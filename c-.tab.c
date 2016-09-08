@@ -65,9 +65,10 @@
 #line 1 "c-.y" /* yacc.c:339  */
 
 #include <cstdio>
+#include "Token.h"
 
 extern int yylex();
-extern void yyerror(const char* msg);
+//extern void yyerror(const char* msg);
 extern char* yytext;
 extern int yylineno;
 
@@ -77,7 +78,7 @@ void yyerror(const char *msg)
     printf(msg);
 }
 
-#line 81 "c-.tab.c" /* yacc.c:339  */
+#line 82 "c-.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -112,8 +113,8 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    BOOLCONST = 258,
-    NUMCONST = 259,
+    NUMCONST = 258,
+    BOOLCONST = 259,
     ID = 260,
     CHARCONST = 261,
     RECORD = 262,
@@ -127,37 +128,38 @@ extern int yydebug;
     OR = 270,
     NOT = 271,
     WHILE = 272,
-    RETURN = 273,
-    DIV = 274,
-    STAR = 275,
-    ADD = 276,
-    MINUS = 277,
-    PERCENT = 278,
-    COMMA = 279,
-    ASSIGN = 280,
-    MULASS = 281,
-    INC = 282,
-    ADDASS = 283,
-    DEC = 284,
-    SUBASS = 285,
-    DIVASS = 286,
-    LTHAN = 287,
-    LESSEQ = 288,
-    EQ = 289,
-    NOTEQ = 290,
-    GTHAN = 291,
-    GRTEQ = 292,
-    QMARK = 293,
-    LPAREN = 294,
-    RPAREN = 295,
-    LCURLY = 296,
-    RCURLY = 297,
-    LBRACKET = 298,
-    RBRACKET = 299,
-    COLON = 300,
-    SEMICOLON = 301,
-    DOT = 302,
-    ERROR = 303
+    BREAK = 273,
+    RETURN = 274,
+    DIV = 275,
+    STAR = 276,
+    ADD = 277,
+    MINUS = 278,
+    PERCENT = 279,
+    COMMA = 280,
+    ASSIGN = 281,
+    MULASS = 282,
+    INC = 283,
+    ADDASS = 284,
+    DEC = 285,
+    SUBASS = 286,
+    DIVASS = 287,
+    LTHAN = 288,
+    LESSEQ = 289,
+    EQ = 290,
+    NOTEQ = 291,
+    GTHAN = 292,
+    GRTEQ = 293,
+    QMARK = 294,
+    LPAREN = 295,
+    RPAREN = 296,
+    LCURLY = 297,
+    RCURLY = 298,
+    LBRACKET = 299,
+    RBRACKET = 300,
+    COLON = 301,
+    SEMICOLON = 302,
+    DOT = 303,
+    ERROR = 304
   };
 #endif
 
@@ -166,11 +168,9 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 17 "c-.y" /* yacc.c:355  */
+#line 18 "c-.y" /* yacc.c:355  */
 
-    int lvalue;
-    char* svalue;
-    int varindex;
+    Token t;
 
 #line 176 "c-.tab.c" /* yacc.c:355  */
 };
@@ -408,23 +408,23 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  50
+#define YYFINAL  51
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   47
+#define YYLAST   48
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  49
+#define YYNTOKENS  50
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  4
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  50
+#define YYNRULES  51
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  52
+#define YYNSTATES  53
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   303
+#define YYMAXUTOK   304
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -463,7 +463,7 @@ static const yytype_uint8 yytranslate[] =
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48
+      45,    46,    47,    48,    49
 };
 
 #if YYDEBUG
@@ -475,7 +475,7 @@ static const yytype_uint8 yyrline[] =
       56,    57,    58,    59,    60,    61,    62,    63,    64,    65,
       66,    67,    68,    69,    70,    71,    72,    73,    74,    75,
       76,    77,    78,    79,    80,    81,    82,    83,    84,    85,
-      86
+      86,    87
 };
 #endif
 
@@ -484,14 +484,14 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "BOOLCONST", "NUMCONST", "ID",
+  "$end", "error", "$undefined", "NUMCONST", "BOOLCONST", "ID",
   "CHARCONST", "RECORD", "STATIC", "INT", "CHAR", "BOOL", "IF", "ELSE",
-  "AND", "OR", "NOT", "WHILE", "RETURN", "DIV", "STAR", "ADD", "MINUS",
-  "PERCENT", "COMMA", "ASSIGN", "MULASS", "INC", "ADDASS", "DEC", "SUBASS",
-  "DIVASS", "LTHAN", "LESSEQ", "EQ", "NOTEQ", "GTHAN", "GRTEQ", "QMARK",
-  "LPAREN", "RPAREN", "LCURLY", "RCURLY", "LBRACKET", "RBRACKET", "COLON",
-  "SEMICOLON", "DOT", "ERROR", "$accept", "program", "declarationList",
-  "declaration", YY_NULL
+  "AND", "OR", "NOT", "WHILE", "BREAK", "RETURN", "DIV", "STAR", "ADD",
+  "MINUS", "PERCENT", "COMMA", "ASSIGN", "MULASS", "INC", "ADDASS", "DEC",
+  "SUBASS", "DIVASS", "LTHAN", "LESSEQ", "EQ", "NOTEQ", "GTHAN", "GRTEQ",
+  "QMARK", "LPAREN", "RPAREN", "LCURLY", "RCURLY", "LBRACKET", "RBRACKET",
+  "COLON", "SEMICOLON", "DOT", "ERROR", "$accept", "program",
+  "declarationList", "declaration", YY_NULL
 };
 #endif
 
@@ -504,7 +504,7 @@ static const yytype_uint16 yytoknum[] =
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
      285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302,   303
+     295,   296,   297,   298,   299,   300,   301,   302,   303,   304
 };
 # endif
 
@@ -526,8 +526,8 @@ static const yytype_int8 yypact[] =
       -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
       -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
       -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
-      -4,    -4,    -4,    -4,    -4,    -4,    -4,    46,    -3,    -4,
-      -4,    -4
+      -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    47,    -3,
+      -4,    -4,    -4
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -535,12 +535,12 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     6,     5,    46,     7,     8,     9,    10,    11,    12,
+       0,     5,     6,    47,     7,     8,     9,    10,    11,    12,
       13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
       23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
       33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    44,    45,    48,    49,    47,    50,     0,     2,     4,
-       1,     3
+      43,    44,    45,    46,    49,    50,    48,    51,     0,     2,
+       4,     1,     3
 };
 
   /* YYPGOTO[NTERM-NUM].  */
@@ -552,7 +552,7 @@ static const yytype_int8 yypgoto[] =
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,    47,    48,    49
+      -1,    48,    49,    50
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -564,7 +564,7 @@ static const yytype_uint8 yytable[] =
       11,    12,    13,    14,    15,    16,    17,    18,    19,    20,
       21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
       31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
-      41,    42,    43,    44,    45,    46,    50,    51
+      41,    42,    43,    44,    45,    46,    47,    51,    52
 };
 
 static const yytype_uint8 yycheck[] =
@@ -573,7 +573,7 @@ static const yytype_uint8 yycheck[] =
       13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
       23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
       33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    44,    45,    46,    47,    48,     0,    48
+      43,    44,    45,    46,    47,    48,    49,     0,    49
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -584,19 +584,19 @@ static const yytype_uint8 yystos[] =
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21,
       22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
       32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
-      42,    43,    44,    45,    46,    47,    48,    50,    51,    52,
-       0,    52
+      42,    43,    44,    45,    46,    47,    48,    49,    51,    52,
+      53,     0,    53
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    49,    50,    51,    51,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52
+       0,    50,    51,    52,    52,    53,    53,    53,    53,    53,
+      53,    53,    53,    53,    53,    53,    53,    53,    53,    53,
+      53,    53,    53,    53,    53,    53,    53,    53,    53,    53,
+      53,    53,    53,    53,    53,    53,    53,    53,    53,    53,
+      53,    53,    53,    53,    53,    53,    53,    53,    53,    53,
+      53,    53
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -607,7 +607,7 @@ static const yytype_uint8 yyr2[] =
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1
+       1,     1
 };
 
 
@@ -1285,282 +1285,288 @@ yyreduce:
     {
         case 5:
 #line 41 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: NUMCONST Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: NUMCONST Value: %d Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
 #line 1290 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 42 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: BOOLCONST Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: BOOLCONST Value: %d Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
 #line 1296 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 43 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: CHARCONST Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: CHARCONST Value: '%c' Input: %s\n", yylval.t.lineNum, yylval.t.charVal, yylval.t.tokenStr); }
 #line 1302 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 44 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: RECORD Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: RECORD\n", yylval.t.lineNum); }
 #line 1308 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 45 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: STATIC Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: STATIC\n", yylval.t.lineNum); }
 #line 1314 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 46 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: INT Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: INT\n", yylval.t.lineNum); }
 #line 1320 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 47 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: CHAR Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: CHAR\n", yylval.t.lineNum); }
 #line 1326 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 48 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: BOOL Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: BOOL\n", yylval.t.lineNum); }
 #line 1332 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 49 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: IF Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: IF\n", yylval.t.lineNum); }
 #line 1338 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 50 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: ELSE Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: ELSE\n", yylval.t.lineNum); }
 #line 1344 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
 #line 51 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: AND Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: AND\n", yylval.t.lineNum); }
 #line 1350 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 52 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: OR Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: OR\n", yylval.t.lineNum); }
 #line 1356 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 53 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: NOT Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: NOT\n", yylval.t.lineNum); }
 #line 1362 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 54 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: WHILE Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: WHILE\n", yylval.t.lineNum); }
 #line 1368 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 55 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: RETURN Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: BREAK\n", yylval.t.lineNum); }
 #line 1374 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 56 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: DIV Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: RETURN\n", yylval.t.lineNum); }
 #line 1380 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 57 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: STAR Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1386 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 58 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: ADD Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1392 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 59 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: MINUS Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1398 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 60 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: PERCENT Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1404 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
 #line 61 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: COMMA Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1410 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 62 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: ASSIGN Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1416 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 63 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: MULASS Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1422 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
 #line 64 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: INC Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: MULASS\n", yylval.t.lineNum); }
 #line 1428 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
 #line 65 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: ADDASS Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: INC\n", yylval.t.lineNum); }
 #line 1434 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 66 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: DEC Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: ADDASS\n", yylval.t.lineNum); }
 #line 1440 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 67 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: SUBASS Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: DEC\n", yylval.t.lineNum); }
 #line 1446 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
 #line 68 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: DIVASS Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: SUBASS\n", yylval.t.lineNum); }
 #line 1452 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
 #line 69 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: LTHAN Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: DIVASS\n", yylval.t.lineNum); }
 #line 1458 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
 #line 70 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: LESSEQ Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1464 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 71 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: EQ Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: LESSEQ\n", yylval.t.lineNum); }
 #line 1470 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 72 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: NOTEQ Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: EQ\n", yylval.t.lineNum); }
 #line 1476 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 73 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: GTHAN Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: NOTEQ\n", yylval.t.lineNum); }
 #line 1482 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 74 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: GRTEQ Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1488 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
 #line 75 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: QMARK Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: GRTEQ\n", yylval.t.lineNum); }
 #line 1494 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 76 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: LPAREN Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1500 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 77 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: RPAREN Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1506 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
 #line 78 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: LCURLY Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1512 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 79 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: RCURLY Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1518 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 80 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: LBRACKET Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1524 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
 #line 81 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: RBRACKET Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1530 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
 #line 82 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: ID Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1536 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
 #line 83 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: DOT Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: ID Value: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1542 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
 #line 84 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: COLON Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1548 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
 #line 85 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: SEMICOLON Value: %s\n", yylineno, yytext); }
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1554 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
 #line 86 "c-.y" /* yacc.c:1646  */
-    { printf("ERROR(%d): Invalid or misplaced input character: \"%c\"\n", yylineno, yytext[0]);										}
+    { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
 #line 1560 "c-.tab.c" /* yacc.c:1646  */
     break;
 
+  case 51:
+#line 87 "c-.y" /* yacc.c:1646  */
+    { printf("ERROR(%d): Invalid or misplaced input character: \"%c\"\n", yylineno, yytext[0]); }
+#line 1566 "c-.tab.c" /* yacc.c:1646  */
+    break;
 
-#line 1564 "c-.tab.c" /* yacc.c:1646  */
+
+#line 1570 "c-.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1788,7 +1794,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 88 "c-.y" /* yacc.c:1906  */
+#line 89 "c-.y" /* yacc.c:1906  */
 
 
 int main()

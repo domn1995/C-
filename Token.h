@@ -1,34 +1,36 @@
 #ifndef TOKENH
 #define TOKENH
 
-#include <string>
+#include <string.h>
 
-class Token
+typedef struct Token
 {
-	private: 
-		int tokenClass;
-		int intValue;
-		char charValue;
-		std::string stringValue;
-		std::string tokenString;
-		
-	public:
-		Token();
-		Token(int tokClass, char* tokenString);
-		Token(int tokClass, int intVal, char* tokenStr);
-		Token(int tokClass, char charVal, char* tokenStr);
-		Token(int tokClass, char* stringVal, char* tokenStr);
-		int GetTokenClass() { return tokenClass; }
-		void SetTokenClass(int tokClass) { tokenClass = tokClass; }
-		int GetIntValue() { return intValue; }
-		void SetIntValue(int intVal) { intValue = intVal; }
-		char GetCharValue() { return charValue; }
-		void SetCharValue(char charVal) { charValue = charVal; }
-		std::string GetStringValue() { return stringValue; }
-		void SetStringValue(char* stringVal ) { stringValue = stringVal; }
-		std::string GetTokenString() { return tokenString; }
-		void SetTokenString(std::string tokenStr) { tokenString = tokenStr; }
-};
-
+	int tokenClass;
+	char* tokenStr;
+	int lineNum;
+	int intVal;
+	char charVal;
+} Token;
+	
+/* class Token 
+{
+private:
+	char* tokenString;
+	int lineNumber;
+	int intValue;
+	char charValue;
+	char* strValue;
+public:
+	char* GetTokenString() { return tokenString; }
+	void SetTokenString(char* tokenStr) { tokenString = strdup(tokenStr); }
+	int GetLineNumber() { return lineNumber; }
+	void SetLineNumber(int lineNum) { lineNumber = lineNum; }
+	int GetIntValue() { return intValue; }
+	void SetIntValue(int intVal) { intValue = intVal; }
+	char GetCharValue() { return charValue; }
+	void SetCharValue(char charVal) { charValue = charVal; }
+	char* GetStrValue() { return strValue; }
+	void SetStrValue(char* strVal) { strValue = strdup(strVal); }
+}; */
 
 #endif
