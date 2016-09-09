@@ -6,6 +6,7 @@ extern int yylex();
 //extern void yyerror(const char* msg);
 extern char* yytext;
 extern int yylineno;
+extern FILE* yyin;
 
 #define YYERROR_VERBOSE
 void yyerror(const char *msg)
@@ -19,8 +20,7 @@ void yyerror(const char *msg)
     Token t;
 }
 
-%token <t.intVal> NUMCONST
-%token BOOLCONST ID CHARCONST 
+%token NUMCONST BOOLCONST ID CHARCONST 
 %token RECORD STATIC INT CHAR BOOL
 %token IF ELSE AND OR NOT WHILE BREAK RETURN
 %token DIV STAR ADD MINUS PERCENT COMMA
@@ -38,9 +38,9 @@ declarationList	: declarationList declaration
 				| declaration 
 				;
 
-declaration 		: NUMCONST 	{ printf("Line %d Token: NUMCONST Value: %d Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
-				| BOOLCONST	{ printf("Line %d Token: BOOLCONST Value: %d Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
-				| CHARCONST 	{ printf("Line %d Token: CHARCONST Value: '%c' Input: %s\n", yylval.t.lineNum, yylval.t.charVal, yylval.t.tokenStr); }		
+declaration 		: NUMCONST 	{ printf("Line %d Token: NUMCONST Value: %d  Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
+				| BOOLCONST	{ printf("Line %d Token: BOOLCONST Value: %d  Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
+				| CHARCONST 	{ printf("Line %d Token: CHARCONST Value: '%c'  Input: %s\n", yylval.t.lineNum, yylval.t.charVal, yylval.t.tokenStr); }		
 				| RECORD		{ printf("Line %d Token: RECORD\n", yylval.t.lineNum); }
 				| STATIC		{ printf("Line %d Token: STATIC\n", yylval.t.lineNum); }
 				| INT		{ printf("Line %d Token: INT\n", yylval.t.lineNum); }
@@ -88,8 +88,27 @@ declaration 		: NUMCONST 	{ printf("Line %d Token: NUMCONST Value: %d Input: %s\
 				;
 %%
 
-int main()
+int main(int argc, char** argv)
 {
-	yyparse();
+	if (argc == 2 && strcmp(argv[1], "<") != 0)
+	{
+		FILE* inputFile = fopen(argv[1], "r");
+		
+		if (!inputFile)
+		{
+			printf("File '%s' not found.\n", argv[1]);
+			return -1;
+		}
+		else
+		{
+			yyin = inputFile;
+		}
+	}
+	
+	do 
+	{
+		yyparse();
+	} while (!feof(yyin));
+	
 	return 0;
 }

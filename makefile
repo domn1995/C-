@@ -1,6 +1,6 @@
 BIN  = c-
 CC   = g++
-SRCS = $(BIN).y $(BIN).l
+SRCS = $(BIN).y $(BIN).l Token.h
 OBJS = lex.yy.o $(BIN).tab.o 
 LIBS = -lm 
 

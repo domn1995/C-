@@ -71,6 +71,7 @@ extern int yylex();
 //extern void yyerror(const char* msg);
 extern char* yytext;
 extern int yylineno;
+extern FILE* yyin;
 
 #define YYERROR_VERBOSE
 void yyerror(const char *msg)
@@ -78,7 +79,7 @@ void yyerror(const char *msg)
     printf(msg);
 }
 
-#line 82 "c-.tab.c" /* yacc.c:339  */
+#line 83 "c-.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -168,11 +169,11 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 18 "c-.y" /* yacc.c:355  */
+#line 19 "c-.y" /* yacc.c:355  */
 
     Token t;
 
-#line 176 "c-.tab.c" /* yacc.c:355  */
+#line 177 "c-.tab.c" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -187,7 +188,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 191 "c-.tab.c" /* yacc.c:358  */
+#line 192 "c-.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1285,288 +1286,288 @@ yyreduce:
     {
         case 5:
 #line 41 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: NUMCONST Value: %d Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
-#line 1290 "c-.tab.c" /* yacc.c:1646  */
+    { printf("Line %d Token: NUMCONST Value: %d  Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
+#line 1291 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 42 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: BOOLCONST Value: %d Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
-#line 1296 "c-.tab.c" /* yacc.c:1646  */
+    { printf("Line %d Token: BOOLCONST Value: %d  Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
+#line 1297 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 43 "c-.y" /* yacc.c:1646  */
-    { printf("Line %d Token: CHARCONST Value: '%c' Input: %s\n", yylval.t.lineNum, yylval.t.charVal, yylval.t.tokenStr); }
-#line 1302 "c-.tab.c" /* yacc.c:1646  */
+    { printf("Line %d Token: CHARCONST Value: '%c'  Input: %s\n", yylval.t.lineNum, yylval.t.charVal, yylval.t.tokenStr); }
+#line 1303 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 44 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: RECORD\n", yylval.t.lineNum); }
-#line 1308 "c-.tab.c" /* yacc.c:1646  */
+#line 1309 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 45 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: STATIC\n", yylval.t.lineNum); }
-#line 1314 "c-.tab.c" /* yacc.c:1646  */
+#line 1315 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 46 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: INT\n", yylval.t.lineNum); }
-#line 1320 "c-.tab.c" /* yacc.c:1646  */
+#line 1321 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 47 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: CHAR\n", yylval.t.lineNum); }
-#line 1326 "c-.tab.c" /* yacc.c:1646  */
+#line 1327 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 48 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: BOOL\n", yylval.t.lineNum); }
-#line 1332 "c-.tab.c" /* yacc.c:1646  */
+#line 1333 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 49 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: IF\n", yylval.t.lineNum); }
-#line 1338 "c-.tab.c" /* yacc.c:1646  */
+#line 1339 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 50 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: ELSE\n", yylval.t.lineNum); }
-#line 1344 "c-.tab.c" /* yacc.c:1646  */
+#line 1345 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
 #line 51 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: AND\n", yylval.t.lineNum); }
-#line 1350 "c-.tab.c" /* yacc.c:1646  */
+#line 1351 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 52 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: OR\n", yylval.t.lineNum); }
-#line 1356 "c-.tab.c" /* yacc.c:1646  */
+#line 1357 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 53 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: NOT\n", yylval.t.lineNum); }
-#line 1362 "c-.tab.c" /* yacc.c:1646  */
+#line 1363 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 54 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: WHILE\n", yylval.t.lineNum); }
-#line 1368 "c-.tab.c" /* yacc.c:1646  */
+#line 1369 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 55 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: BREAK\n", yylval.t.lineNum); }
-#line 1374 "c-.tab.c" /* yacc.c:1646  */
+#line 1375 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 56 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: RETURN\n", yylval.t.lineNum); }
-#line 1380 "c-.tab.c" /* yacc.c:1646  */
+#line 1381 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 57 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1386 "c-.tab.c" /* yacc.c:1646  */
+#line 1387 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 58 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1392 "c-.tab.c" /* yacc.c:1646  */
+#line 1393 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 59 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1398 "c-.tab.c" /* yacc.c:1646  */
+#line 1399 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 60 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1404 "c-.tab.c" /* yacc.c:1646  */
+#line 1405 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
 #line 61 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1410 "c-.tab.c" /* yacc.c:1646  */
+#line 1411 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 62 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1416 "c-.tab.c" /* yacc.c:1646  */
+#line 1417 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 63 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1422 "c-.tab.c" /* yacc.c:1646  */
+#line 1423 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
 #line 64 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: MULASS\n", yylval.t.lineNum); }
-#line 1428 "c-.tab.c" /* yacc.c:1646  */
+#line 1429 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
 #line 65 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: INC\n", yylval.t.lineNum); }
-#line 1434 "c-.tab.c" /* yacc.c:1646  */
+#line 1435 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 66 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: ADDASS\n", yylval.t.lineNum); }
-#line 1440 "c-.tab.c" /* yacc.c:1646  */
+#line 1441 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 67 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: DEC\n", yylval.t.lineNum); }
-#line 1446 "c-.tab.c" /* yacc.c:1646  */
+#line 1447 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
 #line 68 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: SUBASS\n", yylval.t.lineNum); }
-#line 1452 "c-.tab.c" /* yacc.c:1646  */
+#line 1453 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
 #line 69 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: DIVASS\n", yylval.t.lineNum); }
-#line 1458 "c-.tab.c" /* yacc.c:1646  */
+#line 1459 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
 #line 70 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1464 "c-.tab.c" /* yacc.c:1646  */
+#line 1465 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 71 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: LESSEQ\n", yylval.t.lineNum); }
-#line 1470 "c-.tab.c" /* yacc.c:1646  */
+#line 1471 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 72 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: EQ\n", yylval.t.lineNum); }
-#line 1476 "c-.tab.c" /* yacc.c:1646  */
+#line 1477 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 73 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: NOTEQ\n", yylval.t.lineNum); }
-#line 1482 "c-.tab.c" /* yacc.c:1646  */
+#line 1483 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 74 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1488 "c-.tab.c" /* yacc.c:1646  */
+#line 1489 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
 #line 75 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: GRTEQ\n", yylval.t.lineNum); }
-#line 1494 "c-.tab.c" /* yacc.c:1646  */
+#line 1495 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 76 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1500 "c-.tab.c" /* yacc.c:1646  */
+#line 1501 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 77 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1506 "c-.tab.c" /* yacc.c:1646  */
+#line 1507 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
 #line 78 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1512 "c-.tab.c" /* yacc.c:1646  */
+#line 1513 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 79 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1518 "c-.tab.c" /* yacc.c:1646  */
+#line 1519 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 80 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1524 "c-.tab.c" /* yacc.c:1646  */
+#line 1525 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
 #line 81 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1530 "c-.tab.c" /* yacc.c:1646  */
+#line 1531 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
 #line 82 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1536 "c-.tab.c" /* yacc.c:1646  */
+#line 1537 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
 #line 83 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: ID Value: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1542 "c-.tab.c" /* yacc.c:1646  */
+#line 1543 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
 #line 84 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1548 "c-.tab.c" /* yacc.c:1646  */
+#line 1549 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
 #line 85 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1554 "c-.tab.c" /* yacc.c:1646  */
+#line 1555 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
 #line 86 "c-.y" /* yacc.c:1646  */
     { printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-#line 1560 "c-.tab.c" /* yacc.c:1646  */
+#line 1561 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
 #line 87 "c-.y" /* yacc.c:1646  */
     { printf("ERROR(%d): Invalid or misplaced input character: \"%c\"\n", yylineno, yytext[0]); }
-#line 1566 "c-.tab.c" /* yacc.c:1646  */
+#line 1567 "c-.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1570 "c-.tab.c" /* yacc.c:1646  */
+#line 1571 "c-.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1797,8 +1798,27 @@ yyreturn:
 #line 89 "c-.y" /* yacc.c:1906  */
 
 
-int main()
+int main(int argc, char** argv)
 {
-	yyparse();
+	if (argc == 2 && strcmp(argv[1], "<") != 0)
+	{
+		FILE* inputFile = fopen(argv[1], "r");
+		
+		if (!inputFile)
+		{
+			printf("File '%s' not found.\n", argv[1]);
+			return -1;
+		}
+		else
+		{
+			yyin = inputFile;
+		}
+	}
+	
+	do 
+	{
+		yyparse();
+	} while (!feof(yyin));
+	
 	return 0;
 }

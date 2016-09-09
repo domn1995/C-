@@ -100,7 +100,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 18 "c-.y" /* yacc.c:1909  */
+#line 19 "c-.y" /* yacc.c:1909  */
 
     Token t;
 
