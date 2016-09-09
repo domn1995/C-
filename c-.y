@@ -90,7 +90,7 @@ declaration 		: NUMCONST 	{ printf("Line %d Token: NUMCONST Value: %d  Input: %s
 
 int main(int argc, char** argv)
 {
-	if (argc == 2 && strcmp(argv[1], "<") != 0)
+	if (argc == 2)
 	{
 		FILE* inputFile = fopen(argv[1], "r");
 		
