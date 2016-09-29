@@ -2824,7 +2824,7 @@ int main(int argc, char** argv)
 		yyparse();
 	} while (!feof(yyin));
 	
-	PrintTree(savedTree, -1, -1);
+	PrintTree(savedTree, -1);
 	
 	printf("Number of warnings: 0\n");
 	printf("Number of errors: 0\n");

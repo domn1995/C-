@@ -59,7 +59,7 @@ public:
 	int arraySize;
 } TreeNode;
 
-void PrintTree(TreeNode* treeNode, int currSibling, int currChild);
+void PrintTree(TreeNode* treeNode, int currSibling);
 void InitializeChildrenNodes(TreeNode* treeNode);
 void Indent();
 TreeNode* NewDeclNode(DeclKind kind);

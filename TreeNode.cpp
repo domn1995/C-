@@ -2,9 +2,9 @@
 #include <cstdlib>
 #include "TreeNode.h"
 
-static int indent = -4;
+static int indent = 0;
 extern int yylineno;
-static bool firstPrintDone = false;
+static int childCount = 0;
 
 void Indent()
 {	
@@ -22,16 +22,37 @@ void Indent()
 	}
 }
 
-void PrintTree(TreeNode* tree, int currSibling, int currChild)
+void PrintTree(TreeNode* tree, int currSibling)
 {
-	indent += 4;
-		
-	while (tree != NULL)
-	{				
+	bool printFlag = false;
+	if (currSibling == -1)
+	{
+		currSibling++;
+		printFlag = true;
+	}
+	else
+	{
+		indent += 4;
+	}	
+	
+	for (TreeNode* t = tree; t != NULL; t = t->sibling)
+	{
 		Indent();
 		
-		if (tree->nodeKind == StmtK)
+		if (currSibling >= 1)
 		{
+			int currSiblingCorrection = currSibling - 1;
+			printf("Sibling: %d  ", currSiblingCorrection);
+		}
+		else if (currSibling == 0 && printFlag == false)
+		{
+			printf("Child: %d  ", childCount);
+		}
+		
+		currSibling++;
+		
+		if (tree->nodeKind == StmtK)
+		{				
 			switch (tree->kind.stmt)
 			{
 				case IfK:
@@ -158,10 +179,10 @@ void PrintTree(TreeNode* tree, int currSibling, int currChild)
 		
 		for (int i = 0; i < MAXCHILDREN; i++)
 		{
-			PrintTree(tree->children[i], 0, 0);
-		}
-		
-		tree = tree->sibling;
+			childCount = i;
+			PrintTree(t->children[i], 0);
+			childCount = 0;
+		}		
 	}
 	
 	indent -= 4;
