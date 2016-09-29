@@ -3,7 +3,8 @@
 #include "TreeNode.h"
 
 static int childCount = 0;
-static int indent = -2;
+static int siblingCount = 0;
+static int indent = -3;
 extern int yylineno;
 
 void Indent()
@@ -16,7 +17,7 @@ void Indent()
 
 void PrintTree(TreeNode* tree)
 {
-	indent += 2;
+	indent += 3;
 	while (tree != NULL)
 	{
 		Indent();
@@ -155,7 +156,7 @@ void PrintTree(TreeNode* tree)
 		tree = tree->sibling;
 	}
 	
-	indent -= 2;
+	indent -= 3;
 }
 
 void InitializeNodes(TreeNode* treeNode)
@@ -181,6 +182,7 @@ TreeNode* NewDeclNode(DeclKind kind)
 		t->kind.decl = kind;
 		t->lineNumber = yylineno;
 	}
+	return t;
 }
 
 TreeNode* NewStmtNode(StmtKind kind)

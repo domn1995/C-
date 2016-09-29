@@ -111,24 +111,24 @@ stuff ;
 
 char dog:'\t';
 
-// record Point {
-    // bool defined;
-    // int x, y;
-// }
+record Point {
+    bool defined;
+    int x, y;
+}
 
-// record Line {
-    // Point x, y;
-// }
+record Line {
+    Point x, y;
+}
 
-// Point p, q;
-// Line l;
+Point p, q;
+Line l;
 
-// setp(Point p; int x[], y; Point P[]; Line l) {
-    // x[666];
-    // p.x;
-    // p.x.y;       // sematic failure
-    // P[666].y;  
-    // p.x[666];    // sematic failure
-    // l.x.x = 42;
-    // x[3][3] = x.notvalid;
-// }
+setp(Point p; int x[], y; Point P[]; Line l) {
+    x[666];
+    p.x;
+    p.x.y;       // sematic failure
+    P[666].y;  
+    p.x[666];    // sematic failure
+    l.x.x = 42;
+    x[3][3] = x.notvalid;
+}

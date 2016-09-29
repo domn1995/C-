@@ -155,8 +155,10 @@ recDeclaration		: 	RECORD ID LCURLY localDeclarations RCURLY
 						// We need to add the user-defined type to the global symbol table.
 						globalScope.insert($2.tokenStr, (char*)"recordType");
 						
-						TreeNode* t = NewDeclNode(VarK);
-						t->sibling = $4;
+						$$ = NewDeclNode(VarK);
+						$$->attr.name = $2.tokenStr;
+						$$->isRecord = true;
+						$$->children[0] = $4;						
 					}
 				;
 
@@ -188,10 +190,13 @@ scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
 							do
 							{
 								t->expType = $1->expType;
+								t->isRecord = $1->isRecord;
 								t->isStatic = $1->isStatic;
+								t->isArray = $1->isArray;
 								t = t->sibling;
 							}
 							while (t != NULL);
+							$$ = $2;
 						}
 						else
 						{
@@ -253,11 +258,19 @@ scopedTypeSpecifier :	STATIC typeSpecifier
 						$$ = NewDeclNode(VarK);
 						$$->isStatic = true;
 						$$->expType = $2;
+						if ($2 == Record)
+						{
+							$$->isRecord = true;
+						}
 					}
 				| 	typeSpecifier
 					{
-						$$ = NewDeclNode(VarK);
+						$$ = NewDeclNode(VarK);						
 						$$->expType = $1;
+						if ($1 == Record)
+						{
+							$$->isRecord = true;
+						}
 					}
 				;
 				
@@ -805,11 +818,24 @@ mutable			:	ID
 					}
 				|	mutable LBRACKET expression RBRACKET
 					{
-						$$ = NewExprNode(IdK);
-						$$->attr.name = $1->attr.name;
-						$$->children[0] = $3;
-						$$->isArray = true;
-						$$->arraySize = $3->attr.value;
+						$$ = NewExprNode(OpK);
+						$$->attr.name = $2.tokenStr;
+						
+						$$->children[0] = $1;
+						
+						$$->children[1] = $3;
+						
+						// $$ = NewExprNode(IdK);
+						
+						// TreeNode* t = NewExprNode(OpK);
+						// t->attr.name = $2.tokenStr;
+						
+						// $$->children[0] = t;
+						
+						// $$->attr.name = $1->attr.name;
+						// $$->children[1] = $3;
+						// $$->isArray = true;
+						// $$->arraySize = $3->attr.value;
 					}
 				|	mutable DOT ID
 					{
