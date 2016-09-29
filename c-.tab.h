@@ -101,12 +101,13 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 23 "c-.y" /* yacc.c:1909  */
+#line 28 "c-.y" /* yacc.c:1909  */
 
     Token t;
     TreeNode* treeNode;
+    ExpType expType;
 
-#line 110 "c-.tab.h" /* yacc.c:1909  */
+#line 111 "c-.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

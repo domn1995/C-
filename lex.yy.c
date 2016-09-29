@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 52
-#define YY_END_OF_BUFFER 53
+#define YY_NUM_RULES 51
+#define YY_END_OF_BUFFER 52
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -386,18 +386,18 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[107] =
     {   0,
-        0,    0,   53,   51,    1,    1,   51,   23,   51,   39,
-       40,   20,   21,   24,   22,   47,   19,    2,   48,   49,
-       32,   25,   36,   38,   46,   43,   44,   46,   46,   46,
-       46,   46,   46,   46,   46,   46,   46,   46,   46,   41,
-       42,   35,    0,    0,   26,   27,   28,   29,   30,   50,
-       31,    2,   33,   34,   37,   46,   46,   46,   46,   46,
-       46,   46,   46,   11,   46,   46,   14,   46,   46,   46,
-       46,    5,   50,   13,   46,   46,   46,   46,   46,    8,
-       15,   46,   46,   46,   46,   46,   10,   46,    9,   12,
-       46,   46,   46,   46,    3,   46,   17,    4,   46,   46,
+        0,    0,   52,   50,    1,    1,   50,   23,   50,   39,
+       40,   20,   21,   24,   22,   46,   19,    2,   47,   48,
+       32,   25,   36,   38,   45,   43,   44,   45,   45,   45,
+       45,   45,   45,   45,   45,   45,   45,   45,   45,   41,
+       42,   35,    0,    0,   26,   27,   28,   29,   30,   49,
+       31,    2,   33,   34,   37,   45,   45,   45,   45,   45,
+       45,   45,   45,   11,   45,   45,   14,   45,   45,   45,
+       45,    5,   49,   13,   45,   45,   45,   45,   45,    8,
+       15,   45,   45,   45,   45,   45,   10,   45,    9,   12,
+       45,   45,   45,   45,    3,   45,   17,    4,   45,   45,
 
-       46,   16,    6,   18,    7,    0
+       45,   16,    6,   18,    7,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -530,11 +530,11 @@ static yyconst flex_int16_t yy_chk[220] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static yyconst flex_int32_t yy_rule_can_match_eol[53] =
+static yyconst flex_int32_t yy_rule_can_match_eol[52] =
     {   0,
 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -1343,18 +1343,9 @@ case 45:
 YY_RULE_SETUP
 #line 341 "c-.l"
 { 
-						yylval.t.tokenClass = RECORD;
-						yylval.t.lineNum = yylineno;
-						yylval.t.tokenStr = strdup(yytext);
-					}
-	YY_BREAK
-case 46:
-YY_RULE_SETUP
-#line 346 "c-.l"
-{ 
 						int tokenType = ID;						
 						
-						// If this identifier is actually a record type, we set it to RECTYPE instead.
+						// If this identifier is actually a record type, we should return RECTYPE instead.
 						if ((char*)globalScope.lookup(yytext) != NULL && strcmp((char*)globalScope.lookup(yytext), "recordType") == 0)
 						{								
 							tokenType = RECTYPE;
@@ -1365,9 +1356,9 @@ YY_RULE_SETUP
 						return tokenType; 
 					}
 	YY_BREAK
-case 47:
+case 46:
 YY_RULE_SETUP
-#line 359 "c-.l"
+#line 354 "c-.l"
 { 
 						yylval.t.tokenClass = DOT;
 						yylval.t.lineNum = yylineno;
@@ -1376,9 +1367,9 @@ YY_RULE_SETUP
 						return DOT; 
 					}
 	YY_BREAK
-case 48:
+case 47:
 YY_RULE_SETUP
-#line 366 "c-.l"
+#line 361 "c-.l"
 { 
 						yylval.t.tokenClass = COLON;
 						yylval.t.lineNum = yylineno;
@@ -1387,9 +1378,9 @@ YY_RULE_SETUP
 						return COLON; 
 					}
 	YY_BREAK
-case 49:
+case 48:
 YY_RULE_SETUP
-#line 373 "c-.l"
+#line 368 "c-.l"
 { 
 						yylval.t.tokenClass = SEMICOLON;
 						yylval.t.lineNum = yylineno;
@@ -1398,22 +1389,22 @@ YY_RULE_SETUP
 						return SEMICOLON; 
 					}
 	YY_BREAK
+case 49:
+YY_RULE_SETUP
+#line 375 "c-.l"
+; // Do nothing.
+	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 380 "c-.l"
-; // Do nothing.
+#line 376 "c-.l"
+{ return ERROR; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 381 "c-.l"
-{ return ERROR; }
-	YY_BREAK
-case 52:
-YY_RULE_SETUP
-#line 382 "c-.l"
+#line 377 "c-.l"
 ECHO;
 	YY_BREAK
-#line 1417 "lex.yy.c"
+#line 1408 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2423,6 +2414,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 382 "c-.l"
+#line 377 "c-.l"
 
 

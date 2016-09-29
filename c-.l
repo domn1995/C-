@@ -338,11 +338,6 @@ return				{
 						yylval.t.tokenStr = strdup(yytext);
 						return RBRACKET; 
 					}
-"record"				{ 
-						yylval.t.tokenClass = RECORD;
-						yylval.t.lineNum = yylineno;
-						yylval.t.tokenStr = strdup(yytext);
-					}
 [a-zA-Z]+[0-9a-zA-Z]*	{ 
 						int tokenType = ID;						
 						

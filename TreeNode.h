@@ -5,7 +5,7 @@
 
 typedef enum 
 {
-	DeclK, StmtK, ExprK
+	DeclK, StmtK, ExpK
 } NodeKind;
 
 typedef enum
@@ -15,17 +15,17 @@ typedef enum
 
 typedef enum 
 {
-	IfK, ForK, WhileK, CompK, ReturnK, BreakK
+	IfK, WhileK, CompK, ReturnK, BreakK
 } StmtKind;
 
 typedef enum
 {
-	ConstK, IdK, OpK, AssignK, SimpK, CallK
+	AssignK, ConstK, IdK, OpK, CallK
 } ExpKind;
 
 typedef enum
 {
-	Void, Int, Bool, Char
+	Void, Int, Bool, Char, Record
 } ExpType;
 
 typedef struct TreeNode
@@ -56,7 +56,14 @@ public:
 	bool isArray;
 	bool isRecord;
 	bool isStatic;
+	int arraySize;
 } TreeNode;
 
+void PrintTree(TreeNode* treeNode);
+void InitializeChildrenNodes(TreeNode* treeNode);
+void Indent();
+TreeNode* NewDeclNode(DeclKind kind);
+TreeNode* NewStmtNode(StmtKind kind);
+TreeNode* NewExprNode(ExpKind kind);
 
 #endif
