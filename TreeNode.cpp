@@ -15,7 +15,7 @@ void Indent()
 	}
 }
 
-void PrintTree(TreeNode* tree)
+void PrintTree(TreeNode* tree, int currSibling, int currChild)
 {
 	indent += 3;
 	while (tree != NULL)
@@ -150,7 +150,7 @@ void PrintTree(TreeNode* tree)
 		
 		for (int i = 0; i < MAXCHILDREN; i++)
 		{
-			PrintTree(tree->children[i]);
+			PrintTree(tree->children[i], 0, 0);
 		}
 		
 		tree = tree->sibling;

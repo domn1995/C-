@@ -19,7 +19,7 @@ char GetEscapedChar(char* string)
 				toReturn = '\n';
 				break;
 			case 't':
-				toReturn = '\t';
+				toReturn = 't';
 				break;
 			case '0':
 				toReturn = '\0';

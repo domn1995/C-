@@ -911,6 +911,7 @@ constant			:	NUMCONST
 				|	CHARCONST
 					{
 						$$ = NewExprNode(ConstK);
+						printf("Setting '%c' as cVal\n", $1.charVal);
 						$$->attr.cValue = $1.charVal;
 						$$->expType = Char;
 					}
@@ -937,6 +938,7 @@ int main(int argc, char** argv)
 				break;
 			default:
 				printf("Invalid argument: %c", arg);
+				return -1;
 		}
 	}
 	
@@ -960,7 +962,10 @@ int main(int argc, char** argv)
 		yyparse();
 	} while (!feof(yyin));
 	
-	PrintTree(savedTree);
+	PrintTree(savedTree, 0, 0);
+	
+	printf("Number of warnings: 0\n");
+	printf("Number of errors: 0\n");
 	
 	return 0;
 }
