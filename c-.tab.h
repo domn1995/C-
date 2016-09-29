@@ -49,49 +49,50 @@ extern int yydebug;
     BOOLCONST = 259,
     ID = 260,
     CHARCONST = 261,
-    RECORD = 262,
-    STATIC = 263,
-    INT = 264,
-    CHAR = 265,
-    BOOL = 266,
-    IF = 267,
-    ELSE = 268,
-    AND = 269,
-    OR = 270,
-    NOT = 271,
-    WHILE = 272,
-    BREAK = 273,
-    RETURN = 274,
-    DIV = 275,
-    STAR = 276,
-    ADD = 277,
-    MINUS = 278,
-    PERCENT = 279,
-    COMMA = 280,
-    ASSIGN = 281,
-    MULASS = 282,
-    INC = 283,
-    ADDASS = 284,
-    DEC = 285,
-    SUBASS = 286,
-    DIVASS = 287,
-    LTHAN = 288,
-    LESSEQ = 289,
-    EQ = 290,
-    NOTEQ = 291,
-    GTHAN = 292,
-    GRTEQ = 293,
-    QMARK = 294,
-    LPAREN = 295,
-    RPAREN = 296,
-    LCURLY = 297,
-    RCURLY = 298,
-    LBRACKET = 299,
-    RBRACKET = 300,
-    COLON = 301,
-    SEMICOLON = 302,
-    DOT = 303,
-    ERROR = 304
+    RECTYPE = 262,
+    RECORD = 263,
+    STATIC = 264,
+    INT = 265,
+    CHAR = 266,
+    BOOL = 267,
+    IF = 268,
+    ELSE = 269,
+    AND = 270,
+    OR = 271,
+    NOT = 272,
+    WHILE = 273,
+    BREAK = 274,
+    RETURN = 275,
+    DIV = 276,
+    STAR = 277,
+    ADD = 278,
+    MINUS = 279,
+    PERCENT = 280,
+    COMMA = 281,
+    ASSIGN = 282,
+    MULASS = 283,
+    INC = 284,
+    ADDASS = 285,
+    DEC = 286,
+    SUBASS = 287,
+    DIVASS = 288,
+    LTHAN = 289,
+    LESSEQ = 290,
+    EQ = 291,
+    NOTEQ = 292,
+    GTHAN = 293,
+    GRTEQ = 294,
+    QMARK = 295,
+    LPAREN = 296,
+    RPAREN = 297,
+    LCURLY = 298,
+    RCURLY = 299,
+    LBRACKET = 300,
+    RBRACKET = 301,
+    COLON = 302,
+    SEMICOLON = 303,
+    DOT = 304,
+    ERROR = 305
   };
 #endif
 
@@ -100,11 +101,12 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 19 "c-.y" /* yacc.c:1909  */
+#line 23 "c-.y" /* yacc.c:1909  */
 
     Token t;
+    TreeNode* treeNode;
 
-#line 108 "c-.tab.h" /* yacc.c:1909  */
+#line 110 "c-.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

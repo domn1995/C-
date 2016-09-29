@@ -1,7 +1,10 @@
 %{
 #include <stdio.h>
 #include "Token.h"
+#include "TreeNode.h"
+#include "SymbolTable.h"
 #include "c-.tab.h"
+extern Scope globalScope;
 
 char GetEscapedChar(char* string)
 {
@@ -335,10 +338,23 @@ return				{
 						yylval.t.tokenStr = strdup(yytext);
 						return RBRACKET; 
 					}
-[a-zA-Z]+[0-9a-zA-Z]*	{ 
+"record"				{ 
+						yylval.t.tokenClass = RECORD;
 						yylval.t.lineNum = yylineno;
 						yylval.t.tokenStr = strdup(yytext);
-						return ID; 
+					}
+[a-zA-Z]+[0-9a-zA-Z]*	{ 
+						int tokenType = ID;						
+						
+						// If this identifier is actually a record type, we should return RECTYPE instead.
+						if ((char*)globalScope.lookup(yytext) != NULL && strcmp((char*)globalScope.lookup(yytext), "recordType") == 0)
+						{								
+							tokenType = RECTYPE;
+						}						
+						yylval.t.tokenClass = tokenType;
+						yylval.t.lineNum = yylineno;
+						yylval.t.tokenStr = strdup(yytext);
+						return tokenType; 
 					}
 "."					{ 
 						yylval.t.tokenClass = DOT;

@@ -23,7 +23,12 @@ typedef enum
 	ConstK, IdK, OpK, AssignK, SimpK, CallK
 } ExpKind;
 
-class TreeNode
+typedef enum
+{
+	Void, Int, Bool, Char
+} ExpType;
+
+typedef struct TreeNode
 {
 public:	
 	TreeNode* children[MAXCHILDREN];
@@ -41,7 +46,6 @@ public:
 	
 	union
 	{
-		OpKind op;
 		int value;
 		unsigned char cValue;
 		char* str;
@@ -52,7 +56,7 @@ public:
 	bool isArray;
 	bool isRecord;
 	bool isStatic;
-};
+} TreeNode;
 
 
 #endif

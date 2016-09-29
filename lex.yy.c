@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 51
-#define YY_END_OF_BUFFER 52
+#define YY_NUM_RULES 52
+#define YY_END_OF_BUFFER 53
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -386,18 +386,18 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[107] =
     {   0,
-        0,    0,   52,   50,    1,    1,   50,   23,   50,   39,
-       40,   20,   21,   24,   22,   46,   19,    2,   47,   48,
-       32,   25,   36,   38,   45,   43,   44,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   41,
-       42,   35,    0,    0,   26,   27,   28,   29,   30,   49,
-       31,    2,   33,   34,   37,   45,   45,   45,   45,   45,
-       45,   45,   45,   11,   45,   45,   14,   45,   45,   45,
-       45,    5,   49,   13,   45,   45,   45,   45,   45,    8,
-       15,   45,   45,   45,   45,   45,   10,   45,    9,   12,
-       45,   45,   45,   45,    3,   45,   17,    4,   45,   45,
+        0,    0,   53,   51,    1,    1,   51,   23,   51,   39,
+       40,   20,   21,   24,   22,   47,   19,    2,   48,   49,
+       32,   25,   36,   38,   46,   43,   44,   46,   46,   46,
+       46,   46,   46,   46,   46,   46,   46,   46,   46,   41,
+       42,   35,    0,    0,   26,   27,   28,   29,   30,   50,
+       31,    2,   33,   34,   37,   46,   46,   46,   46,   46,
+       46,   46,   46,   11,   46,   46,   14,   46,   46,   46,
+       46,    5,   50,   13,   46,   46,   46,   46,   46,    8,
+       15,   46,   46,   46,   46,   46,   10,   46,    9,   12,
+       46,   46,   46,   46,    3,   46,   17,    4,   46,   46,
 
-       45,   16,    6,   18,    7,    0
+       46,   16,    6,   18,    7,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -530,11 +530,11 @@ static yyconst flex_int16_t yy_chk[220] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static yyconst flex_int32_t yy_rule_can_match_eol[52] =
+static yyconst flex_int32_t yy_rule_can_match_eol[53] =
     {   0,
 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -554,7 +554,10 @@ char *yytext;
 #line 2 "c-.l"
 #include <stdio.h>
 #include "Token.h"
+#include "TreeNode.h"
+#include "SymbolTable.h"
 #include "c-.tab.h"
+extern Scope globalScope;
 
 char GetEscapedChar(char* string)
 {
@@ -593,7 +596,7 @@ char GetEscapedChar(char* string)
 	
 	return toReturn;
 }
-#line 597 "lex.yy.c"
+#line 600 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -775,9 +778,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 48 "c-.l"
+#line 51 "c-.l"
 
-#line 781 "lex.yy.c"
+#line 784 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -873,12 +876,12 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 49 "c-.l"
+#line 52 "c-.l"
 ; // Ignore space, new line, and tab characters.
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 50 "c-.l"
+#line 53 "c-.l"
 { 
 						yylval.t.tokenClass = NUMCONST;
 						yylval.t.lineNum = yylineno;
@@ -889,7 +892,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 57 "c-.l"
+#line 60 "c-.l"
 { 
 						yylval.t.tokenClass = BOOLCONST;
 						yylval.t.lineNum = yylineno;
@@ -900,7 +903,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 64 "c-.l"
+#line 67 "c-.l"
 { 
 						yylval.t.tokenClass = BOOLCONST;
 						yylval.t.lineNum = yylineno;
@@ -911,7 +914,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 71 "c-.l"
+#line 74 "c-.l"
 { 
 						yylval.t.tokenClass = BOOLCONST;
 						yylval.t.lineNum = yylineno;
@@ -922,7 +925,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 78 "c-.l"
+#line 81 "c-.l"
 { 
 						yylval.t.tokenClass = RECORD;
 						yylval.t.lineNum = yylineno;
@@ -932,7 +935,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 84 "c-.l"
+#line 87 "c-.l"
 { 
 						yylval.t.tokenClass = STATIC;
 						yylval.t.lineNum = yylineno;
@@ -942,7 +945,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 90 "c-.l"
+#line 93 "c-.l"
 { 
 						yylval.t.tokenClass = INT;
 						yylval.t.lineNum = yylineno;
@@ -952,7 +955,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 96 "c-.l"
+#line 99 "c-.l"
 { 	 
 						yylval.t.tokenClass = CHAR;
 						yylval.t.lineNum = yylineno;
@@ -962,7 +965,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 102 "c-.l"
+#line 105 "c-.l"
 { 
 						yylval.t.tokenClass = BOOL;
 						yylval.t.lineNum = yylineno;
@@ -972,7 +975,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 108 "c-.l"
+#line 111 "c-.l"
 { 
 						yylval.t.tokenClass = IF;
 						yylval.t.lineNum = yylineno;
@@ -982,7 +985,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 114 "c-.l"
+#line 117 "c-.l"
 { 
 						yylval.t.tokenClass = ELSE;
 						yylval.t.lineNum = yylineno;
@@ -992,7 +995,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 120 "c-.l"
+#line 123 "c-.l"
 { 
 						yylval.t.tokenClass = AND;
 						yylval.t.lineNum = yylineno;
@@ -1002,7 +1005,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 126 "c-.l"
+#line 129 "c-.l"
 { 
 						yylval.t.tokenClass = OR;
 						yylval.t.lineNum = yylineno;
@@ -1012,7 +1015,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 132 "c-.l"
+#line 135 "c-.l"
 { 
 						yylval.t.tokenClass = NOT;
 						yylval.t.lineNum = yylineno;
@@ -1022,7 +1025,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 138 "c-.l"
+#line 141 "c-.l"
 { 
 						yylval.t.tokenClass = WHILE;
 						yylval.t.lineNum = yylineno;
@@ -1032,7 +1035,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 144 "c-.l"
+#line 147 "c-.l"
 { 
 						yylval.t.tokenClass = BREAK;
 						yylval.t.lineNum = yylineno;
@@ -1042,7 +1045,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 150 "c-.l"
+#line 153 "c-.l"
 { 
 						yylval.t.tokenClass = RETURN;
 						yylval.t.lineNum = yylineno;
@@ -1052,7 +1055,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 156 "c-.l"
+#line 159 "c-.l"
 { 
 						yylval.t.tokenClass = DIV;
 						yylval.t.lineNum = yylineno;
@@ -1063,7 +1066,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 163 "c-.l"
+#line 166 "c-.l"
 { 
 						yylval.t.tokenClass = STAR;
 						yylval.t.lineNum = yylineno;
@@ -1074,7 +1077,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 170 "c-.l"
+#line 173 "c-.l"
 { 
 						yylval.t.tokenClass = ADD;
 						yylval.t.lineNum = yylineno;
@@ -1085,7 +1088,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 177 "c-.l"
+#line 180 "c-.l"
 { 
 						yylval.t.tokenClass = MINUS;
 						yylval.t.lineNum = yylineno;
@@ -1096,7 +1099,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 184 "c-.l"
+#line 187 "c-.l"
 { 
 						yylval.t.tokenClass = PERCENT;
 						yylval.t.lineNum = yylineno;
@@ -1107,7 +1110,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 191 "c-.l"
+#line 194 "c-.l"
 { 
 						yylval.t.tokenClass = COMMA;
 						yylval.t.lineNum = yylineno;
@@ -1118,7 +1121,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 198 "c-.l"
+#line 201 "c-.l"
 { 
 						yylval.t.tokenClass = ASSIGN;
 						yylval.t.lineNum = yylineno;
@@ -1129,7 +1132,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 205 "c-.l"
+#line 208 "c-.l"
 { 
 						yylval.t.tokenClass = MULASS;
 						yylval.t.lineNum = yylineno;
@@ -1140,7 +1143,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 212 "c-.l"
+#line 215 "c-.l"
 { 
 						yylval.t.tokenClass = INC;
 						yylval.t.lineNum = yylineno;
@@ -1151,7 +1154,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 219 "c-.l"
+#line 222 "c-.l"
 { 
 						yylval.t.tokenClass = ADDASS;
 						yylval.t.lineNum = yylineno;
@@ -1162,7 +1165,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 226 "c-.l"
+#line 229 "c-.l"
 { 
 						yylval.t.tokenClass = DEC;
 						yylval.t.lineNum = yylineno;
@@ -1173,7 +1176,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 233 "c-.l"
+#line 236 "c-.l"
 { 
 						yylval.t.tokenClass = SUBASS;
 						yylval.t.lineNum = yylineno;
@@ -1184,7 +1187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 240 "c-.l"
+#line 243 "c-.l"
 { 
 						yylval.t.tokenClass = DIVASS;
 						yylval.t.lineNum = yylineno;
@@ -1195,7 +1198,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 247 "c-.l"
+#line 250 "c-.l"
 { 
 						yylval.t.tokenClass = LTHAN;
 						yylval.t.lineNum = yylineno;
@@ -1206,7 +1209,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 254 "c-.l"
+#line 257 "c-.l"
 { 
 						yylval.t.tokenClass = LESSEQ;
 						yylval.t.lineNum = yylineno;
@@ -1217,7 +1220,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 261 "c-.l"
+#line 264 "c-.l"
 { 
 						yylval.t.tokenClass = EQ;
 						yylval.t.lineNum = yylineno;
@@ -1228,7 +1231,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 268 "c-.l"
+#line 271 "c-.l"
 { 
 						yylval.t.tokenClass = NOTEQ;
 						yylval.t.lineNum = yylineno;
@@ -1239,7 +1242,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 275 "c-.l"
+#line 278 "c-.l"
 { 
 						yylval.t.tokenClass = GTHAN;
 						yylval.t.lineNum = yylineno;
@@ -1250,7 +1253,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 282 "c-.l"
+#line 285 "c-.l"
 { 
 						yylval.t.tokenClass = GRTEQ;
 						yylval.t.lineNum = yylineno;
@@ -1261,7 +1264,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 289 "c-.l"
+#line 292 "c-.l"
 { 
 						yylval.t.tokenClass = QMARK;
 						yylval.t.lineNum = yylineno;
@@ -1272,7 +1275,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 296 "c-.l"
+#line 299 "c-.l"
 { 
 						yylval.t.tokenClass = LPAREN;
 						yylval.t.lineNum = yylineno;
@@ -1283,7 +1286,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 303 "c-.l"
+#line 306 "c-.l"
 { 
 						yylval.t.tokenClass = RPAREN;
 						yylval.t.lineNum = yylineno;
@@ -1294,7 +1297,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 310 "c-.l"
+#line 313 "c-.l"
 { 
 						yylval.t.tokenClass = LCURLY;
 						yylval.t.lineNum = yylineno;
@@ -1305,7 +1308,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 317 "c-.l"
+#line 320 "c-.l"
 { 
 						yylval.t.tokenClass = RCURLY;
 						yylval.t.lineNum = yylineno;
@@ -1316,7 +1319,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 324 "c-.l"
+#line 327 "c-.l"
 { 
 						yylval.t.tokenClass = LBRACKET;
 						yylval.t.lineNum = yylineno;
@@ -1327,7 +1330,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 331 "c-.l"
+#line 334 "c-.l"
 { 
 						yylval.t.tokenClass = RBRACKET;
 						yylval.t.lineNum = yylineno;
@@ -1338,16 +1341,33 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 338 "c-.l"
+#line 341 "c-.l"
 { 
+						yylval.t.tokenClass = RECORD;
 						yylval.t.lineNum = yylineno;
 						yylval.t.tokenStr = strdup(yytext);
-						return ID; 
 					}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 343 "c-.l"
+#line 346 "c-.l"
+{ 
+						int tokenType = ID;						
+						
+						// If this identifier is actually a record type, we set it to RECTYPE instead.
+						if ((char*)globalScope.lookup(yytext) != NULL && strcmp((char*)globalScope.lookup(yytext), "recordType") == 0)
+						{								
+							tokenType = RECTYPE;
+						}						
+						yylval.t.tokenClass = tokenType;
+						yylval.t.lineNum = yylineno;
+						yylval.t.tokenStr = strdup(yytext);
+						return tokenType; 
+					}
+	YY_BREAK
+case 47:
+YY_RULE_SETUP
+#line 359 "c-.l"
 { 
 						yylval.t.tokenClass = DOT;
 						yylval.t.lineNum = yylineno;
@@ -1356,9 +1376,9 @@ YY_RULE_SETUP
 						return DOT; 
 					}
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 350 "c-.l"
+#line 366 "c-.l"
 { 
 						yylval.t.tokenClass = COLON;
 						yylval.t.lineNum = yylineno;
@@ -1367,9 +1387,9 @@ YY_RULE_SETUP
 						return COLON; 
 					}
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 357 "c-.l"
+#line 373 "c-.l"
 { 
 						yylval.t.tokenClass = SEMICOLON;
 						yylval.t.lineNum = yylineno;
@@ -1378,22 +1398,22 @@ YY_RULE_SETUP
 						return SEMICOLON; 
 					}
 	YY_BREAK
-case 49:
-YY_RULE_SETUP
-#line 364 "c-.l"
-; // Do nothing.
-	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 365 "c-.l"
-{ return ERROR; }
+#line 380 "c-.l"
+; // Do nothing.
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 366 "c-.l"
+#line 381 "c-.l"
+{ return ERROR; }
+	YY_BREAK
+case 52:
+YY_RULE_SETUP
+#line 382 "c-.l"
 ECHO;
 	YY_BREAK
-#line 1397 "lex.yy.c"
+#line 1417 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2403,6 +2423,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 366 "c-.l"
+#line 382 "c-.l"
 
 

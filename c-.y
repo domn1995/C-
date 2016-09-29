@@ -1,98 +1,670 @@
 %{
 #include <cstdio>
+#include <getopt.h>
 #include "Token.h"
+#include "TreeNode.h"
+#include "SymbolTable.h"
 
 extern int yylex();
 //extern void yyerror(const char* msg);
 extern char* yytext;
 extern int yylineno;
 extern FILE* yyin;
+Scope globalScope("global");
 
 #define YYERROR_VERBOSE
 void yyerror(const char *msg)
 {
-    printf(msg);
+    printf("ERROR(%d): %s\n", yylineno, msg);
 }
 %}
 
 %union 
 {
     Token t;
+    TreeNode* treeNode;
 }
 
-%token NUMCONST BOOLCONST ID CHARCONST 
-%token RECORD STATIC INT CHAR BOOL
-%token IF ELSE AND OR NOT WHILE BREAK RETURN
-%token DIV STAR ADD MINUS PERCENT COMMA
-%token ASSIGN MULASS INC ADDASS DEC
-%token SUBASS DIVASS LTHAN LESSEQ EQ NOTEQ
-%token GTHAN GRTEQ QMARK LPAREN RPAREN
-%token LCURLY RCURLY LBRACKET RBRACKET
-%token COLON SEMICOLON DOT ERROR
+%token <t> NUMCONST BOOLCONST ID CHARCONST RECTYPE
+%token <t> RECORD STATIC INT CHAR BOOL
+%token <t> IF ELSE AND OR NOT WHILE BREAK RETURN
+%token <t> DIV STAR ADD MINUS PERCENT COMMA
+%token <t> ASSIGN MULASS INC ADDASS DEC
+%token <t> SUBASS DIVASS LTHAN LESSEQ EQ NOTEQ
+%token <t> GTHAN GRTEQ QMARK LPAREN RPAREN
+%token <t> LCURLY RCURLY LBRACKET RBRACKET
+%token <t> COLON SEMICOLON DOT ERROR
+
+%type <treeNode> 	program
+				declaration
+				declarationList
+				
+				// Normal Declarations
+				varDeclaration
+				scopedVarDeclaration
+				scopedTypeSpecifier
+				recDeclaration
+				localDeclarations
+				varDeclList
+				varDeclInitialize
+				varDeclId
+				
+				// Function Declarations
+				funDeclaration
+				params
+				paramList
+				paramTypeList
+				paramIdList
+				paramId
+				
+				// Statements
+				statement
+				matched
+				unmatched
+				expressionStmt
+				statementList
+				compoundStmt
+				selectionStmtMatched
+				selectionStmtUnmatched
+				iterationStmtMatched
+				iterationStmtUnmatched
+				returnStmt
+				breakStmt
+				
+				// Expressions
+				expression
+				simpleExpression
+				andExpresssion
+				unaryRelExpression
+				relExpression
+				sumExpression
+				unaryExpression
+				term
+				factor
+				immutable
+				mutable
+				call
+				args
+				argList
+				constant
+				
+				// Operators
+%type <string>		relop
+				sumop
+				mulop
+				unaryop
+				
+				// Types
+				typeSpecifier
+				returnTypeSpecifier
 
 %%
-program			: declarationList
+program			: 	declarationList
+					{
+				
+					}
 				;
 
-declarationList	: declarationList declaration
-				| declaration 
+declarationList	: 	declarationList declaration
+					{
+					
+					}
+				| 	declaration
+					{
+					
+					}
 				;
 
-declaration 		: NUMCONST 	{ printf("Line %d Token: NUMCONST Value: %d  Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
-				| BOOLCONST	{ printf("Line %d Token: BOOLCONST Value: %d  Input: %s\n", yylval.t.lineNum, yylval.t.intVal, yylval.t.tokenStr); }
-				| CHARCONST 	{ printf("Line %d Token: CHARCONST Value: '%c'  Input: %s\n", yylval.t.lineNum, yylval.t.charVal, yylval.t.tokenStr); }		
-				| RECORD		{ printf("Line %d Token: RECORD\n", yylval.t.lineNum); }
-				| STATIC		{ printf("Line %d Token: STATIC\n", yylval.t.lineNum); }
-				| INT		{ printf("Line %d Token: INT\n", yylval.t.lineNum); }
-				| CHAR		{ printf("Line %d Token: CHAR\n", yylval.t.lineNum); }
-				| BOOL 		{ printf("Line %d Token: BOOL\n", yylval.t.lineNum); }
-				| IF			{ printf("Line %d Token: IF\n", yylval.t.lineNum); }
-				| ELSE		{ printf("Line %d Token: ELSE\n", yylval.t.lineNum); }
-				| AND		{ printf("Line %d Token: AND\n", yylval.t.lineNum); }
-				| OR			{ printf("Line %d Token: OR\n", yylval.t.lineNum); }
-				| NOT		{ printf("Line %d Token: NOT\n", yylval.t.lineNum); }
-				| WHILE		{ printf("Line %d Token: WHILE\n", yylval.t.lineNum); }
-				| BREAK		{ printf("Line %d Token: BREAK\n", yylval.t.lineNum); }
-				| RETURN		{ printf("Line %d Token: RETURN\n", yylval.t.lineNum); }
-				| DIV		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| STAR		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| ADD		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| MINUS		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| PERCENT		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| COMMA		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| ASSIGN		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| MULASS		{ printf("Line %d Token: MULASS\n", yylval.t.lineNum); }
-				| INC		{ printf("Line %d Token: INC\n", yylval.t.lineNum); }
-				| ADDASS		{ printf("Line %d Token: ADDASS\n", yylval.t.lineNum); }
-				| DEC		{ printf("Line %d Token: DEC\n", yylval.t.lineNum); }
-				| SUBASS		{ printf("Line %d Token: SUBASS\n", yylval.t.lineNum); }
-				| DIVASS		{ printf("Line %d Token: DIVASS\n", yylval.t.lineNum); }
-				| LTHAN		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| LESSEQ		{ printf("Line %d Token: LESSEQ\n", yylval.t.lineNum); }
-				| EQ			{ printf("Line %d Token: EQ\n", yylval.t.lineNum); }
-				| NOTEQ		{ printf("Line %d Token: NOTEQ\n", yylval.t.lineNum); }
-				| GTHAN		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| GRTEQ		{ printf("Line %d Token: GRTEQ\n", yylval.t.lineNum); }
-				| QMARK		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| LPAREN		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| RPAREN		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| LCURLY		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| RCURLY		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| LBRACKET	{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| RBRACKET	{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }				
-				| ID     		{ printf("Line %d Token: ID Value: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| DOT 		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }	
-				| COLON		{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| SEMICOLON	{ printf("Line %d Token: %s\n", yylval.t.lineNum, yylval.t.tokenStr); }
-				| ERROR 		{ printf("ERROR(%d): Invalid or misplaced input character: \"%c\"\n", yylineno, yytext[0]); }
+declaration 		: 	varDeclaration
+					{
+					
+					}
+				|	funDeclaration
+					{
+					
+					}
+				|	recDeclaration
+					{
+					
+					}
 				;
+				
+// Variable Declarations
+
+recDeclaration		: 	RECORD ID LCURLY localDeclarations RCURLY
+					{
+						printf("Adding %s to scope.\n", $2.tokenStr);
+						globalScope.insert($2.tokenStr, (char*)"recordType");
+					}
+				;
+
+varDeclaration		: 	typeSpecifier varDeclList SEMICOLON
+					{
+						
+					}
+				;
+				
+scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
+					{
+					
+					}
+				;
+				
+varDeclList		:	varDeclList COMMA varDeclInitialize 
+					{
+					
+					}
+				|	varDeclInitialize 
+					{
+					
+					}
+				;
+				
+varDeclInitialize	: 	varDeclId
+					{
+					
+					}
+				|	varDeclId COLON simpleExpression
+					{
+					
+					}
+				;
+				
+varDeclId			:	ID
+					{
+					
+					}
+				|	ID LBRACKET NUMCONST RBRACKET
+					{
+					
+					}
+				;
+				
+scopedTypeSpecifier :	STATIC typeSpecifier
+					{
+					
+					}
+				| 	typeSpecifier
+					{
+					
+					}
+				;
+				
+typeSpecifier		: 	returnTypeSpecifier
+					{
+					
+					}
+				|	RECTYPE
+					{
+						
+					}
+				;
+				
+returnTypeSpecifier :	INT
+					{
+					
+					}
+				|	BOOL
+					{
+					
+					}
+				|	CHAR
+					{
+					
+					}
+				;
+				
+// Function Declarations
+
+funDeclaration		:	typeSpecifier ID LPAREN params RPAREN statement
+					{
+					
+					}
+				|	ID LPAREN params RPAREN statement
+					{
+					
+					}
+				;
+				
+params			:	paramList 
+					{ 
+					
+					}
+				|	{
+				
+					}
+				;
+				
+paramList			: 	paramList SEMICOLON paramTypeList
+					{
+					
+					}
+				|	paramTypeList
+					{
+					
+					}
+				;
+
+paramTypeList		: 	typeSpecifier paramIdList
+					{
+					
+					}
+				;
+				
+paramIdList		:	paramIdList COMMA paramId
+					{
+					
+					}
+				|	paramId
+					{
+					
+					}
+				;
+				
+paramId			:	ID
+					{
+					
+					}
+				|	ID LBRACKET RBRACKET
+					{
+					
+					}
+				;
+				
+// Statements
+
+statement			:	matched
+					{
+					
+					}
+				|	unmatched
+					{
+					
+					}
+				;
+
+matched			:	selectionStmtMatched
+					{
+					
+					}
+				|	iterationStmtMatched
+					{
+					
+					}
+				|	expressionStmt
+					{
+					
+					}
+				|	compoundStmt
+					{
+					
+					}
+				|	returnStmt
+					{
+					
+					}
+				|	breakStmt
+					{
+					
+					}
+				;
+				
+unmatched			:	selectionStmtUnmatched
+					{
+					
+					}
+				|	iterationStmtUnmatched
+					{
+					
+					}
+				;
+				
+compoundStmt		:	LCURLY localDeclarations statementList RCURLY
+					{
+					
+					}
+				;
+			
+localDeclarations	:	localDeclarations scopedVarDeclaration
+					{
+					
+					}
+				|	{
+				
+					}
+				;
+				
+statementList		:	statementList statement
+					{
+					
+					}
+				|	{
+						
+					}
+				;
+			
+expressionStmt		:	expression SEMICOLON
+					{
+					
+					}
+				|	SEMICOLON
+					{
+					
+					}
+				;
+				
+selectionStmtMatched:	IF LPAREN simpleExpression RPAREN matched ELSE matched
+					{
+					
+					}
+				;
+				
+selectionStmtUnmatched:	IF LPAREN simpleExpression RPAREN matched ELSE unmatched
+					{
+					
+					}
+				|
+					IF LPAREN simpleExpression RPAREN statement
+					{
+					
+					}
+				;
+				
+iterationStmtMatched:	WHILE LPAREN simpleExpression RPAREN matched
+					{
+					
+					}
+				;
+				
+iterationStmtUnmatched:	WHILE LPAREN simpleExpression RPAREN unmatched
+					{
+					
+					}
+				;
+				
+returnStmt		:	RETURN SEMICOLON
+					{
+					
+					}
+				|	RETURN expression SEMICOLON
+					{
+					
+					}
+				;
+				
+breakStmt			:	BREAK SEMICOLON
+					{
+					
+					}
+				;
+				
+// Expressions
+
+expression		: 	mutable ASSIGN expression
+					{
+					
+					}
+				|	mutable ADDASS expression
+					{
+					
+					}
+				|	mutable SUBASS expression
+					{
+					
+					}
+				|	mutable MULASS expression
+					{
+					
+					}
+				|	mutable DIVASS expression
+					{
+					
+					}
+				|	mutable INC
+					{
+					
+					}
+				|	mutable DEC
+					{
+					
+					}
+				|	simpleExpression
+					{
+					
+					}
+				;
+				
+simpleExpression	:	simpleExpression OR andExpresssion
+					{
+					
+					}
+				|	andExpresssion
+					{
+					
+					}
+				;
+				
+andExpresssion		:	andExpresssion AND unaryRelExpression
+					{
+					
+					}
+				|	unaryRelExpression
+					{
+					
+					}
+				;
+				
+unaryRelExpression	:	NOT unaryRelExpression
+					{
+					
+					}
+				|	relExpression
+					{
+					
+					}
+				;
+				
+relExpression		:	sumExpression relop sumExpression
+					{
+					
+					}
+				|	sumExpression
+					{
+					
+					}
+				;
+				
+relop			:	LESSEQ
+					{
+					
+					}
+				|	LTHAN
+					{
+					
+					}
+				|	GTHAN
+					{
+					
+					}
+				|	GRTEQ
+					{
+					
+					}
+				| 	EQ
+					{
+					
+					}
+				|	NOTEQ
+					{
+					
+					}
+				;
+				
+sumExpression		:	sumExpression sumop term
+					{
+					
+					}
+				|	term
+					{
+					
+					}
+				;
+				
+sumop			:	ADD
+					{
+					
+					}
+				|	MINUS
+					{
+					
+					}
+				;
+				
+term				:	term mulop unaryExpression
+					{
+					
+					}
+				|	unaryExpression
+					{
+					
+					}
+				;
+				
+mulop			:	STAR
+					{
+					
+					}
+				|	DIV
+					{
+					
+					}
+				|	PERCENT
+					{
+					
+					}
+				;
+				
+unaryExpression	:	unaryop unaryExpression
+					{
+					
+					}
+				|	factor
+					{
+					
+					}
+				;
+				
+unaryop			:	MINUS
+					{
+					
+					}
+				|	STAR
+					{
+					
+					}
+				|	QMARK
+					{
+					
+					}
+				;
+				
+factor			:	immutable
+					{
+					
+					}
+				|	mutable
+					{
+					
+					}
+				;
+
+mutable			:	ID
+					{
+					
+					}
+				|	mutable LBRACKET expression RBRACKET
+					{
+					
+					}
+				|	mutable DOT ID
+					{
+					
+					}
+				;
+				
+immutable			:	LPAREN expression RPAREN
+					{
+					
+					}
+				|	call
+					{
+					
+					}
+				|	constant
+					{
+					
+					}
+				;
+				
+call				:	ID LPAREN args RPAREN
+					{
+					
+					}
+				;
+	
+args 			:	argList
+					{
+					
+					}
+				|	{
+				
+					}
+	
+argList			:	argList COMMA expression
+					{
+					
+					}
+				|	expression
+					{
+					
+					}
+				;
+				
+constant			:	NUMCONST
+					{
+					
+					}
+				|	CHARCONST
+					{
+					
+					}
+				|	BOOLCONST
+					{
+					
+					}
+				;
+				
 %%
 
 int main(int argc, char** argv)
 {
-	if (argc == 2)
+	int arg;
+	
+	while ((arg = getopt(argc, argv, "d")) != EOF)
 	{
-		FILE* inputFile = fopen(argv[1], "r");
+		switch (arg)
+		{
+			case 'd':
+				yydebug = 1;
+				break;
+			default:
+				printf("Invalid argument: %c", arg);
+		}
+	}
+	
+	if (argc >= 2)
+	{
+		FILE* inputFile = fopen(argv[argc - 1], "r");
 		
 		if (!inputFile)
 		{
@@ -109,6 +681,8 @@ int main(int argc, char** argv)
 	{
 		yyparse();
 	} while (!feof(yyin));
+	
+	printf("Valid program");
 	
 	return 0;
 }
