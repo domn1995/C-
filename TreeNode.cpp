@@ -2,24 +2,32 @@
 #include <cstdlib>
 #include "TreeNode.h"
 
-static int childCount = 0;
-static int siblingCount = 0;
-static int indent = -3;
+static int indent = -4;
 extern int yylineno;
+static bool firstPrintDone = false;
 
 void Indent()
-{
+{	
 	for (int i = 0; i < indent; i++)
 	{
-		printf(" ");
+		if (i % 4 == 0)
+		{
+			printf("!");
+		}
+		else
+		{
+			printf(" ");
+		}
+		
 	}
 }
 
 void PrintTree(TreeNode* tree, int currSibling, int currChild)
 {
-	indent += 3;
+	indent += 4;
+		
 	while (tree != NULL)
-	{
+	{				
 		Indent();
 		
 		if (tree->nodeKind == StmtK)
@@ -156,7 +164,7 @@ void PrintTree(TreeNode* tree, int currSibling, int currChild)
 		tree = tree->sibling;
 	}
 	
-	indent -= 3;
+	indent -= 4;
 }
 
 void InitializeNodes(TreeNode* treeNode)

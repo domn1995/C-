@@ -494,7 +494,7 @@ static const yytype_uint16 yyrline[] =
      718,   722,   728,   735,   741,   745,   751,   758,   764,   768,
      772,   778,   784,   790,   794,   798,   804,   808,   814,   819,
      840,   852,   856,   860,   866,   874,   878,   882,   899,   905,
-     911,   918
+     911,   917
 };
 #endif
 
@@ -2539,25 +2539,24 @@ yyreduce:
 #line 912 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(ConstK);
-						printf("Setting '%c' as cVal\n", (yyvsp[0].t).charVal);
 						(yyval.treeNode)->attr.cValue = (yyvsp[0].t).charVal;
 						(yyval.treeNode)->expType = Char;
 					}
-#line 2547 "c-.tab.c" /* yacc.c:1646  */
+#line 2546 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 919 "c-.y" /* yacc.c:1646  */
+#line 918 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(ConstK);
 						(yyval.treeNode)->attr.value = (yyvsp[0].t).intVal;
 						(yyval.treeNode)->expType = Bool;
 					}
-#line 2557 "c-.tab.c" /* yacc.c:1646  */
+#line 2556 "c-.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2561 "c-.tab.c" /* yacc.c:1646  */
+#line 2560 "c-.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2785,7 +2784,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 926 "c-.y" /* yacc.c:1906  */
+#line 925 "c-.y" /* yacc.c:1906  */
 
 
 int main(int argc, char** argv)
@@ -2825,7 +2824,7 @@ int main(int argc, char** argv)
 		yyparse();
 	} while (!feof(yyin));
 	
-	PrintTree(savedTree, 0, 0);
+	PrintTree(savedTree, -1, -1);
 	
 	printf("Number of warnings: 0\n");
 	printf("Number of errors: 0\n");
