@@ -1349,7 +1349,6 @@ YY_RULE_SETUP
 						if ((char*)globalScope.lookup(yytext) != NULL && strcmp((char*)globalScope.lookup(yytext), "recordType") == 0)
 						{								
 							tokenType = RECTYPE;
-							printf("Found record type '%s' on line %d.\n", yytext, yylineno);
 						}						
 						yylval.t.tokenClass = tokenType;
 						yylval.t.lineNum = yylineno;
@@ -1360,7 +1359,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 356 "c-.l"
+#line 355 "c-.l"
 { 
 						yylval.t.tokenClass = DOT;
 						yylval.t.lineNum = yylineno;
@@ -1371,7 +1370,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 363 "c-.l"
+#line 362 "c-.l"
 { 
 						yylval.t.tokenClass = COLON;
 						yylval.t.lineNum = yylineno;
@@ -1382,7 +1381,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 370 "c-.l"
+#line 369 "c-.l"
 { 
 						yylval.t.tokenClass = SEMICOLON;
 						yylval.t.lineNum = yylineno;
@@ -1393,20 +1392,20 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 377 "c-.l"
+#line 376 "c-.l"
 ; // Do nothing.
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 378 "c-.l"
+#line 377 "c-.l"
 { return ERROR; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 379 "c-.l"
+#line 378 "c-.l"
 ECHO;
 	YY_BREAK
-#line 1410 "lex.yy.c"
+#line 1409 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2416,6 +2415,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 379 "c-.l"
+#line 378 "c-.l"
 
 

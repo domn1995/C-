@@ -193,7 +193,6 @@ scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
 								t->expType = $1->expType;
 								t->isRecord = $1->isRecord;
 								t->isStatic = $1->isStatic;
-								t->isArray = $1->isArray;
 								t = t->sibling;
 							}
 							while (t != NULL);
