@@ -345,10 +345,12 @@ return				{
 						if ((char*)globalScope.lookup(yytext) != NULL && strcmp((char*)globalScope.lookup(yytext), "recordType") == 0)
 						{								
 							tokenType = RECTYPE;
+							printf("Found record type '%s' on line %d.\n", yytext, yylineno);
 						}						
 						yylval.t.tokenClass = tokenType;
 						yylval.t.lineNum = yylineno;
 						yylval.t.tokenStr = strdup(yytext);
+						
 						return tokenType; 
 					}
 "."					{ 

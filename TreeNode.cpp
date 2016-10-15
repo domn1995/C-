@@ -22,7 +22,7 @@ void Indent()
 	}
 }
 
-void PrintTree(TreeNode* tree, int currSibling)
+void PrintTree(TreeNode* t, int currSibling)
 {
 	bool printFlag = false;
 	if (currSibling == -1)
@@ -35,14 +35,13 @@ void PrintTree(TreeNode* tree, int currSibling)
 		indent += 4;
 	}	
 	
-	for (TreeNode* t = tree; t != NULL; t = t->sibling)
+	for (TreeNode* tree = t; tree != NULL; tree = tree->sibling)
 	{
 		Indent();
 		
 		if (currSibling >= 1)
-		{
-			int currSiblingCorrection = currSibling - 1;
-			printf("Sibling: %d  ", currSiblingCorrection);
+		{			
+			printf("Sibling: %d  ", currSibling - 1);
 		}
 		else if (currSibling == 0 && printFlag == false)
 		{
@@ -110,7 +109,7 @@ void PrintTree(TreeNode* tree, int currSibling)
 					printf("Op: %s ", tree->attr.name);
 					break;
 				case CallK:
-					printf("Call: %s", tree->attr.name);
+					printf("Call: %s ", tree->attr.name);
 					break;
 				default:
 					printf("ERROR(%s): Unknown ExpKind node.\n", tree->lineNumber);
@@ -125,7 +124,11 @@ void PrintTree(TreeNode* tree, int currSibling)
 					printf("Func %s returns type ", tree->attr.name);
 					break;
 				case VarK:
-					if (tree->isArray)
+					if (tree->isRecord)
+					{
+						printf("Record %s ", tree->attr.name);
+					}
+					else	if (tree->isArray)
 					{
 						printf("Var %s is array of type ", tree->attr.name);
 					}
@@ -151,7 +154,10 @@ void PrintTree(TreeNode* tree, int currSibling)
 			switch (tree->expType)
 			{
 				case Void:
-					printf("void ");
+					if (!tree->isRecord)
+					{
+						printf("void ");
+					}					
 					break;
 				case Int:
 					printf("int ");
@@ -180,7 +186,7 @@ void PrintTree(TreeNode* tree, int currSibling)
 		for (int i = 0; i < MAXCHILDREN; i++)
 		{
 			childCount = i;
-			PrintTree(t->children[i], 0);
+			PrintTree(tree->children[i], 0);
 			childCount = 0;
 		}		
 	}

@@ -156,6 +156,7 @@ recDeclaration		: 	RECORD ID LCURLY localDeclarations RCURLY
 						globalScope.insert($2.tokenStr, (char*)"recordType");
 						
 						$$ = NewDeclNode(VarK);
+						$$->lineNumber = $1.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->isRecord = true;
 						$$->children[0] = $4;						
@@ -267,10 +268,6 @@ scopedTypeSpecifier :	STATIC typeSpecifier
 					{
 						$$ = NewDeclNode(VarK);						
 						$$->expType = $1;
-						if ($1 == Record)
-						{
-							$$->isRecord = true;
-						}
 					}
 				;
 				
@@ -821,10 +818,9 @@ mutable			:	ID
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
 						
-						$$->children[0] = $1;
-						
+						$$->children[0] = $1;						
 						$$->children[1] = $3;
-						
+						$$->isArray = true;
 						// $$ = NewExprNode(IdK);
 						
 						// TreeNode* t = NewExprNode(OpK);
