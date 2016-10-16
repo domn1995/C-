@@ -4,6 +4,7 @@
 #include "Token.h"
 #include "TreeNode.h"
 #include "SymbolTable.h"
+#include "PrintTree.h"
 
 extern int yylex();
 //extern void yyerror(const char* msg);

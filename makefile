@@ -1,7 +1,7 @@
 BIN  = c-
 CC   = g++
-SRCS = $(BIN).y $(BIN).l Token.h SymbolTable.h SymbolTable.cpp TreeNode.h TreeNode.cpp 
-OBJS = lex.yy.o $(BIN).tab.o SymbolTable.o TreeNode.o
+SRCS = $(BIN).y $(BIN).l Token.h SymbolTable.h SymbolTable.cpp TreeNode.h TreeNode.cpp PrintTree.h PrintTree.cpp
+OBJS = lex.yy.o $(BIN).tab.o SymbolTable.o TreeNode.o PrintTree.o
 CCFLAGS = -s
 LIBS = -lm 
 
@@ -13,6 +13,9 @@ SymbolTable.o: SymbolTable.h SymbolTable.cpp
 
 TreeNode.o: TreeNode.h TreeNode.cpp
 	$(CC) $(CCFLAGS) TreeNode.cpp -c
+	
+PrintTree.o: PrintTree.h TreeNode.h PrintTree.cpp
+	$(CC) $(CCFlags) PrintTree.cpp -c
 	
 $(BIN).tab.h $(BIN).tab.c: $(BIN).y SymbolTable.o TreeNode.o
 	bison -v -t -d $(BIN).y   # -d supplies defines file, -v supplies output
