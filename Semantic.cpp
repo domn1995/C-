@@ -284,8 +284,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 	ExpType left = Undefined, right = Undefined, expectedLeft = Undefined, 
 	expectedRight = Undefined, returnType = Undefined;
 
-	bool isBinary = false, isLeftArray = false, isRightArray = false,
-	isLeftIndexed = false, isRightIndexed = false, oneSidedErrors = false;
+	bool isBinary = false, isLeftArray = false, isRightArray = false, oneSidedErrors = false;
 	
 	bool leftError = false, rightError = false;
 	
@@ -300,9 +299,12 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			for (int i = 0; i < 3; i++)
 			{
 				ScopeAndType(node->children[i], numErrors, numWarnings);
-			}			
+			}
+			
+			leftNode = node->children[0];
+			rightNode = node->children[1];
 						
-			if ((leftNode = node->children[0]) != NULL)
+			if (leftNode != NULL)
 			{				
 				left = leftNode->expType;
 				isLeftArray = leftNode->isArray;
@@ -321,7 +323,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				
 				if (strcmp(node->attr.name, "*") == 0)
 				{
-					if (!leftNode->isArray)
+					if (!leftNode->isArray && rightNode == NULL)
 					{
 						Error error;
 						error.errorCode = ArrayOnlyOperation;
@@ -329,14 +331,6 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						error.child0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
-				}
-				
-				if (leftNode->children[0] != NULL)
-				{
-					/* // Accessing the array by index
-					printf("Setting isLeftArray to false\n");
-					isLeftArray = false; */
-					isLeftIndexed = true;
 				}
 				
 				if (leftNode->nodeKind == ExpK)
@@ -350,7 +344,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				}
 			}
 			
-			if ((rightNode = node->children[1]) != NULL)
+			if (rightNode != NULL)
 			{
 				right = rightNode->expType;
 				isRightArray = rightNode->isArray;
@@ -358,7 +352,6 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				if (rightNode->children[0] != NULL)
 				{
 					isRightArray = false;
-					isRightIndexed = true;
 				}
 				
 				if (rightNode->nodeKind == ExpK)
@@ -426,7 +419,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			{
 				if (!oneSidedErrors)
 				{
-					if (left != right && !leftError && !rightError)
+					if (left != right && !leftError && !rightError && strcmp(node->attr.name, "[") != 0)
 					{
 						Error error;
 						error.errorCode = BinaryOperandLhsRhsTypeMismatch;
@@ -465,6 +458,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							error.child0 = node->attr.name;
 							error.child1 = ExpTypeToString(expectedRight);
 							error.child2 = ExpTypeToString(right);
+							PrintError(error, numErrors, numWarnings);
 						}
 					}
 				}
@@ -725,63 +719,49 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 	switch (e.errorCode)
 	{
 	case SimpleVariableCall:
-		printf("ERROR(%d): '%s' is a simple variable and cannot be called.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): '%s' is a simple variable and cannot be called.\n", e.errorLineNumber, e.child0);
 		break;
 	case BinaryOperandLhsTypeMismatch:
-		printf("ERROR(%d): '%s' requires operands of %s but lhs is of %s.\n",
-		e.errorLineNumber, e.child0, e.child1, e.child2);
+		printf("ERROR(%d): '%s' requires operands of type %s but lhs is of type %s.\n",	e.errorLineNumber, e.child0, e.child1, e.child2);
 		break;
 	case BinaryOperandRhsTypeMismatch:
-		printf("ERROR(%d): '%s' requires operands of %s but rhs is of %s.\n",
-		e.errorLineNumber, e.child0, e.child1, e.child2);
+		printf("ERROR(%d): '%s' requires operands of type %s but rhs is of type %s.\n",	e.errorLineNumber, e.child0, e.child1, e.child2);
 		break;
 	case BinaryOperandLhsRhsTypeMismatch:
-		printf("ERROR(%d): '%s' requires operands of the same type but lhs is %s and rhs is %s.\n",
-		e.errorLineNumber, e.child0, e.child1, e.child2);
+		printf("ERROR(%d): '%s' requires operands of the same type but lhs is type %s and rhs is type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
 		break;
 	case ArrayIndexTypeNotInt:
-		printf("ERROR(%d): Array '%s' should be indexed by type int but got %s.\n",
-		e.errorLineNumber, e.child0, e.child1);
+		printf("ERROR(%d): Array '%s' should be indexed by type int but got type %s.\n", e.errorLineNumber, e.child0, e.child1);
 		break;
 	case ArrayIndexUnindexedArray:
-		printf("ERROR(%d): Array index is the unindexed array '%s'.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): Array index is the unindexed array '%s'.\n", e.errorLineNumber, e.child0);
 		break;
 	case IndexNonArrayKnown:
-		printf("ERROR(%d): Cannot index nonarray '%s'.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): Cannot index nonarray '%s'.\n", e.errorLineNumber, e.child0);
 		break;
 	case IndexNonArrayUnknown:
-		printf("ERROR(%d): Cannot index nonarray .\n",
-		e.errorLineNumber);
+		printf("ERROR(%d): Cannot index nonarray .\n", e.errorLineNumber);
 		break;
 	case ReturnArray:
-		printf("ERROR(%d): Cannot return an array.\n",
-		e.errorLineNumber);
+		printf("ERROR(%d): Cannot return an array.\n", e.errorLineNumber);
 		break;
 	case UseFunctionAsVariable:
-		printf("ERROR(%d): Cannot use function '%s' as a variable.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): Cannot use function '%s' as a variable.\n", e.errorLineNumber, e.child0);
 		break;
 	case SymbolAlreadyDefined:
-		printf("ERROR(%d): Symbol '%s' is already defined at line %d.\n",
-		e.errorLineNumber, e.child0, e.expressionLineNumber);
+		printf("ERROR(%d): Symbol '%s' is already defined at line %d.\n", e.errorLineNumber, e.child0, e.expressionLineNumber);
 		break;
 	case SymbolUndefined:
-		printf("ERROR(%d): Symbol '%s' is not defined.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): Symbol '%s' is not defined.\n", e.errorLineNumber, e.child0);
 		break;
 	case InvalidArrayOperation:
-		printf("ERROR(%d): The operation '%s' does not work with arrays.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): The operation '%s' does not work with arrays.\n", e.errorLineNumber, e.child0);
 		break;
 	case ArrayOnlyOperation:
-		printf("ERROR(%d): The operation '%s' only works with arrays.\n",
-		e.errorLineNumber, e.child0);
+		printf("ERROR(%d): The operation '%s' only works with arrays.\n", e.errorLineNumber, e.child0);
 		break;
 	case UnaryOperandTypeMismatch:
-		printf("ERROR(%d): Unary '%s' requires an operand of type %s but was given %s.\n");
+		printf("ERROR(%d): Unary '%s' requires an operand of type %s but was given type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
 		break;
 	case MainUndefined:
 		printf("ERROR(LINKER): Procedure main is not defined.\n");

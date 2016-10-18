@@ -182,7 +182,14 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 		
 		if (annotated)
 		{
-			printf("[type %s] ", ExpTypeToString(tree->expType));
+			if (tree->expType == Undefined)
+			{
+				printf("[undefined type] ");
+			}
+			else
+			{
+				printf("[type %s] ", ExpTypeToString(tree->expType));
+			}			
 		}
 		
 		printf("[line: %d]\n", tree->lineNumber);
