@@ -1,5 +1,4 @@
 ERROR(39): The operation '<' does not work with arrays.
-ERROR(81): The operation '-' does not work with arrays.
 ERROR(81): The operation '>=' does not work with arrays.
 Var gromit of type int [type int] [line: 6]
 Sibling: 0  Func wallace returns type void [type void] [line: 8]
@@ -359,4 +358,4 @@ Sibling: 14  Var bat of type char [type char] [line: 105]
 Sibling: 15  Var dog of type char [type char] [line: 106]
 !   Child: 0  Const: 't' [type char] [line: 106]
 Number of warnings: 0
-Number of errors: 3
+Number of errors: 2

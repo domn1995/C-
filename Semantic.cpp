@@ -36,7 +36,7 @@ void ScopeAndType(TreeNode* node, int& numErrors, int& numWarnings)
 	{
 		return;
 	}
-	
+		
 	switch (node->nodeKind)
 	{
 	case DeclK: 
@@ -50,7 +50,7 @@ void ScopeAndType(TreeNode* node, int& numErrors, int& numWarnings)
 		break;
 	default:
 		printf("ERROR: Unknown NodeKind\n");
-	}
+	}	
 		
 	if (node->sibling != NULL)
 	{
@@ -65,18 +65,18 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 	// If the node kind is not VarK (we'll handle it later) and we cannot 
 	// insert into the symbol table, it means that the symbol was already defined.
 	if (node->kind.decl != VarK && !symbolTable.insert(node->attr.name, node))
-	{
+	{		
 		declaration = (TreeNode*)symbolTable.lookup(node->attr.name);
 		// Build up the Error struct.
 		
 		Error error;
 		error.errorCode = SymbolAlreadyDefined;
-		error.errorLineNumber = node->lineNumber;
+		error.errorLineNumber = node->lineNumber;		
 		error.expressionLineNumber = declaration->lineNumber;
 		error.child0 = node->attr.name;
 		PrintError(error, numErrors, numWarnings);
 	}
-	
+		
 	switch (node->kind.decl)
 	{
 	case ParamK:
@@ -129,7 +129,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		
 		symbolTable.enter(node->attr.name);
 		currentFunction = node;
-		enteredFunctionScope = true;		
+		enteredFunctionScope = true;	
 		
 		for (int i = 0; i < 3; i++)
 		{
@@ -257,13 +257,12 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		if (keepScope)
 		{
 			symbolTable.enter("compound");
+			node->expType = Void;	
 		}
 		else
 		{
 			enteredFunctionScope = false;
 		}			
-		
-		node->expType = Void;		
 		
 		for (int i = 0; i < 3; i++)
 		{
@@ -305,8 +304,12 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			rightNode = node->children[1];
 						
 			if (leftNode != NULL)
-			{				
-				left = leftNode->expType;
+			{	
+				if (leftNode->expType != Undefined)
+				{					
+					left = leftNode->expType;
+				}
+				
 				isLeftArray = leftNode->isArray;
 				
 				if (strcmp(node->attr.name, "[") == 0)
@@ -346,7 +349,11 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			
 			if (rightNode != NULL)
 			{
-				right = rightNode->expType;
+				if (rightNode->expType != Undefined)
+				{
+					right = rightNode->expType;
+				}
+				
 				isRightArray = rightNode->isArray;
 				
 				if (rightNode->children[0] != NULL)
@@ -380,6 +387,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			
 			if (!isBinary && !leftError)
 			{
+				
 				if (left != expectedLeft && expectedLeft != Undefined)
 				{
 					Error error;
@@ -392,15 +400,32 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				}
 				
 				if (isLeftArray)
-				{
+				{						
 					if (strcmp(node->attr.name, "*") != 0)
-					{
-						//printf("InvalidArrayOperation\n");						
-						Error error;
-						error.errorCode = InvalidArrayOperation;
-						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
-						PrintError(error, numErrors, numWarnings);
+					{		
+						if (left != expectedLeft)
+						{
+							Error error;
+							error.errorCode = UnaryOperandTypeMismatch;
+							error.errorLineNumber = node->lineNumber;
+							error.child0 = node->attr.name;
+							error.child1 = ExpTypeToString(expectedLeft);
+							error.child2 = ExpTypeToString(left);
+							PrintError(error, numErrors, numWarnings);
+						}
+						else
+						{
+							if (left != expectedLeft)
+							{
+								Error error;
+								error.errorCode = InvalidArrayOperation;
+								error.errorLineNumber = node->lineNumber;
+								error.child0 = node->attr.name;
+								PrintError(error, numErrors, numWarnings);
+							}
+							
+						}					
+						
 					}
 					else if (strcmp(node->attr.name, "*") == 0)
 					{
@@ -413,14 +438,25 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							PrintError(error, numErrors, numWarnings);
 						}
 					}
+					
+					if (strcmp(node->attr.name, "?") == 0)
+					{
+						Error error;
+						error.errorCode = InvalidArrayOperation;
+						error.errorLineNumber = node->lineNumber;
+						error.child0 = node->attr.name;
+						PrintError(error, numErrors, numWarnings);
+					}
 				}
 			}
 			else
 			{
+				//printf("binary op %s; left = %s, right = %s\n", node->attr.name, ExpTypeToString(left), ExpTypeToString(right));
+				//printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
 				if (!oneSidedErrors)
-				{
+				{					
 					if (left != right && !leftError && !rightError && strcmp(node->attr.name, "[") != 0)
-					{
+					{						
 						Error error;
 						error.errorCode = BinaryOperandLhsRhsTypeMismatch;
 						error.errorLineNumber = node->lineNumber;
@@ -429,10 +465,32 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						error.child2 = ExpTypeToString(rightNode->expType);
 						PrintError(error, numErrors, numWarnings);
 					}
+					else if (strcmp(node->attr.name, "[") == 0 && right != Int)
+					{
+						
+						if (rightNode->isArray && strcmp(node->attr.name, "[") != 0)
+						{
+							Error error;
+							error.errorCode = ArrayIndexUnindexedArray;
+							error.errorLineNumber = node->lineNumber;
+							error.child0 = rightNode->attr.name;
+							PrintError(error, numErrors, numWarnings);
+						}
+						else if (right != Int)
+						{
+							Error error;
+							error.errorCode = ArrayIndexTypeNotInt;
+							error.errorLineNumber = node->lineNumber;
+							error.child0 = leftNode->attr.name;
+							error.child1 = ExpTypeToString(right);
+							PrintError(error, numErrors, numWarnings);
+						}										
+						
+					}
 				}
 				
 				if (!(expectedLeft == Undefined || expectedRight == Undefined))
-				{
+				{					
 					if (expectedLeft == IntOrChar || expectedRight == IntOrChar)
 					{
 						// Handle errors on comparisons that take ints or chars.
@@ -465,6 +523,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				
 				if (isLeftArray || isRightArray)
 				{
+					// printf("node %s at line %d\n", node->attr.name, node->lineNumber);
+					// printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
+					
 					if (expectedLeft != Undefined)
 					{
 						Error error;
@@ -473,6 +534,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						error.child0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
+					
 				}
 			}
 			
@@ -495,7 +557,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			found = (TreeNode*)symbolTable.lookup(node->attr.name);
 			
 			if (found == NULL)
-			{				
+			{
 				node->expType = Undefined;
 				Error error;
 				error.errorCode = SymbolUndefined;
@@ -505,7 +567,11 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 			else
 			{		
-				node->expType = found->expType;
+				if (found->expType != Undefined)
+				{
+					node->expType = found->expType;
+				}
+				//node->expType = found->expType;
 				node->isArray = found->isArray;
 					
 				if (found->kind.decl == FuncK)
@@ -520,7 +586,6 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				
 				if (node->children[0] != NULL)
 				{
-					printf("FLAG2\n");
 					ScopeAndType(node->children[0], numErrors, numWarnings);
 					
 					if (node->children[0]->expType == Void &&
@@ -541,7 +606,6 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					{
 						if (node->children[0]->expType != Int)
 						{
-							
 							Error error;
 							error.errorCode = ArrayIndexTypeNotInt;
 							error.errorLineNumber = node->lineNumber;
@@ -575,6 +639,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			
 			if (found == NULL)
 			{
+				node->expType = Undefined;
 				Error error;
 				error.errorCode = SymbolUndefined;
 				error.errorLineNumber = node->lineNumber;
@@ -583,8 +648,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 			else
 			{
-				node->expType = found->expType;
-				
+							
 				if (found->kind.decl != FuncK)
 				{
 					Error error;
@@ -592,6 +656,10 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					error.errorLineNumber = node->lineNumber;
 					error.child0 = node->attr.name;
 					PrintError(error, numErrors, numWarnings);
+				}
+				else if (found->expType != Undefined)
+				{
+					node->expType = found->expType;
 				}
 				
 				// Handle other function call errors.
