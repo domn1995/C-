@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include "TreeNode.h"
 
 extern int yylineno;
@@ -16,6 +17,7 @@ void InitializeNodes(TreeNode* treeNode)
 TreeNode* NewDeclNode(DeclKind kind)
 {
 	TreeNode* t = (TreeNode*)malloc(sizeof(TreeNode));
+	
 	if (t == NULL)
 	{
 		printf("NewDeclNode(): Failed to allocate memory for TreeNode.\n");
@@ -27,12 +29,14 @@ TreeNode* NewDeclNode(DeclKind kind)
 		t->kind.decl = kind;
 		t->lineNumber = yylineno;
 	}
+	
 	return t;
 }
 
 TreeNode* NewStmtNode(StmtKind kind)
 {
 	TreeNode* t = (TreeNode*)malloc(sizeof(TreeNode));
+	
 	if (t == NULL)
 	{
 		printf("NewStmtNode(): Failed to allocate memory for TreeNode.\n");
@@ -44,12 +48,14 @@ TreeNode* NewStmtNode(StmtKind kind)
 		t->kind.stmt = kind;
 		t->lineNumber = yylineno;
 	}	
+	
 	return t;
 }
 
 TreeNode* NewExprNode(ExpKind kind)
 {
 	TreeNode* t = (TreeNode*)malloc(sizeof(TreeNode));
+	
 	if (t == NULL)
 	{
 		printf("NewExprNode(): Failed to allocate memory for TreeNode.\n");
@@ -61,5 +67,29 @@ TreeNode* NewExprNode(ExpKind kind)
 		t->kind.exp = kind;
 		t->lineNumber = yylineno;
 	}
+	
 	return t;
+}
+
+char* ExpTypeToString(ExpType expType)
+{
+	switch (expType)
+	{
+		case Void:
+			return strdup("void");
+		case Int:
+			return strdup("int");
+		case Bool:
+			return strdup("bool");
+		case Char:
+			return strdup("char");
+		case Record:
+			return strdup("record");
+		case Undefined:
+			return strdup("undefined");
+		case IntOrChar:
+			return strdup("intorchar");
+		default:
+			return strdup("UNKNOWN_TYPE");
+	}
 }

@@ -5,6 +5,7 @@
 #include "TreeNode.h"
 #include "SymbolTable.h"
 #include "PrintTree.h"
+#include "Semantic.h"
 
 extern int yylex();
 //extern void yyerror(const char* msg);
@@ -923,44 +924,72 @@ constant			:	NUMCONST
 int main(int argc, char** argv)
 {
 	int arg;
+	bool argFound;
 	
-	while ((arg = getopt(argc, argv, "d")) != EOF)
+	bool printAbstractSyntaxTree = false;
+	bool printAnnotatedSyntaxTree = false;
+	
+	for (int i = 0; i < argc; i++)
+	{
+		printf("argv[%d] = %s\n", i, argv[i]);
+	}		
+	
+	while ((arg = getopt(argc, argv, "dpP")) != EOF)
 	{
 		switch (arg)
 		{
 			case 'd':
+				argFound = true;
 				yydebug = 1;
+				break;
+			case 'p':
+				argFound = true;
+				printAbstractSyntaxTree = true;
+				break;
+			case 'P':
+				argFound = true;
+				printAnnotatedSyntaxTree = true;
 				break;
 			default:
 				printf("Invalid argument: %c", arg);
 				return -1;
 		}
-	}
+	}	
 	
 	if (argc >= 2)
 	{
 		FILE* inputFile = fopen(argv[argc - 1], "r");
 		
-		if (!inputFile)
-		{
-			printf("File '%s' not found.\n", argv[1]);
-			return -1;
-		}
-		else
+		if (inputFile)
 		{
 			yyin = inputFile;
 		}
-	}
+	}	
 	
 	do 
 	{
 		yyparse();
-	} while (!feof(yyin));
+	} 
+	while (!feof(yyin));	
+		
+	if (printAbstractSyntaxTree)
+	{
+		
+		PrintSyntaxTree(savedTree, -1, false);
+	}	
 	
-	PrintTree(savedTree, -1);
+	int numOfErrors = 0;
+	int numOfWarnings = 0;	
 	
-	printf("Number of warnings: 0\n");
-	printf("Number of errors: 0\n");
+	SemanticAnalysis(savedTree, numOfErrors, numOfWarnings);
+	
+	if (printAnnotatedSyntaxTree)
+	{
+		PrintSyntaxTree(savedTree, -1, true);
+	}
+		
+	printf("Number of warnings: %d\n", numOfWarnings);
+	printf("Number of errors: %d\n", numOfErrors);
 	
 	return 0;
 }

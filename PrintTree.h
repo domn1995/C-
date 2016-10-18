@@ -2,6 +2,7 @@
 #define PRINTTREEH
 #include "TreeNode.h"
 
-void PrintTree(TreeNode* treeNode, int currSibling);
+void Indent();
+void PrintSyntaxTree(TreeNode* treeNode, int currSibling, bool annotated);
 
 #endif

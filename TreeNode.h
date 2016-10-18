@@ -25,7 +25,7 @@ typedef enum
 
 typedef enum
 {
-	Void, Int, Bool, Char, Record
+	Void, Int, Bool, Char, Record, IntOrChar, Undefined
 } ExpType;
 
 typedef struct TreeNode
@@ -59,11 +59,10 @@ public:
 	int arraySize;
 } TreeNode;
 
-void PrintTree(TreeNode* treeNode, int currSibling);
 void InitializeChildrenNodes(TreeNode* treeNode);
-void Indent();
 TreeNode* NewDeclNode(DeclKind kind);
 TreeNode* NewStmtNode(StmtKind kind);
 TreeNode* NewExprNode(ExpKind kind);
+char* ExpTypeToString(ExpType expType);
 
 #endif

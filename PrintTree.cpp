@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include "TreeNode.h"
 
-extern int yylineno;
 static int indent = 0;
 static int childCount = 0;
 
@@ -22,7 +21,7 @@ void Indent()
 	}
 }
 
-void PrintTree(TreeNode* t, int currSibling)
+void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 {
 	bool printFlag = false;
 	if (currSibling == -1)
@@ -181,12 +180,17 @@ void PrintTree(TreeNode* t, int currSibling)
 			printf("ERROR(%d): Unknown NodeKind.\n", tree->lineNumber);
 		}
 		
+		if (annotated)
+		{
+			printf("[type %s] ", ExpTypeToString(tree->expType));
+		}
+		
 		printf("[line: %d]\n", tree->lineNumber);
 		
 		for (int i = 0; i < MAXCHILDREN; i++)
 		{
 			childCount = i;
-			PrintTree(tree->children[i], 0);
+			PrintSyntaxTree(tree->children[i], 0, annotated);
 			childCount = 0;
 		}		
 	}
