@@ -20,13 +20,10 @@ std::string unaryOps[6] = {"++", "--", "-", "not", "*", "?"};
 
 void SemanticAnalysis(TreeNode* tree, int& numErrors, int& numWarnings)
 {
-	printf("------ IN SemanticAnalysis() ------ \n");
-	
+	printf("starting scoping and typing\n");
 	ScopeAndType(tree, numErrors, numWarnings);
-	
-	printf("------ OUT ScopeAndType() -------\n");
-	
 	TreeNode* main = (TreeNode*)symbolTable.lookup("main");
+		
 	if (main == NULL)
 	{
 		Error e;
@@ -36,7 +33,7 @@ void SemanticAnalysis(TreeNode* tree, int& numErrors, int& numWarnings)
 }
 
 void ScopeAndType(TreeNode* node, int& numErrors, int& numWarnings)
-{	
+{		
 	if (node == NULL)
 	{
 		return;
@@ -54,9 +51,9 @@ void ScopeAndType(TreeNode* node, int& numErrors, int& numWarnings)
 		ParseExprNode(node, numErrors, numWarnings);
 		break;
 	default:
-		printf("ERROR: Unknown NodeKind '%d'.\n", node->nodeKind);
+		printf("ERROR: Unknown NodeKind\n");
 	}
-	
+		
 	if (node->sibling != NULL)
 	{
 		ScopeAndType(node->sibling, numErrors, numWarnings);
@@ -201,7 +198,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 	}
 	
 	switch (node->kind.stmt)
-	{
+	{		
 	case IfK:
 		if (node->children[0]->expType != Bool && !child0error)
 		{
@@ -258,6 +255,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		//
 		//
 		// 
+		node->expType = Void;
 		
 		symbolTable.enter("compound");
 		
@@ -283,27 +281,51 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 	
 	TreeNode* found = NULL;
 	TreeNode* leftNode = NULL;
-	TreeNode* rightNode = NULL;
+	TreeNode* rightNode = NULL;	
 	
 	switch (node->kind.exp)
-	{
+	{			
 		case AssignK:
-		case OpK:
-			
+		case OpK:	
 			for (int i = 0; i < 3; i++)
 			{
 				ScopeAndType(node->children[i], numErrors, numWarnings);
-			}
-			
+			}			
+						
 			if ((leftNode = node->children[0]) != NULL)
-			{
+			{				
 				left = leftNode->expType;
 				isLeftArray = leftNode->isArray;
 				
+				if (strcmp(node->attr.name, "[") == 0)
+				{
+					if (!leftNode->isArray)
+					{
+						Error error;
+						error.errorCode = IndexNonArrayKnown;
+						error.errorLineNumber = node->lineNumber;
+						error.child0 = node->children[0]->attr.name;
+						PrintError(error, numErrors, numWarnings);
+					}
+				}
+				
+				if (strcmp(node->attr.name, "*") == 0)
+				{
+					if (!leftNode->isArray)
+					{
+						Error error;
+						error.errorCode = ArrayOnlyOperation;
+						error.errorLineNumber = node->lineNumber;
+						error.child0 = node->attr.name;
+						PrintError(error, numErrors, numWarnings);
+					}
+				}
+				
 				if (leftNode->children[0] != NULL)
 				{
-					// Accessing the array by index.
-					isLeftArray = false;
+					/* // Accessing the array by index
+					printf("Setting isLeftArray to false\n");
+					isLeftArray = false; */
 					isLeftIndexed = true;
 				}
 				
@@ -370,20 +392,25 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				{
 					if (strcmp(node->attr.name, "*") != 0)
 					{
+						//printf("InvalidArrayOperation\n");						
 						Error error;
 						error.errorCode = InvalidArrayOperation;
 						error.errorLineNumber = node->lineNumber;
 						error.child0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
-					else
+					else if (strcmp(node->attr.name, "*") == 0)
 					{
-						Error error;
-						error.errorCode = ArrayOnlyOperation;
-						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
+						if (!symbolTable.lookup(leftNode->attr.name) || !leftNode->isArray)
+						{
+							Error error;
+							error.errorCode = ArrayOnlyOperation;
+							error.errorLineNumber = node->lineNumber;
+							error.child0 = node->attr.name;
+							PrintError(error, numErrors, numWarnings);
+						}
 					}
-				}		
+				}
 			}
 			else
 			{
@@ -395,8 +422,8 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						error.errorCode = BinaryOperandLhsRhsTypeMismatch;
 						error.errorLineNumber = node->lineNumber;
 						error.child0 = node->attr.name;
-						error.child1 = ExpTypeToString(expectedLeft);
-						error.child2 = ExpTypeToString(left);
+						error.child1 = ExpTypeToString(leftNode->expType);
+						error.child2 = ExpTypeToString(rightNode->expType);
 						PrintError(error, numErrors, numWarnings);
 					}
 				}
@@ -460,11 +487,12 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				ScopeAndType(node->children[i], numErrors, numWarnings);
 			}
 			break;
-		case IdK:
+		case IdK:	
 			found = (TreeNode*)symbolTable.lookup(node->attr.name);
 			
 			if (found == NULL)
-			{
+			{				
+				node->expType = Undefined;
 				Error error;
 				error.errorCode = SymbolUndefined;
 				error.errorLineNumber = node->lineNumber;
@@ -473,9 +501,10 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 			else
 			{
+						
 				node->expType = found->expType;
 				node->isArray = found->isArray;
-				
+					
 				if (found->kind.decl == FuncK)
 				{
 					Error error;
@@ -487,6 +516,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				
 				if (node->children[0] != NULL)
 				{
+					printf("FLAG2\n");
 					ScopeAndType(node->children[0], numErrors, numWarnings);
 					
 					if (node->children[0]->expType == Void &&
@@ -507,6 +537,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					{
 						if (node->children[0]->expType != Int)
 						{
+							
 							Error error;
 							error.errorCode = ArrayIndexTypeNotInt;
 							error.errorLineNumber = node->lineNumber;
@@ -524,13 +555,16 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							PrintError(error, numErrors, numWarnings);
 						}
 					}
-				}
+				}				
 			}
 			break;
 		case CallK:
 			for (int i = 0; i < 3; i++)
 			{
-				ScopeAndType(node->children[i], numErrors, numWarnings);
+				if (node->children[i] != NULL)
+				{
+					ScopeAndType(node->children[i], numErrors, numWarnings);
+				}				
 			}
 			
 			found = (TreeNode*)symbolTable.lookup(node->attr.name);
@@ -660,6 +694,7 @@ BinaryOp BinaryOpStringSwitcher(std::string const str)
 	if (str == "=") return AssignOp;
 	if (str == "and") return AndOp;
 	if (str == "or") return OrOp;
+	if (str == "[") return IndexOp;
 	return UnknownBOp;
 }
 
@@ -742,7 +777,7 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 		printf("ERROR(LINKER): Procedure main is not defined.\n");
 		break;
 	default:
-		printf("Unknown error!");
+		printf("Unknown error!\n");
 		break;			
 	}
 }

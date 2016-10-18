@@ -2,7 +2,7 @@ BIN  = c-
 CC   = g++
 SRCS = $(BIN).y $(BIN).l Token.h SymbolTable.h SymbolTable.cpp TreeNode.h TreeNode.cpp PrintTree.h PrintTree.cpp Semantic.h Semantic.cpp
 OBJS = lex.yy.o $(BIN).tab.o SymbolTable.o TreeNode.o PrintTree.o Semantic.o
-CCFLAGS = -ggdb -g
+CCFLAGS = -ggdb -g -O0
 LIBS = -lm 
 
 $(BIN): $(OBJS)

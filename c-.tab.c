@@ -2790,12 +2790,7 @@ int main(int argc, char** argv)
 	bool argFound;
 	
 	bool printAbstractSyntaxTree = false;
-	bool printAnnotatedSyntaxTree = false;
-	
-	for (int i = 0; i < argc; i++)
-	{
-		printf("argv[%d] = %s\n", i, argv[i]);
-	}		
+	bool printAnnotatedSyntaxTree = false;	
 	
 	while ((arg = getopt(argc, argv, "dpP")) != EOF)
 	{
