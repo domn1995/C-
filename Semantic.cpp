@@ -525,15 +525,73 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				{
 					// printf("node %s at line %d\n", node->attr.name, node->lineNumber);
 					// printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
+					// printf("left is array = %d; right is array = %d\n", leftNode->isArray, rightNode->isArray);
+						
+										
+					if (expectedLeft != Undefined) 
+					{
+						if (leftNode != NULL)
+						{
+							if (strcmp(leftNode->attr.name, "[") != 0)
+							{
+								// printf("FLAG1\n");
+								// printf("child node %s\n", leftNode->attr.name);
+								Error error;
+								error.errorCode = InvalidArrayOperation;
+								error.errorLineNumber = node->lineNumber;
+								error.child0 = node->attr.name;
+								PrintError(error, numErrors, numWarnings);
+							}
+						}
+						else if (rightNode != NULL)
+						{
+							if (strcmp(rightNode->attr.name, "[") != 0)
+							{
+								Error error;
+								error.errorCode = InvalidArrayOperation;
+								error.errorLineNumber = node->lineNumber;
+								error.child0 = node->attr.name;
+								PrintError(error, numErrors, numWarnings);
+							}
+						}
+						else if (leftNode == NULL || rightNode == NULL)
+						{
+							Error error;
+							error.errorCode = InvalidArrayOperation;
+							error.errorLineNumber = node->lineNumber;
+							error.child0 = node->attr.name;
+							PrintError(error, numErrors, numWarnings);
+						}						
+						else if (left != expectedLeft || right != expectedRight)
+						{
+							if ((left == Int && expectedLeft != IntOrChar) || (right == Int && expectedRight != IntOrChar))
+							{
+								Error error;
+								error.errorCode = InvalidArrayOperation;
+								error.errorLineNumber = node->lineNumber;
+								error.child0 = node->attr.name;
+								PrintError(error, numErrors, numWarnings);
+							}							
+							
+						}
+						else if (expectedLeft != Undefined)
+						{
+							Error error;
+							error.errorCode = InvalidArrayOperation;
+							error.errorLineNumber = node->lineNumber;
+							error.child0 = node->attr.name;
+							PrintError(error, numErrors, numWarnings);
+						}
+					}
 					
-					if (expectedLeft != Undefined)
+					/* if (expectedLeft != Undefined)
 					{
 						Error error;
 						error.errorCode = InvalidArrayOperation;
 						error.errorLineNumber = node->lineNumber;
 						error.child0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
-					}
+					} */
 					
 				}
 			}
