@@ -6,7 +6,6 @@ SymbolTable symbolTable;
 // Tracks whether we entered a function scope in order to handle
 // not creating a new scope on the compound statement.
 bool enteredFunctionScope = false;
-ExpType functionReturnType;
 TreeNode* currentFunction = NULL;
 bool returnStatementFound = false;
 bool insideLoop = false;
@@ -20,7 +19,6 @@ std::string unaryOps[6] = {"++", "--", "-", "not", "*", "?"};
 
 void SemanticAnalysis(TreeNode* tree, int& numErrors, int& numWarnings)
 {
-	printf("starting scoping and typing\n");
 	ScopeAndType(tree, numErrors, numWarnings);
 	TreeNode* main = (TreeNode*)symbolTable.lookup("main");
 		
@@ -61,7 +59,7 @@ void ScopeAndType(TreeNode* node, int& numErrors, int& numWarnings)
 }
 
 void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
-{
+{	
 	TreeNode* declaration = NULL;	
 	
 	// If the node kind is not VarK (we'll handle it later) and we cannot 
@@ -70,9 +68,11 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 	{
 		declaration = (TreeNode*)symbolTable.lookup(node->attr.name);
 		// Build up the Error struct.
+		
 		Error error;
 		error.errorCode = SymbolAlreadyDefined;
-		error.errorLineNumber = declaration->lineNumber;
+		error.errorLineNumber = node->lineNumber;
+		error.expressionLineNumber = declaration->lineNumber;
 		error.child0 = node->attr.name;
 		PrintError(error, numErrors, numWarnings);
 	}
@@ -116,19 +116,20 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		// Symbol already defined.
 		if (!symbolTable.insert(node->attr.name, node))
 		{
-			TreeNode* existingNode = (TreeNode*)symbolTable.lookup(node->attr.name);
+			TreeNode* existingNode = (TreeNode*)symbolTable.lookup(node->attr.name);			
 			Error error;
 			error.errorCode = SymbolAlreadyDefined;
 			error.errorLineNumber = node->lineNumber;
+			error.child0 = node->attr.name;
 			error.expressionLineNumber = existingNode->lineNumber;
 			PrintError(error, numErrors, numWarnings);
 		}
 		break;
 	case FuncK:
+		
 		symbolTable.enter(node->attr.name);
 		currentFunction = node;
-		enteredFunctionScope = true;
-		functionReturnType = node->expType;
+		enteredFunctionScope = true;		
 		
 		for (int i = 0; i < 3; i++)
 		{
@@ -222,6 +223,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			insideLoop = false;
 		}
+		break;
 	case ReturnK:
 		if (node->children[0] != NULL)
 		{
@@ -250,21 +252,29 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		break;
 	case CompK:
-		// Handle function scope special case here on HW4.
-		//
-		//
-		//
-		// 
-		node->expType = Void;
+		bool keepScope = !enteredFunctionScope;
 		
-		symbolTable.enter("compound");
+		if (keepScope)
+		{
+			symbolTable.enter("compound");
+		}
+		else
+		{
+			enteredFunctionScope = false;
+		}			
+		
+		node->expType = Void;		
 		
 		for (int i = 0; i < 3; i++)
 		{
 			ScopeAndType(node->children[i], numErrors, numWarnings);
 		}
 		
-		symbolTable.leave();
+		if (keepScope)
+		{
+			symbolTable.leave();
+		}
+		
 		break;
 	}
 }
@@ -500,8 +510,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				PrintError(error, numErrors, numWarnings);
 			}
 			else
-			{
-						
+			{		
 				node->expType = found->expType;
 				node->isArray = found->isArray;
 					
@@ -511,6 +520,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					error.errorCode = UseFunctionAsVariable;
 					error.errorLineNumber = node->lineNumber;
 					error.child0 = node->attr.name;
+					PrintError(error, numErrors, numWarnings);
 					break;
 				}
 				
@@ -719,7 +729,7 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 		e.errorLineNumber, e.child0);
 		break;
 	case BinaryOperandLhsTypeMismatch:
-		printf("Error(%d): '%s' requires operands of %s but lhs is of %s.\n",
+		printf("ERROR(%d): '%s' requires operands of %s but lhs is of %s.\n",
 		e.errorLineNumber, e.child0, e.child1, e.child2);
 		break;
 	case BinaryOperandRhsTypeMismatch:
