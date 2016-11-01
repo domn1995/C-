@@ -2792,10 +2792,10 @@ int main(int argc, char** argv)
 	bool printAbstractSyntaxTree = false;
 	bool printAnnotatedSyntaxTree = false;	
 	
-	while ((arg = getopt(argc, argv, "dpP")) != EOF)
+	while ((arg = getopt(argc, argv, "dpP0")) != EOF)
 	{
 		switch (arg)
-		{
+		{			
 			case 'd':
 				argFound = true;
 				yydebug = 1;
@@ -2807,6 +2807,8 @@ int main(int argc, char** argv)
 			case 'P':
 				argFound = true;
 				printAnnotatedSyntaxTree = true;
+				break;				
+			case '0': // Case '0' does nothing.
 				break;
 			default:
 				printf("Invalid argument: %c", arg);
