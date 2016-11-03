@@ -273,7 +273,11 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		if (node->children[0]->isArray)
 		{
-			// Error: used array in a conditional.
+			Error error;
+			error.errorCode = ArrayAsTestCondition;
+			error.errorLineNumber = node->lineNumber;
+			error.context0 = node->attr.name;
+			PrintError(error, numErrors, numWarnings);
 		}
 		break;
 	case WhileK:
@@ -288,7 +292,11 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		if (node->children[0]->isArray)
 		{
-			// Error: used array in a conditional.
+			Error error;
+			error.errorCode = ArrayAsTestCondition;
+			error.errorLineNumber = node->lineNumber;
+			error.context0 = node->attr.name;
+			PrintError(error, numErrors, numWarnings);
 		}
 		if (loopDepth == symbolTable.depth())
 		{
@@ -807,7 +815,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			node->expType = Undefined;
 			Error error;
-			error.errorCode = SymbolUndefined;
+			error.errorCode = FunctionUndefined;
 			error.errorLineNumber = node->lineNumber;
 			error.context0 = node->attr.name;
 			PrintError(error, numErrors, numWarnings);
@@ -1090,6 +1098,9 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 		case SymbolUndefined:
 			printf("ERROR(%d): Symbol '%s' is not defined.\n", e.errorLineNumber, e.context0);
 			break;
+		case FunctionUndefined:
+			printf("ERROR(%d): Function '%s' is not defined.\n", e.errorLineNumber, e.context0);
+			break;
 		case InvalidArrayOperation:
 			printf("ERROR(%d): The operation '%s' does not work with arrays.\n", e.errorLineNumber, e.context0);
 			break;
@@ -1139,6 +1150,9 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			break;
 		case TooManyCallParams:
 			printf("ERROR(%d): Too many parameters passed for function '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.expressionLineNumber);
+			break;
+		case ArrayAsTestCondition:
+			printf("ERROR(%d): Cannot use array as test condition in %s statement.\n", e.errorLineNumber, e.context0);
 			break;
 		case MainUndefined:
 			printf("ERROR(LINKER): Procedure main is not defined.\n");

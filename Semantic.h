@@ -17,6 +17,7 @@ typedef enum
 	UseFunctionAsVariable,
 	SymbolAlreadyDefined,
 	SymbolUndefined,
+	FunctionUndefined,
 	InvalidArrayOperation,
 	ArrayOnlyOperation,
 	UnaryOperandTypeMismatch,
@@ -33,6 +34,7 @@ typedef enum
 	NotExpectingArrayParam,
 	TooFewCallParams,
 	TooManyCallParams,
+	ArrayAsTestCondition,
 	MainUndefined,
 } ErrorCode;
 
