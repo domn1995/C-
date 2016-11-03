@@ -25,6 +25,8 @@ typedef enum
 	UnexpectedReturnType,
 	ExpectedReturnTypeNotPresent,
 	BreakOutsideOfLoop,
+	InitializerNotConstant,
+	InitializationTypeMismatch,
 	MainUndefined,
 } ErrorCode;
 

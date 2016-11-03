@@ -110,8 +110,6 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 	if (node->kind.decl != VarK && !symbolTable.insert(node->attr.name, node))
 	{
 		declaration = (TreeNode*)symbolTable.lookup(node->attr.name);
-		// Build up the Error struct.
-
 		Error error;
 		error.errorCode = SymbolAlreadyDefined;
 		error.errorLineNumber = node->lineNumber;
@@ -147,12 +145,25 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 			if (declaration->nodeKind == ExpK && (declaration->kind.exp == IdK || declaration->kind.exp == CallK))
 			{
-
 				// Error: Declaration must be initialized with constant.
+				Error error;
+				error.errorCode = InitializerNotConstant;
+				error.errorLineNumber = node->lineNumber;
+				error.child0 = node->attr.name;
+				PrintError(error, numErrors, numWarnings);
 			}
 			else
 			{
-				// Handle other possible errors if it was a constant.
+				if (declaration->expType != node->expType)
+				{
+					Error error;
+					error.errorCode = InitializationTypeMismatch;
+					error.errorLineNumber = node->lineNumber;
+					error.child0 = node->attr.name;
+					error.child1 = ExpTypeToString(node->expType);
+					error.child2 = ExpTypeToString(declaration->expType);
+					PrintError(error, numErrors, numWarnings);
+				}
 			}
 		}
 
@@ -993,6 +1004,12 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			break;
 		case BreakOutsideOfLoop:
 			printf("ERROR(%d): Cannot have a break statement out of loop.\n", e.errorLineNumber);
+			break;
+		case InitializerNotConstant:
+			printf("ERROR(%d): Initializer for variable '%s' is not a constant expression.\n", e.errorLineNumber, e.child0);
+			break;
+		case InitializationTypeMismatch:
+			printf("ERROR(%d): Variable '%s' is of type %s but is being initialized with an expression of type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
 			break;
 		case MainUndefined:
 			printf("ERROR(LINKER): Procedure main is not defined.\n");
