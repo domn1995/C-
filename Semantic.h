@@ -28,6 +28,11 @@ typedef enum
 	InitializerNotConstant,
 	InitializationTypeMismatch,
 	MissingReturnStatementWarning,
+	FuncCallParamTypeMismatch,
+	ExpectingArrayParam,
+	NotExpectingArrayParam,
+	TooFewCallParams,
+	TooManyCallParams,
 	MainUndefined,
 } ErrorCode;
 
@@ -37,9 +42,10 @@ public:
 	ErrorCode errorCode;
 	int errorLineNumber;
 	int expressionLineNumber;
-	char* child0;
-	char* child1;
-	char* child2;
+	char* context0;
+	char* context1;
+	char* context2;
+	char* context3;
 } Error;
 
 enum BinaryOp

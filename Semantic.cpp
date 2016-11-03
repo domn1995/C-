@@ -2,6 +2,7 @@
 #include "SymbolTable.h"
 #include "Utils.h"
 #include <string.h>
+#include <sstream>
 
 SymbolTable symbolTable;
 // Tracks whether we entered a function scope in order to handle
@@ -114,7 +115,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		error.errorCode = SymbolAlreadyDefined;
 		error.errorLineNumber = node->lineNumber;
 		error.expressionLineNumber = declaration->lineNumber;
-		error.child0 = node->attr.name;
+		error.context0 = node->attr.name;
 		PrintError(error, numErrors, numWarnings);
 	}
 
@@ -150,7 +151,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 				Error error;
 				error.errorCode = InitializerNotConstant;
 				error.errorLineNumber = node->lineNumber;
-				error.child0 = node->attr.name;
+				error.context0 = node->attr.name;
 				PrintError(error, numErrors, numWarnings);
 			}
 			else
@@ -160,9 +161,9 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = InitializationTypeMismatch;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->attr.name;
-					error.child1 = ExpTypeToString(node->expType);
-					error.child2 = ExpTypeToString(declaration->expType);
+					error.context0 = node->attr.name;
+					error.context1 = ExpTypeToString(node->expType);
+					error.context2 = ExpTypeToString(declaration->expType);
 					PrintError(error, numErrors, numWarnings);
 				}
 			}
@@ -175,7 +176,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			Error error;
 			error.errorCode = SymbolAlreadyDefined;
 			error.errorLineNumber = node->lineNumber;
-			error.child0 = node->attr.name;
+			error.context0 = node->attr.name;
 			error.expressionLineNumber = existingNode->lineNumber;
 			PrintError(error, numErrors, numWarnings);
 		}
@@ -205,8 +206,8 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 				Error error;
 				error.errorCode = MissingReturnStatementWarning;
 				error.errorLineNumber = node->lineNumber;
-				error.child0 = ExpTypeToString(node->expType);
-				error.child1 = node->attr.name;
+				error.context0 = ExpTypeToString(node->expType);
+				error.context1 = node->attr.name;
 				PrintError(error, numErrors, numWarnings);
 			}
 		}
@@ -266,8 +267,8 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 			Error error;
 			error.errorCode = ExpectedBooleanCondition;
 			error.errorLineNumber = node->lineNumber;
-			error.child0 = node->attr.name;
-			error.child1 = ExpTypeToString(node->children[0]->expType);
+			error.context0 = node->attr.name;
+			error.context1 = ExpTypeToString(node->children[0]->expType);
 			PrintError(error, numErrors, numWarnings);
 		}
 		if (node->children[0]->isArray)
@@ -281,8 +282,8 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 			Error error;
 			error.errorCode = ExpectedBooleanCondition;
 			error.errorLineNumber = node->lineNumber;
-			error.child0 = node->attr.name;
-			error.child1 = ExpTypeToString(node->children[0]->expType);
+			error.context0 = node->attr.name;
+			error.context1 = ExpTypeToString(node->children[0]->expType);
 			PrintError(error, numErrors, numWarnings);
 		}
 		if (node->children[0]->isArray)
@@ -316,9 +317,9 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 				error.errorCode = ReturnTypeMismatch;
 				error.errorLineNumber = node->lineNumber;
 				error.expressionLineNumber = currentFunction->lineNumber;
-				error.child0 = currentFunction->attr.name;
-				error.child1 = ExpTypeToString(currentFunction->expType);
-				error.child2 = ExpTypeToString(node->children[0]->expType);
+				error.context0 = currentFunction->attr.name;
+				error.context1 = ExpTypeToString(currentFunction->expType);
+				error.context2 = ExpTypeToString(node->children[0]->expType);
 				PrintError(error, numErrors, numWarnings);
 			}
 		}
@@ -332,7 +333,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 			error.errorCode = UnexpectedReturnType;
 			error.errorLineNumber = node->lineNumber;
 			error.expressionLineNumber = currentFunction->lineNumber;
-			error.child0 = currentFunction->attr.name;
+			error.context0 = currentFunction->attr.name;
 			PrintError(error, numErrors, numWarnings);
 		}
 
@@ -343,8 +344,8 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 			error.errorCode = ExpectedReturnTypeNotPresent;
 			error.errorLineNumber = node->lineNumber;
 			error.expressionLineNumber = currentFunction->lineNumber;
-			error.child0 = currentFunction->attr.name;
-			error.child1 = ExpTypeToString(currentFunction->expType);
+			error.context0 = currentFunction->attr.name;
+			error.context1 = ExpTypeToString(currentFunction->expType);
 			PrintError(error, numErrors, numWarnings);
 		}
 
@@ -426,7 +427,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = IndexNonArrayKnown;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->children[0]->attr.name;
+					error.context0 = node->children[0]->attr.name;
 					PrintError(error, numErrors, numWarnings);
 				}
 			}
@@ -438,7 +439,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = ArrayOnlyOperation;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->attr.name;
+					error.context0 = node->attr.name;
 					PrintError(error, numErrors, numWarnings);
 				}
 			}
@@ -500,9 +501,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				Error error;
 				error.errorCode = UnaryOperandTypeMismatch;
 				error.errorLineNumber = node->lineNumber;
-				error.child0 = node->attr.name;
-				error.child1 = ExpTypeToString(expectedLeft);
-				error.child2 = ExpTypeToString(left);
+				error.context0 = node->attr.name;
+				error.context1 = ExpTypeToString(expectedLeft);
+				error.context2 = ExpTypeToString(left);
 				PrintError(error, numErrors, numWarnings);
 			}
 
@@ -515,9 +516,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = UnaryOperandTypeMismatch;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
-						error.child1 = ExpTypeToString(expectedLeft);
-						error.child2 = ExpTypeToString(left);
+						error.context0 = node->attr.name;
+						error.context1 = ExpTypeToString(expectedLeft);
+						error.context2 = ExpTypeToString(left);
 						PrintError(error, numErrors, numWarnings);
 					}
 					else
@@ -527,7 +528,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							Error error;
 							error.errorCode = InvalidArrayOperation;
 							error.errorLineNumber = node->lineNumber;
-							error.child0 = node->attr.name;
+							error.context0 = node->attr.name;
 							PrintError(error, numErrors, numWarnings);
 						}
 
@@ -541,7 +542,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = ArrayOnlyOperation;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
+						error.context0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
 				}
@@ -551,7 +552,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = InvalidArrayOperation;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->attr.name;
+					error.context0 = node->attr.name;
 					PrintError(error, numErrors, numWarnings);
 				}
 			}
@@ -567,9 +568,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = BinaryOperandLhsRhsTypeMismatch;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->attr.name;
-					error.child1 = ExpTypeToString(leftNode->expType);
-					error.child2 = ExpTypeToString(rightNode->expType);
+					error.context0 = node->attr.name;
+					error.context1 = ExpTypeToString(leftNode->expType);
+					error.context2 = ExpTypeToString(rightNode->expType);
 					PrintError(error, numErrors, numWarnings);
 				}
 				else if (StrEq(node->attr.name, "[") && right != Int)
@@ -580,7 +581,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = ArrayIndexUnindexedArray;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = rightNode->attr.name;
+						error.context0 = rightNode->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
 					else if (right != Int)
@@ -588,8 +589,8 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = ArrayIndexTypeNotInt;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = leftNode->attr.name;
-						error.child1 = ExpTypeToString(right);
+						error.context0 = leftNode->attr.name;
+						error.context1 = ExpTypeToString(right);
 						PrintError(error, numErrors, numWarnings);
 					}
 
@@ -609,9 +610,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = BinaryOperandLhsTypeMismatch;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
-						error.child1 = ExpTypeToString(expectedLeft);
-						error.child2 = ExpTypeToString(left);
+						error.context0 = node->attr.name;
+						error.context1 = ExpTypeToString(expectedLeft);
+						error.context2 = ExpTypeToString(left);
 						PrintError(error, numErrors, numWarnings);
 					}
 
@@ -620,9 +621,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = BinaryOperandRhsTypeMismatch;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
-						error.child1 = ExpTypeToString(expectedRight);
-						error.child2 = ExpTypeToString(right);
+						error.context0 = node->attr.name;
+						error.context1 = ExpTypeToString(expectedRight);
+						error.context2 = ExpTypeToString(right);
 						PrintError(error, numErrors, numWarnings);
 					}
 				}
@@ -646,7 +647,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							Error error;
 							error.errorCode = InvalidArrayOperation;
 							error.errorLineNumber = node->lineNumber;
-							error.child0 = node->attr.name;
+							error.context0 = node->attr.name;
 							PrintError(error, numErrors, numWarnings);
 						}
 					}
@@ -657,7 +658,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							Error error;
 							error.errorCode = InvalidArrayOperation;
 							error.errorLineNumber = node->lineNumber;
-							error.child0 = node->attr.name;
+							error.context0 = node->attr.name;
 							PrintError(error, numErrors, numWarnings);
 						}
 					}
@@ -666,7 +667,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = InvalidArrayOperation;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
+						error.context0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
 					else if (left != expectedLeft || right != expectedRight)
@@ -676,7 +677,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							Error error;
 							error.errorCode = InvalidArrayOperation;
 							error.errorLineNumber = node->lineNumber;
-							error.child0 = node->attr.name;
+							error.context0 = node->attr.name;
 							PrintError(error, numErrors, numWarnings);
 						}
 
@@ -686,7 +687,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = InvalidArrayOperation;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
+						error.context0 = node->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
 				}
@@ -696,7 +697,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = InvalidArrayOperation;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->attr.name;
+					error.context0 = node->attr.name;
 					PrintError(error, numErrors, numWarnings);
 				} */
 
@@ -727,7 +728,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			Error error;
 			error.errorCode = SymbolUndefined;
 			error.errorLineNumber = node->lineNumber;
-			error.child0 = node->attr.name;
+			error.context0 = node->attr.name;
 			PrintError(error, numErrors, numWarnings);
 		}
 		else
@@ -744,7 +745,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				Error error;
 				error.errorCode = UseFunctionAsVariable;
 				error.errorLineNumber = node->lineNumber;
-				error.child0 = node->attr.name;
+				error.context0 = node->attr.name;
 				PrintError(error, numErrors, numWarnings);
 				break;
 			}
@@ -764,7 +765,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					Error error;
 					error.errorCode = IndexNonArrayKnown;
 					error.errorLineNumber = node->lineNumber;
-					error.child0 = node->attr.name;
+					error.context0 = node->attr.name;
 					PrintError(error, numErrors, numWarnings);
 				}
 				else
@@ -774,8 +775,8 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = ArrayIndexTypeNotInt;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->attr.name;
-						error.child1 = ExpTypeToString(node->children[0]->expType);
+						error.context0 = node->attr.name;
+						error.context1 = ExpTypeToString(node->children[0]->expType);
 						PrintError(error, numWarnings, numErrors);
 					}
 
@@ -784,7 +785,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						Error error;
 						error.errorCode = ArrayIndexUnindexedArray;
 						error.errorLineNumber = node->lineNumber;
-						error.child0 = node->children[0]->attr.name;
+						error.context0 = node->children[0]->attr.name;
 						PrintError(error, numErrors, numWarnings);
 					}
 				}
@@ -808,7 +809,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			Error error;
 			error.errorCode = SymbolUndefined;
 			error.errorLineNumber = node->lineNumber;
-			error.child0 = node->attr.name;
+			error.context0 = node->attr.name;
 			PrintError(error, numErrors, numWarnings);
 		}
 		else
@@ -819,7 +820,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				Error error;
 				error.errorCode = SimpleVariableCall;
 				error.errorLineNumber = node->lineNumber;
-				error.child0 = node->attr.name;
+				error.context0 = node->attr.name;
 				PrintError(error, numErrors, numWarnings);
 			}
 			else if (found->expType != Undefined)
@@ -828,10 +829,112 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 
 			// Handle other function call errors.
-			// 
-			// 
-			//
-			//
+			TreeNode* callParams = node->children[0];
+			TreeNode* declParams = found->children[0];
+			bool callIsArray = false, declIsArray = false;
+			// Keeps track of which parameter currently being checked.
+			int paramNum = 1;
+
+			while (callParams != NULL && declParams != NULL)
+			{
+				if (callParams->kind.exp == IdK && callParams->expType == Void)
+				{
+					callParams = callParams->sibling;
+					declParams = declParams->sibling;
+					callIsArray = declIsArray = false;
+					paramNum++;
+					continue;
+				}
+
+				if (declParams->isArray)
+				{
+					declIsArray = true;
+					if (declParams->children[0] != NULL)
+					{
+						declIsArray = false;
+					}
+				}
+
+				if (callParams->isArray)
+				{
+					callIsArray = true;
+					if (callParams->children[0] != NULL)
+					{
+						callIsArray = false;
+					}
+				}
+
+				if (callParams->expType != declParams->expType)
+				{
+					Error error;
+					error.errorCode = FuncCallParamTypeMismatch;
+					error.errorLineNumber = node->lineNumber;
+					error.expressionLineNumber = found->lineNumber;
+					char paramNumStr[2];
+					sprintf(paramNumStr, "%d", paramNum);
+					error.context0 = ExpTypeToString(declParams->expType);
+					error.context1 = paramNumStr;
+					error.context2 = node->attr.name;
+					error.context3 = ExpTypeToString(callParams->expType);
+					PrintError(error, numErrors, numWarnings);
+				}
+
+				if (callIsArray && !declIsArray)
+				{
+					Error error;
+					error.errorCode = NotExpectingArrayParam;
+					error.errorLineNumber = node->lineNumber;
+					error.expressionLineNumber = found->lineNumber;
+					char paramNumStr[2];
+					sprintf(paramNumStr, "%d", paramNum);
+					error.context0 = paramNumStr;
+					error.context1 = node->attr.name;
+					PrintError(error, numErrors, numWarnings);
+				}
+
+				if (!callIsArray && declIsArray)
+				{
+					Error error;
+					error.errorCode = ExpectingArrayParam;
+					error.errorLineNumber = node->lineNumber;
+					error.expressionLineNumber = found->lineNumber;
+					char paramNumStr[2];
+					sprintf(paramNumStr, "%d", paramNum);
+					error.context0 = paramNumStr;
+					error.context1 = node->attr.name;
+					PrintError(error, numErrors, numWarnings);
+				}
+
+				callParams = callParams->sibling;
+				declParams = declParams->sibling;
+				paramNum++;
+				callIsArray = declIsArray = false;
+			}
+
+			// If we run out of call params, but there are still declaration params,
+			// then there are too few call params.
+			if (callParams == NULL && declParams != NULL)
+			{
+				Error error;
+				error.errorCode = TooFewCallParams;
+				error.errorLineNumber = node->lineNumber;
+				error.expressionLineNumber = found->lineNumber;
+				error.context0 = node->attr.name;
+				PrintError(error, numErrors, numWarnings);
+			}
+
+			// if we run out of declaration params, but there are still call params,
+			// then there are too many call params.
+			if (callParams != NULL && declParams == NULL)
+			{
+				Error error;
+				error.errorCode = TooManyCallParams;
+				error.errorLineNumber = node->lineNumber;
+				error.expressionLineNumber = found->lineNumber;
+				error.context0 = node->attr.name;
+				PrintError(error, numErrors, numWarnings);
+			}
+
 		}
 		break;
 	}
@@ -952,25 +1055,25 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 	switch (e.errorCode)
 	{
 		case SimpleVariableCall:
-			printf("ERROR(%d): '%s' is a simple variable and cannot be called.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): '%s' is a simple variable and cannot be called.\n", e.errorLineNumber, e.context0);
 			break;
 		case BinaryOperandLhsTypeMismatch:
-			printf("ERROR(%d): '%s' requires operands of type %s but lhs is of type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+			printf("ERROR(%d): '%s' requires operands of type %s but lhs is of type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2);
 			break;
 		case BinaryOperandRhsTypeMismatch:
-			printf("ERROR(%d): '%s' requires operands of type %s but rhs is of type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+			printf("ERROR(%d): '%s' requires operands of type %s but rhs is of type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2);
 			break;
 		case BinaryOperandLhsRhsTypeMismatch:
-			printf("ERROR(%d): '%s' requires operands of the same type but lhs is type %s and rhs is type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+			printf("ERROR(%d): '%s' requires operands of the same type but lhs is type %s and rhs is type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2);
 			break;
 		case ArrayIndexTypeNotInt:
-			printf("ERROR(%d): Array '%s' should be indexed by type int but got type %s.\n", e.errorLineNumber, e.child0, e.child1);
+			printf("ERROR(%d): Array '%s' should be indexed by type int but got type %s.\n", e.errorLineNumber, e.context0, e.context1);
 			break;
 		case ArrayIndexUnindexedArray:
-			printf("ERROR(%d): Array index is the unindexed array '%s'.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): Array index is the unindexed array '%s'.\n", e.errorLineNumber, e.context0);
 			break;
 		case IndexNonArrayKnown:
-			printf("ERROR(%d): Cannot index nonarray '%s'.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): Cannot index nonarray '%s'.\n", e.errorLineNumber, e.context0);
 			break;
 		case IndexNonArrayUnknown:
 			printf("ERROR(%d): Cannot index nonarray .\n", e.errorLineNumber);
@@ -979,48 +1082,63 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			printf("ERROR(%d): Cannot return an array.\n", e.errorLineNumber);
 			break;
 		case UseFunctionAsVariable:
-			printf("ERROR(%d): Cannot use function '%s' as a variable.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): Cannot use function '%s' as a variable.\n", e.errorLineNumber, e.context0);
 			break;
 		case SymbolAlreadyDefined:
-			printf("ERROR(%d): Symbol '%s' is already defined at line %d.\n", e.errorLineNumber, e.child0, e.expressionLineNumber);
+			printf("ERROR(%d): Symbol '%s' is already defined at line %d.\n", e.errorLineNumber, e.context0, e.expressionLineNumber);
 			break;
 		case SymbolUndefined:
-			printf("ERROR(%d): Symbol '%s' is not defined.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): Symbol '%s' is not defined.\n", e.errorLineNumber, e.context0);
 			break;
 		case InvalidArrayOperation:
-			printf("ERROR(%d): The operation '%s' does not work with arrays.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): The operation '%s' does not work with arrays.\n", e.errorLineNumber, e.context0);
 			break;
 		case ArrayOnlyOperation:
-			printf("ERROR(%d): The operation '%s' only works with arrays.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): The operation '%s' only works with arrays.\n", e.errorLineNumber, e.context0);
 			break;
 		case UnaryOperandTypeMismatch:
-			printf("ERROR(%d): Unary '%s' requires an operand of type %s but was given type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+			printf("ERROR(%d): Unary '%s' requires an operand of type %s but was given type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2);
 			break;
 		case ExpectedBooleanCondition:
-			printf("ERROR(%d): Expecting Boolean test condition in %s statement but got type %s.\n", e.errorLineNumber, e.child0, e.child1);
+			printf("ERROR(%d): Expecting Boolean test condition in %s statement but got type %s.\n", e.errorLineNumber, e.context0, e.context1);
 			break;
 		case ReturnTypeMismatch:
-			printf("ERROR(%d): Function '%s' at line %d is expecting to return type %s but instead returns type %s.\n", e.errorLineNumber, e.child0, e.expressionLineNumber, e.child1, e.child2);
+			printf("ERROR(%d): Function '%s' at line %d is expecting to return type %s but instead returns type %s.\n", e.errorLineNumber, e.context0, e.expressionLineNumber, e.context1, e.context2);
 			break;
 		case UnexpectedReturnType:
-			printf("ERROR(%d): Function '%s' at line %d is expecting no return value, but return has return value.\n", e.errorLineNumber, e.child0, e.expressionLineNumber);
+			printf("ERROR(%d): Function '%s' at line %d is expecting no return value, but return has return value.\n", e.errorLineNumber, e.context0, e.expressionLineNumber);
 			break;
 		case ExpectedReturnTypeNotPresent:
-			printf("ERROR(%d): Function '%s' at line %d is expecting to return type %s but return has no return value.\n", e.errorLineNumber, e.child0, e.expressionLineNumber, e.child1);
+			printf("ERROR(%d): Function '%s' at line %d is expecting to return type %s but return has no return value.\n", e.errorLineNumber, e.context0, e.expressionLineNumber, e.context1);
 			break;
 		case BreakOutsideOfLoop:
 			printf("ERROR(%d): Cannot have a break statement out of loop.\n", e.errorLineNumber);
 			break;
 		case InitializerNotConstant:
-			printf("ERROR(%d): Initializer for variable '%s' is not a constant expression.\n", e.errorLineNumber, e.child0);
+			printf("ERROR(%d): Initializer for variable '%s' is not a constant expression.\n", e.errorLineNumber, e.context0);
 			break;
 		case InitializationTypeMismatch:
-			printf("ERROR(%d): Variable '%s' is of type %s but is being initialized with an expression of type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+			printf("ERROR(%d): Variable '%s' is of type %s but is being initialized with an expression of type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2);
 			break;
 		case MissingReturnStatementWarning:
-			printf("WARNING(%d): Expecting to return %s but function '%s' has no return statement.\n", e.errorLineNumber, e.child0, e.child1);
+			printf("WARNING(%d): Expecting to return type %s but function '%s' has no return statement.\n", e.errorLineNumber, e.context0, e.context1);
 			numErrors--;
 			numWarnings++;
+			break;
+		case FuncCallParamTypeMismatch:
+			printf("ERROR(%d): Expecting type %s in parameter %s of call to '%s' defined on line %d but got type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2, e.expressionLineNumber, e.context3);
+			break;
+		case ExpectingArrayParam:
+			printf("ERROR(%d): Expecting array in paremeter %s of call to '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.context1, e.expressionLineNumber);
+			break;
+		case NotExpectingArrayParam:
+			printf("ERROR(%d): Not expecting array in parameter %s of call to '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.context1, e.expressionLineNumber);
+			break;
+		case TooFewCallParams:
+			printf("ERROR(%d): Too few parameters passed for function '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.expressionLineNumber);
+			break;
+		case TooManyCallParams:
+			printf("ERROR(%d): Too many parameters passed for function '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.expressionLineNumber);
 			break;
 		case MainUndefined:
 			printf("ERROR(LINKER): Procedure main is not defined.\n");
