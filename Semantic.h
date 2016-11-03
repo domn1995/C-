@@ -21,6 +21,10 @@ typedef enum
 	ArrayOnlyOperation,
 	UnaryOperandTypeMismatch,
 	ExpectedBooleanCondition,
+	ReturnTypeMismatch,
+	UnexpectedReturnType,
+	ExpectedReturnTypeNotPresent,
+	BreakOutsideOfLoop,
 	MainUndefined,
 } ErrorCode;
 
