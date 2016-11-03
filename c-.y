@@ -575,11 +575,13 @@ returnStmt		:	RETURN SEMICOLON
 					{
 						$$ = NewStmtNode(ReturnK);
 						$$->attr.name = $1.tokenStr;
+						$$->lineNumber = $1.lineNum;
 					}
 				|	RETURN expression SEMICOLON
 					{
 						$$ = NewStmtNode(ReturnK);
 						$$->attr.name = $1.tokenStr;
+						$$->lineNumber = $1.lineNum;
 						$$->children[0] = $2;
 					}
 				;

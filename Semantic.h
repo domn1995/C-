@@ -20,6 +20,7 @@ typedef enum
 	InvalidArrayOperation,
 	ArrayOnlyOperation,
 	UnaryOperandTypeMismatch,
+	ExpectedBooleanCondition,
 	MainUndefined,
 } ErrorCode;
 
@@ -78,8 +79,6 @@ void TypeCheck(char* op, bool isBinary, bool& oneSidedErrors, ExpType& left, Exp
 BinaryOp BinaryOpStringSwitcher(std::string const str);
 UnaryOp UnaryOpStringSwitcher(std::string const str);
 void PrintError(Error error, int& numErrors, int& numWarnings);
-// Returns true if 'str' and 'comp' have the same value.
-bool StrEq(const char* str, const char* comp);
+void AttachIOLib(TreeNode*& treeNode);
 
 #endif
-

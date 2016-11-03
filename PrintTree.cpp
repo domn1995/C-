@@ -111,7 +111,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					printf("Call: %s ", tree->attr.name);
 					break;
 				default:
-					printf("ERROR(%s): Unknown ExpKind node.\n", tree->lineNumber);
+					printf("ERROR(%d): Unknown ExpKind node.\n", tree->lineNumber);
 					break;
 			}
 		}

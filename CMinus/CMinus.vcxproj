@@ -119,6 +119,7 @@
     <ClCompile Include="..\Semantic.cpp" />
     <ClCompile Include="..\SymbolTable.cpp" />
     <ClCompile Include="..\TreeNode.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\PrintTree.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="..\SymbolTable.h" />
     <ClInclude Include="..\Token.h" />
     <ClInclude Include="..\TreeNode.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

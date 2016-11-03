@@ -1,6 +1,7 @@
 #include "Semantic.h"
 #include "SymbolTable.h"
 #include "Utils.h"
+#include <string.h>
 
 SymbolTable symbolTable;
 // Tracks whether we entered a function scope in order to handle
@@ -16,6 +17,48 @@ std::string binaryOps[19] = {"+", "-", "*", "/", "%", "+=", "-=", "*=", "/=",
 	"and", "or"};
 
 std::string unaryOps[6] = {"++", "--", "-", "not", "*", "?"};
+
+void AttachIOLib(TreeNode*& treeNode)
+{
+	// The return types, identifiers, and parameter types for the IO functions.
+	ExpType funcRetVals[] =	  { Void,      Void,      Void,      Int,     Bool,     Char,     Void };
+	std::string funcIds[] =	  { "output", "outputb", "outputc", "input", "inputb", "inputc", "outnl" };	
+	ExpType funcParamVals[] = { Int,       Bool,      Char,      Void,    Void,     Void,     Void };
+
+	TreeNode* nodes[7];
+
+	for (int i = 0; i < 7; i++)
+	{
+		TreeNode* funcNode = NewDeclNode(FuncK);
+		funcNode->lineNumber = -1;
+		funcNode->attr.name = strdup(funcIds[i].c_str());
+		funcNode->expType = funcRetVals[i];
+
+		// If the param val is not void, it means it has parameters.
+		// As such, we need to create some nodes and add point the current function node to it.
+		if (funcParamVals[i] != Void)
+		{
+			TreeNode* paramNode = NewDeclNode(ParamK);
+			paramNode->lineNumber = -1;
+			paramNode->attr.name = strdup("*dummy*");
+			paramNode->expType = funcParamVals[i];
+			funcNode->children[0] = paramNode;
+		}
+
+		nodes[i] = funcNode;
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		nodes[i]->sibling = nodes[i + 1];
+	}
+
+	// Points the last IO lib node to the beginning of our syntax tree.
+	nodes[6]->sibling = treeNode;
+
+	// The top of the tree is now the first IO lib node.
+	treeNode = nodes[0];
+}
 
 void SemanticAnalysis(TreeNode* tree, int& numErrors, int& numWarnings)
 {
@@ -203,7 +246,12 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 	case IfK:
 		if (node->children[0]->expType != Bool && !child0error)
 		{
-			// Error: didn't find boolean condition.
+			Error error;
+			error.errorCode = ExpectedBooleanCondition;
+			error.errorLineNumber = node->lineNumber;
+			error.child0 = node->attr.name;
+			error.child1 = ExpTypeToString(node->children[0]->expType);
+			PrintError(error, numErrors, numWarnings);
 		}
 		if (node->children[0]->isArray)
 		{
@@ -213,7 +261,12 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 	case WhileK:
 		if (node->children[0]->expType != Bool && !child0error)
 		{
-			// Error: didn't find boolean condition.
+			Error error;
+			error.errorCode = ExpectedBooleanCondition;
+			error.errorLineNumber = node->lineNumber;
+			error.child0 = node->attr.name;
+			error.child1 = ExpTypeToString(node->children[0]->expType);
+			PrintError(error, numErrors, numWarnings);
 		}
 		if (node->children[0]->isArray)
 		{
@@ -888,6 +941,9 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 		break;
 	case UnaryOperandTypeMismatch:
 		printf("ERROR(%d): Unary '%s' requires an operand of type %s but was given type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+		break;
+	case ExpectedBooleanCondition:
+		printf("ERROR(%d): Expecting Boolean test condition in %s statement but got type %s.\n", e.errorLineNumber, e.child0, e.child1);
 		break;
 	case MainUndefined:
 		printf("ERROR(LINKER): Procedure main is not defined.\n");
