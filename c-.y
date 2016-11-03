@@ -652,6 +652,7 @@ simpleExpression	:	simpleExpression OR andExpresssion
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
+						$$->isConst = $1->isConst && $3->isConst;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
 					}
@@ -665,6 +666,7 @@ andExpresssion		:	andExpresssion AND unaryRelExpression
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
+						$$->isConst = $1->isConst && $3->isConst;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
 					}
@@ -678,6 +680,7 @@ unaryRelExpression	:	NOT unaryRelExpression
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $1.tokenStr;
+						$$->isConst = $2->isConst;
 						$$->children[0] = $2;
 					}
 				|	relExpression
@@ -690,6 +693,7 @@ relExpression		:	sumExpression relop sumExpression
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
+						$$->isConst = $1->isConst && $3->isConst;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
 					}
@@ -729,6 +733,7 @@ sumExpression		:	sumExpression sumop term
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
+						$$->isConst = $1->isConst && $3->isConst;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
 					}
@@ -754,6 +759,7 @@ term				:	term mulop unaryExpression
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
+						$$->isConst = $1->isConst && $3->isConst;
 					}
 				|	unaryExpression
 					{
@@ -780,6 +786,7 @@ unaryExpression	:	unaryop unaryExpression
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $1.tokenStr;
 						$$->children[0] = $2;
+						$$->isConst = $1.isConst && $2->isConst;
 					}
 				|	factor
 					{
@@ -790,6 +797,7 @@ unaryExpression	:	unaryop unaryExpression
 unaryop			:	MINUS
 					{
 						$$ = $1;
+						$$.isConst = true;
 					}
 				|	STAR
 					{
@@ -824,17 +832,6 @@ mutable			:	ID
 						$$->children[0] = $1;						
 						$$->children[1] = $3;
 						$$->isArray = true;
-						// $$ = NewExprNode(IdK);
-						
-						// TreeNode* t = NewExprNode(OpK);
-						// t->attr.name = $2.tokenStr;
-						
-						// $$->children[0] = t;
-						
-						// $$->attr.name = $1->attr.name;
-						// $$->children[1] = $3;
-						// $$->isArray = true;
-						// $$->arraySize = $3->attr.value;
 					}
 				|	mutable DOT ID
 					{
@@ -904,18 +901,21 @@ argList			:	argList COMMA expression
 constant			:	NUMCONST
 					{
 						$$ = NewExprNode(ConstK);
+						$$->isConst = true;
 						$$->attr.value = $1.intVal;
 						$$->expType = Int;
 					}
 				|	CHARCONST
 					{
 						$$ = NewExprNode(ConstK);
+						$$->isConst = true;
 						$$->attr.cValue = $1.charVal;
 						$$->expType = Char;
 					}
 				|	BOOLCONST
 					{
 						$$ = NewExprNode(ConstK);
+						$$->isConst = true;
 						$$->attr.value = $1.intVal;
 						$$->expType = Bool;
 					}
@@ -972,14 +972,14 @@ int main(int argc, char** argv)
 	while (!feof(yyin));	
 		
 	if (printAbstractSyntaxTree)
-	{
-		
+	{		
 		PrintSyntaxTree(savedTree, -1, false);
 	}	
 	
 	int numOfErrors = 0;
 	int numOfWarnings = 0;	
 	
+	AttachIOLib(savedTree);
 	SemanticAnalysis(savedTree, numOfErrors, numOfWarnings);
 	
 	if (printAnnotatedSyntaxTree)

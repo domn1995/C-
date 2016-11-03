@@ -7,6 +7,7 @@ typedef struct Token
 {
 	int tokenClass;
 	char* tokenStr;
+	bool isConst;
 	int lineNum;
 	int intVal;
 	char charVal;

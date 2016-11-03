@@ -130,10 +130,10 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		for (int i = 0; i < 3; i++)
 		{
 			ScopeAndType(node->children[i], numErrors, numWarnings);
-		}
+		}		
 
 		if (node->children[0] != NULL)
-		{
+		{				
 			if (node->children[0]->nodeKind == ExpK && (node->kind.exp == IdK && node->children[0]->kind.exp == CallK))
 			{
 				declaration = (TreeNode*)symbolTable.lookup(node->children[0]->attr.name);
@@ -141,10 +141,11 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			else
 			{
 				declaration = node->children[0];
-			}
+			}			
 
-			if (declaration->nodeKind == ExpK && (declaration->kind.exp == IdK || declaration->kind.exp == CallK))
+			if (declaration->nodeKind == ExpK && (declaration->kind.exp == IdK || declaration->kind.exp == CallK || !declaration->isConst))
 			{
+				
 				// Error: Declaration must be initialized with constant.
 				Error error;
 				error.errorCode = InitializerNotConstant;
@@ -153,7 +154,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 				PrintError(error, numErrors, numWarnings);
 			}
 			else
-			{
+			{	
 				if (declaration->expType != node->expType)
 				{
 					Error error;

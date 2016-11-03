@@ -5,7 +5,7 @@
 
 extern int yylineno;
 
-void InitializeNodes(TreeNode* treeNode)
+void InitializeChildrenNodes(TreeNode* treeNode)
 {
 	for (int i = 0; i < MAXCHILDREN; i++)
 	{
@@ -24,7 +24,7 @@ TreeNode* NewDeclNode(DeclKind kind)
 	}
 	else
 	{
-		InitializeNodes(t);
+		InitializeChildrenNodes(t);
 		t->nodeKind = DeclK;
 		t->kind.decl = kind;
 		t->lineNumber = yylineno;
@@ -43,7 +43,7 @@ TreeNode* NewStmtNode(StmtKind kind)
 	}
 	else
 	{
-		InitializeNodes(t);
+		InitializeChildrenNodes(t);
 		t->nodeKind = StmtK;
 		t->kind.stmt = kind;
 		t->lineNumber = yylineno;
@@ -62,9 +62,9 @@ TreeNode* NewExprNode(ExpKind kind)
 	}
 	else
 	{
-		InitializeNodes(t);
+		InitializeChildrenNodes(t);
 		t->nodeKind = ExpK;
-		t->kind.exp = kind;
+		t->kind.exp = kind;	
 		t->lineNumber = yylineno;
 	}
 	

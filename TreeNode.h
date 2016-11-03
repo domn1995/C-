@@ -56,6 +56,7 @@ public:
 	bool isArray;
 	bool isRecord;
 	bool isStatic;
+	bool isConst;
 	int arraySize;
 } TreeNode;
 
