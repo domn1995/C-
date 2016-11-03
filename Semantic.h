@@ -27,6 +27,7 @@ typedef enum
 	BreakOutsideOfLoop,
 	InitializerNotConstant,
 	InitializationTypeMismatch,
+	MissingReturnStatementWarning,
 	MainUndefined,
 } ErrorCode;
 

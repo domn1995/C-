@@ -13,8 +13,8 @@ bool insideLoop = false;
 int loopDepth = 1;
 
 std::string binaryOps[19] = { "+", "-", "*", "/", "%", "+=", "-=", "*=", "/=",
-	"<", ">", "<=", ">=", "==", "!=", "=", "[",
-	"and", "or" };
+							  "<", ">", "<=", ">=", "==", "!=", "=", "[",
+							  "and", "or" };
 
 std::string unaryOps[6] = { "++", "--", "-", "not", "*", "?" };
 
@@ -202,7 +202,12 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			if (node->expType != Void && node->lineNumber >= 0)
 			{
-				// Error: Missing return statement of type expType.
+				Error error;
+				error.errorCode = MissingReturnStatementWarning;
+				error.errorLineNumber = node->lineNumber;
+				error.child0 = ExpTypeToString(node->expType);
+				error.child1 = node->attr.name;
+				PrintError(error, numErrors, numWarnings);
 			}
 		}
 
@@ -1011,6 +1016,11 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			break;
 		case InitializationTypeMismatch:
 			printf("ERROR(%d): Variable '%s' is of type %s but is being initialized with an expression of type %s.\n", e.errorLineNumber, e.child0, e.child1, e.child2);
+			break;
+		case MissingReturnStatementWarning:
+			printf("WARNING(%d): Expecting to return %s but function '%s' has no return statement.\n", e.errorLineNumber, e.child0, e.child1);
+			numErrors--;
+			numWarnings++;
 			break;
 		case MainUndefined:
 			printf("ERROR(LINKER): Procedure main is not defined.\n");
