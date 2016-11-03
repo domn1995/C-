@@ -1,6 +1,6 @@
 #include "Semantic.h"
 #include "SymbolTable.h"
-#include <cstring>
+#include "Utils.h"
 
 SymbolTable symbolTable;
 // Tracks whether we entered a function scope in order to handle
@@ -312,7 +312,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				
 				isLeftArray = leftNode->isArray;
 				
-				if (strcmp(node->attr.name, "[") == 0)
+				if (StrEq(node->attr.name, "["))
 				{
 					if (!leftNode->isArray)
 					{
@@ -324,7 +324,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					}
 				}
 				
-				if (strcmp(node->attr.name, "*") == 0)
+				if (StrEq(node->attr.name, "*"))
 				{
 					if (!leftNode->isArray && rightNode == NULL)
 					{
@@ -401,7 +401,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				
 				if (isLeftArray)
 				{						
-					if (strcmp(node->attr.name, "*") != 0)
+					if (!StrEq(node->attr.name, "*"))
 					{		
 						if (left != expectedLeft)
 						{
@@ -427,7 +427,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						}					
 						
 					}
-					else if (strcmp(node->attr.name, "*") == 0)
+					else if (StrEq(node->attr.name, "*"))
 					{
 						if (!symbolTable.lookup(leftNode->attr.name) || !leftNode->isArray)
 						{
@@ -439,7 +439,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						}
 					}
 					
-					if (strcmp(node->attr.name, "?") == 0)
+					if (StrEq(node->attr.name, "?"))
 					{
 						Error error;
 						error.errorCode = InvalidArrayOperation;
@@ -455,7 +455,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				//printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
 				if (!oneSidedErrors)
 				{					
-					if (left != right && !leftError && !rightError && strcmp(node->attr.name, "[") != 0)
+					if (left != right && !leftError && !rightError && !StrEq(node->attr.name, "["))
 					{						
 						Error error;
 						error.errorCode = BinaryOperandLhsRhsTypeMismatch;
@@ -465,10 +465,10 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						error.child2 = ExpTypeToString(rightNode->expType);
 						PrintError(error, numErrors, numWarnings);
 					}
-					else if (strcmp(node->attr.name, "[") == 0 && right != Int)
+					else if (StrEq(node->attr.name, "[") && right != Int)
 					{
 						
-						if (rightNode->isArray && strcmp(node->attr.name, "[") != 0)
+						if (rightNode->isArray && !StrEq(node->attr.name, "["))
 						{
 							Error error;
 							error.errorCode = ArrayIndexUnindexedArray;
@@ -532,7 +532,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 					{
 						if (leftNode != NULL)
 						{
-							if (strcmp(leftNode->attr.name, "[") != 0)
+							if (!StrEq(node->attr.name, "["))
 							{
 								// printf("FLAG1\n");
 								// printf("child node %s\n", leftNode->attr.name);
@@ -545,7 +545,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						}
 						else if (rightNode != NULL)
 						{
-							if (strcmp(rightNode->attr.name, "[") != 0)
+							if (!StrEq(node->attr.name, "["))
 							{
 								Error error;
 								error.errorCode = InvalidArrayOperation;
