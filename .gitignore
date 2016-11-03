@@ -1,0 +1,7 @@
+# Compiled source #
+*.o
+
+# Packages #
+*.tar
+*.gz
+*.zip
