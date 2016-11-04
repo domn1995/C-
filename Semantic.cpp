@@ -570,8 +570,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			//printf("binary op %s; left = %s, right = %s\n", node->attr.name, ExpTypeToString(left), ExpTypeToString(right));
 			//printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
 			if (!oneSidedErrors)
-			{				
-
+			{
 				if (left != right && !leftError && !rightError && !StrEq(node->attr.name, "["))
 				{
 					Error error;
@@ -602,7 +601,6 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						error.context1 = ExpTypeToString(right);
 						PrintError(error, numErrors, numWarnings);
 					}
-
 				}
 			}
 
@@ -643,8 +641,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				// printf("node %s at line %d\n", node->attr.name, node->lineNumber);
 				// printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
 				// printf("left is array = %d; right is array = %d\n", leftNode->isArray, rightNode->isArray);
-
-
+				
 				if (expectedLeft != Undefined)
 				{
 					if (leftNode != NULL)
@@ -660,56 +657,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 							PrintError(error, numErrors, numWarnings);
 						}
 					}
-					else if (rightNode != NULL)
-					{
-						if (!StrEq(node->attr.name, "["))
-						{
-							Error error;
-							error.errorCode = InvalidArrayOperation;
-							error.errorLineNumber = node->lineNumber;
-							error.context0 = node->attr.name;
-							PrintError(error, numErrors, numWarnings);
-						}
-					}
-					else if (leftNode == NULL || rightNode == NULL)
-					{
-						Error error;
-						error.errorCode = InvalidArrayOperation;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						PrintError(error, numErrors, numWarnings);
-					}
-					else if (left != expectedLeft || right != expectedRight)
-					{
-						if ((left == Int && expectedLeft != IntOrChar) || (right == Int && expectedRight != IntOrChar))
-						{
-							Error error;
-							error.errorCode = InvalidArrayOperation;
-							error.errorLineNumber = node->lineNumber;
-							error.context0 = node->attr.name;
-							PrintError(error, numErrors, numWarnings);
-						}
-
-					}
-					else if (expectedLeft != Undefined)
-					{
-						Error error;
-						error.errorCode = InvalidArrayOperation;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						PrintError(error, numErrors, numWarnings);
-					}
 				}
-
-				/* if (expectedLeft != Undefined)
-				{
-					Error error;
-					error.errorCode = InvalidArrayOperation;
-					error.errorLineNumber = node->lineNumber;
-					error.context0 = node->attr.name;
-					PrintError(error, numErrors, numWarnings);
-				} */
-
 			}
 		}		
 
@@ -729,7 +677,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		break;
 	case IdK:
-		found = (TreeNode*)symbolTable.lookup(node->attr.name);
+		found = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
 
 		if (found == NULL)
 		{

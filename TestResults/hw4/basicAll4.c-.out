@@ -50,7 +50,6 @@ ERROR(104): '==' requires operands of the same type but lhs is type char and rhs
 ERROR(104): '=' requires operands of the same type but lhs is type int and rhs is type bool.
 ERROR(105): Symbol 'y' is not defined.
 ERROR(105): 'and' requires operands of type bool but lhs is of type char.
-ERROR(105): 'and' requires operands of type bool but rhs is of type undefined.
 ERROR(105): '*' requires operands of type int but lhs is of type char.
 ERROR(105): '*' requires operands of type int but rhs is of type bool.
 ERROR(105): '+' requires operands of type int but lhs is of type char.
@@ -75,7 +74,6 @@ ERROR(120): Array 'aa' should be indexed by type int but got type undefined.
 ERROR(122): Symbol 'xyzzy' is not defined.
 ERROR(123): Function 'meerkat' is not defined.
 ERROR(124): Symbol 'xyzzy' is not defined.
-ERROR(124): '/' requires operands of type int but lhs is of type undefined.
 ERROR(124): 'and' requires operands of type bool but rhs is of type int.
 ERROR(126): Unary 'not' requires an operand of type bool but was given type int.
 ERROR(126): Unary '-' requires an operand of type int but was given type bool.
@@ -149,4 +147,4 @@ ERROR(167): Expecting type char in parameter 3 of call to 'emu' defined on line 
 ERROR(167): Too many parameters passed for function 'emu' defined on line 50.
 ERROR(171): Cannot return an array.
 Number of warnings: 2
-Number of errors: 148
+Number of errors: 146

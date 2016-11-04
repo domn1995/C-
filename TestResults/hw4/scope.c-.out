@@ -11,8 +11,6 @@ ERROR(40): Symbol 'x' is not defined.
 ERROR(44): Symbol 'p' is not defined.
 ERROR(45): Symbol 'q' is not defined.
 ERROR(45): Symbol 'r' is not defined.
-ERROR(45): '+' requires operands of type int but lhs is of type undefined.
-ERROR(45): '+' requires operands of type int but rhs is of type undefined.
 ERROR(46): Symbol 's' is not defined.
 ERROR(46): Symbol 't' is not defined.
 ERROR(46): Expecting type int in parameter 1 of call to 'ant' defined on line 3 but got type undefined.
@@ -31,4 +29,4 @@ ERROR(61): Symbol 'g' is already defined at line 2.
 ERROR(62): Symbol 'ant' is already defined at line 3.
 ERROR(LINKER): Procedure main is not defined.
 Number of warnings: 2
-Number of errors: 30
+Number of errors: 28

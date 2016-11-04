@@ -6,8 +6,6 @@ ERROR(14): Unary '-' requires an operand of type int but was given type char.
 ERROR(15): Unary '--' requires an operand of type int but was given type char.
 ERROR(17): Function 'emu' is not defined.
 ERROR(17): Symbol 'fox' is not defined.
-ERROR(17): '+' requires operands of type int but lhs is of type undefined.
-ERROR(17): '+' requires operands of type int but rhs is of type undefined.
 WARNING(9): Expecting to return type int but function 'main' has no return statement.
 Number of warnings: 1
-Number of errors: 10
+Number of errors: 8
