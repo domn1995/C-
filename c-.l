@@ -342,7 +342,7 @@ return				{
 						int tokenType = ID;						
 						
 						// If this identifier is actually a record type, we should return RECTYPE instead.
-						if ((char*)globalScope.lookup(yytext) != NULL && strcmp((char*)globalScope.lookup(yytext), "recordType") == 0)
+						if (static_cast<char*>(globalScope.lookup(yytext)) != NULL && strcmp(static_cast<char*>(globalScope.lookup(yytext)), "recordType") == 0)
 						{								
 							tokenType = RECTYPE;
 						}						

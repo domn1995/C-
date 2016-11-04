@@ -1488,7 +1488,7 @@ yyreduce:
 #line 156 "c-.y" /* yacc.c:1646  */
     {
 						// We need to add the user-defined type to the global symbol table.
-						globalScope.insert((yyvsp[-3].t).tokenStr, (char*)"recordType");
+						globalScope.insert((yyvsp[-3].t).tokenStr, static_cast<char*>("recordType"));
 						
 						(yyval.treeNode) = NewDeclNode(VarK);
 						(yyval.treeNode)->lineNumber = (yyvsp[-4].t).lineNum;

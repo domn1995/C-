@@ -2,7 +2,6 @@
 #include "SymbolTable.h"
 #include "Utils.h"
 #include <string.h>
-#include <sstream>
 
 SymbolTable symbolTable;
 // Tracks whether we entered a function scope in order to handle
@@ -64,7 +63,7 @@ void AttachIOLib(TreeNode*& treeNode)
 void SemanticAnalysis(TreeNode* tree, int& numErrors, int& numWarnings)
 {
 	ScopeAndType(tree, numErrors, numWarnings);
-	TreeNode* main = (TreeNode*)symbolTable.lookup("main");
+	TreeNode* main = static_cast<TreeNode*>(symbolTable.lookup("main"));
 
 	if (main == NULL)
 	{
@@ -110,7 +109,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 	// insert into the symbol table, it means that the symbol was already defined.
 	if (node->kind.decl != VarK && !symbolTable.insert(node->attr.name, node))
 	{
-		declaration = (TreeNode*)symbolTable.lookup(node->attr.name);
+		declaration = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
 		Error error;
 		error.errorCode = SymbolAlreadyDefined;
 		error.errorLineNumber = node->lineNumber;
@@ -137,7 +136,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{				
 			if (node->children[0]->nodeKind == ExpK && (node->kind.exp == IdK && node->children[0]->kind.exp == CallK))
 			{
-				declaration = (TreeNode*)symbolTable.lookup(node->children[0]->attr.name);
+				declaration = static_cast<TreeNode*>(symbolTable.lookup(node->children[0]->attr.name));
 			}
 			else
 			{
@@ -172,7 +171,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		// Symbol already defined.
 		if (!symbolTable.insert(node->attr.name, node))
 		{
-			TreeNode* existingNode = (TreeNode*)symbolTable.lookup(node->attr.name);
+			TreeNode* existingNode = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
 			Error error;
 			error.errorCode = SymbolAlreadyDefined;
 			error.errorLineNumber = node->lineNumber;
@@ -221,7 +220,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 {
-	bool child0error = false, child1error = false, child2error = false;
+	bool child0error = false, child1error, child2error = false;
 
 	if (node->kind.stmt == WhileK)
 	{
@@ -641,6 +640,18 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				// printf("node %s at line %d\n", node->attr.name, node->lineNumber);
 				// printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
 				// printf("left is array = %d; right is array = %d\n", leftNode->isArray, rightNode->isArray);
+
+				if (!leftError || !rightError)
+				{
+					if (isLeftArray != isRightArray)
+					{
+						Error error;
+						error.errorCode = BothOrNeitherArrayRequired;
+						error.errorLineNumber = node->lineNumber;
+						error.context0 = node->attr.name;
+						PrintError(error, numErrors, numWarnings);
+					}
+				}
 				
 				if (expectedLeft != Undefined)
 				{
@@ -758,7 +769,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 		}
 
-		found = (TreeNode*)symbolTable.lookup(node->attr.name);
+		found = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
 
 		if (found == NULL)
 		{

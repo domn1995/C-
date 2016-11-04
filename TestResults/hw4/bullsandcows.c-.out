@@ -1,5 +1,30 @@
+ERROR(31): '[' requires that either both or neither operands be arrays.
+ERROR(31): '[' requires that either both or neither operands be arrays.
+ERROR(31): '=' requires that either both or neither operands be arrays.
+ERROR(32): '[' requires that either both or neither operands be arrays.
 ERROR(32): Cannot return an array.
+ERROR(47): '[' requires that either both or neither operands be arrays.
+ERROR(47): '[' requires that either both or neither operands be arrays.
+ERROR(47): '==' requires that either both or neither operands be arrays.
+ERROR(56): '[' requires that either both or neither operands be arrays.
+ERROR(56): '[' requires that either both or neither operands be arrays.
+ERROR(56): '==' requires that either both or neither operands be arrays.
+ERROR(77): '[' requires that either both or neither operands be arrays.
+ERROR(77): '=' requires that either both or neither operands be arrays.
+ERROR(85): '[' requires that either both or neither operands be arrays.
+ERROR(85): '=' requires that either both or neither operands be arrays.
+ERROR(86): '[' requires that either both or neither operands be arrays.
+ERROR(86): '!=' requires that either both or neither operands be arrays.
+ERROR(99): '[' requires that either both or neither operands be arrays.
+ERROR(99): '=' requires that either both or neither operands be arrays.
+ERROR(102): '[' requires that either both or neither operands be arrays.
+ERROR(102): '<' requires that either both or neither operands be arrays.
 ERROR(102): The operation '<' does not work with arrays.
+ERROR(102): '[' requires that either both or neither operands be arrays.
+ERROR(102): '>' requires that either both or neither operands be arrays.
 ERROR(102): The operation '>' does not work with arrays.
+ERROR(110): '[' requires that either both or neither operands be arrays.
+ERROR(110): '==' requires that either both or neither operands be arrays.
+ERROR(152): '[' requires that either both or neither operands be arrays.
 Number of warnings: 0
-Number of errors: 3
+Number of errors: 28

@@ -3,5 +3,11 @@ ERROR(2): Initializer for variable 's' is not a constant expression.
 ERROR(2): Variable 't' is of type int but is being initialized with an expression of type char.
 ERROR(2): Variable 'u' is of type int but is being initialized with an expression of type char.
 ERROR(9): Initializer for variable 'lenx' is not a constant expression.
+ERROR(13): '[' requires that either both or neither operands be arrays.
+ERROR(13): '=' requires that either both or neither operands be arrays.
+ERROR(20): '[' requires that either both or neither operands be arrays.
+ERROR(20): '=' requires that either both or neither operands be arrays.
+ERROR(25): '[' requires that either both or neither operands be arrays.
+ERROR(25): '=' requires that either both or neither operands be arrays.
 Number of warnings: 0
-Number of errors: 5
+Number of errors: 11

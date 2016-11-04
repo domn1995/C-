@@ -155,7 +155,7 @@ declaration 		: 	varDeclaration
 recDeclaration		: 	RECORD ID LCURLY localDeclarations RCURLY
 					{
 						// We need to add the user-defined type to the global symbol table.
-						globalScope.insert($2.tokenStr, (char*)"recordType");
+						globalScope.insert($2.tokenStr, static_cast<char*>("recordType"));
 						
 						$$ = NewDeclNode(VarK);
 						$$->lineNumber = $1.lineNum;

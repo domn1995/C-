@@ -16,7 +16,7 @@ void InitializeChildrenNodes(TreeNode* treeNode)
 
 TreeNode* NewDeclNode(DeclKind kind)
 {
-	TreeNode* t = (TreeNode*)malloc(sizeof(TreeNode));
+	TreeNode* t = static_cast<TreeNode*>(malloc(sizeof(TreeNode)));
 	
 	if (t == NULL)
 	{
@@ -35,7 +35,7 @@ TreeNode* NewDeclNode(DeclKind kind)
 
 TreeNode* NewStmtNode(StmtKind kind)
 {
-	TreeNode* t = (TreeNode*)malloc(sizeof(TreeNode));
+	TreeNode* t = static_cast<TreeNode*>(malloc(sizeof(TreeNode)));
 	
 	if (t == NULL)
 	{
@@ -54,7 +54,7 @@ TreeNode* NewStmtNode(StmtKind kind)
 
 TreeNode* NewExprNode(ExpKind kind)
 {
-	TreeNode* t = (TreeNode*)malloc(sizeof(TreeNode));
+	TreeNode* t = static_cast<TreeNode*>(malloc(sizeof(TreeNode)));
 	
 	if (t == NULL)
 	{
