@@ -1,8 +1,9 @@
 WARNING(7): Expecting to return type int but function 'main' has no return statement.
 ERROR(20): Cannot use function 'dog' as a variable.
+ERROR(20): '=' requires operands of the same type but lhs is type void and rhs is type int.
 ERROR(21): Symbol 'klingon' is not defined.
 ERROR(22): Symbol 'klingon' is not defined.
 ERROR(22): Symbol 'romulon' is not defined.
 WARNING(19): Expecting to return type int but function 'elk' has no return statement.
 Number of warnings: 2
-Number of errors: 4
+Number of errors: 5

@@ -73,6 +73,7 @@ enum BinaryOp
 	IndexOp,
 	AndOp,
 	OrOp,
+	DotOp,
 	UnknownBOp
 };
 

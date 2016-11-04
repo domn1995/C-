@@ -600,6 +600,7 @@ breakStmt			:	BREAK SEMICOLON
 expression		: 	mutable ASSIGN expression
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
@@ -607,6 +608,7 @@ expression		: 	mutable ASSIGN expression
 				|	mutable ADDASS expression
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
@@ -614,6 +616,7 @@ expression		: 	mutable ASSIGN expression
 				|	mutable SUBASS expression
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
@@ -621,6 +624,7 @@ expression		: 	mutable ASSIGN expression
 				|	mutable MULASS expression
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
@@ -628,6 +632,7 @@ expression		: 	mutable ASSIGN expression
 				|	mutable DIVASS expression
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
@@ -635,12 +640,14 @@ expression		: 	mutable ASSIGN expression
 				|	mutable INC
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 					}
 				|	mutable DEC
 					{
 						$$ = NewExprNode(AssignK);
+						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
 						$$->children[0] = $1;
 					}
@@ -735,6 +742,7 @@ sumExpression		:	sumExpression sumop term
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
+						$$->lineNumber = $2.lineNum;
 						$$->isConst = $1->isConst && $3->isConst;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
@@ -759,6 +767,7 @@ term				:	term mulop unaryExpression
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $2.tokenStr;
+						$$->lineNumber = $2.lineNum;
 						$$->children[0] = $1;
 						$$->children[1] = $3;
 						$$->isConst = $1->isConst && $3->isConst;
@@ -787,6 +796,7 @@ unaryExpression	:	unaryop unaryExpression
 					{
 						$$ = NewExprNode(OpK);
 						$$->attr.name = $1.tokenStr;
+						$$->lineNumber = $1.lineNum;
 						$$->children[0] = $2;
 						$$->isConst = $1.isConst && $2->isConst;
 					}

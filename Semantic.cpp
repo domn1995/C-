@@ -13,7 +13,7 @@ bool insideLoop = false;
 int loopDepth = 1;
 
 std::string binaryOps[19] = { "+", "-", "*", "/", "%", "+=", "-=", "*=", "/=",
-							  "<", ">", "<=", ">=", "==", "!=", "=", "[",
+							  "<", ">", "<=", ">=", "==", "!=", "=", "[", "."
 							  "and", "or" };
 
 std::string unaryOps[6] = { "++", "--", "-", "not", "*", "?" };
@@ -260,7 +260,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 	switch (node->kind.stmt)
 	{
 	case IfK:
-		if (node->children[0]->expType != Bool && !child0error)
+		if (node->children[0]->expType != Bool && !child0error && node->children[0]->expType != Undefined)
 		{
 			Error error;
 			error.errorCode = ExpectedBooleanCondition;
@@ -279,7 +279,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		break;
 	case WhileK:
-		if (node->children[0]->expType != Bool && !child0error)
+		if (node->children[0]->expType != Bool && !child0error && node->children[0]->expType != Undefined)
 		{
 			Error error;
 			error.errorCode = ExpectedBooleanCondition;
@@ -316,7 +316,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 				break;
 			}
 			if (currentFunction->expType != Void && node->children[0]->expType != Void &&
-				currentFunction->expType != node->children[0]->expType)
+				currentFunction->expType != node->children[0]->expType && node->children[0]->expType != Undefined)
 			{
 				// Incorrect return type.
 				Error error;
@@ -500,7 +500,7 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		// If no errors are raised, the result will be of type bool.
 		opNode->expType = Bool;
 
-		if (leftOperand->expType != Bool)
+		if (leftOperand->expType != Bool && leftOperand->expType != Undefined)
 		{			
 			Error error;
 			error.errorCode = BinaryOperandLhsTypeMismatch;
@@ -614,7 +614,7 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		{
 			bool raiseSameTypeError = true;
 
-			if (leftOperand->expType != Int && leftOperand->expType != Char)
+			if (leftOperand->expType != Int && leftOperand->expType != Char && leftOperand->expType != Undefined)
 			{
 				raiseSameTypeError = false;
 				Error error;
@@ -627,7 +627,7 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 				//opNode->expType = Undefined;
 			}
 
-			if (rightOperand->expType != Int && rightOperand->expType != Char)
+			if (rightOperand->expType != Int && rightOperand->expType != Char && rightOperand->expType != Undefined)
 			{
 				raiseSameTypeError = false;
 				Error error;
@@ -641,7 +641,7 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 			}
 
 			// We only raise this error if both the previous two haven't been raised.
-			if (leftOperand->expType != rightOperand->expType && raiseSameTypeError)
+			if (leftOperand->expType != rightOperand->expType && raiseSameTypeError && leftOperand->expType != Undefined && rightOperand->expType != Undefined)
 			{
 				Error error;
 				error.errorCode = BinaryOperandLhsRhsTypeMismatch;
@@ -725,6 +725,8 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		leftOperand->isArray = false;
 
 		break;
+	case DotOp:
+		break;
 	case UnknownBOp:
 		printf("Unknown binary op detected: '%s'.\n", opNode->attr.name);
 		break;
@@ -761,7 +763,7 @@ void TypeAndCheckUnaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		// If no errors are raised, the op gets type int.
 		opNode->expType = Int;
 
-		if (operand->expType != Int)
+		if (operand->expType != Int && operand->expType != Undefined)
 		{
 			Error e;
 			e.errorCode = UnaryOperandTypeMismatch;
@@ -788,7 +790,7 @@ void TypeAndCheckUnaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		// If no errors are raised, the op gets type int.
 		opNode->expType = Int;
 
-		if (!operand->isArray)
+		if (!operand->isArray && operand->expType != Undefined)
 		{
 			Error e;
 			e.errorCode = ArrayOnlyOperation;
@@ -804,7 +806,7 @@ void TypeAndCheckUnaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		// If no errors are raised, the op gets type bool.
 		opNode->expType = Bool;
 		
-		if (operand->expType != Bool)
+		if (operand->expType != Bool && operand->expType != Undefined)
 		{
 			Error e;
 			e.errorCode = UnaryOperandTypeMismatch;
@@ -1099,6 +1101,7 @@ BinaryOp BinaryOpStringSwitcher(std::string const str)
 	if (str == "and") return AndOp;
 	if (str == "or") return OrOp;
 	if (str == "[") return IndexOp;
+	if (str == ".") return DotOp;
 	return UnknownBOp;
 }
 
