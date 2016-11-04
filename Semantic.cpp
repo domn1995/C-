@@ -570,7 +570,8 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			//printf("binary op %s; left = %s, right = %s\n", node->attr.name, ExpTypeToString(left), ExpTypeToString(right));
 			//printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
 			if (!oneSidedErrors)
-			{
+			{				
+
 				if (left != right && !leftError && !rightError && !StrEq(node->attr.name, "["))
 				{
 					Error error;
@@ -613,7 +614,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				}
 				else
 				{
-					if (left != expectedLeft && !leftError)
+					if (left != expectedLeft && !leftError && left != Undefined)
 					{
 						Error error;
 						error.errorCode = BinaryOperandLhsTypeMismatch;
@@ -624,7 +625,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 						PrintError(error, numErrors, numWarnings);
 					}
 
-					if (right != expectedRight && !rightError)
+					if (right != expectedRight && !rightError && right != Undefined)
 					{
 						Error error;
 						error.errorCode = BinaryOperandRhsTypeMismatch;
@@ -710,7 +711,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				} */
 
 			}
-		}
+		}		
 
 		if (returnType != Undefined)
 		{
@@ -1140,7 +1141,7 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			printf("ERROR(%d): Expecting type %s in parameter %s of call to '%s' defined on line %d but got type %s.\n", e.errorLineNumber, e.context0, e.context1, e.context2, e.expressionLineNumber, e.context3);
 			break;
 		case ExpectingArrayParam:
-			printf("ERROR(%d): Expecting array in paremeter %s of call to '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.context1, e.expressionLineNumber);
+			printf("ERROR(%d): Expecting array in parameter %s of call to '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.context1, e.expressionLineNumber);
 			break;
 		case NotExpectingArrayParam:
 			printf("ERROR(%d): Not expecting array in parameter %s of call to '%s' defined on line %d.\n", e.errorLineNumber, e.context0, e.context1, e.expressionLineNumber);
@@ -1153,6 +1154,9 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			break;
 		case ArrayAsTestCondition:
 			printf("ERROR(%d): Cannot use array as test condition in %s statement.\n", e.errorLineNumber, e.context0);
+			break;
+		case BothOrNeitherArrayRequired:
+			printf("ERROR(%d): '%s' requires that either both or neither operands be arrays.\n", e.errorLineNumber, e.context0);
 			break;
 		case MainUndefined:
 			printf("ERROR(LINKER): Procedure main is not defined.\n");

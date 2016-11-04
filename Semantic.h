@@ -35,6 +35,7 @@ typedef enum
 	TooFewCallParams,
 	TooManyCallParams,
 	ArrayAsTestCondition,
+	BothOrNeitherArrayRequired,
 	MainUndefined,
 } ErrorCode;
 

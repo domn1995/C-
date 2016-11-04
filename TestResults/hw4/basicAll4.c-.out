@@ -92,7 +92,7 @@ ERROR(133): Expecting type char in parameter 1 of call to 'dog' defined on line 
 ERROR(135): Not expecting array in parameter 1 of call to 'cat' defined on line 29.
 ERROR(136): Expecting type char in parameter 1 of call to 'cat' defined on line 29 but got type bool.
 ERROR(136): Not expecting array in parameter 1 of call to 'cat' defined on line 29.
-ERROR(138): Expecting array in paremeter 1 of call to 'ibex' defined on line 39.
+ERROR(138): Expecting array in parameter 1 of call to 'ibex' defined on line 39.
 ERROR(139): Expecting type char in parameter 1 of call to 'ibex' defined on line 39 but got type int.
 ERROR(140): Cannot use function 'ibex' as a variable.
 ERROR(140): Cannot index nonarray 'ibex'.
