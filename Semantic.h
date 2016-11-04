@@ -11,6 +11,7 @@ typedef enum
 	BinaryOperandLhsRhsTypeMismatch,
 	ArrayIndexTypeNotInt,
 	ArrayIndexUnindexedArray,
+	ArrayIndexUnindexedArrayUnknown,
 	IndexNonArrayKnown,
 	IndexNonArrayUnknown,
 	ReturnArray,

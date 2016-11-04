@@ -863,6 +863,7 @@ immutable			:	LPAREN expression RPAREN
 call				:	ID LPAREN args RPAREN
 					{
 						$$ = NewExprNode(CallK);
+						$$->lineNumber = $1.lineNum;
 						$$->attr.name = $1.tokenStr;
 						$$->children[0] = $3;
 					}

@@ -6,6 +6,7 @@ ERROR(29): Expecting Boolean test condition in while statement but got type int.
 ERROR(35): Cannot return an array.
 ERROR(35): Function 'main' at line 11 is expecting no return value, but return has return value.
 ERROR(42): '*' requires operands of type int but rhs is of type bool.
+ERROR(43): '=' requires that either both or neither operands be arrays.
 ERROR(44): Cannot have a break statement outside of loop.
 ERROR(48): The operation '*' only works with arrays.
 ERROR(50): Unary '?' requires an operand of type int but was given type char.
@@ -13,4 +14,4 @@ ERROR(54): Function 'emu' is not defined.
 ERROR(60): Too few parameters passed for function 'dog' defined on line 3.
 ERROR(61): '+' requires operands of type int but rhs is of type char.
 Number of warnings: 0
-Number of errors: 14
+Number of errors: 15

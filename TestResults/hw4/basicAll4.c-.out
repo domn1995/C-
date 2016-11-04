@@ -67,10 +67,10 @@ ERROR(109): 'and' requires operands of type bool but rhs is of type int.
 ERROR(115): Cannot use function 'cat' as a variable.
 ERROR(115): Array 'aa' should be indexed by type int but got type char.
 ERROR(117): Array 'aa' should be indexed by type int but got type char.
+ERROR(117): Array index is the unindexed array 'aa'.
 ERROR(118): Symbol 'AA' is not defined.
 ERROR(118): Cannot index nonarray 'AA'.
 ERROR(120): Symbol 'meerkat' is not defined.
-ERROR(120): Array 'aa' should be indexed by type int but got type undefined.
 ERROR(122): Symbol 'xyzzy' is not defined.
 ERROR(123): Function 'meerkat' is not defined.
 ERROR(124): Symbol 'xyzzy' is not defined.
@@ -98,6 +98,7 @@ ERROR(142): Cannot use function 'ibex' as a variable.
 ERROR(143): Cannot use function 'ibex' as a variable.
 ERROR(145): Array 'aa' should be indexed by type int but got type char.
 ERROR(146): Array 'aa' should be indexed by type int but got type char.
+ERROR(146): Array index is the unindexed array 'zz'.
 ERROR(147): Expecting type char in parameter 1 of call to 'ox' defined on line 45 but got type bool.
 ERROR(147): Array 'aa' should be indexed by type int but got type void.
 ERROR(148): Array 'aa' should be indexed by type int but got type char.
@@ -130,14 +131,12 @@ ERROR(166): Symbol 'parrot' is not defined.
 ERROR(166): 'and' requires operands of type bool but lhs is of type int.
 ERROR(166): 'and' requires operands of type bool but rhs is of type char.
 ERROR(166): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
-ERROR(166): Expecting type char in parameter 2 of call to 'emu' defined on line 50 but got type undefined.
 ERROR(166): Expecting type char in parameter 3 of call to 'emu' defined on line 50 but got type bool.
 ERROR(167): '+' requires operands of type int but lhs is of type char.
 ERROR(167): Symbol 'parrot' is not defined.
 ERROR(167): 'and' requires operands of type bool but lhs is of type int.
 ERROR(167): 'and' requires operands of type bool but rhs is of type char.
 ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
-ERROR(167): Expecting type char in parameter 2 of call to 'emu' defined on line 50 but got type undefined.
 ERROR(167): Expecting type char in parameter 3 of call to 'emu' defined on line 50 but got type bool.
 ERROR(167): 'and' requires operands of type bool but rhs is of type char.
 ERROR(167): '*' requires operands of type int but lhs is of type char.
@@ -147,4 +146,4 @@ ERROR(167): Expecting type char in parameter 3 of call to 'emu' defined on line 
 ERROR(167): Too many parameters passed for function 'emu' defined on line 50.
 ERROR(171): Cannot return an array.
 Number of warnings: 2
-Number of errors: 146
+Number of errors: 145

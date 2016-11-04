@@ -30,9 +30,7 @@ ERROR(25): '=' requires operands of the same type but lhs is type int and rhs is
 ERROR(26): Unary 'not' requires an operand of type bool but was given type int.
 ERROR(26): '=' requires operands of the same type but lhs is type int and rhs is type bool.
 ERROR(36): Symbol 'x' is not defined.
-ERROR(36): '=' requires operands of the same type but lhs is type undefined and rhs is type bool.
 ERROR(37): Symbol 'x' is not defined.
-ERROR(37): '=' requires operands of the same type but lhs is type bool and rhs is type undefined.
 ERROR(39): '+' requires operands of type int but lhs is of type bool.
 ERROR(39): '+' requires operands of type int but rhs is of type bool.
 ERROR(39): '=' requires operands of the same type but lhs is type bool and rhs is type int.
@@ -44,7 +42,6 @@ ERROR(40): '*' requires operands of type int but lhs is of type bool.
 ERROR(40): Symbol 'x' is not defined.
 ERROR(40): '+' requires operands of type int but lhs is of type bool.
 ERROR(40): '+' requires operands of type int but rhs is of type bool.
-ERROR(40): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
 ERROR(43): '=' requires operands of the same type but lhs is type bool and rhs is type int.
 Number of warnings: 0
-Number of errors: 48
+Number of errors: 45
