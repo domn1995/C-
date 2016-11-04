@@ -27,7 +27,6 @@ ERROR(81): Cannot use array as test condition in while statement.
 ERROR(83): Cannot have a break statement outside of loop.
 ERROR(85): Expecting Boolean test condition in while statement but got type int.
 ERROR(87): '+' requires operands of type int but lhs is of type char.
-ERROR(87): '+' requires that either both or neither operands be arrays.
 ERROR(87): The operation '+' does not work with arrays.
 ERROR(88): The operation '<' does not work with arrays.
 ERROR(89): The operation '<' does not work with arrays.
@@ -65,18 +64,13 @@ ERROR(106): '=' requires operands of the same type but lhs is type int and rhs i
 ERROR(108): The operation '*' only works with arrays.
 ERROR(109): 'and' requires operands of type bool but lhs is of type int.
 ERROR(109): 'and' requires operands of type bool but rhs is of type int.
-ERROR(110): '[' requires that either both or neither operands be arrays.
-ERROR(111): '[' requires that either both or neither operands be arrays.
-ERROR(113): '[' requires that either both or neither operands be arrays.
 ERROR(115): Cannot use function 'cat' as a variable.
 ERROR(115): Array 'aa' should be indexed by type int but got type char.
-ERROR(115): '[' requires that either both or neither operands be arrays.
 ERROR(117): Array 'aa' should be indexed by type int but got type char.
 ERROR(118): Symbol 'AA' is not defined.
 ERROR(118): Cannot index nonarray 'AA'.
 ERROR(120): Symbol 'meerkat' is not defined.
 ERROR(120): Array 'aa' should be indexed by type int but got type undefined.
-ERROR(120): '[' requires that either both or neither operands be arrays.
 ERROR(122): Symbol 'xyzzy' is not defined.
 ERROR(123): Function 'meerkat' is not defined.
 ERROR(124): Symbol 'xyzzy' is not defined.
@@ -102,22 +96,15 @@ ERROR(140): Cannot use function 'ibex' as a variable.
 ERROR(140): Cannot index nonarray 'ibex'.
 ERROR(142): Cannot use function 'ibex' as a variable.
 ERROR(143): Cannot use function 'ibex' as a variable.
-ERROR(145): '[' requires that either both or neither operands be arrays.
 ERROR(145): Array 'aa' should be indexed by type int but got type char.
-ERROR(145): '[' requires that either both or neither operands be arrays.
 ERROR(146): Array 'aa' should be indexed by type int but got type char.
 ERROR(147): Expecting type char in parameter 1 of call to 'ox' defined on line 45 but got type bool.
 ERROR(147): Array 'aa' should be indexed by type int but got type void.
-ERROR(147): '[' requires that either both or neither operands be arrays.
 ERROR(148): Array 'aa' should be indexed by type int but got type char.
-ERROR(148): '[' requires that either both or neither operands be arrays.
 ERROR(149): Array 'aa' should be indexed by type int but got type bool.
-ERROR(149): '[' requires that either both or neither operands be arrays.
 ERROR(150): Cannot use function 'ox' as a variable.
 ERROR(150): Array 'aa' should be indexed by type int but got type void.
-ERROR(150): '[' requires that either both or neither operands be arrays.
 ERROR(151): Cannot use function 'ibex' as a variable.
-ERROR(151): '[' requires that either both or neither operands be arrays.
 ERROR(153): Expecting type char in parameter 1 of call to 'ox' defined on line 45 but got type int.
 ERROR(153): '=' requires operands of the same type but lhs is type char and rhs is type void.
 ERROR(154): Expecting type char in parameter 1 of call to 'ox' defined on line 45 but got type int.
@@ -160,4 +147,4 @@ ERROR(167): Expecting type char in parameter 3 of call to 'emu' defined on line 
 ERROR(167): Too many parameters passed for function 'emu' defined on line 50.
 ERROR(171): Cannot return an array.
 Number of warnings: 2
-Number of errors: 159
+Number of errors: 146

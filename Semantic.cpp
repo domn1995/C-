@@ -144,8 +144,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}			
 
 			if (declaration->nodeKind == ExpK && (declaration->kind.exp == IdK || declaration->kind.exp == CallK || !declaration->isConst))
-			{
-				
+			{				
 				// Error: Declaration must be initialized with constant.
 				Error error;
 				error.errorCode = InitializerNotConstant;
@@ -393,18 +392,401 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 	}
 }
 
+void TypeAndCheck(TreeNode* opNode, int& numErrors, int& numWarnings)
+{
+	if (opNode == NULL)
+	{
+		return;
+	}
+
+	if (opNode->children[0] != NULL & opNode->children[1] != NULL)
+	{
+		TypeAndCheckBinaryOp(opNode, numErrors, numWarnings);
+	}
+	else
+	{
+		TypeAndCheckUnaryOp(opNode, numErrors, numWarnings);
+	}
+}
+
+void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
+{
+	if (opNode == NULL)
+	{
+		return;
+	}
+
+	TreeNode* leftOperand = opNode->children[0];
+	TreeNode* rightOperand = opNode->children[1];
+
+	// Prevents cascading errors.
+	if (leftOperand->expType == Undefined || rightOperand->expType == Undefined)
+	{
+		opNode->expType = Undefined;
+		return;
+	}
+
+	
+
+	std::string opStr(opNode->attr.name);
+
+	switch(BinaryOpStringSwitcher(opStr))
+	{
+	case AddOp:
+	case SubOp:
+	case MulOp:
+	case DivOp:
+	case ModOp:
+	case AddAssOp:
+	case SubAssOp:
+	case MulAssOp:
+	case DivAssOp:
+		// If no errors are raised, the result will be of type int.
+		opNode->expType = Int;		
+
+		if (leftOperand->expType != Int || rightOperand->expType != Int)
+		{
+			/*if (leftOperand->expType != Int && rightOperand->expType != Int)
+			{
+				Error error;
+				error.errorCode = BinaryOperandLhsRhsTypeMismatch;
+				error.errorLineNumber = opNode->lineNumber;
+				error.context0 = opNode->attr.name;
+				error.context1 = ExpTypeToString(leftOperand->expType);
+				error.context2 = ExpTypeToString(rightOperand->expType);
+				PrintError(error, numErrors, numWarnings);
+				opNode->expType = Undefined;
+			}
+			else */
+			if (leftOperand->expType != Int)
+			{
+				Error error;
+				error.errorCode = BinaryOperandLhsTypeMismatch;
+				error.errorLineNumber = opNode->lineNumber;
+				error.context0 = opNode->attr.name;
+				error.context1 = ExpTypeToString(Int);
+				error.context2 = ExpTypeToString(leftOperand->expType);
+				PrintError(error, numErrors, numWarnings);
+				opNode->expType = Undefined;
+			}
+			else if (rightOperand->expType != Int)
+			{
+				Error error;
+				error.errorCode = BinaryOperandRhsTypeMismatch;
+				error.errorLineNumber = opNode->lineNumber;
+				error.context0 = opNode->attr.name;
+				error.context1 = ExpTypeToString(Int);
+				error.context2 = ExpTypeToString(rightOperand->expType);
+				PrintError(error, numErrors, numWarnings);
+				opNode->expType = Undefined;
+			}
+		}
+
+		if (leftOperand->isArray || rightOperand->isArray)
+		{
+			Error error;
+			error.errorCode = InvalidArrayOperation;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		break;
+	case AndOp:
+	case OrOp:
+		// If no errors are raised, the result will be of type bool.
+		opNode->expType = Bool;
+
+		if (leftOperand->expType != Bool)
+		{			
+			Error error;
+			error.errorCode = BinaryOperandLhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(Bool);
+			error.context2 = ExpTypeToString(leftOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		if (rightOperand->expType != Bool)
+		{
+			Error error;
+			error.errorCode = BinaryOperandRhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(Bool);
+			error.context2 = ExpTypeToString(rightOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		break;
+	case AssignOp:
+		// If no errors are raised, the result will be the type of the left operand.
+		opNode->expType = leftOperand->expType;
+
+		if (leftOperand->expType != rightOperand->expType)
+		{
+			Error error;
+			error.errorCode = BinaryOperandLhsRhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(leftOperand->expType);
+			error.context2 = ExpTypeToString(rightOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		// If either operand is an array we need to check further.
+		if (leftOperand->isArray || rightOperand->isArray)
+		{
+			// If no errors are raised, the result will be the type of the left operand.
+			opNode->isArray = leftOperand->isArray;
+
+			// If one is an array and the other isn't.
+			if (leftOperand->isArray ^ rightOperand->isArray)
+			{
+				Error error;
+				error.errorCode = BothOrNeitherArrayRequired;
+				error.errorLineNumber = opNode->lineNumber;
+				error.context0 = opNode->attr.name;
+				PrintError(error, numErrors, numWarnings);
+				opNode->expType = Undefined;
+			}
+		}
+
+		break;
+	case EqOp:
+	case NotEqOp:
+		// If no errors are raised, the result will be of type bool.
+		opNode->expType = Bool;
+
+		if (leftOperand->expType != rightOperand->expType)
+		{
+			Error error;
+			error.errorCode = BinaryOperandLhsRhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(leftOperand->expType);
+			error.context2 = ExpTypeToString(rightOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		// If either operand is an array we need to check further.
+		if (leftOperand->isArray || rightOperand->isArray)
+		{
+			// If one is an array and the other isn't.
+			if (leftOperand->isArray ^ rightOperand->isArray)
+			{
+				Error error;
+				error.errorCode = BothOrNeitherArrayRequired;
+				error.errorLineNumber = opNode->lineNumber;
+				error.context0 = opNode->attr.name;
+				PrintError(error, numErrors, numWarnings);
+				opNode->expType = Undefined;
+			}
+		}
+
+		break;
+	case LsThanOp:
+	case GrThanOp:
+	case LsEqOp:
+	case GrtEqOp:
+		// If no errors are raised, the result will be of type bool.
+		opNode->expType = Bool;
+
+		if (leftOperand->expType != rightOperand->expType)
+		{
+			Error error;
+			error.errorCode = BinaryOperandLhsRhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(leftOperand->expType);
+			error.context2 = ExpTypeToString(rightOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+			break;
+		}
+
+		if (leftOperand->expType != Int && leftOperand->expType != Char)
+		{
+			Error error;
+			error.errorCode = BinaryOperandLhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(IntOrChar);
+			error.context2 = ExpTypeToString(leftOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		if (rightOperand->expType != Int && rightOperand->expType != Char)
+		{
+			Error error;
+			error.errorCode = BinaryOperandRhsTypeMismatch;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			error.context1 = ExpTypeToString(IntOrChar);
+			error.context2 = ExpTypeToString(rightOperand->expType);
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		if (leftOperand->isArray || rightOperand->isArray)
+		{
+			Error error;
+			error.errorCode = InvalidArrayOperation;
+			error.errorLineNumber = opNode->lineNumber;
+			error.context0 = opNode->attr.name;
+			PrintError(error, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		break;
+	case IndexOp:
+		// If no errors are raised, the result will be the type of the left operand.
+		opNode->expType = leftOperand->expType;		
+
+		if (!leftOperand->isArray)
+		{
+			if (StrEq(leftOperand->attr.name, "["))
+			{
+				Error e;
+				e.errorCode = IndexNonArrayUnknown;
+				e.errorLineNumber = opNode->lineNumber;
+				PrintError(e, numErrors, numWarnings);
+				//opNode->expType = Undefined;
+			}
+			else
+			{
+				Error e;
+				e.errorCode = IndexNonArrayKnown;
+				e.errorLineNumber = opNode->lineNumber;
+				e.context0 = leftOperand->attr.name;
+				PrintError(e, numErrors, numWarnings);
+				//opNode->expType = Undefined;
+			}
+		}
+		
+		// We just indexed the array, therefore it is no longer an array.
+		leftOperand->isArray = false;
+
+		break;
+	case UnknownBOp:
+		printf("Unknown binary op detected: '%s'.\n", opNode->attr.name);
+		break;
+	default:
+		printf("Default case of binary op check hit.\n");
+	}
+}
+
+void TypeAndCheckUnaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
+{
+	if (opNode == NULL)
+	{
+		return;
+	}
+
+	TreeNode* operand = opNode->children[0];
+
+	// Prevent cascading errors.
+	if (operand->expType == Undefined)
+	{
+		opNode->expType = Undefined;
+		return;
+	}
+
+	std::string opStr(opNode->attr.name);
+
+	switch (UnaryOpStringSwitcher(opStr))
+	{
+	case IncOp:
+	case DecOp:
+	case NegOp:
+	case QMarkOp:
+		// If no errors are raised, the op gets type int.
+		opNode->expType = Int;
+
+		if (operand->expType != Int)
+		{
+			Error e;
+			e.errorCode = UnaryOperandTypeMismatch;
+			e.errorLineNumber = opNode->lineNumber;
+			e.context0 = opNode->attr.name;
+			e.context1 = ExpTypeToString(Int);
+			e.context2 = ExpTypeToString(operand->expType);
+			PrintError(e, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		if (operand->isArray)
+		{
+			Error e;
+			e.errorCode = InvalidArrayOperation;
+			e.errorLineNumber = opNode->lineNumber;
+			e.context0 = opNode->attr.name;
+			PrintError(e, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		break;
+	case StarOp:
+		// If no errors are raised, the op gets type int.
+		opNode->expType = Int;
+
+		if (!operand->isArray)
+		{
+			Error e;
+			e.errorCode = ArrayOnlyOperation;
+			e.errorLineNumber = opNode->lineNumber;
+			e.context0 = opNode->attr.name;
+			PrintError(e, numErrors, numWarnings);
+			//opNode->expType = Undefined;
+		}
+
+		break;
+
+	case NotOp:
+		// If no errors are raised, the op gets type bool.
+		opNode->expType = Bool;
+
+		if (operand->expType != Bool)
+		{
+			Error e;
+			e.errorCode = UnaryOperandTypeMismatch;
+			e.errorLineNumber = opNode->lineNumber;
+			e.context0 = opNode->attr.name;
+			e.context1 = ExpTypeToString(Bool);
+			e.context2 = ExpTypeToString(operand->expType);
+			opNode->expType = Undefined;
+		}
+
+		if (operand->isArray)
+		{
+			Error e;
+			e.errorCode = InvalidArrayOperation;
+			e.errorLineNumber = opNode->lineNumber;
+			e.context0 = opNode->attr.name;
+			PrintError(e, numErrors, numWarnings);
+			opNode->expType = Undefined;
+		}
+
+		break;
+	case UnknownUOp:
+		printf("Unknown unary op detected: '%s'.\n", opNode->attr.name);
+		break;
+	default:
+		printf("Default case of unary op check hit.\n");
+	}
+}
+
 void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 {
-	ExpType left = Undefined, right = Undefined, expectedLeft = Undefined,
-		expectedRight = Undefined, returnType = Undefined;
-
-	bool isBinary = false, isLeftArray = false, isRightArray = false, oneSidedErrors = false;
-
-	bool leftError = false, rightError = false;
 
 	TreeNode* found = NULL;
-	TreeNode* leftNode = NULL;
-	TreeNode* rightNode = NULL;
 
 	switch (node->kind.exp)
 	{
@@ -414,272 +796,9 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			ScopeAndType(node->children[i], numErrors, numWarnings);
 		}
-
-		leftNode = node->children[0];
-		rightNode = node->children[1];
-
-		if (leftNode != NULL)
-		{
-			if (leftNode->expType != Undefined)
-			{
-				left = leftNode->expType;
-			}
-
-			isLeftArray = leftNode->isArray;
-
-			if (StrEq(node->attr.name, "["))
-			{
-				if (!leftNode->isArray)
-				{
-					Error error;
-					error.errorCode = IndexNonArrayKnown;
-					error.errorLineNumber = node->lineNumber;
-					error.context0 = node->children[0]->attr.name;
-					PrintError(error, numErrors, numWarnings);
-				}
-			}
-
-			if (StrEq(node->attr.name, "*"))
-			{
-				if (!leftNode->isArray && rightNode == NULL)
-				{
-					Error error;
-					error.errorCode = ArrayOnlyOperation;
-					error.errorLineNumber = node->lineNumber;
-					error.context0 = node->attr.name;
-					PrintError(error, numErrors, numWarnings);
-				}
-			}
-
-			if (leftNode->nodeKind == ExpK)
-			{
-				if (leftNode->kind.exp == CallK)
-				{
-					isLeftArray = false;
-				}
-
-				// What if it's const?
-			}
-		}
-
-		if (rightNode != NULL)
-		{
-			if (rightNode->expType != Undefined)
-			{
-				right = rightNode->expType;
-			}
-
-			isRightArray = rightNode->isArray;
-
-			if (rightNode->children[0] != NULL)
-			{
-				isRightArray = false;
-			}
-
-			if (rightNode->nodeKind == ExpK)
-			{
-				if (rightNode->kind.exp == CallK)
-				{
-					isRightArray = false;
-				}
-
-				// What if it's const?
-			}
-
-			isBinary = true;
-		}
-
-		TypeCheck(node->attr.name, isBinary, oneSidedErrors, expectedLeft, expectedRight, returnType);
-
-		if (left == Void && !(leftNode->nodeKind == ExpK && leftNode->kind.exp == CallK))
-		{
-			leftError = true;
-		}
-		if (right == Void && !(rightNode->nodeKind == ExpK && rightNode->kind.exp == CallK))
-		{
-			rightError = true;
-		}
-
-		if (!isBinary && !leftError)
-		{
-
-			if (left != expectedLeft && expectedLeft != Undefined)
-			{
-				Error error;
-				error.errorCode = UnaryOperandTypeMismatch;
-				error.errorLineNumber = node->lineNumber;
-				error.context0 = node->attr.name;
-				error.context1 = ExpTypeToString(expectedLeft);
-				error.context2 = ExpTypeToString(left);
-				PrintError(error, numErrors, numWarnings);
-			}
-
-			if (isLeftArray)
-			{
-				if (!StrEq(node->attr.name, "*"))
-				{
-					if (left != expectedLeft)
-					{
-						Error error;
-						error.errorCode = UnaryOperandTypeMismatch;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						error.context1 = ExpTypeToString(expectedLeft);
-						error.context2 = ExpTypeToString(left);
-						PrintError(error, numErrors, numWarnings);
-					}
-					else
-					{
-						if (left != expectedLeft)
-						{
-							Error error;
-							error.errorCode = InvalidArrayOperation;
-							error.errorLineNumber = node->lineNumber;
-							error.context0 = node->attr.name;
-							PrintError(error, numErrors, numWarnings);
-						}
-
-					}
-
-				}
-				else if (StrEq(node->attr.name, "*"))
-				{
-					if (!symbolTable.lookup(leftNode->attr.name) || !leftNode->isArray)
-					{
-						Error error;
-						error.errorCode = ArrayOnlyOperation;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						PrintError(error, numErrors, numWarnings);
-					}
-				}
-
-				if (StrEq(node->attr.name, "?"))
-				{
-					Error error;
-					error.errorCode = InvalidArrayOperation;
-					error.errorLineNumber = node->lineNumber;
-					error.context0 = node->attr.name;
-					PrintError(error, numErrors, numWarnings);
-				}
-			}
-		}
-		else
-		{
-			//printf("binary op %s; left = %s, right = %s\n", node->attr.name, ExpTypeToString(left), ExpTypeToString(right));
-			//printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
-			if (!oneSidedErrors)
-			{
-				if (left != right && !leftError && !rightError && !StrEq(node->attr.name, "["))
-				{
-					Error error;
-					error.errorCode = BinaryOperandLhsRhsTypeMismatch;
-					error.errorLineNumber = node->lineNumber;
-					error.context0 = node->attr.name;
-					error.context1 = ExpTypeToString(leftNode->expType);
-					error.context2 = ExpTypeToString(rightNode->expType);
-					PrintError(error, numErrors, numWarnings);
-				}
-				else if (StrEq(node->attr.name, "[") && right != Int)
-				{
-
-					if (rightNode->isArray && !StrEq(node->attr.name, "["))
-					{
-						Error error;
-						error.errorCode = ArrayIndexUnindexedArray;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = rightNode->attr.name;
-						PrintError(error, numErrors, numWarnings);
-					}
-					else if (right != Int)
-					{
-						Error error;
-						error.errorCode = ArrayIndexTypeNotInt;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = leftNode->attr.name;
-						error.context1 = ExpTypeToString(right);
-						PrintError(error, numErrors, numWarnings);
-					}
-				}
-			}
-
-			if (!(expectedLeft == Undefined || expectedRight == Undefined))
-			{
-				if (expectedLeft == IntOrChar || expectedRight == IntOrChar)
-				{
-					// Handle errors on comparisons that take ints or chars.
-				}
-				else
-				{
-					if (left != expectedLeft && !leftError && left != Undefined)
-					{
-						Error error;
-						error.errorCode = BinaryOperandLhsTypeMismatch;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						error.context1 = ExpTypeToString(expectedLeft);
-						error.context2 = ExpTypeToString(left);
-						PrintError(error, numErrors, numWarnings);
-					}
-
-					if (right != expectedRight && !rightError && right != Undefined)
-					{
-						Error error;
-						error.errorCode = BinaryOperandRhsTypeMismatch;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						error.context1 = ExpTypeToString(expectedRight);
-						error.context2 = ExpTypeToString(right);
-						PrintError(error, numErrors, numWarnings);
-					}
-				}
-			}
-
-			if (isLeftArray || isRightArray)
-			{
-				// printf("node %s at line %d\n", node->attr.name, node->lineNumber);
-				// printf("left = %s, expectedLeft = %s; right = %s, expectedRight = %s\n", ExpTypeToString(left), ExpTypeToString(expectedLeft), ExpTypeToString(right), ExpTypeToString(expectedRight));
-				// printf("left is array = %d; right is array = %d\n", leftNode->isArray, rightNode->isArray);
-
-				if (!leftError || !rightError)
-				{
-					if (isLeftArray != isRightArray)
-					{
-						Error error;
-						error.errorCode = BothOrNeitherArrayRequired;
-						error.errorLineNumber = node->lineNumber;
-						error.context0 = node->attr.name;
-						PrintError(error, numErrors, numWarnings);
-					}
-				}
-				
-				if (expectedLeft != Undefined)
-				{
-					if (leftNode != NULL)
-					{
-						if (!StrEq(node->attr.name, "["))
-						{
-							// printf("FLAG1\n");
-							// printf("child node %s\n", leftNode->attr.name);
-							Error error;
-							error.errorCode = InvalidArrayOperation;
-							error.errorLineNumber = node->lineNumber;
-							error.context0 = node->attr.name;
-							PrintError(error, numErrors, numWarnings);
-						}
-					}
-				}
-			}
-		}		
-
-		if (returnType != Undefined)
-		{
-			node->expType = returnType;
-		}
-		else
-		{
-			node->expType = left;
-		}
+		
+		TypeAndCheck(node, numErrors, numWarnings);
+		
 		break;
 	case ConstK:
 		for (int i = 0; i < 3; i++)
@@ -905,80 +1024,6 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 		}
 		break;
-	}
-}
-
-void TypeCheck(char* op, bool isBinary, bool& oneSidedErrors, ExpType& left, ExpType& right, ExpType& ret)
-{
-	std::string opStr(op);
-	oneSidedErrors = false;
-
-	if (isBinary)
-	{
-		switch (BinaryOpStringSwitcher(opStr))
-		{
-			/* Left, Right: ReturnType */
-			// Int, Int: Int
-		case AddOp:
-		case SubOp:
-		case MulOp:
-		case DivOp:
-		case ModOp:
-		case AddAssOp:
-		case SubAssOp:
-		case MulAssOp:
-		case DivAssOp:
-			left = right = ret = Int;
-			oneSidedErrors = true;
-			break;
-			// Bool, Bool: Bool
-		case AndOp:
-		case OrOp:
-			left = right = ret = Bool;
-			oneSidedErrors = true;
-			break;
-			// Undefined, Undefined: Undefined
-		case AssignOp:
-			left = right = ret = Undefined;
-			break;
-			// Undefined, Undefined: Bool
-		case EqOp:
-		case NotEqOp:
-			left = right = Undefined;
-			ret = Bool;
-			break;
-		case LsThanOp:
-		case GrThanOp:
-		case LsEqOp:
-		case GrtEqOp:
-			left = right = IntOrChar;
-			ret = Bool;
-			break;
-		case IndexOp:
-			left = Undefined;
-			right = Int;
-			ret = Undefined;
-			break;
-		}
-	}
-	else
-	{
-		switch (UnaryOpStringSwitcher(opStr))
-		{
-		case IncOp:
-		case DecOp:
-		case NegOp:
-		case QMarkOp:
-			left = right = ret = Int;
-			break;
-		case NotOp:
-			left = right = ret = Bool;
-			break;
-		case StarOp:
-			left = right = Undefined;
-			ret = Int;
-			break;
-		}
 	}
 }
 

@@ -833,7 +833,6 @@ mutable			:	ID
 						
 						$$->children[0] = $1;						
 						$$->children[1] = $3;
-						$$->isArray = true;
 					}
 				|	mutable DOT ID
 					{

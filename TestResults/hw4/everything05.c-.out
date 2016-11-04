@@ -1,19 +1,2 @@
-ERROR(38): '[' requires that either both or neither operands be arrays.
-ERROR(38): '=' requires that either both or neither operands be arrays.
-ERROR(39): '[' requires that either both or neither operands be arrays.
-ERROR(39): '<' requires that either both or neither operands be arrays.
-ERROR(39): The operation '<' does not work with arrays.
-ERROR(60): '[' requires that either both or neither operands be arrays.
-ERROR(60): '=' requires that either both or neither operands be arrays.
-ERROR(62): '[' requires that either both or neither operands be arrays.
-ERROR(62): '=' requires that either both or neither operands be arrays.
-ERROR(70): '[' requires that either both or neither operands be arrays.
-ERROR(70): '[' requires that either both or neither operands be arrays.
-ERROR(81): '[' requires that either both or neither operands be arrays.
-ERROR(83): '[' requires that either both or neither operands be arrays.
-ERROR(83): '[' requires that either both or neither operands be arrays.
-ERROR(83): '>=' requires that either both or neither operands be arrays.
-ERROR(83): The operation '>=' does not work with arrays.
-ERROR(96): '[' requires that either both or neither operands be arrays.
 Number of warnings: 0
-Number of errors: 17
+Number of errors: 0

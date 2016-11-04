@@ -1,8 +1,2 @@
-ERROR(64): '[' requires that either both or neither operands be arrays.
-ERROR(64): '=' requires that either both or neither operands be arrays.
-ERROR(65): '[' requires that either both or neither operands be arrays.
-ERROR(65): '=' requires that either both or neither operands be arrays.
-ERROR(132): '[' requires that either both or neither operands be arrays.
-ERROR(132): '[' requires that either both or neither operands be arrays.
 Number of warnings: 0
-Number of errors: 6
+Number of errors: 0

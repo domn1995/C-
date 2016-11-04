@@ -88,7 +88,7 @@ char* ExpTypeToString(ExpType expType)
 		case Undefined:
 			return strdup("undefined");
 		case IntOrChar:
-			return strdup("intorchar");
+			return strdup("char or type int");
 		default:
 			return strdup("UNKNOWN_TYPE");
 	}

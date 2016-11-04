@@ -9,6 +9,7 @@ ERROR(17): Symbol 'z' is not defined.
 ERROR(18): Cannot use function 'main' as a variable.
 ERROR(19): Cannot index nonarray 'x'.
 ERROR(20): Array 'y' should be indexed by type int but got type char.
+ERROR(23): Cannot index nonarray '['.
 ERROR(24): Cannot use function 'main' as a variable.
 ERROR(25): Cannot use function 'main' as a variable.
 ERROR(25): Cannot index nonarray 'main'.
@@ -20,7 +21,6 @@ ERROR(30): Too few parameters passed for function 'main' defined on line 7.
 ERROR(30): The operation '*' only works with arrays.
 ERROR(31): Unary '?' requires an operand of type int but was given type char.
 ERROR(31): Unary '?' requires an operand of type int but was given type bool.
-ERROR(32): The operation '*' does not work with arrays.
 ERROR(33): Too few parameters passed for function 'main' defined on line 7.
 ERROR(33): Function 'fred' is not defined.
 ERROR(33): 'and' requires operands of type bool but lhs is of type int.

@@ -1,11 +1,4 @@
-ERROR(4): '+' requires that either both or neither operands be arrays.
 ERROR(4): The operation '+' does not work with arrays.
-ERROR(4): '[' requires that either both or neither operands be arrays.
-ERROR(5): '=' requires that either both or neither operands be arrays.
-ERROR(5): '[' requires that either both or neither operands be arrays.
-ERROR(6): '[' requires that either both or neither operands be arrays.
-ERROR(6): '[' requires that either both or neither operands be arrays.
-ERROR(6): '=' requires that either both or neither operands be arrays.
-ERROR(7): '=' requires that either both or neither operands be arrays.
+ERROR(6): Cannot index nonarray '['.
 Number of warnings: 0
-Number of errors: 9
+Number of errors: 2

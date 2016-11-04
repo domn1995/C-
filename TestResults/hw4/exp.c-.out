@@ -1,51 +1,14 @@
 ERROR(26): 'and' requires operands of type bool but rhs is of type int.
 ERROR(26): 'or' requires operands of type bool but rhs is of type int.
-ERROR(32): '[' requires that either both or neither operands be arrays.
-ERROR(33): '[' requires that either both or neither operands be arrays.
-ERROR(33): '=' requires that either both or neither operands be arrays.
-ERROR(34): '[' requires that either both or neither operands be arrays.
-ERROR(34): '[' requires that either both or neither operands be arrays.
-ERROR(34): '=' requires that either both or neither operands be arrays.
-ERROR(35): '[' requires that either both or neither operands be arrays.
-ERROR(35): '[' requires that either both or neither operands be arrays.
-ERROR(35): '[' requires that either both or neither operands be arrays.
 ERROR(35): '+' requires operands of type int but lhs is of type bool.
 ERROR(35): '+' requires operands of type int but rhs is of type bool.
-ERROR(35): '+' requires that either both or neither operands be arrays.
-ERROR(35): The operation '+' does not work with arrays.
 ERROR(35): '=' requires operands of the same type but lhs is type bool and rhs is type int.
-ERROR(35): '=' requires that either both or neither operands be arrays.
 ERROR(40): Symbol 'x' is not defined.
-ERROR(40): '[' requires that either both or neither operands be arrays.
 ERROR(40): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
-ERROR(41): '[' requires that either both or neither operands be arrays.
 ERROR(41): Symbol 'x' is not defined.
 ERROR(41): '=' requires operands of the same type but lhs is type int and rhs is type undefined.
-ERROR(41): '=' requires that either both or neither operands be arrays.
-ERROR(42): '[' requires that either both or neither operands be arrays.
-ERROR(42): '[' requires that either both or neither operands be arrays.
-ERROR(42): '=' requires that either both or neither operands be arrays.
-ERROR(43): '[' requires that either both or neither operands be arrays.
-ERROR(43): '[' requires that either both or neither operands be arrays.
-ERROR(43): '[' requires that either both or neither operands be arrays.
-ERROR(43): '+' requires that either both or neither operands be arrays.
-ERROR(43): The operation '+' does not work with arrays.
-ERROR(43): '=' requires that either both or neither operands be arrays.
 ERROR(44): Symbol 'x' is not defined.
-ERROR(44): '[' requires that either both or neither operands be arrays.
-ERROR(44): '[' requires that either both or neither operands be arrays.
-ERROR(44): '[' requires that either both or neither operands be arrays.
-ERROR(44): '*' requires that either both or neither operands be arrays.
-ERROR(44): The operation '*' does not work with arrays.
-ERROR(44): '+' requires that either both or neither operands be arrays.
-ERROR(44): The operation '+' does not work with arrays.
-ERROR(44): '[' requires that either both or neither operands be arrays.
-ERROR(44): '*' requires that either both or neither operands be arrays.
-ERROR(44): The operation '*' does not work with arrays.
 ERROR(44): Symbol 'x' is not defined.
-ERROR(44): '[' requires that either both or neither operands be arrays.
-ERROR(44): '+' requires that either both or neither operands be arrays.
-ERROR(44): The operation '+' does not work with arrays.
 ERROR(44): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
 Number of warnings: 0
-Number of errors: 49
+Number of errors: 12
