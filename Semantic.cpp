@@ -1123,7 +1123,7 @@ void PrintError(Error e, int& numErrors, int& numWarnings)
 			printf("ERROR(%d): Function '%s' at line %d is expecting to return type %s but return has no return value.\n", e.errorLineNumber, e.context0, e.expressionLineNumber, e.context1);
 			break;
 		case BreakOutsideOfLoop:
-			printf("ERROR(%d): Cannot have a break statement out of loop.\n", e.errorLineNumber);
+			printf("ERROR(%d): Cannot have a break statement outside of loop.\n", e.errorLineNumber);
 			break;
 		case InitializerNotConstant:
 			printf("ERROR(%d): Initializer for variable '%s' is not a constant expression.\n", e.errorLineNumber, e.context0);

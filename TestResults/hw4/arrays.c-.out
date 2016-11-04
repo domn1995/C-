@@ -1,0 +1,24 @@
+ERROR(14): '=' requires operands of the same type but lhs is type int and rhs is type char.
+ERROR(15): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+ERROR(21): '=' requires operands of the same type but lhs is type int and rhs is type char.
+ERROR(22): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+ERROR(27): '=' requires operands of the same type but lhs is type int and rhs is type char.
+ERROR(28): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+ERROR(30): '==' requires operands of the same type but lhs is type int and rhs is type bool.
+ERROR(31): '==' requires operands of the same type but lhs is type bool and rhs is type int.
+ERROR(33): '!=' requires operands of the same type but lhs is type int and rhs is type bool.
+ERROR(34): '!=' requires operands of the same type but lhs is type bool and rhs is type int.
+ERROR(36): The operation '>' does not work with arrays.
+ERROR(37): The operation '<' does not work with arrays.
+ERROR(38): The operation '>=' does not work with arrays.
+ERROR(39): The operation '<=' does not work with arrays.
+ERROR(43): The operation '>' does not work with arrays.
+ERROR(44): The operation '>' does not work with arrays.
+ERROR(46): The operation '?' does not work with arrays.
+ERROR(49): The operation '*' only works with arrays.
+ERROR(50): Cannot index nonarray 'x'.
+ERROR(51): Cannot index nonarray 'x'.
+ERROR(51): The operation '*' only works with arrays.
+ERROR(53): The operation '*' only works with arrays.
+Number of warnings: 0
+Number of errors: 22

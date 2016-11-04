@@ -1,0 +1,5 @@
+ERROR(32): Cannot return an array.
+ERROR(102): The operation '<' does not work with arrays.
+ERROR(102): The operation '>' does not work with arrays.
+Number of warnings: 0
+Number of errors: 3

@@ -1,0 +1,2226 @@
+./c- -0 ./TestFiles/hw4/arrays2.c- > TestResults/hw4/arrays2.c-.out
+diff TestResults/hw4/arrays2.c-.out TestFiles/hw4/arrays2.out
+0a1,4
+> ERROR(9): '=' requires that either both or neither operands be arrays.
+> ERROR(10): '=' requires that either both or neither operands be arrays.
+> ERROR(15): '=' requires that either both or neither operands be arrays.
+> ERROR(16): '=' requires that either both or neither operands be arrays.
+2a7
+> ERROR(21): '=' requires that either both or neither operands be arrays.
+3a9
+> ERROR(22): '=' requires that either both or neither operands be arrays.
+8c14
+< Number of errors: 6
+---
+> Number of errors: 12
+./c- -0 ./TestFiles/hw4/arrays.c- > TestResults/hw4/arrays.c-.out
+diff TestResults/hw4/arrays.c-.out TestFiles/hw4/arrays.out
+2a3,6
+> ERROR(16): '=' requires that either both or neither operands be arrays.
+> ERROR(18): '=' requires that either both or neither operands be arrays.
+> ERROR(19): '=' requires that either both or neither operands be arrays.
+> ERROR(20): '=' requires that either both or neither operands be arrays.
+3a8
+> ERROR(21): '=' requires that either both or neither operands be arrays.
+4a10,13
+> ERROR(22): '=' requires that either both or neither operands be arrays.
+> ERROR(24): '=' requires that either both or neither operands be arrays.
+> ERROR(25): '=' requires that either both or neither operands be arrays.
+> ERROR(26): '=' requires that either both or neither operands be arrays.
+5a15
+> ERROR(27): '=' requires that either both or neither operands be arrays.
+6a17
+> ERROR(28): '=' requires that either both or neither operands be arrays.
+7a19
+> ERROR(30): '==' requires that either both or neither operands be arrays.
+8a21
+> ERROR(31): '==' requires that either both or neither operands be arrays.
+9a23
+> ERROR(33): '!=' requires that either both or neither operands be arrays.
+10a25
+> ERROR(34): '!=' requires that either both or neither operands be arrays.
+24c39
+< Number of errors: 22
+---
+> Number of errors: 37
+./c- -0 ./TestFiles/hw4/basicAll4.c- > TestResults/hw4/basicAll4.c-.out
+diff TestResults/hw4/basicAll4.c-.out TestFiles/hw4/basicAll4.out
+27c27
+< ERROR(83): Cannot have a break statement out of loop.
+---
+> ERROR(83): Cannot have a break statement outside of loop.
+53d52
+< ERROR(105): 'and' requires operands of type bool but rhs is of type undefined.
+69d67
+< ERROR(115): Array 'aa' should be indexed by type int but got type char.
+70a69
+> ERROR(117): Array index is the unindexed array 'aa'.
+74d72
+< ERROR(120): Array 'aa' should be indexed by type int but got type undefined.
+78d75
+< ERROR(124): '/' requires operands of type int but lhs is of type undefined.
+79a77
+> ERROR(126): Function 'flight' is not defined.
+86d83
+< ERROR(126): Function 'flight' is not defined.
+95c92
+< ERROR(138): Expecting array in paremeter 1 of call to 'ibex' defined on line 39.
+---
+> ERROR(138): Expecting array in parameter 1 of call to 'ibex' defined on line 39.
+102a100
+> ERROR(146): Array index is the unindexed array 'zz'.
+108d105
+< ERROR(150): Array 'aa' should be indexed by type int but got type void.
+111c108
+< ERROR(153): '=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(153): '=' requires operands of NONVOID but rhs is of type void.
+130a128
+> ERROR(166): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+134,135d131
+< ERROR(166): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+< ERROR(166): Expecting type char in parameter 2 of call to 'emu' defined on line 50 but got type undefined.
+136a133
+> ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type bool.
+137a135
+> ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+141,142d138
+< ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+< ERROR(167): Expecting type char in parameter 2 of call to 'emu' defined on line 50 but got type undefined.
+145,146d140
+< ERROR(167): '*' requires operands of type int but lhs is of type char.
+< ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type bool.
+149a144
+> ERROR(167): '*' requires operands of type int but lhs is of type char.
+152c147
+< Number of errors: 148
+---
+> Number of errors: 143
+./c- -0 ./TestFiles/hw4/basicExtra.c- > TestResults/hw4/basicExtra.c-.out
+diff TestResults/hw4/basicExtra.c-.out TestFiles/hw4/basicExtra.out
+1a2,3
+> ERROR(15): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(15): '<' requires operands of type char or type int but rhs is of type bool.
+3a6,7
+> ERROR(19): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(19): '<' requires operands of type char or type int but rhs is of type bool.
+10,11c14,17
+< ERROR(28): '<' requires operands of the same type but lhs is type void and rhs is type char.
+< ERROR(29): '<' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(26): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(26): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(28): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(29): '<' requires operands of type char or type int but rhs is of type void.
+13d18
+< ERROR(31): '+' requires operands of type int but rhs is of type undefined.
+15d19
+< ERROR(32): '+' requires operands of type int but lhs is of type undefined.
+18,19d21
+< ERROR(33): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(33): '+' requires operands of type int but rhs is of type undefined.
+21d22
+< ERROR(34): '+' requires operands of type int but lhs is of type undefined.
+23d23
+< ERROR(35): '+' requires operands of type int but lhs is of type void.
+./c- -0 ./TestFiles/hw4/battleship.c- > TestResults/hw4/battleship.c-.out
+diff TestResults/hw4/battleship.c-.out TestFiles/hw4/battleship.out
+./c- -0 ./TestFiles/hw4/bullsandcows.c- > TestResults/hw4/bullsandcows.c-.out
+diff TestResults/hw4/bullsandcows.c-.out TestFiles/hw4/bullsandcows.out
+1,3d0
+< ERROR(32): Cannot return an array.
+< ERROR(102): The operation '<' does not work with arrays.
+< ERROR(102): The operation '>' does not work with arrays.
+5c2
+< Number of errors: 3
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/call4.c- > TestResults/hw4/call4.c-.out
+diff TestResults/hw4/call4.c-.out TestFiles/hw4/call4.out
+4,5c4,5
+< ERROR(11): Too few parameters passed for function 'check2' defined on line 2.
+< ERROR(18): Too many parameters passed for function 'check2' defined on line 2.
+---
+> ERROR(10): Too few parameters passed for function 'check2' defined on line 2.
+> ERROR(15): Too many parameters passed for function 'check2' defined on line 2.
+9c9,11
+< ERROR(20): Expecting array in paremeter 1 of call to 'ski' defined on line 5.
+---
+> ERROR(20): '=' requires that either both or neither operands be arrays.
+> ERROR(20): Array index is an unindexed array.
+> ERROR(20): Expecting array in parameter 1 of call to 'ski' defined on line 5.
+12c14
+< Number of errors: 9
+---
+> Number of errors: 11
+./c- -0 ./TestFiles/hw4/call.c- > TestResults/hw4/call.c-.out
+diff TestResults/hw4/call.c-.out TestFiles/hw4/call.out
+./c- -0 ./TestFiles/hw4/err.c- > TestResults/hw4/err.c-.out
+diff TestResults/hw4/err.c-.out TestFiles/hw4/err.out
+1a2,5
+> ERROR(5): '=' requires that either both or neither operands be arrays.
+> ERROR(5): Array index is an unindexed array.
+> ERROR(6): Cannot index nonarray.
+> ERROR(7): '=' requires that either both or neither operands be arrays.
+3c7
+< Number of errors: 1
+---
+> Number of errors: 5
+./c- -0 ./TestFiles/hw4/errorloc.c- > TestResults/hw4/errorloc.c-.out
+diff TestResults/hw4/errorloc.c-.out TestFiles/hw4/errorloc.out
+2,3c2,3
+< ERROR(16): Variable 'y' is of type int but is being initialized with an expression of type bool.
+< ERROR(23): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(15): Variable 'y' is of type int but is being initialized with an expression of type bool.
+> ERROR(21): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+6d5
+< ERROR(35): Cannot return an array.
+8,14c7,15
+< ERROR(42): '*' requires operands of type int but rhs is of type bool.
+< ERROR(44): Cannot have a break statement out of loop.
+< ERROR(48): The operation '*' only works with arrays.
+< ERROR(50): Unary '?' requires an operand of type int but was given type char.
+< ERROR(54): Function 'emu' is not defined.
+< ERROR(60): Too few parameters passed for function 'dog' defined on line 3.
+< ERROR(61): '+' requires operands of type int but rhs is of type char.
+---
+> ERROR(35): Cannot return an array.
+> ERROR(41): '*' requires operands of type int but rhs is of type bool.
+> ERROR(39): '=' requires that either both or neither operands be arrays.
+> ERROR(44): Cannot have a break statement outside of loop.
+> ERROR(46): The operation '*' only works with arrays.
+> ERROR(49): Unary '?' requires an operand of type int but was given type char.
+> ERROR(52): Function 'emu' is not defined.
+> ERROR(58): Too few parameters passed for function 'dog' defined on line 3.
+> ERROR(57): '+' requires operands of type int but rhs is of type char.
+16c17
+< Number of errors: 14
+---
+> Number of errors: 15
+./c- -0 ./TestFiles/hw4/errormessages.c- > TestResults/hw4/errormessages.c-.out
+diff TestResults/hw4/errormessages.c-.out TestFiles/hw4/errormessages.out
+9,10d8
+< ERROR(17): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(17): '+' requires operands of type int but rhs is of type undefined.
+13c11
+< Number of errors: 10
+---
+> Number of errors: 8
+./c- -0 ./TestFiles/hw4/everything05.c- > TestResults/hw4/everything05.c-.out
+diff TestResults/hw4/everything05.c-.out TestFiles/hw4/everything05.out
+1,2d0
+< ERROR(39): The operation '<' does not work with arrays.
+< ERROR(83): The operation '>=' does not work with arrays.
+4c2
+< Number of errors: 2
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/exp2.c- > TestResults/hw4/exp2.c-.out
+diff TestResults/hw4/exp2.c-.out TestFiles/hw4/exp2.out
+32d31
+< ERROR(31): The operation '+' does not work with arrays.
+34d32
+< ERROR(36): '=' requires operands of the same type but lhs is type undefined and rhs is type bool.
+36d33
+< ERROR(37): '=' requires operands of the same type but lhs is type bool and rhs is type undefined.
+39d35
+< ERROR(39): The operation '+' does not work with arrays.
+44d39
+< ERROR(40): The operation '*' does not work with arrays.
+46d40
+< ERROR(40): The operation '+' does not work with arrays.
+48d41
+< ERROR(40): The operation '*' does not work with arrays.
+52,54d44
+< ERROR(40): The operation '+' does not work with arrays.
+< ERROR(40): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(40): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+57c47
+< Number of errors: 55
+---
+> Number of errors: 45
+./c- -0 ./TestFiles/hw4/exp.c- > TestResults/hw4/exp.c-.out
+diff TestResults/hw4/exp.c-.out TestFiles/hw4/exp.out
+5d4
+< ERROR(35): The operation '+' does not work with arrays.
+8d6
+< ERROR(40): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+10,11d7
+< ERROR(41): '=' requires operands of the same type but lhs is type int and rhs is type undefined.
+< ERROR(43): The operation '+' does not work with arrays.
+13,15d8
+< ERROR(44): The operation '*' does not work with arrays.
+< ERROR(44): The operation '+' does not work with arrays.
+< ERROR(44): The operation '*' does not work with arrays.
+17,19d9
+< ERROR(44): The operation '+' does not work with arrays.
+< ERROR(44): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(44): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+21c11
+< Number of errors: 19
+---
+> Number of errors: 9
+./c- -0 ./TestFiles/hw4/factor.c- > TestResults/hw4/factor.c-.out
+diff TestResults/hw4/factor.c-.out TestFiles/hw4/factor.out
+./c- -0 ./TestFiles/hw4/factorial2.c- > TestResults/hw4/factorial2.c-.out
+diff TestResults/hw4/factorial2.c-.out TestFiles/hw4/factorial2.out
+./c- -0 ./TestFiles/hw4/factorial.c- > TestResults/hw4/factorial.c-.out
+diff TestResults/hw4/factorial.c-.out TestFiles/hw4/factorial.out
+./c- -0 ./TestFiles/hw4/factorialr.c- > TestResults/hw4/factorialr.c-.out
+diff TestResults/hw4/factorialr.c-.out TestFiles/hw4/factorialr.out
+./c- -0 ./TestFiles/hw4/fractal.c- > TestResults/hw4/fractal.c-.out
+diff TestResults/hw4/fractal.c-.out TestFiles/hw4/fractal.out
+./c- -0 ./TestFiles/hw4/gcd.c- > TestResults/hw4/gcd.c-.out
+diff TestResults/hw4/gcd.c-.out TestFiles/hw4/gcd.out
+./c- -0 ./TestFiles/hw4/gcdsm.c- > TestResults/hw4/gcdsm.c-.out
+diff TestResults/hw4/gcdsm.c-.out TestFiles/hw4/gcdsm.out
+./c- -0 ./TestFiles/hw4/init.c- > TestResults/hw4/init.c-.out
+diff TestResults/hw4/init.c-.out TestFiles/hw4/init.out
+./c- -0 ./TestFiles/hw4/mixed.c- > TestResults/hw4/mixed.c-.out
+diff TestResults/hw4/mixed.c-.out TestFiles/hw4/mixed.out
+2c2
+< ERROR(28): Expecting array in paremeter 2 of call to 'thelma' defined on line 13.
+---
+> ERROR(28): Expecting array in parameter 2 of call to 'thelma' defined on line 13.
+./c- -0 ./TestFiles/hw4/nano.c- > TestResults/hw4/nano.c-.out
+diff TestResults/hw4/nano.c-.out TestFiles/hw4/nano.out
+./c- -0 ./TestFiles/hw4/op.c- > TestResults/hw4/op.c-.out
+diff TestResults/hw4/op.c-.out TestFiles/hw4/op.out
+1c1
+< ERROR(8): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(8): '<' requires operands of type char or type int but rhs is of type bool.
+3,4c3,6
+< ERROR(10): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+< ERROR(12): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(10): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(11): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(11): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(12): '<' requires operands of type char or type int but lhs is of type bool.
+6c8
+< ERROR(14): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(14): '<' requires operands of type char or type int but rhs is of type bool.
+8d9
+< ERROR(17): '<' requires operands of the same type but lhs is type undefined and rhs is type int.
+10c11
+< ERROR(18): '<' requires operands of the same type but lhs is type undefined and rhs is type bool.
+---
+> ERROR(18): '<' requires operands of type char or type int but rhs is of type bool.
+12d12
+< ERROR(19): '<' requires operands of the same type but lhs is type undefined and rhs is type char.
+./c- -0 ./TestFiles/hw4/overkill.c- > TestResults/hw4/overkill.c-.out
+diff TestResults/hw4/overkill.c-.out TestFiles/hw4/overkill.out
+4a5
+> ERROR(27): '!=' requires that either both or neither operands be arrays.
+5a7
+> ERROR(29): '==' requires that either both or neither operands be arrays.
+23a26
+> ERROR(44): '=' requires that either both or neither operands be arrays.
+44a48
+> ERROR(63): '!=' requires that either both or neither operands be arrays.
+47a52
+> ERROR(65): '==' requires that either both or neither operands be arrays.
+78a84
+> ERROR(80): '=' requires that either both or neither operands be arrays.
+80c86
+< ERROR(82): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(82): '<=' requires operands of type char or type int but rhs is of type bool.
+82,84c88,90
+< ERROR(84): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+< ERROR(85): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+< ERROR(86): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(84): '>=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(85): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(86): '>' requires operands of type char or type int but rhs is of type bool.
+98c104,105
+< ERROR(100): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(99): '!=' requires that either both or neither operands be arrays.
+> ERROR(100): '<=' requires operands of type char or type int but rhs is of type bool.
+101c108,109
+< ERROR(102): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(101): '==' requires that either both or neither operands be arrays.
+> ERROR(102): '>=' requires operands of type char or type int but rhs is of type bool.
+103c111
+< ERROR(103): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(103): '<' requires operands of type char or type int but rhs is of type bool.
+105c113
+< ERROR(104): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(104): '>' requires operands of type char or type int but rhs is of type bool.
+130,135c138,144
+< ERROR(117): '!=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(118): '<=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(119): '==' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(120): '>=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(121): '<' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(122): '>' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(116): '=' requires that either both or neither operands be arrays.
+> ERROR(117): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(118): '<=' requires operands of type char or type int but rhs is of type void.
+> ERROR(119): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(120): '>=' requires operands of type char or type int but rhs is of type void.
+> ERROR(121): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(122): '>' requires operands of type char or type int but rhs is of type void.
+149c158,159
+< ERROR(134): '=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(134): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(135): '!=' requires that either both or neither operands be arrays.
+150a161
+> ERROR(137): '==' requires that either both or neither operands be arrays.
+168a180
+> ERROR(152): '=' requires that either both or neither operands be arrays.
+188a201
+> ERROR(171): '!=' requires that either both or neither operands be arrays.
+191a205
+> ERROR(173): '==' requires that either both or neither operands be arrays.
+222a237
+> ERROR(188): '=' requires that either both or neither operands be arrays.
+259c274,275
+< ERROR(208): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(207): '!=' requires that either both or neither operands be arrays.
+> ERROR(208): '<=' requires operands of type char or type int but rhs is of type bool.
+262c278,279
+< ERROR(210): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(209): '==' requires that either both or neither operands be arrays.
+> ERROR(210): '>=' requires operands of type char or type int but rhs is of type bool.
+264c281
+< ERROR(211): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(211): '<' requires operands of type char or type int but rhs is of type bool.
+266c283
+< ERROR(212): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(212): '>' requires operands of type char or type int but rhs is of type bool.
+290a308
+> ERROR(224): '=' requires that either both or neither operands be arrays.
+292c310
+< ERROR(226): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(226): '<=' requires operands of type char or type int but rhs is of type bool.
+295c313
+< ERROR(228): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(228): '>=' requires operands of type char or type int but rhs is of type bool.
+297c315
+< ERROR(229): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(229): '<' requires operands of type char or type int but rhs is of type bool.
+299c317
+< ERROR(230): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(230): '>' requires operands of type char or type int but rhs is of type bool.
+324,325c342,344
+< ERROR(243): '!=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(244): '<=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(243): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(243): '!=' requires that either both or neither operands be arrays.
+> ERROR(244): '<=' requires operands of type char or type int but rhs is of type void.
+327,328c346,348
+< ERROR(245): '==' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(246): '>=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(245): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(245): '==' requires that either both or neither operands be arrays.
+> ERROR(246): '>=' requires operands of type char or type int but rhs is of type void.
+330c350
+< ERROR(247): '<' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(247): '<' requires operands of type char or type int but rhs is of type void.
+332c352
+< ERROR(248): '>' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(248): '>' requires operands of type char or type int but rhs is of type void.
+358c378,379
+< ERROR(260): '=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(260): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(260): '=' requires that either both or neither operands be arrays.
+379a401
+> ERROR(279): '!=' requires that either both or neither operands be arrays.
+382a405
+> ERROR(281): '==' requires that either both or neither operands be arrays.
+413a437
+> ERROR(296): '=' requires that either both or neither operands be arrays.
+435a460
+> ERROR(315): '!=' requires that either both or neither operands be arrays.
+436a462
+> ERROR(317): '==' requires that either both or neither operands be arrays.
+472a499
+> ERROR(332): '=' requires that either both or neither operands be arrays.
+474c501
+< ERROR(334): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(334): '<=' requires operands of type char or type int but rhs is of type bool.
+476,478c503,505
+< ERROR(336): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+< ERROR(337): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+< ERROR(338): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(336): '>=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(337): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(338): '>' requires operands of type char or type int but rhs is of type bool.
+501c528,529
+< ERROR(352): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(351): '!=' requires that either both or neither operands be arrays.
+> ERROR(352): '<=' requires operands of type char or type int but rhs is of type bool.
+504c532,533
+< ERROR(354): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(353): '==' requires that either both or neither operands be arrays.
+> ERROR(354): '>=' requires operands of type char or type int but rhs is of type bool.
+506c535
+< ERROR(355): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(355): '<' requires operands of type char or type int but rhs is of type bool.
+508c537
+< ERROR(356): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(356): '>' requires operands of type char or type int but rhs is of type bool.
+542,547c571,577
+< ERROR(369): '!=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(370): '<=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(371): '==' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(372): '>=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(373): '<' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(374): '>' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(368): '=' requires that either both or neither operands be arrays.
+> ERROR(369): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(370): '<=' requires operands of type char or type int but rhs is of type void.
+> ERROR(371): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(372): '>=' requires operands of type char or type int but rhs is of type void.
+> ERROR(373): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(374): '>' requires operands of type char or type int but rhs is of type void.
+570c600
+< ERROR(386): '=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(386): '=' requires operands of NONVOID but rhs is of type void.
+571a602
+> ERROR(387): '!=' requires that either both or neither operands be arrays.
+574a606
+> ERROR(389): '==' requires that either both or neither operands be arrays.
+605a638
+> ERROR(404): '=' requires that either both or neither operands be arrays.
+640a674
+> ERROR(423): '!=' requires that either both or neither operands be arrays.
+641a676
+> ERROR(425): '==' requires that either both or neither operands be arrays.
+677a713
+> ERROR(440): '=' requires that either both or neither operands be arrays.
+716c752,753
+< ERROR(460): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(459): '!=' requires that either both or neither operands be arrays.
+> ERROR(460): '<=' requires operands of type char or type int but rhs is of type bool.
+719c756,757
+< ERROR(462): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(461): '==' requires that either both or neither operands be arrays.
+> ERROR(462): '>=' requires operands of type char or type int but rhs is of type bool.
+721c759
+< ERROR(463): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(463): '<' requires operands of type char or type int but rhs is of type bool.
+723c761
+< ERROR(464): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(464): '>' requires operands of type char or type int but rhs is of type bool.
+756a795
+> ERROR(476): '=' requires that either both or neither operands be arrays.
+758c797
+< ERROR(478): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(478): '<=' requires operands of type char or type int but rhs is of type bool.
+761c800
+< ERROR(480): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(480): '>=' requires operands of type char or type int but rhs is of type bool.
+763c802
+< ERROR(481): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(481): '<' requires operands of type char or type int but rhs is of type bool.
+765c804
+< ERROR(482): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(482): '>' requires operands of type char or type int but rhs is of type bool.
+799,800c838,840
+< ERROR(495): '!=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(496): '<=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(495): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(495): '!=' requires that either both or neither operands be arrays.
+> ERROR(496): '<=' requires operands of type char or type int but rhs is of type void.
+802,803c842,844
+< ERROR(497): '==' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(498): '>=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(497): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(497): '==' requires that either both or neither operands be arrays.
+> ERROR(498): '>=' requires operands of type char or type int but rhs is of type void.
+805c846
+< ERROR(499): '<' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(499): '<' requires operands of type char or type int but rhs is of type void.
+807c848
+< ERROR(500): '>' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(500): '>' requires operands of type char or type int but rhs is of type void.
+842c883,884
+< ERROR(512): '=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(512): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(512): '=' requires that either both or neither operands be arrays.
+844c886
+< ERROR(514): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(514): '<=' requires operands of type char or type int but lhs is of type bool.
+846,848c888,890
+< ERROR(516): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+< ERROR(517): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+< ERROR(518): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(516): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(517): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(518): '>' requires operands of type char or type int but lhs is of type bool.
+862c904,905
+< ERROR(532): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(531): '!=' requires that either both or neither operands be arrays.
+> ERROR(532): '<=' requires operands of type char or type int but lhs is of type bool.
+865c908,909
+< ERROR(534): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(533): '==' requires that either both or neither operands be arrays.
+> ERROR(534): '>=' requires operands of type char or type int but lhs is of type bool.
+867c911
+< ERROR(535): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(535): '<' requires operands of type char or type int but lhs is of type bool.
+869c913
+< ERROR(536): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(536): '>' requires operands of type char or type int but lhs is of type bool.
+893a938
+> ERROR(548): '=' requires that either both or neither operands be arrays.
+895c940
+< ERROR(550): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(550): '<=' requires operands of type char or type int but lhs is of type bool.
+897,899c942,944
+< ERROR(552): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+< ERROR(553): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+< ERROR(554): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(552): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(553): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(554): '>' requires operands of type char or type int but lhs is of type bool.
+922c967,968
+< ERROR(568): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(567): '!=' requires that either both or neither operands be arrays.
+> ERROR(568): '<=' requires operands of type char or type int but lhs is of type bool.
+925c971,972
+< ERROR(570): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(569): '==' requires that either both or neither operands be arrays.
+> ERROR(570): '>=' requires operands of type char or type int but lhs is of type bool.
+927c974
+< ERROR(571): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(571): '<' requires operands of type char or type int but lhs is of type bool.
+929c976
+< ERROR(572): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(572): '>' requires operands of type char or type int but lhs is of type bool.
+962a1010,1018
+> ERROR(584): '=' requires that either both or neither operands be arrays.
+> ERROR(586): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(586): '<=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(588): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(588): '>=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(589): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(589): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(590): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(590): '>' requires operands of type char or type int but rhs is of type bool.
+980a1037,1039
+> ERROR(603): '!=' requires that either both or neither operands be arrays.
+> ERROR(604): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(604): '<=' requires operands of type char or type int but rhs is of type bool.
+981a1041,1043
+> ERROR(605): '==' requires that either both or neither operands be arrays.
+> ERROR(606): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(606): '>=' requires operands of type char or type int but rhs is of type bool.
+982a1045,1046
+> ERROR(607): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(607): '<' requires operands of type char or type int but rhs is of type bool.
+983a1048,1049
+> ERROR(608): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(608): '>' requires operands of type char or type int but rhs is of type bool.
+1014,1019c1080,1090
+< ERROR(621): '!=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(622): '<=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(623): '==' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(624): '>=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(625): '<' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(626): '>' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(620): '=' requires that either both or neither operands be arrays.
+> ERROR(621): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(622): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(622): '<=' requires operands of type char or type int but rhs is of type void.
+> ERROR(623): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(624): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(624): '>=' requires operands of type char or type int but rhs is of type void.
+> ERROR(625): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(625): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(626): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(626): '>' requires operands of type char or type int but rhs is of type void.
+1040c1111
+< ERROR(638): '=' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(638): '=' requires operands of NONVOID but rhs is of type void.
+1042c1113,1114
+< ERROR(640): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(639): '!=' requires that either both or neither operands be arrays.
+> ERROR(640): '<=' requires operands of type char or type int but lhs is of type bool.
+1045c1117,1118
+< ERROR(642): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(641): '==' requires that either both or neither operands be arrays.
+> ERROR(642): '>=' requires operands of type char or type int but lhs is of type bool.
+1047c1120
+< ERROR(643): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(643): '<' requires operands of type char or type int but lhs is of type bool.
+1049c1122
+< ERROR(644): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(644): '>' requires operands of type char or type int but lhs is of type bool.
+1073a1147
+> ERROR(656): '=' requires that either both or neither operands be arrays.
+1075c1149
+< ERROR(658): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(658): '<=' requires operands of type char or type int but lhs is of type bool.
+1078c1152
+< ERROR(660): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(660): '>=' requires operands of type char or type int but lhs is of type bool.
+1080c1154
+< ERROR(661): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(661): '<' requires operands of type char or type int but lhs is of type bool.
+1082c1156
+< ERROR(662): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(662): '>' requires operands of type char or type int but lhs is of type bool.
+1108c1182,1183
+< ERROR(676): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(675): '!=' requires that either both or neither operands be arrays.
+> ERROR(676): '<=' requires operands of type char or type int but lhs is of type bool.
+1111c1186,1187
+< ERROR(678): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(677): '==' requires that either both or neither operands be arrays.
+> ERROR(678): '>=' requires operands of type char or type int but lhs is of type bool.
+1113c1189
+< ERROR(679): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(679): '<' requires operands of type char or type int but lhs is of type bool.
+1115c1191
+< ERROR(680): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(680): '>' requires operands of type char or type int but lhs is of type bool.
+1148a1225
+> ERROR(692): '=' requires that either both or neither operands be arrays.
+1150c1227
+< ERROR(694): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(694): '<=' requires operands of type char or type int but lhs is of type bool.
+1153c1230
+< ERROR(696): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(696): '>=' requires operands of type char or type int but lhs is of type bool.
+1155c1232
+< ERROR(697): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(697): '<' requires operands of type char or type int but lhs is of type bool.
+1157c1234
+< ERROR(698): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(698): '>' requires operands of type char or type int but lhs is of type bool.
+1190a1268,1270
+> ERROR(711): '!=' requires that either both or neither operands be arrays.
+> ERROR(712): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(712): '<=' requires operands of type char or type int but rhs is of type bool.
+1191a1272,1274
+> ERROR(713): '==' requires that either both or neither operands be arrays.
+> ERROR(714): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(714): '>=' requires operands of type char or type int but rhs is of type bool.
+1192a1276,1277
+> ERROR(715): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(715): '<' requires operands of type char or type int but rhs is of type bool.
+1193a1279,1280
+> ERROR(716): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(716): '>' requires operands of type char or type int but rhs is of type bool.
+1223a1311,1313
+> ERROR(728): '=' requires that either both or neither operands be arrays.
+> ERROR(730): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(730): '<=' requires operands of type char or type int but rhs is of type bool.
+1224a1315,1316
+> ERROR(732): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(732): '>=' requires operands of type char or type int but rhs is of type bool.
+1225a1318,1319
+> ERROR(733): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(733): '<' requires operands of type char or type int but rhs is of type bool.
+1226a1321,1322
+> ERROR(734): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(734): '>' requires operands of type char or type int but rhs is of type bool.
+1257,1258c1353,1356
+< ERROR(747): '!=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(748): '<=' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(747): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(747): '!=' requires that either both or neither operands be arrays.
+> ERROR(748): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(748): '<=' requires operands of type char or type int but rhs is of type void.
+1260,1261c1358,1361
+< ERROR(749): '==' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(750): '>=' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(749): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(749): '==' requires that either both or neither operands be arrays.
+> ERROR(750): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(750): '>=' requires operands of type char or type int but rhs is of type void.
+1263c1363,1364
+< ERROR(751): '<' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(751): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(751): '<' requires operands of type char or type int but rhs is of type void.
+1265c1366,1367
+< ERROR(752): '>' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(752): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(752): '>' requires operands of type char or type int but rhs is of type void.
+1298,1300c1400,1403
+< ERROR(764): '=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(765): '<' requires operands of the same type but lhs is type void and rhs is type int.
+< ERROR(766): '>' requires operands of the same type but lhs is type void and rhs is type int.
+---
+> ERROR(764): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(764): '=' requires that either both or neither operands be arrays.
+> ERROR(765): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(766): '>' requires operands of type char or type int but lhs is of type void.
+1310c1413
+< ERROR(774): '<' requires operands of the same type but lhs is type void and rhs is type int.
+---
+> ERROR(774): '<' requires operands of type char or type int but lhs is of type void.
+1312c1415
+< ERROR(775): '>' requires operands of the same type but lhs is type void and rhs is type int.
+---
+> ERROR(775): '>' requires operands of type char or type int but lhs is of type void.
+1330,1331c1433,1434
+< ERROR(783): '<' requires operands of the same type but lhs is type void and rhs is type char.
+< ERROR(784): '>' requires operands of the same type but lhs is type void and rhs is type char.
+---
+> ERROR(783): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(784): '>' requires operands of type char or type int but lhs is of type void.
+1346c1449
+< ERROR(792): '<' requires operands of the same type but lhs is type void and rhs is type char.
+---
+> ERROR(792): '<' requires operands of type char or type int but lhs is of type void.
+1348c1451
+< ERROR(793): '>' requires operands of the same type but lhs is type void and rhs is type char.
+---
+> ERROR(793): '>' requires operands of type char or type int but lhs is of type void.
+1371,1372c1474,1477
+< ERROR(801): '<' requires operands of the same type but lhs is type void and rhs is type bool.
+< ERROR(802): '>' requires operands of the same type but lhs is type void and rhs is type bool.
+---
+> ERROR(801): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(801): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(802): '>' requires operands of type char or type int but lhs is of type void.
+> ERROR(802): '>' requires operands of type char or type int but rhs is of type bool.
+1385c1490,1491
+< ERROR(810): '<' requires operands of the same type but lhs is type void and rhs is type bool.
+---
+> ERROR(810): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(810): '<' requires operands of type char or type int but rhs is of type bool.
+1387c1493,1494
+< ERROR(811): '>' requires operands of the same type but lhs is type void and rhs is type bool.
+---
+> ERROR(811): '>' requires operands of type char or type int but lhs is of type void.
+> ERROR(811): '>' requires operands of type char or type int but rhs is of type bool.
+1407a1515,1518
+> ERROR(819): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(819): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(820): '>' requires operands of type char or type int but lhs is of type void.
+> ERROR(820): '>' requires operands of type char or type int but rhs is of type void.
+1425c1536
+< ERROR(831): Unary 'not' requires an operand of type bool but was given type int.
+---
+> ERROR(831): The operation 'not' does not work with arrays.
+1431,1432c1542
+< ERROR(837): Unary 'not' requires an operand of type bool but was given type char.
+< ERROR(839): Unary '?' requires an operand of type int but was given type char.
+---
+> ERROR(837): The operation 'not' does not work with arrays.
+1437c1547
+< ERROR(845): Unary '?' requires an operand of type int but was given type bool.
+---
+> ERROR(843): The operation 'not' does not work with arrays.
+1442a1553,1554
+> ERROR(851): The operation '++' does not work with arrays.
+> ERROR(852): The operation '--' does not work with arrays.
+1446,1447c1558
+< ERROR(855): Unary '++' requires an operand of type int but was given type char.
+< ERROR(856): Unary '--' requires an operand of type int but was given type char.
+---
+> ERROR(855): The operation '++' does not work with arrays.
+1448a1560
+> ERROR(856): The operation '--' does not work with arrays.
+1452,1453c1564
+< ERROR(859): Unary '++' requires an operand of type int but was given type bool.
+< ERROR(860): Unary '--' requires an operand of type int but was given type bool.
+---
+> ERROR(859): The operation '++' does not work with arrays.
+1454a1566
+> ERROR(860): The operation '--' does not work with arrays.
+1456c1568
+< Number of errors: 1454
+---
+> Number of errors: 1566
+./c- -0 ./TestFiles/hw4/parmtiny.c- > TestResults/hw4/parmtiny.c-.out
+diff TestResults/hw4/parmtiny.c-.out TestFiles/hw4/parmtiny.out
+6a7
+> ERROR(10): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+9,10d9
+< ERROR(10): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+< ERROR(10): Expecting type char in parameter 2 of call to 'emu' defined on line 1 but got type undefined.
+12a12
+> ERROR(11): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+16d15
+< ERROR(11): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+23d21
+< ERROR(15): '+' requires operands of type int but lhs is of type char.
+26a25,26
+> ERROR(15): '+' requires operands of type int but lhs is of type char.
+> ERROR(16): Function 'zot' is not defined.
+29d28
+< ERROR(16): Function 'zot' is not defined.
+31c30
+< Number of errors: 28
+---
+> Number of errors: 27
+./c- -0 ./TestFiles/hw4/poker.c- > TestResults/hw4/poker.c-.out
+diff TestResults/hw4/poker.c-.out TestFiles/hw4/poker.out
+1d0
+< ERROR(91): The operation '+' does not work with arrays.
+3c2
+< Number of errors: 1
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/redefined.c- > TestResults/hw4/redefined.c-.out
+diff TestResults/hw4/redefined.c-.out TestFiles/hw4/redefined.out
+./c- -0 ./TestFiles/hw4/scope.c- > TestResults/hw4/scope.c-.out
+diff TestResults/hw4/scope.c-.out TestFiles/hw4/scope.out
+14,15d13
+< ERROR(45): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(45): '+' requires operands of type int but rhs is of type undefined.
+17,18d14
+< ERROR(46): Symbol 't' is not defined.
+< ERROR(46): Expecting type int in parameter 1 of call to 'ant' defined on line 3 but got type undefined.
+19a16
+> ERROR(46): Symbol 't' is not defined.
+21d17
+< ERROR(47): Symbol 'v' is not defined.
+22a19
+> ERROR(47): Symbol 'v' is not defined.
+29d25
+< ERROR(58): Function 'g' at line 56 is expecting to return type int but instead returns type undefined.
+34c30
+< Number of errors: 30
+---
+> Number of errors: 26
+./c- -0 ./TestFiles/hw4/simple.c- > TestResults/hw4/simple.c-.out
+diff TestResults/hw4/simple.c-.out TestFiles/hw4/simple.out
+./c- -0 ./TestFiles/hw4/simpleDefine.c- > TestResults/hw4/simpleDefine.c-.out
+diff TestResults/hw4/simpleDefine.c-.out TestFiles/hw4/simpleDefine.out
+2d1
+< ERROR(9): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+4d2
+< ERROR(11): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+10c8
+< Number of errors: 8
+---
+> Number of errors: 6
+./c- -0 ./TestFiles/hw4/small.c- > TestResults/hw4/small.c-.out
+diff TestResults/hw4/small.c-.out TestFiles/hw4/small.out
+3c3
+< ERROR(21): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+---
+> ERROR(21): Cannot index nonarray.
+./c- -0 ./TestFiles/hw4/sudoku.c- > TestResults/hw4/sudoku.c-.out
+diff TestResults/hw4/sudoku.c-.out TestFiles/hw4/sudoku.out
+1,2d0
+< ERROR(45): Cannot return an array.
+< ERROR(57): Cannot return an array.
+4c2
+< Number of errors: 2
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/tictactoe.c- > TestResults/hw4/tictactoe.c-.out
+diff TestResults/hw4/tictactoe.c-.out TestFiles/hw4/tictactoe.out
+./c- -0 ./TestFiles/hw4/tinybad.c- > TestResults/hw4/tinybad.c-.out
+diff TestResults/hw4/tinybad.c-.out TestFiles/hw4/tinybad.out
+5d4
+< ERROR(9): '=' requires operands of the same type but lhs is type char and rhs is type int.
+7d5
+< ERROR(10): '=' requires operands of the same type but lhs is type int and rhs is type char.
+12d9
+< ERROR(12): Array 'ant' should be indexed by type int but got type undefined.
+16c13
+< Number of errors: 14
+---
+> Number of errors: 11
+./c- -0 ./TestFiles/hw4/tiny.c- > TestResults/hw4/tiny.c-.out
+diff TestResults/hw4/tiny.c-.out TestFiles/hw4/tiny.out
+5d4
+< ERROR(9): '=' requires operands of the same type but lhs is type char and rhs is type int.
+7d5
+< ERROR(10): '=' requires operands of the same type but lhs is type int and rhs is type char.
+11c9
+< Number of errors: 9
+---
+> Number of errors: 7
+./c- -0 ./TestFiles/hw4/tinygood.c- > TestResults/hw4/tinygood.c-.out
+diff TestResults/hw4/tinygood.c-.out TestFiles/hw4/tinygood.out
+./c- -0 ./TestFiles/hw4/tinyscope.c- > TestResults/hw4/tinyscope.c-.out
+diff TestResults/hw4/tinyscope.c-.out TestFiles/hw4/tinyscope.out
+./c- -0 ./TestFiles/hw4/tinyType.c- > TestResults/hw4/tinyType.c-.out
+diff TestResults/hw4/tinyType.c-.out TestFiles/hw4/tinyType.out
+6d5
+< ERROR(12): '+' requires operands of type int but lhs is of type undefined.
+10,11d8
+< ERROR(17): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(17): '+' requires operands of type int but rhs is of type undefined.
+14a12,13
+> ERROR(21): Array index is the unindexed array 'y'.
+> ERROR(23): Cannot index nonarray.
+26d24
+< ERROR(32): The operation '*' does not work with arrays.
+30d27
+< ERROR(33): 'and' requires operands of type bool but rhs is of type undefined.
+36c33
+< ERROR(36): '=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(36): '=' requires operands of NONVOID but rhs is of type void.
+40a38,39
+> ERROR(38): '==' requires operands of NONVOID but lhs is of type void.
+> ERROR(38): '==' requires operands of NONVOID but rhs is of type void.
+42a42,43
+> ERROR(39): '!=' requires operands of NONVOID but lhs is of type void.
+> ERROR(39): '!=' requires operands of NONVOID but rhs is of type void.
+48a50,51
+> ERROR(43): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(43): '<' requires operands of type char or type int but rhs is of type bool.
+53a57
+> ERROR(51): Function 'main' at line 7 is expecting to return type int but instead returns type void.
+55c59
+< Number of errors: 53
+---
+> Number of errors: 57
+./c- -0 ./TestFiles/hw4/undefined.c- > TestResults/hw4/undefined.c-.out
+diff TestResults/hw4/undefined.c-.out TestFiles/hw4/undefined.out
+2d1
+< ERROR(4): The operation '*' only works with arrays.
+4d2
+< ERROR(5): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+7,8d4
+< ERROR(6): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(6): '<' requires operands of the same type but lhs is type undefined and rhs is type int.
+10d5
+< ERROR(7): '*' requires operands of type int but rhs is of type undefined.
+12d6
+< ERROR(7): '>' requires operands of the same type but lhs is type int and rhs is type undefined.
+14d7
+< ERROR(8): '+' requires operands of type int but lhs is of type undefined.
+16d8
+< ERROR(8): 'or' requires operands of type bool but lhs is of type undefined.
+19,20d10
+< ERROR(9): The operation '*' only works with arrays.
+< ERROR(9): '=' requires operands of the same type but lhs is type undefined and rhs is type bool.
+23d12
+< ERROR(15): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+27,29d15
+< ERROR(16): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(16): '*' requires operands of type int but rhs is of type undefined.
+< ERROR(16): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+31d16
+< ERROR(18): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+33d17
+< ERROR(25): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+35d18
+< ERROR(27): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+37d19
+< ERROR(29): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+39d20
+< ERROR(31): Function 'cat' at line 12 is expecting to return type int but instead returns type undefined.
+42,43d22
+< ERROR(36): 'and' requires operands of type bool but lhs is of type undefined.
+< ERROR(36): 'and' requires operands of type bool but rhs is of type undefined.
+50,51d28
+< ERROR(39): '+=' requires operands of type int but lhs is of type undefined.
+< ERROR(39): '+=' requires operands of type int but rhs is of type undefined.
+53d29
+< ERROR(41): Expecting Boolean test condition in if statement but got type undefined.
+55d30
+< ERROR(42): Expecting Boolean test condition in while statement but got type undefined.
+58c33
+< Number of errors: 55
+---
+> Number of errors: 30
+./c- -0 ./TestFiles/hw4/uninitialized.c- > TestResults/hw4/uninitialized.c-.out
+diff TestResults/hw4/uninitialized.c-.out TestFiles/hw4/uninitialized.out
+./c- -0 ./TestFiles/hw4/unused.c- > TestResults/hw4/unused.c-.out
+diff TestResults/hw4/unused.c-.out TestFiles/hw4/unused.out
+./c- -0 ./TestFiles/hw4/walsh.c- > TestResults/hw4/walsh.c-.out
+diff TestResults/hw4/walsh.c-.out TestFiles/hw4/walsh.out
+1,2d0
+< ERROR(62): The operation '+' does not work with arrays.
+< ERROR(75): The operation '/' does not work with arrays.
+4c2
+< Number of errors: 2
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/whileif.c- > TestResults/hw4/whileif.c-.out
+diff TestResults/hw4/whileif.c-.out TestFiles/hw4/whileif.out
+./c- -0 ./TestFiles/hw4/arrays2.c- > TestResults/hw4/arrays2.c-.out
+diff TestResults/hw4/arrays2.c-.out TestFiles/hw4/arrays2.out
+0a1,4
+> ERROR(9): '=' requires that either both or neither operands be arrays.
+> ERROR(10): '=' requires that either both or neither operands be arrays.
+> ERROR(15): '=' requires that either both or neither operands be arrays.
+> ERROR(16): '=' requires that either both or neither operands be arrays.
+2a7
+> ERROR(21): '=' requires that either both or neither operands be arrays.
+3a9
+> ERROR(22): '=' requires that either both or neither operands be arrays.
+8c14
+< Number of errors: 6
+---
+> Number of errors: 12
+./c- -0 ./TestFiles/hw4/arrays.c- > TestResults/hw4/arrays.c-.out
+diff TestResults/hw4/arrays.c-.out TestFiles/hw4/arrays.out
+2a3,6
+> ERROR(16): '=' requires that either both or neither operands be arrays.
+> ERROR(18): '=' requires that either both or neither operands be arrays.
+> ERROR(19): '=' requires that either both or neither operands be arrays.
+> ERROR(20): '=' requires that either both or neither operands be arrays.
+3a8
+> ERROR(21): '=' requires that either both or neither operands be arrays.
+4a10,13
+> ERROR(22): '=' requires that either both or neither operands be arrays.
+> ERROR(24): '=' requires that either both or neither operands be arrays.
+> ERROR(25): '=' requires that either both or neither operands be arrays.
+> ERROR(26): '=' requires that either both or neither operands be arrays.
+5a15
+> ERROR(27): '=' requires that either both or neither operands be arrays.
+6a17
+> ERROR(28): '=' requires that either both or neither operands be arrays.
+7a19
+> ERROR(30): '==' requires that either both or neither operands be arrays.
+8a21
+> ERROR(31): '==' requires that either both or neither operands be arrays.
+9a23
+> ERROR(33): '!=' requires that either both or neither operands be arrays.
+10a25
+> ERROR(34): '!=' requires that either both or neither operands be arrays.
+24c39
+< Number of errors: 22
+---
+> Number of errors: 37
+./c- -0 ./TestFiles/hw4/basicAll4.c- > TestResults/hw4/basicAll4.c-.out
+diff TestResults/hw4/basicAll4.c-.out TestFiles/hw4/basicAll4.out
+27c27
+< ERROR(83): Cannot have a break statement out of loop.
+---
+> ERROR(83): Cannot have a break statement outside of loop.
+53d52
+< ERROR(105): 'and' requires operands of type bool but rhs is of type undefined.
+69d67
+< ERROR(115): Array 'aa' should be indexed by type int but got type char.
+70a69
+> ERROR(117): Array index is the unindexed array 'aa'.
+74d72
+< ERROR(120): Array 'aa' should be indexed by type int but got type undefined.
+78d75
+< ERROR(124): '/' requires operands of type int but lhs is of type undefined.
+79a77
+> ERROR(126): Function 'flight' is not defined.
+86d83
+< ERROR(126): Function 'flight' is not defined.
+95c92
+< ERROR(138): Expecting array in paremeter 1 of call to 'ibex' defined on line 39.
+---
+> ERROR(138): Expecting array in parameter 1 of call to 'ibex' defined on line 39.
+102a100
+> ERROR(146): Array index is the unindexed array 'zz'.
+108d105
+< ERROR(150): Array 'aa' should be indexed by type int but got type void.
+111c108
+< ERROR(153): '=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(153): '=' requires operands of NONVOID but rhs is of type void.
+130a128
+> ERROR(166): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+134,135d131
+< ERROR(166): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+< ERROR(166): Expecting type char in parameter 2 of call to 'emu' defined on line 50 but got type undefined.
+136a133
+> ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type bool.
+137a135
+> ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+141,142d138
+< ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type int.
+< ERROR(167): Expecting type char in parameter 2 of call to 'emu' defined on line 50 but got type undefined.
+145,146d140
+< ERROR(167): '*' requires operands of type int but lhs is of type char.
+< ERROR(167): Expecting type char in parameter 1 of call to 'emu' defined on line 50 but got type bool.
+149a144
+> ERROR(167): '*' requires operands of type int but lhs is of type char.
+152c147
+< Number of errors: 148
+---
+> Number of errors: 143
+./c- -0 ./TestFiles/hw4/basicExtra.c- > TestResults/hw4/basicExtra.c-.out
+diff TestResults/hw4/basicExtra.c-.out TestFiles/hw4/basicExtra.out
+1a2,3
+> ERROR(15): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(15): '<' requires operands of type char or type int but rhs is of type bool.
+3a6,7
+> ERROR(19): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(19): '<' requires operands of type char or type int but rhs is of type bool.
+10,11c14,17
+< ERROR(28): '<' requires operands of the same type but lhs is type void and rhs is type char.
+< ERROR(29): '<' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(26): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(26): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(28): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(29): '<' requires operands of type char or type int but rhs is of type void.
+13d18
+< ERROR(31): '+' requires operands of type int but rhs is of type undefined.
+15d19
+< ERROR(32): '+' requires operands of type int but lhs is of type undefined.
+18,19d21
+< ERROR(33): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(33): '+' requires operands of type int but rhs is of type undefined.
+21d22
+< ERROR(34): '+' requires operands of type int but lhs is of type undefined.
+23d23
+< ERROR(35): '+' requires operands of type int but lhs is of type void.
+./c- -0 ./TestFiles/hw4/battleship.c- > TestResults/hw4/battleship.c-.out
+diff TestResults/hw4/battleship.c-.out TestFiles/hw4/battleship.out
+./c- -0 ./TestFiles/hw4/bullsandcows.c- > TestResults/hw4/bullsandcows.c-.out
+diff TestResults/hw4/bullsandcows.c-.out TestFiles/hw4/bullsandcows.out
+1,3d0
+< ERROR(32): Cannot return an array.
+< ERROR(102): The operation '<' does not work with arrays.
+< ERROR(102): The operation '>' does not work with arrays.
+5c2
+< Number of errors: 3
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/call4.c- > TestResults/hw4/call4.c-.out
+diff TestResults/hw4/call4.c-.out TestFiles/hw4/call4.out
+4,5c4,5
+< ERROR(11): Too few parameters passed for function 'check2' defined on line 2.
+< ERROR(18): Too many parameters passed for function 'check2' defined on line 2.
+---
+> ERROR(10): Too few parameters passed for function 'check2' defined on line 2.
+> ERROR(15): Too many parameters passed for function 'check2' defined on line 2.
+9c9,11
+< ERROR(20): Expecting array in paremeter 1 of call to 'ski' defined on line 5.
+---
+> ERROR(20): '=' requires that either both or neither operands be arrays.
+> ERROR(20): Array index is an unindexed array.
+> ERROR(20): Expecting array in parameter 1 of call to 'ski' defined on line 5.
+12c14
+< Number of errors: 9
+---
+> Number of errors: 11
+./c- -0 ./TestFiles/hw4/call.c- > TestResults/hw4/call.c-.out
+diff TestResults/hw4/call.c-.out TestFiles/hw4/call.out
+./c- -0 ./TestFiles/hw4/err.c- > TestResults/hw4/err.c-.out
+diff TestResults/hw4/err.c-.out TestFiles/hw4/err.out
+1a2,5
+> ERROR(5): '=' requires that either both or neither operands be arrays.
+> ERROR(5): Array index is an unindexed array.
+> ERROR(6): Cannot index nonarray.
+> ERROR(7): '=' requires that either both or neither operands be arrays.
+3c7
+< Number of errors: 1
+---
+> Number of errors: 5
+./c- -0 ./TestFiles/hw4/errorloc.c- > TestResults/hw4/errorloc.c-.out
+diff TestResults/hw4/errorloc.c-.out TestFiles/hw4/errorloc.out
+2,3c2,3
+< ERROR(16): Variable 'y' is of type int but is being initialized with an expression of type bool.
+< ERROR(23): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(15): Variable 'y' is of type int but is being initialized with an expression of type bool.
+> ERROR(21): '=' requires operands of the same type but lhs is type int and rhs is type bool.
+6d5
+< ERROR(35): Cannot return an array.
+8,14c7,15
+< ERROR(42): '*' requires operands of type int but rhs is of type bool.
+< ERROR(44): Cannot have a break statement out of loop.
+< ERROR(48): The operation '*' only works with arrays.
+< ERROR(50): Unary '?' requires an operand of type int but was given type char.
+< ERROR(54): Function 'emu' is not defined.
+< ERROR(60): Too few parameters passed for function 'dog' defined on line 3.
+< ERROR(61): '+' requires operands of type int but rhs is of type char.
+---
+> ERROR(35): Cannot return an array.
+> ERROR(41): '*' requires operands of type int but rhs is of type bool.
+> ERROR(39): '=' requires that either both or neither operands be arrays.
+> ERROR(44): Cannot have a break statement outside of loop.
+> ERROR(46): The operation '*' only works with arrays.
+> ERROR(49): Unary '?' requires an operand of type int but was given type char.
+> ERROR(52): Function 'emu' is not defined.
+> ERROR(58): Too few parameters passed for function 'dog' defined on line 3.
+> ERROR(57): '+' requires operands of type int but rhs is of type char.
+16c17
+< Number of errors: 14
+---
+> Number of errors: 15
+./c- -0 ./TestFiles/hw4/errormessages.c- > TestResults/hw4/errormessages.c-.out
+diff TestResults/hw4/errormessages.c-.out TestFiles/hw4/errormessages.out
+9,10d8
+< ERROR(17): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(17): '+' requires operands of type int but rhs is of type undefined.
+13c11
+< Number of errors: 10
+---
+> Number of errors: 8
+./c- -0 ./TestFiles/hw4/everything05.c- > TestResults/hw4/everything05.c-.out
+diff TestResults/hw4/everything05.c-.out TestFiles/hw4/everything05.out
+1,2d0
+< ERROR(39): The operation '<' does not work with arrays.
+< ERROR(83): The operation '>=' does not work with arrays.
+4c2
+< Number of errors: 2
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/exp2.c- > TestResults/hw4/exp2.c-.out
+diff TestResults/hw4/exp2.c-.out TestFiles/hw4/exp2.out
+32d31
+< ERROR(31): The operation '+' does not work with arrays.
+34d32
+< ERROR(36): '=' requires operands of the same type but lhs is type undefined and rhs is type bool.
+36d33
+< ERROR(37): '=' requires operands of the same type but lhs is type bool and rhs is type undefined.
+39d35
+< ERROR(39): The operation '+' does not work with arrays.
+44d39
+< ERROR(40): The operation '*' does not work with arrays.
+46d40
+< ERROR(40): The operation '+' does not work with arrays.
+48d41
+< ERROR(40): The operation '*' does not work with arrays.
+52,54d44
+< ERROR(40): The operation '+' does not work with arrays.
+< ERROR(40): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(40): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+57c47
+< Number of errors: 55
+---
+> Number of errors: 45
+./c- -0 ./TestFiles/hw4/exp.c- > TestResults/hw4/exp.c-.out
+diff TestResults/hw4/exp.c-.out TestFiles/hw4/exp.out
+5d4
+< ERROR(35): The operation '+' does not work with arrays.
+8d6
+< ERROR(40): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+10,11d7
+< ERROR(41): '=' requires operands of the same type but lhs is type int and rhs is type undefined.
+< ERROR(43): The operation '+' does not work with arrays.
+13,15d8
+< ERROR(44): The operation '*' does not work with arrays.
+< ERROR(44): The operation '+' does not work with arrays.
+< ERROR(44): The operation '*' does not work with arrays.
+17,19d9
+< ERROR(44): The operation '+' does not work with arrays.
+< ERROR(44): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(44): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+21c11
+< Number of errors: 19
+---
+> Number of errors: 9
+./c- -0 ./TestFiles/hw4/factor.c- > TestResults/hw4/factor.c-.out
+diff TestResults/hw4/factor.c-.out TestFiles/hw4/factor.out
+./c- -0 ./TestFiles/hw4/factorial2.c- > TestResults/hw4/factorial2.c-.out
+diff TestResults/hw4/factorial2.c-.out TestFiles/hw4/factorial2.out
+./c- -0 ./TestFiles/hw4/factorial.c- > TestResults/hw4/factorial.c-.out
+diff TestResults/hw4/factorial.c-.out TestFiles/hw4/factorial.out
+./c- -0 ./TestFiles/hw4/factorialr.c- > TestResults/hw4/factorialr.c-.out
+diff TestResults/hw4/factorialr.c-.out TestFiles/hw4/factorialr.out
+./c- -0 ./TestFiles/hw4/fractal.c- > TestResults/hw4/fractal.c-.out
+diff TestResults/hw4/fractal.c-.out TestFiles/hw4/fractal.out
+./c- -0 ./TestFiles/hw4/gcd.c- > TestResults/hw4/gcd.c-.out
+diff TestResults/hw4/gcd.c-.out TestFiles/hw4/gcd.out
+./c- -0 ./TestFiles/hw4/gcdsm.c- > TestResults/hw4/gcdsm.c-.out
+diff TestResults/hw4/gcdsm.c-.out TestFiles/hw4/gcdsm.out
+./c- -0 ./TestFiles/hw4/init.c- > TestResults/hw4/init.c-.out
+diff TestResults/hw4/init.c-.out TestFiles/hw4/init.out
+./c- -0 ./TestFiles/hw4/mixed.c- > TestResults/hw4/mixed.c-.out
+diff TestResults/hw4/mixed.c-.out TestFiles/hw4/mixed.out
+2c2
+< ERROR(28): Expecting array in paremeter 2 of call to 'thelma' defined on line 13.
+---
+> ERROR(28): Expecting array in parameter 2 of call to 'thelma' defined on line 13.
+./c- -0 ./TestFiles/hw4/nano.c- > TestResults/hw4/nano.c-.out
+diff TestResults/hw4/nano.c-.out TestFiles/hw4/nano.out
+./c- -0 ./TestFiles/hw4/op.c- > TestResults/hw4/op.c-.out
+diff TestResults/hw4/op.c-.out TestFiles/hw4/op.out
+1c1
+< ERROR(8): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(8): '<' requires operands of type char or type int but rhs is of type bool.
+3,4c3,6
+< ERROR(10): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+< ERROR(12): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(10): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(11): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(11): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(12): '<' requires operands of type char or type int but lhs is of type bool.
+6c8
+< ERROR(14): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(14): '<' requires operands of type char or type int but rhs is of type bool.
+8d9
+< ERROR(17): '<' requires operands of the same type but lhs is type undefined and rhs is type int.
+10c11
+< ERROR(18): '<' requires operands of the same type but lhs is type undefined and rhs is type bool.
+---
+> ERROR(18): '<' requires operands of type char or type int but rhs is of type bool.
+12d12
+< ERROR(19): '<' requires operands of the same type but lhs is type undefined and rhs is type char.
+./c- -0 ./TestFiles/hw4/overkill.c- > TestResults/hw4/overkill.c-.out
+diff TestResults/hw4/overkill.c-.out TestFiles/hw4/overkill.out
+4a5
+> ERROR(27): '!=' requires that either both or neither operands be arrays.
+5a7
+> ERROR(29): '==' requires that either both or neither operands be arrays.
+23a26
+> ERROR(44): '=' requires that either both or neither operands be arrays.
+44a48
+> ERROR(63): '!=' requires that either both or neither operands be arrays.
+47a52
+> ERROR(65): '==' requires that either both or neither operands be arrays.
+78a84
+> ERROR(80): '=' requires that either both or neither operands be arrays.
+80c86
+< ERROR(82): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(82): '<=' requires operands of type char or type int but rhs is of type bool.
+82,84c88,90
+< ERROR(84): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+< ERROR(85): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+< ERROR(86): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(84): '>=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(85): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(86): '>' requires operands of type char or type int but rhs is of type bool.
+98c104,105
+< ERROR(100): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(99): '!=' requires that either both or neither operands be arrays.
+> ERROR(100): '<=' requires operands of type char or type int but rhs is of type bool.
+101c108,109
+< ERROR(102): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(101): '==' requires that either both or neither operands be arrays.
+> ERROR(102): '>=' requires operands of type char or type int but rhs is of type bool.
+103c111
+< ERROR(103): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(103): '<' requires operands of type char or type int but rhs is of type bool.
+105c113
+< ERROR(104): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(104): '>' requires operands of type char or type int but rhs is of type bool.
+130,135c138,144
+< ERROR(117): '!=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(118): '<=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(119): '==' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(120): '>=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(121): '<' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(122): '>' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(116): '=' requires that either both or neither operands be arrays.
+> ERROR(117): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(118): '<=' requires operands of type char or type int but rhs is of type void.
+> ERROR(119): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(120): '>=' requires operands of type char or type int but rhs is of type void.
+> ERROR(121): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(122): '>' requires operands of type char or type int but rhs is of type void.
+149c158,159
+< ERROR(134): '=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(134): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(135): '!=' requires that either both or neither operands be arrays.
+150a161
+> ERROR(137): '==' requires that either both or neither operands be arrays.
+168a180
+> ERROR(152): '=' requires that either both or neither operands be arrays.
+188a201
+> ERROR(171): '!=' requires that either both or neither operands be arrays.
+191a205
+> ERROR(173): '==' requires that either both or neither operands be arrays.
+222a237
+> ERROR(188): '=' requires that either both or neither operands be arrays.
+259c274,275
+< ERROR(208): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(207): '!=' requires that either both or neither operands be arrays.
+> ERROR(208): '<=' requires operands of type char or type int but rhs is of type bool.
+262c278,279
+< ERROR(210): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(209): '==' requires that either both or neither operands be arrays.
+> ERROR(210): '>=' requires operands of type char or type int but rhs is of type bool.
+264c281
+< ERROR(211): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(211): '<' requires operands of type char or type int but rhs is of type bool.
+266c283
+< ERROR(212): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(212): '>' requires operands of type char or type int but rhs is of type bool.
+290a308
+> ERROR(224): '=' requires that either both or neither operands be arrays.
+292c310
+< ERROR(226): '<=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(226): '<=' requires operands of type char or type int but rhs is of type bool.
+295c313
+< ERROR(228): '>=' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(228): '>=' requires operands of type char or type int but rhs is of type bool.
+297c315
+< ERROR(229): '<' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(229): '<' requires operands of type char or type int but rhs is of type bool.
+299c317
+< ERROR(230): '>' requires operands of the same type but lhs is type int and rhs is type bool.
+---
+> ERROR(230): '>' requires operands of type char or type int but rhs is of type bool.
+324,325c342,344
+< ERROR(243): '!=' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(244): '<=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(243): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(243): '!=' requires that either both or neither operands be arrays.
+> ERROR(244): '<=' requires operands of type char or type int but rhs is of type void.
+327,328c346,348
+< ERROR(245): '==' requires operands of the same type but lhs is type int and rhs is type void.
+< ERROR(246): '>=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(245): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(245): '==' requires that either both or neither operands be arrays.
+> ERROR(246): '>=' requires operands of type char or type int but rhs is of type void.
+330c350
+< ERROR(247): '<' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(247): '<' requires operands of type char or type int but rhs is of type void.
+332c352
+< ERROR(248): '>' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(248): '>' requires operands of type char or type int but rhs is of type void.
+358c378,379
+< ERROR(260): '=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(260): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(260): '=' requires that either both or neither operands be arrays.
+379a401
+> ERROR(279): '!=' requires that either both or neither operands be arrays.
+382a405
+> ERROR(281): '==' requires that either both or neither operands be arrays.
+413a437
+> ERROR(296): '=' requires that either both or neither operands be arrays.
+435a460
+> ERROR(315): '!=' requires that either both or neither operands be arrays.
+436a462
+> ERROR(317): '==' requires that either both or neither operands be arrays.
+472a499
+> ERROR(332): '=' requires that either both or neither operands be arrays.
+474c501
+< ERROR(334): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(334): '<=' requires operands of type char or type int but rhs is of type bool.
+476,478c503,505
+< ERROR(336): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+< ERROR(337): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+< ERROR(338): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(336): '>=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(337): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(338): '>' requires operands of type char or type int but rhs is of type bool.
+501c528,529
+< ERROR(352): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(351): '!=' requires that either both or neither operands be arrays.
+> ERROR(352): '<=' requires operands of type char or type int but rhs is of type bool.
+504c532,533
+< ERROR(354): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(353): '==' requires that either both or neither operands be arrays.
+> ERROR(354): '>=' requires operands of type char or type int but rhs is of type bool.
+506c535
+< ERROR(355): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(355): '<' requires operands of type char or type int but rhs is of type bool.
+508c537
+< ERROR(356): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(356): '>' requires operands of type char or type int but rhs is of type bool.
+542,547c571,577
+< ERROR(369): '!=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(370): '<=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(371): '==' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(372): '>=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(373): '<' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(374): '>' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(368): '=' requires that either both or neither operands be arrays.
+> ERROR(369): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(370): '<=' requires operands of type char or type int but rhs is of type void.
+> ERROR(371): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(372): '>=' requires operands of type char or type int but rhs is of type void.
+> ERROR(373): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(374): '>' requires operands of type char or type int but rhs is of type void.
+570c600
+< ERROR(386): '=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(386): '=' requires operands of NONVOID but rhs is of type void.
+571a602
+> ERROR(387): '!=' requires that either both or neither operands be arrays.
+574a606
+> ERROR(389): '==' requires that either both or neither operands be arrays.
+605a638
+> ERROR(404): '=' requires that either both or neither operands be arrays.
+640a674
+> ERROR(423): '!=' requires that either both or neither operands be arrays.
+641a676
+> ERROR(425): '==' requires that either both or neither operands be arrays.
+677a713
+> ERROR(440): '=' requires that either both or neither operands be arrays.
+716c752,753
+< ERROR(460): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(459): '!=' requires that either both or neither operands be arrays.
+> ERROR(460): '<=' requires operands of type char or type int but rhs is of type bool.
+719c756,757
+< ERROR(462): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(461): '==' requires that either both or neither operands be arrays.
+> ERROR(462): '>=' requires operands of type char or type int but rhs is of type bool.
+721c759
+< ERROR(463): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(463): '<' requires operands of type char or type int but rhs is of type bool.
+723c761
+< ERROR(464): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(464): '>' requires operands of type char or type int but rhs is of type bool.
+756a795
+> ERROR(476): '=' requires that either both or neither operands be arrays.
+758c797
+< ERROR(478): '<=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(478): '<=' requires operands of type char or type int but rhs is of type bool.
+761c800
+< ERROR(480): '>=' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(480): '>=' requires operands of type char or type int but rhs is of type bool.
+763c802
+< ERROR(481): '<' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(481): '<' requires operands of type char or type int but rhs is of type bool.
+765c804
+< ERROR(482): '>' requires operands of the same type but lhs is type char and rhs is type bool.
+---
+> ERROR(482): '>' requires operands of type char or type int but rhs is of type bool.
+799,800c838,840
+< ERROR(495): '!=' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(496): '<=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(495): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(495): '!=' requires that either both or neither operands be arrays.
+> ERROR(496): '<=' requires operands of type char or type int but rhs is of type void.
+802,803c842,844
+< ERROR(497): '==' requires operands of the same type but lhs is type char and rhs is type void.
+< ERROR(498): '>=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(497): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(497): '==' requires that either both or neither operands be arrays.
+> ERROR(498): '>=' requires operands of type char or type int but rhs is of type void.
+805c846
+< ERROR(499): '<' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(499): '<' requires operands of type char or type int but rhs is of type void.
+807c848
+< ERROR(500): '>' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(500): '>' requires operands of type char or type int but rhs is of type void.
+842c883,884
+< ERROR(512): '=' requires operands of the same type but lhs is type char and rhs is type void.
+---
+> ERROR(512): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(512): '=' requires that either both or neither operands be arrays.
+844c886
+< ERROR(514): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(514): '<=' requires operands of type char or type int but lhs is of type bool.
+846,848c888,890
+< ERROR(516): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+< ERROR(517): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+< ERROR(518): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(516): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(517): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(518): '>' requires operands of type char or type int but lhs is of type bool.
+862c904,905
+< ERROR(532): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(531): '!=' requires that either both or neither operands be arrays.
+> ERROR(532): '<=' requires operands of type char or type int but lhs is of type bool.
+865c908,909
+< ERROR(534): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(533): '==' requires that either both or neither operands be arrays.
+> ERROR(534): '>=' requires operands of type char or type int but lhs is of type bool.
+867c911
+< ERROR(535): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(535): '<' requires operands of type char or type int but lhs is of type bool.
+869c913
+< ERROR(536): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(536): '>' requires operands of type char or type int but lhs is of type bool.
+893a938
+> ERROR(548): '=' requires that either both or neither operands be arrays.
+895c940
+< ERROR(550): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(550): '<=' requires operands of type char or type int but lhs is of type bool.
+897,899c942,944
+< ERROR(552): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+< ERROR(553): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+< ERROR(554): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(552): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(553): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(554): '>' requires operands of type char or type int but lhs is of type bool.
+922c967,968
+< ERROR(568): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(567): '!=' requires that either both or neither operands be arrays.
+> ERROR(568): '<=' requires operands of type char or type int but lhs is of type bool.
+925c971,972
+< ERROR(570): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(569): '==' requires that either both or neither operands be arrays.
+> ERROR(570): '>=' requires operands of type char or type int but lhs is of type bool.
+927c974
+< ERROR(571): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(571): '<' requires operands of type char or type int but lhs is of type bool.
+929c976
+< ERROR(572): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(572): '>' requires operands of type char or type int but lhs is of type bool.
+962a1010,1018
+> ERROR(584): '=' requires that either both or neither operands be arrays.
+> ERROR(586): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(586): '<=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(588): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(588): '>=' requires operands of type char or type int but rhs is of type bool.
+> ERROR(589): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(589): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(590): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(590): '>' requires operands of type char or type int but rhs is of type bool.
+980a1037,1039
+> ERROR(603): '!=' requires that either both or neither operands be arrays.
+> ERROR(604): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(604): '<=' requires operands of type char or type int but rhs is of type bool.
+981a1041,1043
+> ERROR(605): '==' requires that either both or neither operands be arrays.
+> ERROR(606): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(606): '>=' requires operands of type char or type int but rhs is of type bool.
+982a1045,1046
+> ERROR(607): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(607): '<' requires operands of type char or type int but rhs is of type bool.
+983a1048,1049
+> ERROR(608): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(608): '>' requires operands of type char or type int but rhs is of type bool.
+1014,1019c1080,1090
+< ERROR(621): '!=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(622): '<=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(623): '==' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(624): '>=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(625): '<' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(626): '>' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(620): '=' requires that either both or neither operands be arrays.
+> ERROR(621): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(622): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(622): '<=' requires operands of type char or type int but rhs is of type void.
+> ERROR(623): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(624): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(624): '>=' requires operands of type char or type int but rhs is of type void.
+> ERROR(625): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(625): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(626): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(626): '>' requires operands of type char or type int but rhs is of type void.
+1040c1111
+< ERROR(638): '=' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(638): '=' requires operands of NONVOID but rhs is of type void.
+1042c1113,1114
+< ERROR(640): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(639): '!=' requires that either both or neither operands be arrays.
+> ERROR(640): '<=' requires operands of type char or type int but lhs is of type bool.
+1045c1117,1118
+< ERROR(642): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(641): '==' requires that either both or neither operands be arrays.
+> ERROR(642): '>=' requires operands of type char or type int but lhs is of type bool.
+1047c1120
+< ERROR(643): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(643): '<' requires operands of type char or type int but lhs is of type bool.
+1049c1122
+< ERROR(644): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(644): '>' requires operands of type char or type int but lhs is of type bool.
+1073a1147
+> ERROR(656): '=' requires that either both or neither operands be arrays.
+1075c1149
+< ERROR(658): '<=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(658): '<=' requires operands of type char or type int but lhs is of type bool.
+1078c1152
+< ERROR(660): '>=' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(660): '>=' requires operands of type char or type int but lhs is of type bool.
+1080c1154
+< ERROR(661): '<' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(661): '<' requires operands of type char or type int but lhs is of type bool.
+1082c1156
+< ERROR(662): '>' requires operands of the same type but lhs is type bool and rhs is type int.
+---
+> ERROR(662): '>' requires operands of type char or type int but lhs is of type bool.
+1108c1182,1183
+< ERROR(676): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(675): '!=' requires that either both or neither operands be arrays.
+> ERROR(676): '<=' requires operands of type char or type int but lhs is of type bool.
+1111c1186,1187
+< ERROR(678): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(677): '==' requires that either both or neither operands be arrays.
+> ERROR(678): '>=' requires operands of type char or type int but lhs is of type bool.
+1113c1189
+< ERROR(679): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(679): '<' requires operands of type char or type int but lhs is of type bool.
+1115c1191
+< ERROR(680): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(680): '>' requires operands of type char or type int but lhs is of type bool.
+1148a1225
+> ERROR(692): '=' requires that either both or neither operands be arrays.
+1150c1227
+< ERROR(694): '<=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(694): '<=' requires operands of type char or type int but lhs is of type bool.
+1153c1230
+< ERROR(696): '>=' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(696): '>=' requires operands of type char or type int but lhs is of type bool.
+1155c1232
+< ERROR(697): '<' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(697): '<' requires operands of type char or type int but lhs is of type bool.
+1157c1234
+< ERROR(698): '>' requires operands of the same type but lhs is type bool and rhs is type char.
+---
+> ERROR(698): '>' requires operands of type char or type int but lhs is of type bool.
+1190a1268,1270
+> ERROR(711): '!=' requires that either both or neither operands be arrays.
+> ERROR(712): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(712): '<=' requires operands of type char or type int but rhs is of type bool.
+1191a1272,1274
+> ERROR(713): '==' requires that either both or neither operands be arrays.
+> ERROR(714): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(714): '>=' requires operands of type char or type int but rhs is of type bool.
+1192a1276,1277
+> ERROR(715): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(715): '<' requires operands of type char or type int but rhs is of type bool.
+1193a1279,1280
+> ERROR(716): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(716): '>' requires operands of type char or type int but rhs is of type bool.
+1223a1311,1313
+> ERROR(728): '=' requires that either both or neither operands be arrays.
+> ERROR(730): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(730): '<=' requires operands of type char or type int but rhs is of type bool.
+1224a1315,1316
+> ERROR(732): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(732): '>=' requires operands of type char or type int but rhs is of type bool.
+1225a1318,1319
+> ERROR(733): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(733): '<' requires operands of type char or type int but rhs is of type bool.
+1226a1321,1322
+> ERROR(734): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(734): '>' requires operands of type char or type int but rhs is of type bool.
+1257,1258c1353,1356
+< ERROR(747): '!=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(748): '<=' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(747): '!=' requires operands of NONVOID but rhs is of type void.
+> ERROR(747): '!=' requires that either both or neither operands be arrays.
+> ERROR(748): '<=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(748): '<=' requires operands of type char or type int but rhs is of type void.
+1260,1261c1358,1361
+< ERROR(749): '==' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(750): '>=' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(749): '==' requires operands of NONVOID but rhs is of type void.
+> ERROR(749): '==' requires that either both or neither operands be arrays.
+> ERROR(750): '>=' requires operands of type char or type int but lhs is of type bool.
+> ERROR(750): '>=' requires operands of type char or type int but rhs is of type void.
+1263c1363,1364
+< ERROR(751): '<' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(751): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(751): '<' requires operands of type char or type int but rhs is of type void.
+1265c1366,1367
+< ERROR(752): '>' requires operands of the same type but lhs is type bool and rhs is type void.
+---
+> ERROR(752): '>' requires operands of type char or type int but lhs is of type bool.
+> ERROR(752): '>' requires operands of type char or type int but rhs is of type void.
+1298,1300c1400,1403
+< ERROR(764): '=' requires operands of the same type but lhs is type bool and rhs is type void.
+< ERROR(765): '<' requires operands of the same type but lhs is type void and rhs is type int.
+< ERROR(766): '>' requires operands of the same type but lhs is type void and rhs is type int.
+---
+> ERROR(764): '=' requires operands of NONVOID but rhs is of type void.
+> ERROR(764): '=' requires that either both or neither operands be arrays.
+> ERROR(765): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(766): '>' requires operands of type char or type int but lhs is of type void.
+1310c1413
+< ERROR(774): '<' requires operands of the same type but lhs is type void and rhs is type int.
+---
+> ERROR(774): '<' requires operands of type char or type int but lhs is of type void.
+1312c1415
+< ERROR(775): '>' requires operands of the same type but lhs is type void and rhs is type int.
+---
+> ERROR(775): '>' requires operands of type char or type int but lhs is of type void.
+1330,1331c1433,1434
+< ERROR(783): '<' requires operands of the same type but lhs is type void and rhs is type char.
+< ERROR(784): '>' requires operands of the same type but lhs is type void and rhs is type char.
+---
+> ERROR(783): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(784): '>' requires operands of type char or type int but lhs is of type void.
+1346c1449
+< ERROR(792): '<' requires operands of the same type but lhs is type void and rhs is type char.
+---
+> ERROR(792): '<' requires operands of type char or type int but lhs is of type void.
+1348c1451
+< ERROR(793): '>' requires operands of the same type but lhs is type void and rhs is type char.
+---
+> ERROR(793): '>' requires operands of type char or type int but lhs is of type void.
+1371,1372c1474,1477
+< ERROR(801): '<' requires operands of the same type but lhs is type void and rhs is type bool.
+< ERROR(802): '>' requires operands of the same type but lhs is type void and rhs is type bool.
+---
+> ERROR(801): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(801): '<' requires operands of type char or type int but rhs is of type bool.
+> ERROR(802): '>' requires operands of type char or type int but lhs is of type void.
+> ERROR(802): '>' requires operands of type char or type int but rhs is of type bool.
+1385c1490,1491
+< ERROR(810): '<' requires operands of the same type but lhs is type void and rhs is type bool.
+---
+> ERROR(810): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(810): '<' requires operands of type char or type int but rhs is of type bool.
+1387c1493,1494
+< ERROR(811): '>' requires operands of the same type but lhs is type void and rhs is type bool.
+---
+> ERROR(811): '>' requires operands of type char or type int but lhs is of type void.
+> ERROR(811): '>' requires operands of type char or type int but rhs is of type bool.
+1407a1515,1518
+> ERROR(819): '<' requires operands of type char or type int but lhs is of type void.
+> ERROR(819): '<' requires operands of type char or type int but rhs is of type void.
+> ERROR(820): '>' requires operands of type char or type int but lhs is of type void.
+> ERROR(820): '>' requires operands of type char or type int but rhs is of type void.
+1425c1536
+< ERROR(831): Unary 'not' requires an operand of type bool but was given type int.
+---
+> ERROR(831): The operation 'not' does not work with arrays.
+1431,1432c1542
+< ERROR(837): Unary 'not' requires an operand of type bool but was given type char.
+< ERROR(839): Unary '?' requires an operand of type int but was given type char.
+---
+> ERROR(837): The operation 'not' does not work with arrays.
+1437c1547
+< ERROR(845): Unary '?' requires an operand of type int but was given type bool.
+---
+> ERROR(843): The operation 'not' does not work with arrays.
+1442a1553,1554
+> ERROR(851): The operation '++' does not work with arrays.
+> ERROR(852): The operation '--' does not work with arrays.
+1446,1447c1558
+< ERROR(855): Unary '++' requires an operand of type int but was given type char.
+< ERROR(856): Unary '--' requires an operand of type int but was given type char.
+---
+> ERROR(855): The operation '++' does not work with arrays.
+1448a1560
+> ERROR(856): The operation '--' does not work with arrays.
+1452,1453c1564
+< ERROR(859): Unary '++' requires an operand of type int but was given type bool.
+< ERROR(860): Unary '--' requires an operand of type int but was given type bool.
+---
+> ERROR(859): The operation '++' does not work with arrays.
+1454a1566
+> ERROR(860): The operation '--' does not work with arrays.
+1456c1568
+< Number of errors: 1454
+---
+> Number of errors: 1566
+./c- -0 ./TestFiles/hw4/parmtiny.c- > TestResults/hw4/parmtiny.c-.out
+diff TestResults/hw4/parmtiny.c-.out TestFiles/hw4/parmtiny.out
+6a7
+> ERROR(10): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+9,10d9
+< ERROR(10): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+< ERROR(10): Expecting type char in parameter 2 of call to 'emu' defined on line 1 but got type undefined.
+12a12
+> ERROR(11): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+16d15
+< ERROR(11): Expecting type char in parameter 1 of call to 'emu' defined on line 1 but got type int.
+23d21
+< ERROR(15): '+' requires operands of type int but lhs is of type char.
+26a25,26
+> ERROR(15): '+' requires operands of type int but lhs is of type char.
+> ERROR(16): Function 'zot' is not defined.
+29d28
+< ERROR(16): Function 'zot' is not defined.
+31c30
+< Number of errors: 28
+---
+> Number of errors: 27
+./c- -0 ./TestFiles/hw4/poker.c- > TestResults/hw4/poker.c-.out
+diff TestResults/hw4/poker.c-.out TestFiles/hw4/poker.out
+1d0
+< ERROR(91): The operation '+' does not work with arrays.
+3c2
+< Number of errors: 1
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/redefined.c- > TestResults/hw4/redefined.c-.out
+diff TestResults/hw4/redefined.c-.out TestFiles/hw4/redefined.out
+./c- -0 ./TestFiles/hw4/scope.c- > TestResults/hw4/scope.c-.out
+diff TestResults/hw4/scope.c-.out TestFiles/hw4/scope.out
+14,15d13
+< ERROR(45): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(45): '+' requires operands of type int but rhs is of type undefined.
+17,18d14
+< ERROR(46): Symbol 't' is not defined.
+< ERROR(46): Expecting type int in parameter 1 of call to 'ant' defined on line 3 but got type undefined.
+19a16
+> ERROR(46): Symbol 't' is not defined.
+21d17
+< ERROR(47): Symbol 'v' is not defined.
+22a19
+> ERROR(47): Symbol 'v' is not defined.
+29d25
+< ERROR(58): Function 'g' at line 56 is expecting to return type int but instead returns type undefined.
+34c30
+< Number of errors: 30
+---
+> Number of errors: 26
+./c- -0 ./TestFiles/hw4/simple.c- > TestResults/hw4/simple.c-.out
+diff TestResults/hw4/simple.c-.out TestFiles/hw4/simple.out
+./c- -0 ./TestFiles/hw4/simpleDefine.c- > TestResults/hw4/simpleDefine.c-.out
+diff TestResults/hw4/simpleDefine.c-.out TestFiles/hw4/simpleDefine.out
+2d1
+< ERROR(9): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+4d2
+< ERROR(11): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+10c8
+< Number of errors: 8
+---
+> Number of errors: 6
+./c- -0 ./TestFiles/hw4/small.c- > TestResults/hw4/small.c-.out
+diff TestResults/hw4/small.c-.out TestFiles/hw4/small.out
+3c3
+< ERROR(21): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+---
+> ERROR(21): Cannot index nonarray.
+./c- -0 ./TestFiles/hw4/sudoku.c- > TestResults/hw4/sudoku.c-.out
+diff TestResults/hw4/sudoku.c-.out TestFiles/hw4/sudoku.out
+1,2d0
+< ERROR(45): Cannot return an array.
+< ERROR(57): Cannot return an array.
+4c2
+< Number of errors: 2
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/tictactoe.c- > TestResults/hw4/tictactoe.c-.out
+diff TestResults/hw4/tictactoe.c-.out TestFiles/hw4/tictactoe.out
+./c- -0 ./TestFiles/hw4/tinybad.c- > TestResults/hw4/tinybad.c-.out
+diff TestResults/hw4/tinybad.c-.out TestFiles/hw4/tinybad.out
+5d4
+< ERROR(9): '=' requires operands of the same type but lhs is type char and rhs is type int.
+7d5
+< ERROR(10): '=' requires operands of the same type but lhs is type int and rhs is type char.
+12d9
+< ERROR(12): Array 'ant' should be indexed by type int but got type undefined.
+16c13
+< Number of errors: 14
+---
+> Number of errors: 11
+./c- -0 ./TestFiles/hw4/tiny.c- > TestResults/hw4/tiny.c-.out
+diff TestResults/hw4/tiny.c-.out TestFiles/hw4/tiny.out
+5d4
+< ERROR(9): '=' requires operands of the same type but lhs is type char and rhs is type int.
+7d5
+< ERROR(10): '=' requires operands of the same type but lhs is type int and rhs is type char.
+11c9
+< Number of errors: 9
+---
+> Number of errors: 7
+./c- -0 ./TestFiles/hw4/tinygood.c- > TestResults/hw4/tinygood.c-.out
+diff TestResults/hw4/tinygood.c-.out TestFiles/hw4/tinygood.out
+./c- -0 ./TestFiles/hw4/tinyscope.c- > TestResults/hw4/tinyscope.c-.out
+diff TestResults/hw4/tinyscope.c-.out TestFiles/hw4/tinyscope.out
+./c- -0 ./TestFiles/hw4/tinyType.c- > TestResults/hw4/tinyType.c-.out
+diff TestResults/hw4/tinyType.c-.out TestFiles/hw4/tinyType.out
+6d5
+< ERROR(12): '+' requires operands of type int but lhs is of type undefined.
+10,11d8
+< ERROR(17): '+' requires operands of type int but lhs is of type undefined.
+< ERROR(17): '+' requires operands of type int but rhs is of type undefined.
+14a12,13
+> ERROR(21): Array index is the unindexed array 'y'.
+> ERROR(23): Cannot index nonarray.
+26d24
+< ERROR(32): The operation '*' does not work with arrays.
+30d27
+< ERROR(33): 'and' requires operands of type bool but rhs is of type undefined.
+36c33
+< ERROR(36): '=' requires operands of the same type but lhs is type int and rhs is type void.
+---
+> ERROR(36): '=' requires operands of NONVOID but rhs is of type void.
+40a38,39
+> ERROR(38): '==' requires operands of NONVOID but lhs is of type void.
+> ERROR(38): '==' requires operands of NONVOID but rhs is of type void.
+42a42,43
+> ERROR(39): '!=' requires operands of NONVOID but lhs is of type void.
+> ERROR(39): '!=' requires operands of NONVOID but rhs is of type void.
+48a50,51
+> ERROR(43): '<' requires operands of type char or type int but lhs is of type bool.
+> ERROR(43): '<' requires operands of type char or type int but rhs is of type bool.
+53a57
+> ERROR(51): Function 'main' at line 7 is expecting to return type int but instead returns type void.
+55c59
+< Number of errors: 53
+---
+> Number of errors: 57
+./c- -0 ./TestFiles/hw4/undefined.c- > TestResults/hw4/undefined.c-.out
+diff TestResults/hw4/undefined.c-.out TestFiles/hw4/undefined.out
+2d1
+< ERROR(4): The operation '*' only works with arrays.
+4d2
+< ERROR(5): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+7,8d4
+< ERROR(6): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(6): '<' requires operands of the same type but lhs is type undefined and rhs is type int.
+10d5
+< ERROR(7): '*' requires operands of type int but rhs is of type undefined.
+12d6
+< ERROR(7): '>' requires operands of the same type but lhs is type int and rhs is type undefined.
+14d7
+< ERROR(8): '+' requires operands of type int but lhs is of type undefined.
+16d8
+< ERROR(8): 'or' requires operands of type bool but lhs is of type undefined.
+19,20d10
+< ERROR(9): The operation '*' only works with arrays.
+< ERROR(9): '=' requires operands of the same type but lhs is type undefined and rhs is type bool.
+23d12
+< ERROR(15): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+27,29d15
+< ERROR(16): '*' requires operands of type int but lhs is of type undefined.
+< ERROR(16): '*' requires operands of type int but rhs is of type undefined.
+< ERROR(16): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+31d16
+< ERROR(18): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+33d17
+< ERROR(25): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+35d18
+< ERROR(27): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+37d19
+< ERROR(29): '=' requires operands of the same type but lhs is type undefined and rhs is type int.
+39d20
+< ERROR(31): Function 'cat' at line 12 is expecting to return type int but instead returns type undefined.
+42,43d22
+< ERROR(36): 'and' requires operands of type bool but lhs is of type undefined.
+< ERROR(36): 'and' requires operands of type bool but rhs is of type undefined.
+50,51d28
+< ERROR(39): '+=' requires operands of type int but lhs is of type undefined.
+< ERROR(39): '+=' requires operands of type int but rhs is of type undefined.
+53d29
+< ERROR(41): Expecting Boolean test condition in if statement but got type undefined.
+55d30
+< ERROR(42): Expecting Boolean test condition in while statement but got type undefined.
+58c33
+< Number of errors: 55
+---
+> Number of errors: 30
+./c- -0 ./TestFiles/hw4/uninitialized.c- > TestResults/hw4/uninitialized.c-.out
+diff TestResults/hw4/uninitialized.c-.out TestFiles/hw4/uninitialized.out
+./c- -0 ./TestFiles/hw4/unused.c- > TestResults/hw4/unused.c-.out
+diff TestResults/hw4/unused.c-.out TestFiles/hw4/unused.out
+./c- -0 ./TestFiles/hw4/walsh.c- > TestResults/hw4/walsh.c-.out
+diff TestResults/hw4/walsh.c-.out TestFiles/hw4/walsh.out
+1,2d0
+< ERROR(62): The operation '+' does not work with arrays.
+< ERROR(75): The operation '/' does not work with arrays.
+4c2
+< Number of errors: 2
+---
+> Number of errors: 0
+./c- -0 ./TestFiles/hw4/whileif.c- > TestResults/hw4/whileif.c-.out
+diff TestResults/hw4/whileif.c-.out TestFiles/hw4/whileif.out

@@ -244,12 +244,14 @@ varDeclInitialize	: 	varDeclId
 varDeclId			:	ID
 					{
 						$$ = NewDeclNode(VarK);
+						$$->lineNumber = $1.lineNum;
 						$$->attr.name = $1.tokenStr;
 					}
 				|	ID LBRACKET NUMCONST RBRACKET
 					{
 						$$ = NewDeclNode(VarK);
 						$$->attr.name = $1.tokenStr;
+						$$->lineNumber = $1.lineNum;
 						$$->isArray = true;
 						$$->arraySize = $3.intVal;
 					}
