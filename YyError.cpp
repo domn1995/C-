@@ -5,6 +5,9 @@
 #include <string>
 #include "YyError.h"
 
+extern int yylineno;
+int numErrors = 0, numWarnings = 0;
+
 // // // // // // // // // // // // // // // // // // // // 
 //
 // Error message printing
@@ -178,7 +181,7 @@ void yyerror(const char *msg)
 	}
 
 	// print components
-	printf("ERROR(%d): Syntax error, unexpected %s", line, strs[3]);
+	printf("ERROR(%d): Syntax error, unexpected %s", yylineno, strs[3]);
 	if (Elaborate(strs[3])) {
 		if (yytext[0] == '\'' || yytext[0] == '"') printf(" %s", yytext);
 		else printf(" \'%s\'", yytext);

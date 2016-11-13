@@ -4,7 +4,11 @@
 #include "TreeNode.h"
 #include "SymbolTable.h"
 #include "c-.tab.h"
+#include "YyError.h"
+
 extern Scope globalScope;
+
+extern int numErrors, numWarnings;
 
 char GetEscapedChar(char* string)
 {
@@ -374,5 +378,8 @@ return				{
 						return SEMICOLON; 
 					}
 "//".*				; // Do nothing.
-.					{ return ERROR; }
+.					{ 
+						numErrors++; 
+						printf("WARNING(%d): Invalid input character: '%c'. Character ignored.", yylineno, yytext[0]);
+					}
 %%

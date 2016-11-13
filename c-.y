@@ -6,12 +6,13 @@
 #include "SymbolTable.h"
 #include "PrintTree.h"
 #include "Semantic.h"
+#include "YyError.h"
 
 extern int yylex();
-//extern void yyerror(const char* msg);
 extern char* yytext;
 extern int yylineno;
 extern FILE* yyin;
+extern int numErrors, numWarnings;
 
 Scope globalScope("global");
 
@@ -20,10 +21,7 @@ static char* savedName;
 static int savedLineNum;
 
 #define YYERROR_VERBOSE
-void yyerror(const char *msg)
-{
-    printf("ERROR(%d): %s\n", yylineno, msg);
-}
+extern void yyerror(const char* msg);
 %}
 
 %union 
