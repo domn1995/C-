@@ -105,275 +105,352 @@ extern void yyerror(const char* msg);
 				returnTypeSpecifier
 
 %%
-program			: 	declarationList
-					{
-						savedTree = $1;
-					}
-				;
-
-declarationList	: 	declarationList declaration
-					{
-						TreeNode* t = $1;
-						if (t != NULL)
+	program			: 	declarationList
 						{
-							while (t->sibling != NULL)
+							savedTree = $1;
+						}
+					;
+
+	declarationList	: 	declarationList declaration
+						{
+							TreeNode* t = $1;
+							if (t != NULL)
 							{
-								t = t->sibling;
+								while (t->sibling != NULL)
+								{
+									t = t->sibling;
+								}
+								t->sibling = $2;
+								$$ = $1;
 							}
-							t->sibling = $2;
+							else
+							{
+								$$ = $2;
+							}
+						}
+					| 	declaration
+						{
 							$$ = $1;
 						}
-						else
-						{
-							$$ = $2;
-						}
-					}
-				| 	declaration
-					{
-						$$ = $1;
-					}
-				;
+					;
 
-declaration 		: 	varDeclaration
-					{
-						$$ = $1;
-					}
-				|	funDeclaration
-					{
-						$$ = $1;
-					}
-				|	recDeclaration
-					{
-						$$ = $1;
-					}
-				;
+	declaration 	: 	varDeclaration
+						{
+							$$ = $1;
+						}
+					|	funDeclaration
+						{
+							$$ = $1;
+						}
+					|	recDeclaration
+						{
+							$$ = $1;
+						}
+					|	error
+						{
+							$$ = NULL;
+						}
+					;
 				
 // Variable Declarations
 
 recDeclaration		: 	RECORD ID LCURLY localDeclarations RCURLY
-					{
-						// We need to add the user-defined type to the global symbol table.
-						globalScope.insert($2.tokenStr, static_cast<char*>("recordType"));
+						{
+							// We need to add the user-defined type to the global symbol table.
+							globalScope.insert($2.tokenStr, static_cast<char*>("recordType"));
 						
-						$$ = NewDeclNode(VarK);
-						$$->lineNumber = $1.lineNum;
-						$$->attr.name = $2.tokenStr;
-						$$->isRecord = true;
-						$$->children[0] = $4;						
-					}
-				;
+							$$ = NewDeclNode(VarK);
+							$$->lineNumber = $1.lineNum;
+							$$->attr.name = $2.tokenStr;
+							$$->isRecord = true;
+							$$->children[0] = $4;						
+						}
+					;
 
 varDeclaration		: 	typeSpecifier varDeclList SEMICOLON
-					{
-						TreeNode* t = $2;
-						if (t != NULL)
 						{
-							do
+							yyerrok;
+							TreeNode* t = $2;
+							if (t != NULL)
 							{
-								t->expType = $1;
-								t = t->sibling;
+								do
+								{
+									t->expType = $1;
+									t = t->sibling;
+								}
+								while (t != NULL);
+								$$ = $2;
 							}
-							while (t != NULL);
-							$$ = $2;
+							else
+							{
+								$$ = NULL;
+							}
 						}
-						else
+					|	error varDeclList SEMICOLON
 						{
 							$$ = NULL;
 						}
-					}
-				;
+					|	typeSpecifier error SEMICOLON
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
-					{
-						TreeNode* t = $2;
-						if (t != NULL)
 						{
-							do
+							yyerrok;
+							TreeNode* t = $2;
+							if (t != NULL)
 							{
-								t->expType = $1->expType;
-								t->isRecord = $1->isRecord;
-								t->isStatic = $1->isStatic;
-								t = t->sibling;
+								do
+								{
+									t->expType = $1->expType;
+									t->isRecord = $1->isRecord;
+									t->isStatic = $1->isStatic;
+									t = t->sibling;
+								}
+								while (t != NULL);
+								$$ = $2;
 							}
-							while (t != NULL);
-							$$ = $2;
+							else
+							{
+								$$ = NULL;
+							}
 						}
-						else
+					;
+				
+	varDeclList		:	varDeclList COMMA varDeclInitialize 
+						{
+							yyerrok;
+							TreeNode* t = $1;
+							if (t != NULL)
+							{
+								while (t->sibling != NULL)
+								{
+									t = t->sibling;
+								}
+								t->sibling = $3;
+								$$ = $1;
+							}
+							else
+							{
+								$$ = $3;
+							}
+						}
+					|	varDeclInitialize 
+						{
+							$$ = $1;
+						}
+					|	varDeclList COMMA error
 						{
 							$$ = NULL;
 						}
-					}
-				;
-				
-varDeclList		:	varDeclList COMMA varDeclInitialize 
-					{
-						TreeNode* t = $1;
-						if (t != NULL)
+					|	error
 						{
-							while (t->sibling != NULL)
-							{
-								t = t->sibling;
-							}
-							t->sibling = $3;
-							$$ = $1;
+							$$ = NULL;
 						}
-						else
-						{
-							$$ = $3;
-						}
-					}
-				|	varDeclInitialize 
-					{
-						$$ = $1;
-					}
-				;
+					;
 				
 varDeclInitialize	: 	varDeclId
-					{
-						$$ = $1;
-					}
-				|	varDeclId COLON simpleExpression
-					{
-						$1->children[0] = $3;
-						$$ = $1;
-					}
-				;
+						{
+							$$ = $1;
+						}
+					|	varDeclId COLON simpleExpression
+						{
+							$1->children[0] = $3;
+							$$ = $1;
+						}
+					|	error COLON simpleExpression
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	varDeclId COLON error
+						{
+							$$ = NULL;
+						}
+					;
 				
 varDeclId			:	ID
-					{
-						$$ = NewDeclNode(VarK);
-						$$->lineNumber = $1.lineNum;
-						$$->attr.name = $1.tokenStr;
-					}
-				|	ID LBRACKET NUMCONST RBRACKET
-					{
-						$$ = NewDeclNode(VarK);
-						$$->attr.name = $1.tokenStr;
-						$$->lineNumber = $1.lineNum;
-						$$->isArray = true;
-						$$->arraySize = $3.intVal;
-					}
-				;
+						{
+							$$ = NewDeclNode(VarK);
+							$$->lineNumber = $1.lineNum;
+							$$->attr.name = $1.tokenStr;
+						}
+					|	ID LBRACKET NUMCONST RBRACKET
+						{
+							$$ = NewDeclNode(VarK);
+							$$->attr.name = $1.tokenStr;
+							$$->lineNumber = $1.lineNum;
+							$$->isArray = true;
+							$$->arraySize = $3.intVal;
+						}
+					|	ID LBRACKET error
+						{
+							$$ = NULL;
+						}
+					|	error RBRACKET
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 scopedTypeSpecifier :	STATIC typeSpecifier
-					{
-						$$ = NewDeclNode(VarK);
-						$$->isStatic = true;
-						$$->expType = $2;
-						if ($2 == Record)
 						{
-							$$->isRecord = true;
+							$$ = NewDeclNode(VarK);
+							$$->isStatic = true;
+							$$->expType = $2;
+							if ($2 == Record)
+							{
+								$$->isRecord = true;
+							}
 						}
-					}
-				| 	typeSpecifier
-					{
-						$$ = NewDeclNode(VarK);						
-						$$->expType = $1;
-					}
-				;
+					| 	typeSpecifier
+						{
+							$$ = NewDeclNode(VarK);						
+							$$->expType = $1;
+						}
+					;
 				
 typeSpecifier		: 	returnTypeSpecifier
-					{
-						$$ = $1;
-					}
-				|	RECTYPE
-					{	
-						$$ = Record;
-					}
-				;
+						{
+							$$ = $1;
+						}
+					|	RECTYPE
+						{	
+							$$ = Record;
+						}
+					;
 				
 returnTypeSpecifier :	INT
-					{
-						$$ = Int;
-					}
-				|	BOOL
-					{
-						$$ = Bool;
-					}
-				|	CHAR
-					{
-						$$ = Char;
-					}
-				;
+						{
+							$$ = Int;
+						}
+					|	BOOL
+						{
+							$$ = Bool;
+						}
+					|	CHAR
+						{
+							$$ = Char;
+						}
+					;
 				
 // Function Declarations
 
 funDeclaration		:	typeSpecifier ID LPAREN params RPAREN statement
-					{
-						$$ = NewDeclNode(FuncK);
-						$$->expType = $1;
-						$$->attr.name = $2.tokenStr;
-						$$->children[0] = $4;
-						$$->children[1] = $6;
-						// Sets the line number where the function declaration starts.
-						$$->lineNumber = $2.lineNum; 
-					}
-				|	ID LPAREN params RPAREN statement
-					{
-						$$ = NewDeclNode(FuncK);
-						$$->expType = Void;
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-						$$->children[1] = $5;
-						// Sets the line number where the function call starts.
-						$$->lineNumber = $1.lineNum;
-					}
-				;
-				
-params			:	paramList 
-					{ 
-						$$ = $1;
-					}
-				|	{
-						$$ = NULL;
-					}
-				;
-				
-paramList			: 	paramList SEMICOLON paramTypeList
-					{
-						TreeNode* t = $1;
-						if (t != NULL)
 						{
-							while (t->sibling != NULL)
-							{
-								t = t->sibling;
-							}
-							t->sibling = $3;
-							$$ = $1;
+							$$ = NewDeclNode(FuncK);
+							$$->expType = $1;
+							$$->attr.name = $2.tokenStr;
+							$$->children[0] = $4;
+							$$->children[1] = $6;
+							// Sets the line number where the function declaration starts.
+							$$->lineNumber = $2.lineNum; 
 						}
-						else
+					|	ID LPAREN params RPAREN statement
 						{
-							$$ = $3;
+							$$ = NewDeclNode(FuncK);
+							$$->expType = Void;
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+							$$->children[1] = $5;
+							// Sets the line number where the function call starts.
+							$$->lineNumber = $1.lineNum;
 						}
-					}
-				|	paramTypeList
-					{
-						$$ = $1;
-					}
-				;
-
-paramTypeList		: 	typeSpecifier paramIdList
-					{
-						TreeNode* t = $2;
-						if (t != NULL)
-						{
-							do
-							{
-								t->expType = $1;
-								t = t->sibling;
-							}
-							while (t != NULL);
-							$$ = $2;
-						}
-						else
+					|	typeSpecifier error
 						{
 							$$ = NULL;
 						}
-					}
-				;
+					|	typeSpecifier ID LPAREN error
+						{
+							$$ = NULL;
+						}
+					|	typeSpecifier ID LPAREN params RPAREN error
+						{
+							$$ = NULL;
+						}
+					|	ID LPAREN error
+						{
+							$$ = NULL;
+						}
+					|	ID LPAREN params RPAREN error
+						{
+							$$ = NULL;
+						}
+					;
+				
+params				:	paramList 
+						{ 
+							$$ = $1;
+						}
+					|	{
+							$$ = NULL;
+						}
+					;
+				
+paramList			: 	paramList SEMICOLON paramTypeList
+						{
+							yyerrok;
+							TreeNode* t = $1;
+							if (t != NULL)
+							{
+								while (t->sibling != NULL)
+								{
+									t = t->sibling;
+								}
+								t->sibling = $3;
+								$$ = $1;
+							}
+							else
+							{
+								$$ = $3;
+							}
+						}
+					|	paramTypeList
+						{
+							$$ = $1;
+						}
+					|	paramList SEMICOLON error
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	error
+						{
+							$$ = NULL;
+						}
+					;
+
+paramTypeList		: 	typeSpecifier paramIdList
+						{
+							TreeNode* t = $2;
+							if (t != NULL)
+							{
+								do
+								{
+									t->expType = $1;
+									t = t->sibling;
+								}
+								while (t != NULL);
+								$$ = $2;
+							}
+							else
+							{
+								$$ = NULL;
+							}
+						}
+					|	typeSpecifier error
+						{
+							$$ = NULL;
+						}
+					;
 				
 paramIdList		:	paramIdList COMMA paramId
 					{
+						yyerrok;
 						TreeNode* t = $1;
 						if (t != NULL)
 						{
@@ -394,6 +471,14 @@ paramIdList		:	paramIdList COMMA paramId
 					{
 						$$ = $1;
 					}
+				|	paramIdList COMMA error
+					{
+						$$ = NULL;
+					}
+				|	error
+					{
+						$$ = NULL;
+					}
 				;
 				
 paramId			:	ID
@@ -407,191 +492,267 @@ paramId			:	ID
 						$$->attr.name = $1.tokenStr;
 						$$->isArray = true;
 					}
+				|	error RBRACKET
+					{
+						yyerrok;
+						$$ = NULL;
+					}
 				;
 				
 // Statements
 
 statement			:	matched
-					{
-						$$ = $1;
-					}
-				|	unmatched
-					{
-						$$ = $1;
-					}
-				;
+						{
+							$$ = $1;
+						}
+					|	unmatched
+						{
+							$$ = $1;
+						}
+					;
 
-matched			:	selectionStmtMatched
-					{
-						$$ = $1;
-					}
-				|	iterationStmtMatched
-					{
-						$$ = $1;
-					}
-				|	expressionStmt
-					{
-						$$ = $1;
-					}
-				|	compoundStmt
-					{
-						$$ = $1;
-					}
-				|	returnStmt
-					{
-						$$ = $1;
-					}	
-				|	breakStmt
-					{
-						$$ = $1;
-					}
-				;
+matched				:	selectionStmtMatched
+						{
+							$$ = $1;
+						}
+					|	iterationStmtMatched
+						{
+							$$ = $1;
+						}
+					|	expressionStmt
+						{
+							$$ = $1;
+						}
+					|	compoundStmt
+						{
+							$$ = $1;
+						}
+					|	returnStmt
+						{
+							$$ = $1;
+						}	
+					|	breakStmt
+						{
+							$$ = $1;
+						}
+					;
 				
 unmatched			:	selectionStmtUnmatched
-					{
-						$$ = $1;
-					}
-				|	iterationStmtUnmatched
-					{
-						$$ = $1;
-					}
-				;
+						{
+							$$ = $1;
+						}
+					|	iterationStmtUnmatched
+						{
+							$$ = $1;
+						}
+					;
 				
 compoundStmt		:	LCURLY localDeclarations statementList RCURLY
-					{
-						$$ = NewStmtNode(CompK);
-						$$->children[0] = $2;
-						$$->children[1] = $3;
-						$$->lineNumber = $1.lineNum;
-					}
-				;
+						{
+							yyerrok;
+							$$ = NewStmtNode(CompK);
+							$$->children[0] = $2;
+							$$->children[1] = $3;
+							$$->lineNumber = $1.lineNum;
+						}
+					|	LCURLY error statementList RCURLY
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	LCURLY localDeclarations error RCURLY
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 			
 localDeclarations	:	localDeclarations scopedVarDeclaration
-					{
-						TreeNode* t = $1;
-						if (t != NULL)
 						{
-							while (t->sibling != NULL)
+							TreeNode* t = $1;
+							if (t != NULL)
 							{
-								t = t->sibling;
+								while (t->sibling != NULL)
+								{
+									t = t->sibling;
+								}
+								t->sibling = $2;
+								$$ = $1;
 							}
-							t->sibling = $2;
-							$$ = $1;
+							else
+							{
+								$$ = $2;
+							}
 						}
-						else
-						{
-							$$ = $2;
+					|	{
+							$$ = NULL;
 						}
-					}
-				|	{
-						$$ = NULL;
-					}
-				;
+					;
 				
 statementList		:	statementList statement
-					{
-						TreeNode* t = $1;
-						if (t != NULL)
 						{
-							while (t->sibling != NULL)
+							TreeNode* t = $1;
+							if (t != NULL)
 							{
-								t = t->sibling;
+								while (t->sibling != NULL)
+								{
+									t = t->sibling;
+								}
+								t->sibling = $2;
+								$$ = $1;
 							}
-							t->sibling = $2;
-							$$ = $1;
+							else
+							{
+								$$ = $2;
+							}
 						}
-						else
-						{
-							$$ = $2;
+					|	{
+							$$ = NULL;
 						}
-					}
-				|	{
-						$$ = NULL;
-					}
-				;
+					;
 			
 expressionStmt		:	expression SEMICOLON
-					{
-						$$ = $1;
-					}
-				|	SEMICOLON
-					{
-						$$ = NULL;
-					}
-				;
+						{
+							yyerrok;
+							$$ = $1;
+						}
+					|	SEMICOLON
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 selectionStmtMatched:	IF LPAREN simpleExpression RPAREN matched ELSE matched
-					{
-						$$ = NewStmtNode(IfK);
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-						$$->children[1] = $5;
-						$$->children[2] = $7;
-						$$->lineNumber = $1.lineNum;
-					}
-				;
+						{
+							$$ = NewStmtNode(IfK);
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+							$$->children[1] = $5;
+							$$->children[2] = $7;
+							$$->lineNumber = $1.lineNum;
+						}
+					|	IF LPAREN error	
+						{
+							$$ = NULL;
+						}
+					|	IF error RPAREN matched ELSE matched
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	error
+						{
+							$$ = NULL;
+						}
+					;
 				
 selectionStmtUnmatched:	IF LPAREN simpleExpression RPAREN matched ELSE unmatched
-					{
-						$$ = NewStmtNode(IfK);
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-						$$->children[1] = $5;
-						$$->children[2] = $7;
-						$$->lineNumber = $1.lineNum;
-					}
-				|
-					IF LPAREN simpleExpression RPAREN statement
-					{
-						$$ = NewStmtNode(IfK);
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-						$$->children[1] = $5;
-						$$->lineNumber = $1.lineNum;
-					}
-				;
+						{
+							$$ = NewStmtNode(IfK);
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+							$$->children[1] = $5;
+							$$->children[2] = $7;
+							$$->lineNumber = $1.lineNum;
+						}
+					|
+						IF LPAREN simpleExpression RPAREN statement
+						{
+							$$ = NewStmtNode(IfK);
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+							$$->children[1] = $5;
+							$$->lineNumber = $1.lineNum;
+						}
+					|	IF error
+						{
+							$$ = NULL;
+						}
+					|	IF error RPAREN statement
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	IF error RPAREN matched ELSE unmatched
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 iterationStmtMatched:	WHILE LPAREN simpleExpression RPAREN matched
-					{
-						$$ = NewStmtNode(WhileK);
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-						$$->children[1] = $5;
-						$$->lineNumber = $1.lineNum;
-					}
-				;
+						{
+							$$ = NewStmtNode(WhileK);
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+							$$->children[1] = $5;
+							$$->lineNumber = $1.lineNum;
+						}
+					|	WHILE error RPAREN matched
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	WHILE LPAREN error RPAREN matched
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	WHILE error
+						{
+							$$ = NULL;
+						}
+					|	error
+						{
+							$$ = NULL;
+						}
+					;
 				
 iterationStmtUnmatched:	WHILE LPAREN simpleExpression RPAREN unmatched
-					{
-						$$ = NewStmtNode(WhileK);
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-						$$->children[1] = $5;
-						$$->lineNumber = $1.lineNum;
-					}
-				;
+						{
+							$$ = NewStmtNode(WhileK);
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+							$$->children[1] = $5;
+							$$->lineNumber = $1.lineNum;
+						}
+					|	WHILE error RPAREN unmatched
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	WHILE LPAREN error RPAREN unmatched
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
-returnStmt		:	RETURN SEMICOLON
-					{
-						$$ = NewStmtNode(ReturnK);
-						$$->attr.name = $1.tokenStr;
-						$$->lineNumber = $1.lineNum;
-					}
-				|	RETURN expression SEMICOLON
-					{
-						$$ = NewStmtNode(ReturnK);
-						$$->attr.name = $1.tokenStr;
-						$$->lineNumber = $1.lineNum;
-						$$->children[0] = $2;
-					}
-				;
+	returnStmt		:	RETURN SEMICOLON
+						{
+							yyerrok;
+							$$ = NewStmtNode(ReturnK);
+							$$->attr.name = $1.tokenStr;
+							$$->lineNumber = $1.lineNum;
+						}
+					|	RETURN expression SEMICOLON
+						{
+							yyerrok;
+							$$ = NewStmtNode(ReturnK);
+							$$->attr.name = $1.tokenStr;
+							$$->lineNumber = $1.lineNum;
+							$$->children[0] = $2;
+						}
+					;
 				
 breakStmt			:	BREAK SEMICOLON
-					{
-						$$ = NewStmtNode(BreakK);
-						$$->attr.name = $1.tokenStr;
-					}
-				;
+						{
+							yyerrok;
+							$$ = NewStmtNode(BreakK);
+							$$->attr.name = $1.tokenStr;
+						}
+					;
 				
 // Expressions
 
@@ -637,6 +798,7 @@ expression		: 	mutable ASSIGN expression
 					}
 				|	mutable INC
 					{
+						yyerrok;
 						$$ = NewExprNode(AssignK);
 						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
@@ -644,6 +806,7 @@ expression		: 	mutable ASSIGN expression
 					}
 				|	mutable DEC
 					{
+						yyerrok;
 						$$ = NewExprNode(AssignK);
 						$$->lineNumber = $2.lineNum;
 						$$->attr.name = $2.tokenStr;
@@ -653,62 +816,101 @@ expression		: 	mutable ASSIGN expression
 					{
 						$$ = $1;
 					}
+				|	error ASSIGN error
+					{
+						$$ = NULL;
+					}
+				|	error ADDASS error
+					{
+						$$ = NULL;
+					}
+				|	error SUBASS error
+					{
+						$$ = NULL;
+					}
+				|	error MULASS error
+					{
+						$$ = NULL;
+					}
+				|	error DIVASS error
+					{
+						$$ = NULL;
+					}
+				|	error INC
+					{
+						yyerrok;
+						$$ = NULL;
+					}
+				|	error DEC
+					{
+						yyerrok;
+						$$ = NULL;
+					}
 				;
 				
 simpleExpression	:	simpleExpression OR andExpresssion
-					{
-						$$ = NewExprNode(OpK);
-						$$->attr.name = $2.tokenStr;
-						$$->isConst = $1->isConst && $3->isConst;
-						$$->children[0] = $1;
-						$$->children[1] = $3;
-					}
-				|	andExpresssion
-					{
-						$$ = $1;
-					}
-				;
+						{
+							$$ = NewExprNode(OpK);
+							$$->attr.name = $2.tokenStr;
+							$$->isConst = $1->isConst && $3->isConst;
+							$$->children[0] = $1;
+							$$->children[1] = $3;
+						}
+					|	andExpresssion
+						{
+							$$ = $1;
+						}
+					;
 				
 andExpresssion		:	andExpresssion AND unaryRelExpression
-					{
-						$$ = NewExprNode(OpK);
-						$$->attr.name = $2.tokenStr;
-						$$->isConst = $1->isConst && $3->isConst;
-						$$->children[0] = $1;
-						$$->children[1] = $3;
-					}
-				|	unaryRelExpression
-					{
-						$$ = $1;
-					}
-				;
+						{
+							$$ = NewExprNode(OpK);
+							$$->attr.name = $2.tokenStr;
+							$$->isConst = $1->isConst && $3->isConst;
+							$$->children[0] = $1;
+							$$->children[1] = $3;
+						}
+					|	unaryRelExpression
+						{
+							$$ = $1;
+						}
+					;
 				
 unaryRelExpression	:	NOT unaryRelExpression
-					{
-						$$ = NewExprNode(OpK);
-						$$->attr.name = $1.tokenStr;
-						$$->isConst = $2->isConst;
-						$$->children[0] = $2;
-					}
-				|	relExpression
-					{
-						$$ = $1;
-					}
+						{
+							$$ = NewExprNode(OpK);
+							$$->attr.name = $1.tokenStr;
+							$$->isConst = $2->isConst;
+							$$->children[0] = $2;
+						}
+					|	relExpression
+						{
+							$$ = $1;
+						}
 				;
 				
 relExpression		:	sumExpression relop sumExpression
-					{
-						$$ = NewExprNode(OpK);
-						$$->attr.name = $2.tokenStr;
-						$$->isConst = $1->isConst && $3->isConst;
-						$$->children[0] = $1;
-						$$->children[1] = $3;
-					}
-				|	sumExpression
-					{
-						$$ = $1;
-					}
-				;
+						{
+							$$ = NewExprNode(OpK);
+							$$->attr.name = $2.tokenStr;
+							$$->isConst = $1->isConst && $3->isConst;
+							$$->children[0] = $1;
+							$$->children[1] = $3;
+						}
+					|	sumExpression
+						{
+							$$ = $1;
+						}
+					|	sumExpression relop error
+						{
+							$$ = NULL;
+						}
+					|	error relop sumExpression
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 relop			:	LESSEQ
 					{
@@ -737,19 +939,24 @@ relop			:	LESSEQ
 				;
 				
 sumExpression		:	sumExpression sumop term
-					{
-						$$ = NewExprNode(OpK);
-						$$->attr.name = $2.tokenStr;
-						$$->lineNumber = $2.lineNum;
-						$$->isConst = $1->isConst && $3->isConst;
-						$$->children[0] = $1;
-						$$->children[1] = $3;
-					}
-				|	term
-					{
-						$$ = $1;
-					}
-				;
+						{
+							$$ = NewExprNode(OpK);
+							$$->attr.name = $2.tokenStr;
+							$$->lineNumber = $2.lineNum;
+							$$->isConst = $1->isConst && $3->isConst;
+							$$->children[0] = $1;
+							$$->children[1] = $3;
+						}
+					|	term
+						{
+							$$ = $1;
+						}
+					|	sumExpression sumop error
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 sumop			:	ADD
 					{
@@ -855,27 +1062,42 @@ mutable			:	ID
 				;
 				
 immutable			:	LPAREN expression RPAREN
-					{
-						$$ = $2;
-					}
-				|	call
-					{
-						$$ = $1;
-					}
-				|	constant
-					{
-						$$ = $1;
-					}
-				;
+						{
+							yyerrok;
+							$$ = $2;
+						}
+					|	call
+						{
+							$$ = $1;
+						}
+					|	constant
+						{
+							$$ = $1;
+						}
+					|	LPAREN error
+						{
+							$$ = NULL;
+						}
+					|	error RPAREN
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					;
 				
 call				:	ID LPAREN args RPAREN
-					{
-						$$ = NewExprNode(CallK);
-						$$->lineNumber = $1.lineNum;
-						$$->attr.name = $1.tokenStr;
-						$$->children[0] = $3;
-					}
-				;
+						{
+							yyerrok;
+							$$ = NewExprNode(CallK);
+							$$->lineNumber = $1.lineNum;
+							$$->attr.name = $1.tokenStr;
+							$$->children[0] = $3;
+						}
+					|	error LPAREN
+						{
+							$$ = NULL;
+						}
+					;
 	
 args 			:	argList
 					{
@@ -887,6 +1109,7 @@ args 			:	argList
 	
 argList			:	argList COMMA expression
 					{
+						yyerrok;
 						TreeNode* t = $1;
 						if (t != NULL)
 						{
@@ -905,6 +1128,10 @@ argList			:	argList COMMA expression
 				|	expression
 					{
 						$$ = $1;
+					}
+				|	argList COMMA error
+					{
+						$$ = NULL;
 					}
 				;
 				
@@ -984,21 +1211,18 @@ int main(int argc, char** argv)
 	if (printAbstractSyntaxTree)
 	{		
 		PrintSyntaxTree(savedTree, -1, false);
-	}	
-	
-	int numOfErrors = 0;
-	int numOfWarnings = 0;	
+	}
 	
 	AttachIOLib(savedTree);
-	SemanticAnalysis(savedTree, numOfErrors, numOfWarnings);
+	SemanticAnalysis(savedTree, numErrors, numWarnings);
 	
 	if (printAnnotatedSyntaxTree)
 	{
 		PrintSyntaxTree(savedTree, -1, true);
 	}
 		
-	printf("Number of warnings: %d\n", numOfWarnings);
-	printf("Number of errors: %d\n", numOfErrors);
+	printf("Number of warnings: %d\n", numWarnings);
+	printf("Number of errors: %d\n", numErrors);
 	
 	return 0;
 }
