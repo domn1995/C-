@@ -6,7 +6,7 @@
 #include "YyError.h"
 
 extern int yylineno;
-int numErrors = 0, numWarnings = 0;
+extern int numErrors, numWarnings;
 
 // // // // // // // // // // // // // // // // // // // // 
 //
@@ -71,8 +71,17 @@ static std::map<std::string, char *> niceTokenNameMap;    // use an ordered map 
 														  // WARNING: this routine must be called to initialize mapping of
 														  // (strings returned as error message) --> (human readable strings)
 														  //
-void initErrorProcessing() 
+void InitErrorProcessing() 
 {
+	niceTokenNameMap["COLON"] = static_cast<char*>("':'");
+	niceTokenNameMap["SEMICOLON"] = static_cast<char*>("';'");
+	niceTokenNameMap["DIV"] = static_cast<char*>("'/'");
+	niceTokenNameMap["STAR"] = static_cast<char*>("'*'");
+	niceTokenNameMap["ADD"] = static_cast<char*>("'+'");
+	niceTokenNameMap["MINUS"] = static_cast<char*>("'-'");
+	niceTokenNameMap["PERCENT"] = static_cast<char*>("'%'");
+	niceTokenNameMap["COMMA"] = static_cast<char*>("','");
+	niceTokenNameMap["ASSIGN"] = static_cast<char*>("'='");
 	niceTokenNameMap["AND"] = static_cast<char *>("and");
 	niceTokenNameMap["OR"] = static_cast<char *>("or");
 	niceTokenNameMap["NOT"] = static_cast<char *>("not");
@@ -83,14 +92,23 @@ void initErrorProcessing()
 	niceTokenNameMap["DEC"] = static_cast<char *>("'--'");
 	niceTokenNameMap["SUBASS"] = static_cast<char *>("'-='");
 	niceTokenNameMap["DIVASS"] = static_cast<char *>("'/='");
+	niceTokenNameMap["LTHAN"] = static_cast<char*>("'<'");
+	niceTokenNameMap["GTHAN"] = static_cast<char*>("'>'");
 	niceTokenNameMap["LESSEQ"] = static_cast<char*>("'<='");
 	niceTokenNameMap["EQ"] = static_cast<char*>("'=='");
 	niceTokenNameMap["GRTEQ"] = static_cast<char*>("'>='");
+	niceTokenNameMap["QMARK"] = static_cast<char*>("'?'");
+	niceTokenNameMap["LPAREN"] = static_cast<char*>("'('");
+	niceTokenNameMap["RPAREN"] = static_cast<char*>("')'");
+	niceTokenNameMap["LCURLY"] = static_cast<char*>("'{'");
+	niceTokenNameMap["RCURLY"] = static_cast<char*>("'}'");
+	niceTokenNameMap["LBRACKET"] = static_cast<char*>("'['");
+	niceTokenNameMap["RBRACKET"] = static_cast<char*>("']'");
+	niceTokenNameMap["DOT"] = static_cast<char*>("'.'");
 	niceTokenNameMap["BOOL"] = static_cast<char*>("bool");
 	niceTokenNameMap["BREAK"] = static_cast<char*>("break");
 	niceTokenNameMap["CHAR"] = static_cast<char*>("char");
 	niceTokenNameMap["ELSE"] = static_cast<char*>("else");
-	niceTokenNameMap["FOREACH"] = static_cast<char*>("foreach");
 	niceTokenNameMap["IF"] = static_cast<char*>("if");
 	niceTokenNameMap["IN"] = static_cast<char*>("in");
 	niceTokenNameMap["INT"] = static_cast<char*>("int");
@@ -102,7 +120,6 @@ void initErrorProcessing()
 	niceTokenNameMap["NUMCONST"] = static_cast<char*>("numeric constant");
 	niceTokenNameMap["ID"] = static_cast<char*>("identifier");
 	niceTokenNameMap["CHARCONST"] = static_cast<char*>("character constant");
-	niceTokenNameMap["STRINGCONST"] = static_cast<char*>("string constant");
 	niceTokenNameMap["$end"] = static_cast<char*>("end of input");
 }
 
@@ -120,7 +137,7 @@ char* NiceTokenStr(char* tokenName)
 	{
 		printf("ERROR(SYSTEM): NiceTokenStr fails to find string '%s'\n", tokenName);
 		fflush(stdout);
-		exit(1);
+		//exit(1);
 	}
 	return niceTokenNameMap[tokenName];
 }

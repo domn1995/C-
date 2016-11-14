@@ -1417,8 +1417,8 @@ case 50:
 YY_RULE_SETUP
 #line 381 "c-.l"
 { 
-						numErrors++; 
-						printf("WARNING(%d): Invalid input character: '%c'. Character ignored.", yylineno, yytext[0]);
+						numWarnings++; 
+						printf("WARNING(%d): Invalid input character: '%c'. Character ignored.\n", yylineno, yytext[0]);
 					}
 	YY_BREAK
 case 51:

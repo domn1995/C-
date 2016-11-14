@@ -12,7 +12,7 @@ extern int yylex();
 extern char* yytext;
 extern int yylineno;
 extern FILE* yyin;
-extern int numErrors, numWarnings;
+int numErrors = 0, numWarnings = 0;
 
 Scope globalScope("global");
 
@@ -80,7 +80,7 @@ extern void yyerror(const char* msg);
 				// Expressions
 				expression
 				simpleExpression
-				andExpresssion
+				andExpression
 				unaryRelExpression
 				relExpression
 				sumExpression
@@ -105,13 +105,13 @@ extern void yyerror(const char* msg);
 				returnTypeSpecifier
 
 %%
-	program			: 	declarationList
+program				: 	declarationList
 						{
 							savedTree = $1;
 						}
 					;
 
-	declarationList	: 	declarationList declaration
+declarationList		: 	declarationList declaration
 						{
 							TreeNode* t = $1;
 							if (t != NULL)
@@ -134,7 +134,7 @@ extern void yyerror(const char* msg);
 						}
 					;
 
-	declaration 	: 	varDeclaration
+declaration 		: 	varDeclaration
 						{
 							$$ = $1;
 						}
@@ -195,6 +195,11 @@ varDeclaration		: 	typeSpecifier varDeclList SEMICOLON
 							yyerrok;
 							$$ = NULL;
 						}
+					|	error SEMICOLON
+						{
+							yyerrok;
+							$$ = NULL;
+						}
 					;
 				
 scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
@@ -217,6 +222,15 @@ scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
 							{
 								$$ = NULL;
 							}
+						}
+					|	error
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	scopedTypeSpecifier error
+						{
+							$$ = NULL;
 						}
 					;
 				
@@ -729,7 +743,7 @@ iterationStmtUnmatched:	WHILE LPAREN simpleExpression RPAREN unmatched
 						}
 					;
 				
-	returnStmt		:	RETURN SEMICOLON
+returnStmt			:	RETURN SEMICOLON
 						{
 							yyerrok;
 							$$ = NewStmtNode(ReturnK);
@@ -848,7 +862,7 @@ expression		: 	mutable ASSIGN expression
 					}
 				;
 				
-simpleExpression	:	simpleExpression OR andExpresssion
+simpleExpression	:	simpleExpression OR andExpression
 						{
 							$$ = NewExprNode(OpK);
 							$$->attr.name = $2.tokenStr;
@@ -856,13 +870,26 @@ simpleExpression	:	simpleExpression OR andExpresssion
 							$$->children[0] = $1;
 							$$->children[1] = $3;
 						}
-					|	andExpresssion
+					|	andExpression
 						{
 							$$ = $1;
 						}
+					|	error OR andExpression
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	simpleExpression OR error
+						{
+							$$ = NULL;
+						}
+					|	error OR error
+						{
+							$$ = NULL;
+						}
 					;
 				
-andExpresssion		:	andExpresssion AND unaryRelExpression
+andExpression		:	andExpression AND unaryRelExpression
 						{
 							$$ = NewExprNode(OpK);
 							$$->attr.name = $2.tokenStr;
@@ -873,6 +900,19 @@ andExpresssion		:	andExpresssion AND unaryRelExpression
 					|	unaryRelExpression
 						{
 							$$ = $1;
+						}
+					|	error AND unaryRelExpression
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	andExpression AND error
+						{
+							$$ = NULL;
+						}
+					|	error AND error
+						{
+							$$ = NULL;
 						}
 					;
 				
@@ -908,6 +948,10 @@ relExpression		:	sumExpression relop sumExpression
 					|	error relop sumExpression
 						{
 							yyerrok;
+							$$ = NULL;
+						}
+					|	error relop error
+						{
 							$$ = NULL;
 						}
 					;
@@ -954,6 +998,15 @@ sumExpression		:	sumExpression sumop term
 					|	sumExpression sumop error
 						{
 							yyerrok;
+							$$ = NULL;
+						}
+					|	error sumop term
+						{
+							yyerrok;
+							$$ = NULL;
+						}
+					|	error sumop error
+						{
 							$$ = NULL;
 						}
 					;
@@ -1136,27 +1189,27 @@ argList			:	argList COMMA expression
 				;
 				
 constant			:	NUMCONST
-					{
-						$$ = NewExprNode(ConstK);
-						$$->isConst = true;
-						$$->attr.value = $1.intVal;
-						$$->expType = Int;
-					}
-				|	CHARCONST
-					{
-						$$ = NewExprNode(ConstK);
-						$$->isConst = true;
-						$$->attr.cValue = $1.charVal;
-						$$->expType = Char;
-					}
-				|	BOOLCONST
-					{
-						$$ = NewExprNode(ConstK);
-						$$->isConst = true;
-						$$->attr.value = $1.intVal;
-						$$->expType = Bool;
-					}
-				;
+						{
+							$$ = NewExprNode(ConstK);
+							$$->isConst = true;
+							$$->attr.value = $1.intVal;
+							$$->expType = Int;
+						}
+					|	CHARCONST
+						{
+							$$ = NewExprNode(ConstK);
+							$$->isConst = true;
+							$$->attr.cValue = $1.charVal;
+							$$->expType = Char;
+						}
+					|	BOOLCONST
+						{
+							$$ = NewExprNode(ConstK);
+							$$->isConst = true;
+							$$->attr.value = $1.intVal;
+							$$->expType = Bool;
+						}
+					;
 				
 %%
 
@@ -1167,6 +1220,8 @@ int main(int argc, char** argv)
 	
 	bool printAbstractSyntaxTree = false;
 	bool printAnnotatedSyntaxTree = false;	
+
+	InitErrorProcessing();
 	
 	while ((arg = getopt(argc, argv, "dpP0")) != EOF)
 	{
@@ -1208,18 +1263,23 @@ int main(int argc, char** argv)
 	} 
 	while (!feof(yyin));	
 		
-	if (printAbstractSyntaxTree)
+	if (printAbstractSyntaxTree && numErrors == 0)
 	{		
 		PrintSyntaxTree(savedTree, -1, false);
 	}
 	
-	AttachIOLib(savedTree);
-	SemanticAnalysis(savedTree, numErrors, numWarnings);
-	
-	if (printAnnotatedSyntaxTree)
+
+	if (numErrors == 0)
 	{
-		PrintSyntaxTree(savedTree, -1, true);
+		AttachIOLib(savedTree);
+		SemanticAnalysis(savedTree, numErrors, numWarnings);
+	
+		if (printAnnotatedSyntaxTree)
+		{
+			PrintSyntaxTree(savedTree, -1, true);
+		}
 	}
+	
 		
 	printf("Number of warnings: %d\n", numWarnings);
 	printf("Number of errors: %d\n", numErrors);

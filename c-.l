@@ -53,7 +53,7 @@ char GetEscapedChar(char* string)
 %option noyywrap
  
 %%
-[\ \t\n]				; // Ignore space, new line, and tab characters.
+[\ \t\n]			; // Ignore space, new line, and tab characters.
 [0-9]+				{ 
 						yylval.t.tokenClass = NUMCONST;
 						yylval.t.lineNum = yylineno;
@@ -61,7 +61,7 @@ char GetEscapedChar(char* string)
 						yylval.t.tokenStr = strdup(yytext);
 						return NUMCONST; 
 					}
-true					{ 
+true				{ 
 						yylval.t.tokenClass = BOOLCONST;
 						yylval.t.lineNum = yylineno;
 						yylval.t.intVal = 1;
@@ -75,7 +75,7 @@ false				{
 						yylval.t.tokenStr = strdup(yytext);
 						return BOOLCONST; 
 					}
-'([^'\\\n]|\\.)'		{ 
+'([^'\\\n]|\\.)'	{ 
 						yylval.t.tokenClass = BOOLCONST;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
@@ -100,13 +100,13 @@ int					{
 						yylval.t.tokenStr = strdup(yytext);
 						return INT;
 					}
-char					{ 	 
+char				{ 	 
 						yylval.t.tokenClass = CHAR;
 						yylval.t.lineNum = yylineno;
 						yylval.t.tokenStr = strdup(yytext);
 						return CHAR;
 					}
-bool					{ 
+bool				{ 
 						yylval.t.tokenClass = BOOL;
 						yylval.t.lineNum = yylineno;
 						yylval.t.tokenStr = strdup(yytext);
@@ -118,7 +118,7 @@ if					{
 						yylval.t.tokenStr = strdup(yytext);
 						return IF; 
 					}
-else					{ 
+else				{ 
 						yylval.t.tokenClass = ELSE;
 						yylval.t.lineNum = yylineno;
 						yylval.t.tokenStr = strdup(yytext);
@@ -209,42 +209,42 @@ return				{
 						yylval.t.tokenStr = strdup(yytext);
 						return ASSIGN; 
 					}
-"*="					{ 
+"*="				{ 
 						yylval.t.tokenClass = MULASS;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return MULASS; 
 					}
-"++"					{ 
+"++"				{ 
 						yylval.t.tokenClass = INC;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return INC; 
 					}
-"+="					{ 
+"+="				{ 
 						yylval.t.tokenClass = ADDASS;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return ADDASS; 
 					}
-"--"					{ 
+"--"				{ 
 						yylval.t.tokenClass = DEC;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return DEC; 
 					}
-"-="					{ 
+"-="				{ 
 						yylval.t.tokenClass = SUBASS;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return SUBASS; 
 					}
-"/="					{ 
+"/="				{ 
 						yylval.t.tokenClass = DIVASS;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
@@ -258,21 +258,21 @@ return				{
 						yylval.t.tokenStr = strdup(yytext);
 						return LTHAN; 
 					}
-"<="					{ 
+"<="				{ 
 						yylval.t.tokenClass = LESSEQ;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return LESSEQ; 
 					}
-"=="					{ 
+"=="				{ 
 						yylval.t.tokenClass = EQ;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
 						yylval.t.tokenStr = strdup(yytext);
 						return EQ; 
 					}
-"!="					{ 
+"!="				{ 
 						yylval.t.tokenClass = NOTEQ;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
@@ -286,7 +286,7 @@ return				{
 						yylval.t.tokenStr = strdup(yytext);
 						return GTHAN; 
 					}
-">="					{ 
+">="				{ 
 						yylval.t.tokenClass = GRTEQ;
 						yylval.t.lineNum = yylineno;
 						yylval.t.charVal = GetEscapedChar(yytext);
@@ -343,19 +343,19 @@ return				{
 						return RBRACKET; 
 					}
 [a-zA-Z]+[0-9a-zA-Z]*	{ 
-						int tokenType = ID;						
-						
-						// If this identifier is actually a record type, we should return RECTYPE instead.
-						if (static_cast<char*>(globalScope.lookup(yytext)) != NULL && strcmp(static_cast<char*>(globalScope.lookup(yytext)), "recordType") == 0)
-						{								
-							tokenType = RECTYPE;
-						}						
-						yylval.t.tokenClass = tokenType;
-						yylval.t.lineNum = yylineno;
-						yylval.t.tokenStr = strdup(yytext);
-						
-						return tokenType; 
-					}
+							int tokenType = ID;						
+							
+							// If this identifier is actually a record type, we should return RECTYPE instead.
+							if (static_cast<char*>(globalScope.lookup(yytext)) != NULL && strcmp(static_cast<char*>(globalScope.lookup(yytext)), "recordType") == 0)
+							{								
+								tokenType = RECTYPE;
+							}						
+							yylval.t.tokenClass = tokenType;
+							yylval.t.lineNum = yylineno;
+							yylval.t.tokenStr = strdup(yytext);
+							
+							return tokenType; 
+						}
 "."					{ 
 						yylval.t.tokenClass = DOT;
 						yylval.t.lineNum = yylineno;
@@ -379,7 +379,7 @@ return				{
 					}
 "//".*				; // Do nothing.
 .					{ 
-						numErrors++; 
-						printf("WARNING(%d): Invalid input character: '%c'. Character ignored.", yylineno, yytext[0]);
+						numWarnings++; 
+						printf("WARNING(%d): Invalid input character: '%c'. Character ignored.\n", yylineno, yytext[0]);
 					}
 %%
