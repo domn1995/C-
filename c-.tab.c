@@ -85,10 +85,12 @@ static TreeNode* savedTree;
 static char* savedName;
 static int savedLineNum;
 
+extern int globalOffset;
+
 #define YYERROR_VERBOSE
 extern void yyerror(const char* msg);
 
-#line 92 "c-.tab.c" /* yacc.c:339  */
+#line 94 "c-.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -179,13 +181,13 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 28 "c-.y" /* yacc.c:355  */
+#line 30 "c-.y" /* yacc.c:355  */
 
     Token t;
     TreeNode* treeNode;
     ExpType expType;
 
-#line 189 "c-.tab.c" /* yacc.c:355  */
+#line 191 "c-.tab.c" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -200,7 +202,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 204 "c-.tab.c" /* yacc.c:358  */
+#line 206 "c-.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -502,24 +504,24 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   108,   108,   114,   131,   137,   141,   145,   149,   157,
-     170,   189,   193,   198,   205,   226,   231,   237,   255,   259,
-     263,   269,   273,   278,   283,   289,   295,   303,   307,   314,
-     324,   331,   335,   341,   345,   349,   357,   367,   377,   381,
-     385,   389,   393,   399,   403,   408,   426,   430,   435,   441,
-     459,   465,   484,   488,   492,   498,   503,   509,   518,   522,
-     528,   532,   536,   540,   544,   548,   554,   558,   564,   572,
-     577,   584,   601,   606,   623,   628,   633,   640,   649,   653,
-     658,   664,   674,   682,   686,   691,   698,   706,   711,   716,
-     720,   726,   734,   739,   746,   753,   763,   773,   781,   789,
-     797,   805,   813,   821,   829,   833,   837,   841,   845,   849,
-     853,   858,   865,   873,   877,   882,   886,   892,   900,   904,
-     909,   913,   919,   926,   932,   940,   944,   948,   953,   959,
-     963,   967,   971,   975,   979,   985,   994,   998,  1003,  1008,
-    1014,  1018,  1024,  1033,  1039,  1043,  1047,  1053,  1061,  1067,
-    1072,  1076,  1082,  1086,  1092,  1097,  1105,  1117,  1122,  1126,
-    1130,  1134,  1141,  1149,  1155,  1159,  1163,  1181,  1185,  1191,
-    1198,  1205
+       0,   110,   110,   116,   133,   139,   143,   147,   151,   159,
+     172,   191,   195,   200,   207,   228,   233,   239,   257,   261,
+     265,   271,   275,   280,   285,   291,   297,   305,   309,   316,
+     326,   333,   337,   343,   347,   351,   359,   369,   379,   383,
+     387,   391,   395,   401,   405,   410,   428,   432,   437,   443,
+     461,   467,   486,   490,   494,   500,   505,   511,   520,   524,
+     530,   534,   538,   542,   546,   550,   556,   560,   566,   574,
+     579,   586,   603,   608,   625,   630,   635,   642,   651,   655,
+     660,   666,   676,   684,   688,   693,   700,   708,   713,   718,
+     722,   728,   736,   741,   748,   755,   765,   775,   783,   791,
+     799,   807,   815,   823,   831,   835,   839,   843,   847,   851,
+     855,   860,   867,   875,   879,   884,   888,   894,   902,   906,
+     911,   915,   921,   928,   934,   942,   946,   950,   955,   961,
+     965,   969,   973,   977,   981,   987,   996,  1000,  1005,  1010,
+    1016,  1020,  1026,  1035,  1041,  1045,  1049,  1055,  1063,  1069,
+    1074,  1078,  1084,  1088,  1094,  1099,  1107,  1119,  1124,  1128,
+    1132,  1136,  1143,  1151,  1157,  1161,  1165,  1183,  1187,  1193,
+    1200,  1207
 };
 #endif
 
@@ -1580,15 +1582,15 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 109 "c-.y" /* yacc.c:1646  */
+#line 111 "c-.y" /* yacc.c:1646  */
     {
 							savedTree = (yyvsp[0].treeNode);
 						}
-#line 1588 "c-.tab.c" /* yacc.c:1646  */
+#line 1590 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 115 "c-.y" /* yacc.c:1646  */
+#line 117 "c-.y" /* yacc.c:1646  */
     {
 							TreeNode* t = (yyvsp[-1].treeNode);
 							if (t != NULL)
@@ -1605,51 +1607,51 @@ yyreduce:
 								(yyval.treeNode) = (yyvsp[0].treeNode);
 							}
 						}
-#line 1609 "c-.tab.c" /* yacc.c:1646  */
+#line 1611 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 132 "c-.y" /* yacc.c:1646  */
+#line 134 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 1617 "c-.tab.c" /* yacc.c:1646  */
+#line 1619 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 138 "c-.y" /* yacc.c:1646  */
+#line 140 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 1625 "c-.tab.c" /* yacc.c:1646  */
+#line 1627 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 142 "c-.y" /* yacc.c:1646  */
+#line 144 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 1633 "c-.tab.c" /* yacc.c:1646  */
+#line 1635 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 146 "c-.y" /* yacc.c:1646  */
+#line 148 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 1641 "c-.tab.c" /* yacc.c:1646  */
+#line 1643 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 150 "c-.y" /* yacc.c:1646  */
+#line 152 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1649 "c-.tab.c" /* yacc.c:1646  */
+#line 1651 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 158 "c-.y" /* yacc.c:1646  */
+#line 160 "c-.y" /* yacc.c:1646  */
     {
 							// We need to add the user-defined type to the global symbol table.
 							globalScope.insert((yyvsp[-3].t).tokenStr, static_cast<char*>("recordType"));
@@ -1660,11 +1662,11 @@ yyreduce:
 							(yyval.treeNode)->isRecord = true;
 							(yyval.treeNode)->children[0] = (yyvsp[-1].treeNode);						
 						}
-#line 1664 "c-.tab.c" /* yacc.c:1646  */
+#line 1666 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 171 "c-.y" /* yacc.c:1646  */
+#line 173 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							TreeNode* t = (yyvsp[-1].treeNode);
@@ -1683,37 +1685,37 @@ yyreduce:
 								(yyval.treeNode) = NULL;
 							}
 						}
-#line 1687 "c-.tab.c" /* yacc.c:1646  */
+#line 1689 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 190 "c-.y" /* yacc.c:1646  */
+#line 192 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1695 "c-.tab.c" /* yacc.c:1646  */
+#line 1697 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 194 "c-.y" /* yacc.c:1646  */
+#line 196 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 1704 "c-.tab.c" /* yacc.c:1646  */
+#line 1706 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 199 "c-.y" /* yacc.c:1646  */
+#line 201 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 1713 "c-.tab.c" /* yacc.c:1646  */
+#line 1715 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 206 "c-.y" /* yacc.c:1646  */
+#line 208 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							TreeNode* t = (yyvsp[-1].treeNode);
@@ -1734,28 +1736,28 @@ yyreduce:
 								(yyval.treeNode) = NULL;
 							}
 						}
-#line 1738 "c-.tab.c" /* yacc.c:1646  */
+#line 1740 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 227 "c-.y" /* yacc.c:1646  */
+#line 229 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 1747 "c-.tab.c" /* yacc.c:1646  */
+#line 1749 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 232 "c-.y" /* yacc.c:1646  */
+#line 234 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1755 "c-.tab.c" /* yacc.c:1646  */
+#line 1757 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 238 "c-.y" /* yacc.c:1646  */
+#line 240 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							TreeNode* t = (yyvsp[-2].treeNode);
@@ -1773,79 +1775,79 @@ yyreduce:
 								(yyval.treeNode) = (yyvsp[0].treeNode);
 							}
 						}
-#line 1777 "c-.tab.c" /* yacc.c:1646  */
+#line 1779 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 256 "c-.y" /* yacc.c:1646  */
+#line 258 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 1785 "c-.tab.c" /* yacc.c:1646  */
+#line 1787 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 260 "c-.y" /* yacc.c:1646  */
+#line 262 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1793 "c-.tab.c" /* yacc.c:1646  */
+#line 1795 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 264 "c-.y" /* yacc.c:1646  */
+#line 266 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1801 "c-.tab.c" /* yacc.c:1646  */
+#line 1803 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 270 "c-.y" /* yacc.c:1646  */
+#line 272 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 1809 "c-.tab.c" /* yacc.c:1646  */
+#line 1811 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 274 "c-.y" /* yacc.c:1646  */
+#line 276 "c-.y" /* yacc.c:1646  */
     {
 							(yyvsp[-2].treeNode)->children[0] = (yyvsp[0].treeNode);
 							(yyval.treeNode) = (yyvsp[-2].treeNode);
 						}
-#line 1818 "c-.tab.c" /* yacc.c:1646  */
+#line 1820 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 279 "c-.y" /* yacc.c:1646  */
+#line 281 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 1827 "c-.tab.c" /* yacc.c:1646  */
+#line 1829 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 284 "c-.y" /* yacc.c:1646  */
+#line 286 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1835 "c-.tab.c" /* yacc.c:1646  */
+#line 1837 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 290 "c-.y" /* yacc.c:1646  */
+#line 292 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewDeclNode(VarK);
 							(yyval.treeNode)->lineNumber = (yyvsp[0].t).lineNum;
 							(yyval.treeNode)->attr.name = (yyvsp[0].t).tokenStr;
 						}
-#line 1845 "c-.tab.c" /* yacc.c:1646  */
+#line 1847 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 296 "c-.y" /* yacc.c:1646  */
+#line 298 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewDeclNode(VarK);
 							(yyval.treeNode)->attr.name = (yyvsp[-3].t).tokenStr;
@@ -1853,28 +1855,28 @@ yyreduce:
 							(yyval.treeNode)->isArray = true;
 							(yyval.treeNode)->arrayLength = (yyvsp[-1].t).intVal;
 						}
-#line 1857 "c-.tab.c" /* yacc.c:1646  */
+#line 1859 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 304 "c-.y" /* yacc.c:1646  */
+#line 306 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1865 "c-.tab.c" /* yacc.c:1646  */
+#line 1867 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 308 "c-.y" /* yacc.c:1646  */
+#line 310 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 1874 "c-.tab.c" /* yacc.c:1646  */
+#line 1876 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 315 "c-.y" /* yacc.c:1646  */
+#line 317 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewDeclNode(VarK);
 							(yyval.treeNode)->isStatic = true;
@@ -1884,60 +1886,60 @@ yyreduce:
 								(yyval.treeNode)->isRecord = true;
 							}
 						}
-#line 1888 "c-.tab.c" /* yacc.c:1646  */
+#line 1890 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 325 "c-.y" /* yacc.c:1646  */
+#line 327 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewDeclNode(VarK);						
 							(yyval.treeNode)->expType = (yyvsp[0].expType);
 						}
-#line 1897 "c-.tab.c" /* yacc.c:1646  */
+#line 1899 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 332 "c-.y" /* yacc.c:1646  */
+#line 334 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.expType) = (yyvsp[0].expType);
 						}
-#line 1905 "c-.tab.c" /* yacc.c:1646  */
+#line 1907 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 336 "c-.y" /* yacc.c:1646  */
+#line 338 "c-.y" /* yacc.c:1646  */
     {	
 							(yyval.expType) = Record;
 						}
-#line 1913 "c-.tab.c" /* yacc.c:1646  */
+#line 1915 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 342 "c-.y" /* yacc.c:1646  */
+#line 344 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.expType) = Int;
 						}
-#line 1921 "c-.tab.c" /* yacc.c:1646  */
+#line 1923 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 346 "c-.y" /* yacc.c:1646  */
+#line 348 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.expType) = Bool;
 						}
-#line 1929 "c-.tab.c" /* yacc.c:1646  */
+#line 1931 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 350 "c-.y" /* yacc.c:1646  */
+#line 352 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.expType) = Char;
 						}
-#line 1937 "c-.tab.c" /* yacc.c:1646  */
+#line 1939 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 358 "c-.y" /* yacc.c:1646  */
+#line 360 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewDeclNode(FuncK);
 							(yyval.treeNode)->expType = (yyvsp[-5].expType);
@@ -1947,11 +1949,11 @@ yyreduce:
 							// Sets the line number where the function declaration starts.
 							(yyval.treeNode)->lineNumber = (yyvsp[-4].t).lineNum; 
 						}
-#line 1951 "c-.tab.c" /* yacc.c:1646  */
+#line 1953 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 368 "c-.y" /* yacc.c:1646  */
+#line 370 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewDeclNode(FuncK);
 							(yyval.treeNode)->expType = Void;
@@ -1961,67 +1963,67 @@ yyreduce:
 							// Sets the line number where the function call starts.
 							(yyval.treeNode)->lineNumber = (yyvsp[-4].t).lineNum;
 						}
-#line 1965 "c-.tab.c" /* yacc.c:1646  */
+#line 1967 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 378 "c-.y" /* yacc.c:1646  */
+#line 380 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1973 "c-.tab.c" /* yacc.c:1646  */
+#line 1975 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 382 "c-.y" /* yacc.c:1646  */
+#line 384 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1981 "c-.tab.c" /* yacc.c:1646  */
+#line 1983 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 386 "c-.y" /* yacc.c:1646  */
+#line 388 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1989 "c-.tab.c" /* yacc.c:1646  */
+#line 1991 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 390 "c-.y" /* yacc.c:1646  */
+#line 392 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 1997 "c-.tab.c" /* yacc.c:1646  */
+#line 1999 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 394 "c-.y" /* yacc.c:1646  */
+#line 396 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2005 "c-.tab.c" /* yacc.c:1646  */
+#line 2007 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 400 "c-.y" /* yacc.c:1646  */
+#line 402 "c-.y" /* yacc.c:1646  */
     { 
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2013 "c-.tab.c" /* yacc.c:1646  */
+#line 2015 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 403 "c-.y" /* yacc.c:1646  */
+#line 405 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2021 "c-.tab.c" /* yacc.c:1646  */
+#line 2023 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 409 "c-.y" /* yacc.c:1646  */
+#line 411 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							TreeNode* t = (yyvsp[-2].treeNode);
@@ -2039,36 +2041,36 @@ yyreduce:
 								(yyval.treeNode) = (yyvsp[0].treeNode);
 							}
 						}
-#line 2043 "c-.tab.c" /* yacc.c:1646  */
+#line 2045 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 427 "c-.y" /* yacc.c:1646  */
+#line 429 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2051 "c-.tab.c" /* yacc.c:1646  */
+#line 2053 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 431 "c-.y" /* yacc.c:1646  */
+#line 433 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2060 "c-.tab.c" /* yacc.c:1646  */
+#line 2062 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 436 "c-.y" /* yacc.c:1646  */
+#line 438 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2068 "c-.tab.c" /* yacc.c:1646  */
+#line 2070 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 442 "c-.y" /* yacc.c:1646  */
+#line 444 "c-.y" /* yacc.c:1646  */
     {
 							TreeNode* t = (yyvsp[0].treeNode);
 							if (t != NULL)
@@ -2086,19 +2088,19 @@ yyreduce:
 								(yyval.treeNode) = NULL;
 							}
 						}
-#line 2090 "c-.tab.c" /* yacc.c:1646  */
+#line 2092 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 460 "c-.y" /* yacc.c:1646  */
+#line 462 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2098 "c-.tab.c" /* yacc.c:1646  */
+#line 2100 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 466 "c-.y" /* yacc.c:1646  */
+#line 468 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						TreeNode* t = (yyvsp[-2].treeNode);
@@ -2117,143 +2119,143 @@ yyreduce:
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
 					}
-#line 2121 "c-.tab.c" /* yacc.c:1646  */
+#line 2123 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 485 "c-.y" /* yacc.c:1646  */
+#line 487 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 2129 "c-.tab.c" /* yacc.c:1646  */
+#line 2131 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 489 "c-.y" /* yacc.c:1646  */
+#line 491 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2137 "c-.tab.c" /* yacc.c:1646  */
+#line 2139 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 493 "c-.y" /* yacc.c:1646  */
+#line 495 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2145 "c-.tab.c" /* yacc.c:1646  */
+#line 2147 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 499 "c-.y" /* yacc.c:1646  */
+#line 501 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewDeclNode(ParamK);
 						(yyval.treeNode)->attr.name = (yyvsp[0].t).tokenStr;
 					}
-#line 2154 "c-.tab.c" /* yacc.c:1646  */
+#line 2156 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 504 "c-.y" /* yacc.c:1646  */
+#line 506 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewDeclNode(ParamK);
 						(yyval.treeNode)->attr.name = (yyvsp[-2].t).tokenStr;
 						(yyval.treeNode)->isArray = true;
 					}
-#line 2164 "c-.tab.c" /* yacc.c:1646  */
+#line 2166 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 510 "c-.y" /* yacc.c:1646  */
+#line 512 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						(yyval.treeNode) = NULL;
 					}
-#line 2173 "c-.tab.c" /* yacc.c:1646  */
+#line 2175 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 519 "c-.y" /* yacc.c:1646  */
+#line 521 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2181 "c-.tab.c" /* yacc.c:1646  */
+#line 2183 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 523 "c-.y" /* yacc.c:1646  */
+#line 525 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2189 "c-.tab.c" /* yacc.c:1646  */
+#line 2191 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 529 "c-.y" /* yacc.c:1646  */
+#line 531 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2197 "c-.tab.c" /* yacc.c:1646  */
+#line 2199 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 533 "c-.y" /* yacc.c:1646  */
+#line 535 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2205 "c-.tab.c" /* yacc.c:1646  */
+#line 2207 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 537 "c-.y" /* yacc.c:1646  */
+#line 539 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2213 "c-.tab.c" /* yacc.c:1646  */
+#line 2215 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 541 "c-.y" /* yacc.c:1646  */
+#line 543 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2221 "c-.tab.c" /* yacc.c:1646  */
+#line 2223 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 545 "c-.y" /* yacc.c:1646  */
+#line 547 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2229 "c-.tab.c" /* yacc.c:1646  */
+#line 2231 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 549 "c-.y" /* yacc.c:1646  */
+#line 551 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2237 "c-.tab.c" /* yacc.c:1646  */
+#line 2239 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 555 "c-.y" /* yacc.c:1646  */
+#line 557 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2245 "c-.tab.c" /* yacc.c:1646  */
+#line 2247 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 559 "c-.y" /* yacc.c:1646  */
+#line 561 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2253 "c-.tab.c" /* yacc.c:1646  */
+#line 2255 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 565 "c-.y" /* yacc.c:1646  */
+#line 567 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NewStmtNode(CompK);
@@ -2261,29 +2263,29 @@ yyreduce:
 							(yyval.treeNode)->children[1] = (yyvsp[-1].treeNode);
 							(yyval.treeNode)->lineNumber = (yyvsp[-3].t).lineNum;
 						}
-#line 2265 "c-.tab.c" /* yacc.c:1646  */
+#line 2267 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 573 "c-.y" /* yacc.c:1646  */
+#line 575 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2274 "c-.tab.c" /* yacc.c:1646  */
+#line 2276 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 578 "c-.y" /* yacc.c:1646  */
+#line 580 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2283 "c-.tab.c" /* yacc.c:1646  */
+#line 2285 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 585 "c-.y" /* yacc.c:1646  */
+#line 587 "c-.y" /* yacc.c:1646  */
     {
 							TreeNode* t = (yyvsp[-1].treeNode);
 							if (t != NULL)
@@ -2300,19 +2302,19 @@ yyreduce:
 								(yyval.treeNode) = (yyvsp[0].treeNode);
 							}
 						}
-#line 2304 "c-.tab.c" /* yacc.c:1646  */
+#line 2306 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 601 "c-.y" /* yacc.c:1646  */
+#line 603 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2312 "c-.tab.c" /* yacc.c:1646  */
+#line 2314 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 607 "c-.y" /* yacc.c:1646  */
+#line 609 "c-.y" /* yacc.c:1646  */
     {
 							TreeNode* t = (yyvsp[-1].treeNode);
 							if (t != NULL)
@@ -2329,37 +2331,37 @@ yyreduce:
 								(yyval.treeNode) = (yyvsp[0].treeNode);
 							}
 						}
-#line 2333 "c-.tab.c" /* yacc.c:1646  */
+#line 2335 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 623 "c-.y" /* yacc.c:1646  */
+#line 625 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2341 "c-.tab.c" /* yacc.c:1646  */
+#line 2343 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 629 "c-.y" /* yacc.c:1646  */
+#line 631 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = (yyvsp[-1].treeNode);
 						}
-#line 2350 "c-.tab.c" /* yacc.c:1646  */
+#line 2352 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 634 "c-.y" /* yacc.c:1646  */
+#line 636 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2359 "c-.tab.c" /* yacc.c:1646  */
+#line 2361 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 641 "c-.y" /* yacc.c:1646  */
+#line 643 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewStmtNode(IfK);
 							(yyval.treeNode)->attr.name = (yyvsp[-6].t).tokenStr;
@@ -2368,36 +2370,36 @@ yyreduce:
 							(yyval.treeNode)->children[2] = (yyvsp[0].treeNode);
 							(yyval.treeNode)->lineNumber = (yyvsp[-6].t).lineNum;
 						}
-#line 2372 "c-.tab.c" /* yacc.c:1646  */
+#line 2374 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 650 "c-.y" /* yacc.c:1646  */
+#line 652 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2380 "c-.tab.c" /* yacc.c:1646  */
+#line 2382 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 654 "c-.y" /* yacc.c:1646  */
+#line 656 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2389 "c-.tab.c" /* yacc.c:1646  */
+#line 2391 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 659 "c-.y" /* yacc.c:1646  */
+#line 661 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2397 "c-.tab.c" /* yacc.c:1646  */
+#line 2399 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 665 "c-.y" /* yacc.c:1646  */
+#line 667 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewStmtNode(IfK);
 							(yyval.treeNode)->attr.name = (yyvsp[-6].t).tokenStr;
@@ -2406,11 +2408,11 @@ yyreduce:
 							(yyval.treeNode)->children[2] = (yyvsp[0].treeNode);
 							(yyval.treeNode)->lineNumber = (yyvsp[-6].t).lineNum;
 						}
-#line 2410 "c-.tab.c" /* yacc.c:1646  */
+#line 2412 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 675 "c-.y" /* yacc.c:1646  */
+#line 677 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewStmtNode(IfK);
 							(yyval.treeNode)->attr.name = (yyvsp[-4].t).tokenStr;
@@ -2418,37 +2420,37 @@ yyreduce:
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 							(yyval.treeNode)->lineNumber = (yyvsp[-4].t).lineNum;
 						}
-#line 2422 "c-.tab.c" /* yacc.c:1646  */
+#line 2424 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 683 "c-.y" /* yacc.c:1646  */
+#line 685 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2430 "c-.tab.c" /* yacc.c:1646  */
+#line 2432 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 687 "c-.y" /* yacc.c:1646  */
+#line 689 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2439 "c-.tab.c" /* yacc.c:1646  */
+#line 2441 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 692 "c-.y" /* yacc.c:1646  */
+#line 694 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2448 "c-.tab.c" /* yacc.c:1646  */
+#line 2450 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 699 "c-.y" /* yacc.c:1646  */
+#line 701 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewStmtNode(WhileK);
 							(yyval.treeNode)->attr.name = (yyvsp[-4].t).tokenStr;
@@ -2456,45 +2458,45 @@ yyreduce:
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 							(yyval.treeNode)->lineNumber = (yyvsp[-4].t).lineNum;
 						}
-#line 2460 "c-.tab.c" /* yacc.c:1646  */
+#line 2462 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 707 "c-.y" /* yacc.c:1646  */
+#line 709 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2469 "c-.tab.c" /* yacc.c:1646  */
+#line 2471 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 712 "c-.y" /* yacc.c:1646  */
+#line 714 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2478 "c-.tab.c" /* yacc.c:1646  */
+#line 2480 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 717 "c-.y" /* yacc.c:1646  */
+#line 719 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2486 "c-.tab.c" /* yacc.c:1646  */
+#line 2488 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 721 "c-.y" /* yacc.c:1646  */
+#line 723 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2494 "c-.tab.c" /* yacc.c:1646  */
+#line 2496 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 727 "c-.y" /* yacc.c:1646  */
+#line 729 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewStmtNode(WhileK);
 							(yyval.treeNode)->attr.name = (yyvsp[-4].t).tokenStr;
@@ -2502,40 +2504,40 @@ yyreduce:
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 							(yyval.treeNode)->lineNumber = (yyvsp[-4].t).lineNum;
 						}
-#line 2506 "c-.tab.c" /* yacc.c:1646  */
+#line 2508 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 735 "c-.y" /* yacc.c:1646  */
+#line 737 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2515 "c-.tab.c" /* yacc.c:1646  */
+#line 2517 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 740 "c-.y" /* yacc.c:1646  */
+#line 742 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2524 "c-.tab.c" /* yacc.c:1646  */
+#line 2526 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 747 "c-.y" /* yacc.c:1646  */
+#line 749 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NewStmtNode(ReturnK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
 							(yyval.treeNode)->lineNumber = (yyvsp[-1].t).lineNum;
 						}
-#line 2535 "c-.tab.c" /* yacc.c:1646  */
+#line 2537 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 754 "c-.y" /* yacc.c:1646  */
+#line 756 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NewStmtNode(ReturnK);
@@ -2543,21 +2545,21 @@ yyreduce:
 							(yyval.treeNode)->lineNumber = (yyvsp[-2].t).lineNum;
 							(yyval.treeNode)->children[0] = (yyvsp[-1].treeNode);
 						}
-#line 2547 "c-.tab.c" /* yacc.c:1646  */
+#line 2549 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 764 "c-.y" /* yacc.c:1646  */
+#line 766 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NewStmtNode(BreakK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
 						}
-#line 2557 "c-.tab.c" /* yacc.c:1646  */
+#line 2559 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 774 "c-.y" /* yacc.c:1646  */
+#line 776 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(AssignK);
 						(yyval.treeNode)->lineNumber = (yyvsp[-1].t).lineNum;
@@ -2565,11 +2567,11 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 						(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 					}
-#line 2569 "c-.tab.c" /* yacc.c:1646  */
+#line 2571 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 782 "c-.y" /* yacc.c:1646  */
+#line 784 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(AssignK);
 						(yyval.treeNode)->lineNumber = (yyvsp[-1].t).lineNum;
@@ -2577,11 +2579,11 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 						(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 					}
-#line 2581 "c-.tab.c" /* yacc.c:1646  */
+#line 2583 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 790 "c-.y" /* yacc.c:1646  */
+#line 792 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(AssignK);
 						(yyval.treeNode)->lineNumber = (yyvsp[-1].t).lineNum;
@@ -2589,11 +2591,11 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 						(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 					}
-#line 2593 "c-.tab.c" /* yacc.c:1646  */
+#line 2595 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 798 "c-.y" /* yacc.c:1646  */
+#line 800 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(AssignK);
 						(yyval.treeNode)->lineNumber = (yyvsp[-1].t).lineNum;
@@ -2601,11 +2603,11 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 						(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 					}
-#line 2605 "c-.tab.c" /* yacc.c:1646  */
+#line 2607 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 806 "c-.y" /* yacc.c:1646  */
+#line 808 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(AssignK);
 						(yyval.treeNode)->lineNumber = (yyvsp[-1].t).lineNum;
@@ -2613,11 +2615,11 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 						(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 					}
-#line 2617 "c-.tab.c" /* yacc.c:1646  */
+#line 2619 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 814 "c-.y" /* yacc.c:1646  */
+#line 816 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						(yyval.treeNode) = NewExprNode(AssignK);
@@ -2625,11 +2627,11 @@ yyreduce:
 						(yyval.treeNode)->attr.name = (yyvsp[0].t).tokenStr;
 						(yyval.treeNode)->children[0] = (yyvsp[-1].treeNode);
 					}
-#line 2629 "c-.tab.c" /* yacc.c:1646  */
+#line 2631 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 822 "c-.y" /* yacc.c:1646  */
+#line 824 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						(yyval.treeNode) = NewExprNode(AssignK);
@@ -2637,77 +2639,77 @@ yyreduce:
 						(yyval.treeNode)->attr.name = (yyvsp[0].t).tokenStr;
 						(yyval.treeNode)->children[0] = (yyvsp[-1].treeNode);
 					}
-#line 2641 "c-.tab.c" /* yacc.c:1646  */
+#line 2643 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 830 "c-.y" /* yacc.c:1646  */
+#line 832 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 2649 "c-.tab.c" /* yacc.c:1646  */
+#line 2651 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 834 "c-.y" /* yacc.c:1646  */
+#line 836 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2657 "c-.tab.c" /* yacc.c:1646  */
+#line 2659 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 838 "c-.y" /* yacc.c:1646  */
+#line 840 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2665 "c-.tab.c" /* yacc.c:1646  */
+#line 2667 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 842 "c-.y" /* yacc.c:1646  */
+#line 844 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2673 "c-.tab.c" /* yacc.c:1646  */
+#line 2675 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 846 "c-.y" /* yacc.c:1646  */
+#line 848 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2681 "c-.tab.c" /* yacc.c:1646  */
+#line 2683 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 850 "c-.y" /* yacc.c:1646  */
+#line 852 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 2689 "c-.tab.c" /* yacc.c:1646  */
+#line 2691 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 854 "c-.y" /* yacc.c:1646  */
+#line 856 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						(yyval.treeNode) = NULL;
 					}
-#line 2698 "c-.tab.c" /* yacc.c:1646  */
+#line 2700 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 859 "c-.y" /* yacc.c:1646  */
+#line 861 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						(yyval.treeNode) = NULL;
 					}
-#line 2707 "c-.tab.c" /* yacc.c:1646  */
+#line 2709 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 866 "c-.y" /* yacc.c:1646  */
+#line 868 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(OpK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -2715,44 +2717,44 @@ yyreduce:
 							(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 						}
-#line 2719 "c-.tab.c" /* yacc.c:1646  */
+#line 2721 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 874 "c-.y" /* yacc.c:1646  */
+#line 876 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2727 "c-.tab.c" /* yacc.c:1646  */
+#line 2729 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 878 "c-.y" /* yacc.c:1646  */
+#line 880 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2736 "c-.tab.c" /* yacc.c:1646  */
+#line 2738 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 883 "c-.y" /* yacc.c:1646  */
+#line 885 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2744 "c-.tab.c" /* yacc.c:1646  */
+#line 2746 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 887 "c-.y" /* yacc.c:1646  */
+#line 889 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2752 "c-.tab.c" /* yacc.c:1646  */
+#line 2754 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 893 "c-.y" /* yacc.c:1646  */
+#line 895 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(OpK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -2760,63 +2762,63 @@ yyreduce:
 							(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 						}
-#line 2764 "c-.tab.c" /* yacc.c:1646  */
+#line 2766 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 901 "c-.y" /* yacc.c:1646  */
+#line 903 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2772 "c-.tab.c" /* yacc.c:1646  */
+#line 2774 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 905 "c-.y" /* yacc.c:1646  */
+#line 907 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2781 "c-.tab.c" /* yacc.c:1646  */
+#line 2783 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 910 "c-.y" /* yacc.c:1646  */
+#line 912 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2789 "c-.tab.c" /* yacc.c:1646  */
+#line 2791 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 914 "c-.y" /* yacc.c:1646  */
+#line 916 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2797 "c-.tab.c" /* yacc.c:1646  */
+#line 2799 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 920 "c-.y" /* yacc.c:1646  */
+#line 922 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(OpK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
 							(yyval.treeNode)->isConst = (yyvsp[0].treeNode)->isConst;
 							(yyval.treeNode)->children[0] = (yyvsp[0].treeNode);
 						}
-#line 2808 "c-.tab.c" /* yacc.c:1646  */
+#line 2810 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 927 "c-.y" /* yacc.c:1646  */
+#line 929 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2816 "c-.tab.c" /* yacc.c:1646  */
+#line 2818 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 933 "c-.y" /* yacc.c:1646  */
+#line 935 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(OpK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -2824,92 +2826,92 @@ yyreduce:
 							(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 						}
-#line 2828 "c-.tab.c" /* yacc.c:1646  */
+#line 2830 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 941 "c-.y" /* yacc.c:1646  */
+#line 943 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2836 "c-.tab.c" /* yacc.c:1646  */
+#line 2838 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 945 "c-.y" /* yacc.c:1646  */
+#line 947 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2844 "c-.tab.c" /* yacc.c:1646  */
+#line 2846 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 949 "c-.y" /* yacc.c:1646  */
+#line 951 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2853 "c-.tab.c" /* yacc.c:1646  */
+#line 2855 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 954 "c-.y" /* yacc.c:1646  */
+#line 956 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2861 "c-.tab.c" /* yacc.c:1646  */
+#line 2863 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 960 "c-.y" /* yacc.c:1646  */
+#line 962 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2869 "c-.tab.c" /* yacc.c:1646  */
+#line 2871 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 964 "c-.y" /* yacc.c:1646  */
+#line 966 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2877 "c-.tab.c" /* yacc.c:1646  */
+#line 2879 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 968 "c-.y" /* yacc.c:1646  */
+#line 970 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2885 "c-.tab.c" /* yacc.c:1646  */
+#line 2887 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 972 "c-.y" /* yacc.c:1646  */
+#line 974 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2893 "c-.tab.c" /* yacc.c:1646  */
+#line 2895 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 976 "c-.y" /* yacc.c:1646  */
+#line 978 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2901 "c-.tab.c" /* yacc.c:1646  */
+#line 2903 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 980 "c-.y" /* yacc.c:1646  */
+#line 982 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2909 "c-.tab.c" /* yacc.c:1646  */
+#line 2911 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 986 "c-.y" /* yacc.c:1646  */
+#line 988 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(OpK);
 							(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -2918,61 +2920,61 @@ yyreduce:
 							(yyval.treeNode)->children[0] = (yyvsp[-2].treeNode);
 							(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 						}
-#line 2922 "c-.tab.c" /* yacc.c:1646  */
+#line 2924 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 995 "c-.y" /* yacc.c:1646  */
+#line 997 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 2930 "c-.tab.c" /* yacc.c:1646  */
+#line 2932 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 999 "c-.y" /* yacc.c:1646  */
+#line 1001 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2939 "c-.tab.c" /* yacc.c:1646  */
+#line 2941 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 138:
-#line 1004 "c-.y" /* yacc.c:1646  */
+#line 1006 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 2948 "c-.tab.c" /* yacc.c:1646  */
+#line 2950 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 139:
-#line 1009 "c-.y" /* yacc.c:1646  */
+#line 1011 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 2956 "c-.tab.c" /* yacc.c:1646  */
+#line 2958 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 140:
-#line 1015 "c-.y" /* yacc.c:1646  */
+#line 1017 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2964 "c-.tab.c" /* yacc.c:1646  */
+#line 2966 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 1019 "c-.y" /* yacc.c:1646  */
+#line 1021 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 2972 "c-.tab.c" /* yacc.c:1646  */
+#line 2974 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 1025 "c-.y" /* yacc.c:1646  */
+#line 1027 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(OpK);
 						(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -2981,43 +2983,43 @@ yyreduce:
 						(yyval.treeNode)->children[1] = (yyvsp[0].treeNode);
 						(yyval.treeNode)->isConst = (yyvsp[-2].treeNode)->isConst && (yyvsp[0].treeNode)->isConst;
 					}
-#line 2985 "c-.tab.c" /* yacc.c:1646  */
+#line 2987 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 1034 "c-.y" /* yacc.c:1646  */
+#line 1036 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 2993 "c-.tab.c" /* yacc.c:1646  */
+#line 2995 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 144:
-#line 1040 "c-.y" /* yacc.c:1646  */
+#line 1042 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 3001 "c-.tab.c" /* yacc.c:1646  */
+#line 3003 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 145:
-#line 1044 "c-.y" /* yacc.c:1646  */
+#line 1046 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 3009 "c-.tab.c" /* yacc.c:1646  */
+#line 3011 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 146:
-#line 1048 "c-.y" /* yacc.c:1646  */
+#line 1050 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 3017 "c-.tab.c" /* yacc.c:1646  */
+#line 3019 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 147:
-#line 1054 "c-.y" /* yacc.c:1646  */
+#line 1056 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(OpK);
 						(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -3025,69 +3027,69 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[0].treeNode);
 						(yyval.treeNode)->isConst = (yyvsp[-1].t).isConst && (yyvsp[0].treeNode)->isConst;
 					}
-#line 3029 "c-.tab.c" /* yacc.c:1646  */
+#line 3031 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 148:
-#line 1062 "c-.y" /* yacc.c:1646  */
+#line 1064 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 3037 "c-.tab.c" /* yacc.c:1646  */
+#line 3039 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 1068 "c-.y" /* yacc.c:1646  */
+#line 1070 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 						(yyval.t).isConst = true;
 					}
-#line 3046 "c-.tab.c" /* yacc.c:1646  */
+#line 3048 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 1073 "c-.y" /* yacc.c:1646  */
+#line 1075 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 3054 "c-.tab.c" /* yacc.c:1646  */
+#line 3056 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 151:
-#line 1077 "c-.y" /* yacc.c:1646  */
+#line 1079 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.t) = (yyvsp[0].t);
 					}
-#line 3062 "c-.tab.c" /* yacc.c:1646  */
+#line 3064 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 152:
-#line 1083 "c-.y" /* yacc.c:1646  */
+#line 1085 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 3070 "c-.tab.c" /* yacc.c:1646  */
+#line 3072 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 153:
-#line 1087 "c-.y" /* yacc.c:1646  */
+#line 1089 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 3078 "c-.tab.c" /* yacc.c:1646  */
+#line 3080 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 154:
-#line 1093 "c-.y" /* yacc.c:1646  */
+#line 1095 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(IdK);
 						(yyval.treeNode)->attr.name = (yyvsp[0].t).tokenStr;
 					}
-#line 3087 "c-.tab.c" /* yacc.c:1646  */
+#line 3089 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 155:
-#line 1098 "c-.y" /* yacc.c:1646  */
+#line 1100 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(OpK);
 						(yyval.treeNode)->attr.name = (yyvsp[-2].t).tokenStr;
@@ -3095,11 +3097,11 @@ yyreduce:
 						(yyval.treeNode)->children[0] = (yyvsp[-3].treeNode);						
 						(yyval.treeNode)->children[1] = (yyvsp[-1].treeNode);
 					}
-#line 3099 "c-.tab.c" /* yacc.c:1646  */
+#line 3101 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 156:
-#line 1106 "c-.y" /* yacc.c:1646  */
+#line 1108 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NewExprNode(OpK);
 						(yyval.treeNode)->attr.name = (yyvsp[-1].t).tokenStr;
@@ -3109,53 +3111,53 @@ yyreduce:
 						t->attr.name = (yyvsp[0].t).tokenStr;
 						(yyval.treeNode)->children[1] = t;
 					}
-#line 3113 "c-.tab.c" /* yacc.c:1646  */
+#line 3115 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 157:
-#line 1118 "c-.y" /* yacc.c:1646  */
+#line 1120 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = (yyvsp[-1].treeNode);
 						}
-#line 3122 "c-.tab.c" /* yacc.c:1646  */
+#line 3124 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 158:
-#line 1123 "c-.y" /* yacc.c:1646  */
+#line 1125 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 3130 "c-.tab.c" /* yacc.c:1646  */
+#line 3132 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 159:
-#line 1127 "c-.y" /* yacc.c:1646  */
+#line 1129 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
-#line 3138 "c-.tab.c" /* yacc.c:1646  */
+#line 3140 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 160:
-#line 1131 "c-.y" /* yacc.c:1646  */
+#line 1133 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 3146 "c-.tab.c" /* yacc.c:1646  */
+#line 3148 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 161:
-#line 1135 "c-.y" /* yacc.c:1646  */
+#line 1137 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NULL;
 						}
-#line 3155 "c-.tab.c" /* yacc.c:1646  */
+#line 3157 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 162:
-#line 1142 "c-.y" /* yacc.c:1646  */
+#line 1144 "c-.y" /* yacc.c:1646  */
     {
 							yyerrok;
 							(yyval.treeNode) = NewExprNode(CallK);
@@ -3163,35 +3165,35 @@ yyreduce:
 							(yyval.treeNode)->attr.name = (yyvsp[-3].t).tokenStr;
 							(yyval.treeNode)->children[0] = (yyvsp[-1].treeNode);
 						}
-#line 3167 "c-.tab.c" /* yacc.c:1646  */
+#line 3169 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 163:
-#line 1150 "c-.y" /* yacc.c:1646  */
+#line 1152 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NULL;
 						}
-#line 3175 "c-.tab.c" /* yacc.c:1646  */
+#line 3177 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 164:
-#line 1156 "c-.y" /* yacc.c:1646  */
+#line 1158 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 3183 "c-.tab.c" /* yacc.c:1646  */
+#line 3185 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 165:
-#line 1159 "c-.y" /* yacc.c:1646  */
+#line 1161 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 3191 "c-.tab.c" /* yacc.c:1646  */
+#line 3193 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 166:
-#line 1164 "c-.y" /* yacc.c:1646  */
+#line 1166 "c-.y" /* yacc.c:1646  */
     {
 						yyerrok;
 						TreeNode* t = (yyvsp[-2].treeNode);
@@ -3209,60 +3211,60 @@ yyreduce:
 							(yyval.treeNode) = (yyvsp[0].treeNode);
 						}
 					}
-#line 3213 "c-.tab.c" /* yacc.c:1646  */
+#line 3215 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 167:
-#line 1182 "c-.y" /* yacc.c:1646  */
+#line 1184 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = (yyvsp[0].treeNode);
 					}
-#line 3221 "c-.tab.c" /* yacc.c:1646  */
+#line 3223 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 168:
-#line 1186 "c-.y" /* yacc.c:1646  */
+#line 1188 "c-.y" /* yacc.c:1646  */
     {
 						(yyval.treeNode) = NULL;
 					}
-#line 3229 "c-.tab.c" /* yacc.c:1646  */
+#line 3231 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 169:
-#line 1192 "c-.y" /* yacc.c:1646  */
+#line 1194 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(ConstK);
 							(yyval.treeNode)->isConst = true;
 							(yyval.treeNode)->attr.value = (yyvsp[0].t).intVal;
 							(yyval.treeNode)->expType = Int;
 						}
-#line 3240 "c-.tab.c" /* yacc.c:1646  */
+#line 3242 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 170:
-#line 1199 "c-.y" /* yacc.c:1646  */
+#line 1201 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(ConstK);
 							(yyval.treeNode)->isConst = true;
 							(yyval.treeNode)->attr.cValue = (yyvsp[0].t).charVal;
 							(yyval.treeNode)->expType = Char;
 						}
-#line 3251 "c-.tab.c" /* yacc.c:1646  */
+#line 3253 "c-.tab.c" /* yacc.c:1646  */
     break;
 
   case 171:
-#line 1206 "c-.y" /* yacc.c:1646  */
+#line 1208 "c-.y" /* yacc.c:1646  */
     {
 							(yyval.treeNode) = NewExprNode(ConstK);
 							(yyval.treeNode)->isConst = true;
 							(yyval.treeNode)->attr.value = (yyvsp[0].t).intVal;
 							(yyval.treeNode)->expType = Bool;
 						}
-#line 3262 "c-.tab.c" /* yacc.c:1646  */
+#line 3264 "c-.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 3266 "c-.tab.c" /* yacc.c:1646  */
+#line 3268 "c-.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3490,7 +3492,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 1214 "c-.y" /* yacc.c:1906  */
+#line 1216 "c-.y" /* yacc.c:1906  */
 
 
 int main(int argc, char** argv)
@@ -3560,7 +3562,7 @@ int main(int argc, char** argv)
 		}
 	}
 	
-		
+	printf("Offset for end of global space: %d\n", globalOffset);
 	printf("Number of warnings: %d\n", numWarnings);
 	printf("Number of errors: %d\n", numErrors);
 	

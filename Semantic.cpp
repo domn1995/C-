@@ -23,10 +23,10 @@ std::string unaryOps[6] = { "++", "--", "-", "not", "*", "?" };
 void AttachIOLib(TreeNode*& treeNode)
 {
 	// The return types, identifiers, and parameter types for the IO functions.
-	ExpType funcRetVals[] = { Void,      Void,      Void,      Int,     Bool,     Char,     Void };
-	std::string funcIds[] = { "output", "outputb", "outputc", "input", "inputb", "inputc", "outnl" };
-	ExpType funcParamVals[] = { Int,       Bool,      Char,      Void,    Void,     Void,     Void };
-	int ioMemSize[] = { -3, -3, -3, -2, -2, -2, -2 };
+	ExpType funcRetVals[] =   { Int,	 Void,     Bool,	 Void,      Char,	  Void,      Void };
+	std::string funcIds[] =   {"input", "output", "inputb",	"outputb", "inputc", "outputc", "outnl" };
+	ExpType funcParamVals[] = { Void,	 Int,      Void,	 Bool,      Void,	  Char,      Void };
+	int ioMemSize[] = 		  { -2, 	 -3, 	   -2, 		 -3, 		-2, 	  -3, 		 -2 };
 
 	TreeNode* nodes[7];
 

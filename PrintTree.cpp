@@ -1,5 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
+#include <sstream>
+#include <string>
 #include "TreeNode.h"
 
 static int indent = 0;
@@ -21,9 +23,47 @@ void Indent()
 	}
 }
 
+void PrintMemInfo(TreeNode* node)
+{
+	if (node->nodeKind == StmtK)
+	{
+		// There's no mem info to print for statements.
+		return;
+	}
+	else if (node->nodeKind == ExpK)
+	{
+		switch (node->kind.exp)
+		{
+			// There's no mem info for the following expression types:
+			case AssignK:
+			case ConstK:
+			case OpK:
+				return;
+		}
+	}
+
+	printf("[ref: ");
+
+	if (node->nodeKind == DeclK && node->kind.decl == ParamK)
+	{		
+		printf("Param, ");		
+	}	
+	else if (node->isStatic)
+	{
+		printf("Static, ");
+	}
+	else
+	{
+		printf(node->isGlobal ? "Global, " : "Local, ");
+	}
+
+	printf("size: %d, loc: %d] ", node->memSize, node->memOffset);
+}
+
 void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 {
 	bool printFlag = false;
+
 	if (currSibling == -1)
 	{
 		currSibling++;
@@ -127,7 +167,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					{
 						printf("Record %s ", tree->attr.name);
 					}
-					else	if (tree->isArray)
+					else if (tree->isArray)
 					{
 						printf("Var %s is array of type ", tree->attr.name);
 					}
@@ -135,6 +175,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					{
 						printf("Var %s of type ", tree->attr.name);
 					}
+
 					break;
 				case ParamK:
 					if (tree->isArray)
@@ -145,6 +186,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					{
 						printf("Param %s of type ", tree->attr.name);
 					}
+
 					break;
 				default:
 					printf("ERROR(%d): Unknown DeclKind node.\n", tree->lineNumber);
@@ -180,7 +222,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 			printf("ERROR(%d): Unknown NodeKind.\n", tree->lineNumber);
 		}
 
-		printf("[ref: %s, size: %d, loc: %d] ", tree->isGlobal ? "Global" : "Local", tree->memSize, tree->memOffset);
+		PrintMemInfo(tree);
 		
 		if (annotated)
 		{

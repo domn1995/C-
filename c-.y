@@ -20,6 +20,8 @@ static TreeNode* savedTree;
 static char* savedName;
 static int savedLineNum;
 
+extern int globalOffset;
+
 #define YYERROR_VERBOSE
 extern void yyerror(const char* msg);
 %}
@@ -1280,7 +1282,7 @@ int main(int argc, char** argv)
 		}
 	}
 	
-		
+	printf("Offset for end of global space: %d\n", globalOffset);
 	printf("Number of warnings: %d\n", numWarnings);
 	printf("Number of errors: %d\n", numErrors);
 	
