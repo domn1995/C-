@@ -48,6 +48,7 @@ void AttachIOLib(TreeNode*& treeNode)
 			paramNode->lineNumber = -1;
 			paramNode->attr.name = strdup("*dummy*");
 			paramNode->expType = funcParamVals[i];
+			paramNode->isIO = true;
 			paramNode->memSize = 1;
 			paramNode->memOffset = -2;
 			funcNode->children[0] = paramNode;
@@ -113,6 +114,15 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 {
 	TreeNode* declaration = NULL;
 
+	if (symbolTable.depth() == 1)
+	{
+		node->isGlobal = true;
+	}
+	else
+	{
+		node->isGlobal = false;
+	}	
+
 	// If the node kind is not VarK (we'll handle it later) and we cannot 
 	// insert into the symbol table, it means that the symbol was already defined.
 	if (node->kind.decl != VarK && !symbolTable.insert(node->attr.name, node))
@@ -134,7 +144,10 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			ScopeAndType(node->children[i], numErrors, numWarnings);
 		}
 		node->memSize = 1;
-		node->memOffset = localOffset;
+		if (!node->isIO)
+		{
+			node->memOffset = localOffset;
+		}	
 		localOffset--;
 		break;
 	case VarK:			
@@ -225,7 +238,8 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 
 		break;
-	case FuncK:		
+	case FuncK:
+		localOffset = -2;
 		symbolTable.enter(node->attr.name);
 		currentFunction = node;
 		enteredFunctionScope = true;

@@ -147,6 +147,14 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					break;
 				case IdK:
 					printf("Id: %s ", tree->attr.name);
+					if (tree->isArray)
+					{
+						printf("is array  ");
+					}
+					else
+					{
+						printf(" ");
+					}
 					break;
 				case OpK:
 					printf("Op: %s ", tree->attr.name);
@@ -164,7 +172,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 			switch (tree->kind.decl)
 			{
 				case FuncK:
-					printf("Func %s returns type ", tree->attr.name);
+					printf("Func %s returns type %s ", tree->attr.name, ExpTypeToString(tree->expType));
 					break;
 				case VarK:
 					if (tree->isRecord)
@@ -173,22 +181,22 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					}
 					else if (tree->isArray)
 					{
-						printf("Var %s is array of type ", tree->attr.name);
+						printf("Var %s is array  ", tree->attr.name);
 					}
 					else
 					{
-						printf("Var %s of type ", tree->attr.name);
+						printf("Var %s  ", tree->attr.name);
 					}
 
 					break;
 				case ParamK:
 					if (tree->isArray)
 					{
-						printf("Param %s is array of type ", tree->attr.name);
+						printf("Param %s is array  ", tree->attr.name);
 					}
 					else
 					{
-						printf("Param %s of type ", tree->attr.name);
+						printf("Param %s  ", tree->attr.name);
 					}
 
 					break;
@@ -196,30 +204,30 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					printf("ERROR(%d): Unknown DeclKind node.\n", tree->lineNumber);
 					break;
 			}
-			switch (tree->expType)
-			{
-				case Void:
-					if (!tree->isRecord)
-					{
-						printf("void ");
-					}					
-					break;
-				case Int:
-					printf("int ");
-					break;
-				case Bool:
-					printf("bool ");
-					break;
-				case Char:
-					printf("char ");
-					break;
-				case Record:
-					printf("record ");
-					break;
-				default:
-					printf("ERROR(%d): Unknown ExpType node.\n", tree->lineNumber);
-					break;
-			}
+			// switch (tree->expType)
+			// {
+			// 	case Void:
+			// 		if (!tree->isRecord)
+			// 		{
+			// 			printf("void ");
+			// 		}					
+			// 		break;
+			// 	case Int:
+			// 		printf("int ");
+			// 		break;
+			// 	case Bool:
+			// 		printf("bool ");
+			// 		break;
+			// 	case Char:
+			// 		printf("char ");
+			// 		break;
+			// 	case Record:
+			// 		printf("record ");
+			// 		break;
+			// 	default:
+			// 		printf("ERROR(%d): Unknown ExpType node.\n", tree->lineNumber);
+			// 		break;
+			// }
 		}
 		else
 		{

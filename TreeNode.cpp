@@ -28,6 +28,7 @@ TreeNode* NewDeclNode(DeclKind kind)
 		t->nodeKind = DeclK;
 		t->kind.decl = kind;
 		t->lineNumber = yylineno;
+		t->isIO = false;
 	}
 	
 	return t;
@@ -47,6 +48,7 @@ TreeNode* NewStmtNode(StmtKind kind)
 		t->nodeKind = StmtK;
 		t->kind.stmt = kind;
 		t->lineNumber = yylineno;
+		t->isIO = false;
 	}	
 	
 	return t;
@@ -66,6 +68,7 @@ TreeNode* NewExprNode(ExpKind kind)
 		t->nodeKind = ExpK;
 		t->kind.exp = kind;	
 		t->lineNumber = yylineno;
+		t->isIO = false;
 	}
 	
 	return t;
