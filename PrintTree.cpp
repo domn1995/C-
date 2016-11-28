@@ -255,7 +255,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 			childCount = i;
 			PrintSyntaxTree(tree->children[i], 0, annotated);
 			childCount = 0;
-		}		
+		}
 	}
 	
 	indent -= 4;

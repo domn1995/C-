@@ -10,6 +10,7 @@ bool enteredFunctionScope = false;
 TreeNode* currentFunction = NULL;
 bool returnStatementFound = false;
 bool insideLoop = false;
+bool inFunctionCall = false;
 int loopDepth = 1;
 int globalOffset = 0;
 int localOffset = 0;
@@ -1012,6 +1013,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		break;
 	case CallK:
+		inFunctionCall = true;
 		for (int i = 0; i < 3; i++)
 		{
 			if (node->children[i] != NULL)
@@ -1019,6 +1021,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 				ScopeAndType(node->children[i], numErrors, numWarnings);
 			}
 		}
+		inFunctionCall = false;
 
 		found = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
 
