@@ -11,6 +11,8 @@ TreeNode* currentFunction = NULL;
 bool returnStatementFound = false;
 bool insideLoop = false;
 int loopDepth = 1;
+int globalOffset = 0;
+int localOffset = 0;
 
 std::string binaryOps[19] = { "+", "-", "*", "/", "%", "+=", "-=", "*=", "/=",
 							  "<", ">", "<=", ">=", "==", "!=", "=", "[", "."
@@ -24,6 +26,7 @@ void AttachIOLib(TreeNode*& treeNode)
 	ExpType funcRetVals[] = { Void,      Void,      Void,      Int,     Bool,     Char,     Void };
 	std::string funcIds[] = { "output", "outputb", "outputc", "input", "inputb", "inputc", "outnl" };
 	ExpType funcParamVals[] = { Int,       Bool,      Char,      Void,    Void,     Void,     Void };
+	int ioMemSize[] = { -3, -3, -3, -2, -2, -2, -2 };
 
 	TreeNode* nodes[7];
 
@@ -33,6 +36,9 @@ void AttachIOLib(TreeNode*& treeNode)
 		funcNode->lineNumber = -1;
 		funcNode->attr.name = strdup(funcIds[i].c_str());
 		funcNode->expType = funcRetVals[i];
+		funcNode->isGlobal = true;
+		funcNode->memSize = ioMemSize[i];
+		funcNode->memOffset = 0;
 
 		// If the param val is not void, it means it has parameters.
 		// As such, we need to create some nodes and add point the current function node to it.
@@ -42,6 +48,8 @@ void AttachIOLib(TreeNode*& treeNode)
 			paramNode->lineNumber = -1;
 			paramNode->attr.name = strdup("*dummy*");
 			paramNode->expType = funcParamVals[i];
+			paramNode->memSize = 1;
+			paramNode->memOffset = -2;
 			funcNode->children[0] = paramNode;
 		}
 
@@ -120,18 +128,21 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 	switch (node->kind.decl)
 	{
-	case ParamK:
+	case ParamK:		
 		for (int i = 0; i < 3; i++)
 		{
 			ScopeAndType(node->children[i], numErrors, numWarnings);
 		}
+		node->memSize = 1;
+		node->memOffset = localOffset;
+		localOffset--;
 		break;
-	case VarK:
+	case VarK:			
 		for (int i = 0; i < 3; i++)
 		{
 			ScopeAndType(node->children[i], numErrors, numWarnings);
 		}		
-
+		
 		if (node->children[0] != NULL)
 		{				
 			if (node->children[0]->nodeKind == ExpK && (node->kind.exp == IdK && node->children[0]->kind.exp == CallK))
@@ -142,7 +153,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			{
 				declaration = node->children[0];
 			}			
-
+			
 			if (declaration->nodeKind == ExpK && (declaration->kind.exp == IdK || declaration->kind.exp == CallK || !declaration->isConst))
 			{				
 				// Error: Declaration must be initialized with constant.
@@ -178,9 +189,43 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			error.expressionLineNumber = existingNode->lineNumber;
 			PrintError(error, numErrors, numWarnings);
 		}
-		break;
-	case FuncK:
 
+		if (node->isArray)
+		{
+			node->memSize = node->arrayLength + 1;
+		}
+		else
+		{
+			node->memSize = 1;
+		}
+
+		if (node->isGlobal || node->isStatic)
+		{
+			if (node->isArray)
+			{
+				node->memOffset = globalOffset - 1;
+			}
+			else
+			{
+				node->memOffset = globalOffset;
+			}
+			globalOffset -= node->memSize;
+		}
+		else
+		{
+			if (node->isArray)
+			{
+				node->memOffset = localOffset - 1;
+			}
+			else
+			{
+				node->memOffset = localOffset;
+			}
+			localOffset -= node->memSize;
+		}
+
+		break;
+	case FuncK:		
 		symbolTable.enter(node->attr.name);
 		currentFunction = node;
 		enteredFunctionScope = true;
@@ -212,8 +257,19 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 		symbolTable.leave();
 		currentFunction = NULL;
-		break;
+		
+		node->memSize = 0;
+		TreeNode* t = node->children[0];
+		while (t != NULL)
+		{
+			node->memSize--;
+			t = t->sibling;
+		}
 
+		node->memSize -= 2;
+		node->memOffset = 0;
+
+		break;
 	}
 }
 
@@ -366,6 +422,7 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		break;
 	case CompK:
+		int compSize = localOffset;
 		bool keepScope = !enteredFunctionScope;
 
 		if (keepScope)
@@ -387,6 +444,9 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			symbolTable.leave();
 		}
+
+		node->memSize = localOffset;
+		localOffset = compSize;
 
 		break;
 	}
@@ -880,6 +940,10 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 			//node->expType = found->expType;
 			node->isArray = found->isArray;
+			node->memSize = found->memSize;
+			node->memOffset = found->memOffset;
+			node->isGlobal = found->isGlobal;
+			node->isStatic = found->isStatic;
 
 			if (found->kind.decl == FuncK)
 			{
@@ -955,6 +1019,13 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 		else
 		{
+			node->expType = found->expType;
+			node->memSize = found->memSize;
+			node->memOffset = found->memOffset;
+			node->isArray = found->isArray;
+			node->isStatic = found->isStatic;
+			node->isGlobal = found->isGlobal;
+
 			if (found->kind.decl != FuncK)
 			{
 				Error error;

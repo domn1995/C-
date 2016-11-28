@@ -1851,7 +1851,7 @@ yyreduce:
 							(yyval.treeNode)->attr.name = (yyvsp[-3].t).tokenStr;
 							(yyval.treeNode)->lineNumber = (yyvsp[-3].t).lineNum;
 							(yyval.treeNode)->isArray = true;
-							(yyval.treeNode)->arraySize = (yyvsp[-1].t).intVal;
+							(yyval.treeNode)->arrayLength = (yyvsp[-1].t).intVal;
 						}
 #line 1857 "c-.tab.c" /* yacc.c:1646  */
     break;

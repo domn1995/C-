@@ -179,6 +179,8 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 		{
 			printf("ERROR(%d): Unknown NodeKind.\n", tree->lineNumber);
 		}
+
+		printf("[ref: %s, size: %d, loc: %d] ", tree->isGlobal ? "Global" : "Local", tree->memSize, tree->memOffset);
 		
 		if (annotated)
 		{

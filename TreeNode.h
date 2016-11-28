@@ -57,7 +57,10 @@ public:
 	bool isRecord;
 	bool isStatic;
 	bool isConst;
-	int arraySize;
+	bool isGlobal;
+	int arrayLength;
+	int memSize;
+	int memOffset;
 } TreeNode;
 
 void InitializeChildrenNodes(TreeNode* treeNode);

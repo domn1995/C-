@@ -1361,19 +1361,19 @@ case 45:
 YY_RULE_SETUP
 #line 345 "c-.l"
 { 
-						int tokenType = ID;						
-						
-						// If this identifier is actually a record type, we should return RECTYPE instead.
-						if (static_cast<char*>(globalScope.lookup(yytext)) != NULL && strcmp(static_cast<char*>(globalScope.lookup(yytext)), "recordType") == 0)
-						{								
-							tokenType = RECTYPE;
-						}						
-						yylval.t.tokenClass = tokenType;
-						yylval.t.lineNum = yylineno;
-						yylval.t.tokenStr = strdup(yytext);
-						
-						return tokenType; 
-					}
+							int tokenType = ID;						
+							
+							// If this identifier is actually a record type, we should return RECTYPE instead.
+							if (static_cast<char*>(globalScope.lookup(yytext)) != NULL && strcmp(static_cast<char*>(globalScope.lookup(yytext)), "recordType") == 0)
+							{								
+								tokenType = RECTYPE;
+							}						
+							yylval.t.tokenClass = tokenType;
+							yylval.t.lineNum = yylineno;
+							yylval.t.tokenStr = strdup(yytext);
+							
+							return tokenType; 
+						}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP

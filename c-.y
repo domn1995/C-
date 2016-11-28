@@ -298,7 +298,7 @@ varDeclId			:	ID
 							$$->attr.name = $1.tokenStr;
 							$$->lineNumber = $1.lineNum;
 							$$->isArray = true;
-							$$->arraySize = $3.intVal;
+							$$->arrayLength = $3.intVal;
 						}
 					|	ID LBRACKET error
 						{
