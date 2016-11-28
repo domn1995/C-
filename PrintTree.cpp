@@ -47,7 +47,11 @@ void PrintMemInfo(TreeNode* node)
 	if (node->nodeKind == DeclK && node->kind.decl == ParamK)
 	{		
 		printf("Param, ");		
-	}	
+	}
+	else if (node->nodeKind == ExpK && node->kind.exp == CallK)	
+	{
+		printf("None, ");
+	}
 	else if (node->isStatic)
 	{
 		printf("Static, ");
