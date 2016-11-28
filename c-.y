@@ -234,7 +234,7 @@ scopedVarDeclaration:	scopedTypeSpecifier varDeclList SEMICOLON
 						}
 					;
 				
-	varDeclList		:	varDeclList COMMA varDeclInitialize 
+varDeclList			:	varDeclList COMMA varDeclInitialize 
 						{
 							yyerrok;
 							TreeNode* t = $1;
