@@ -938,7 +938,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		break;
 	case IdK:
 		found = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
-
+		node->memSize = 1;
 		if (found == NULL)
 		{
 			node->expType = Undefined;
