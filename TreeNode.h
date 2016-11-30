@@ -58,6 +58,7 @@ public:
 	bool isStatic;
 	bool isConst;
 	bool isGlobal;
+	bool isParam;
 	bool isIO;
 	int arrayLength;
 	int memSize;

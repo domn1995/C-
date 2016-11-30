@@ -145,6 +145,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			ScopeAndType(node->children[i], numErrors, numWarnings);
 		}
 		node->memSize = 1;
+		node->isParam = true;
 		if (!node->isIO)
 		{
 			node->memOffset = localOffset;
@@ -956,6 +957,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			//node->expType = found->expType;
 			node->isArray = found->isArray;
 			node->memSize = found->memSize;
+			node->isParam = found->isParam;
 			node->memOffset = found->memOffset;
 			node->isGlobal = found->isGlobal;
 			node->isStatic = found->isStatic;
