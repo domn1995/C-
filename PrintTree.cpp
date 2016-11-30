@@ -179,13 +179,18 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					{
 						printf("Record %s ", tree->attr.name);
 					}
-					else if (tree->isArray)
+					else
 					{
-						printf("Var %s is array  ", tree->attr.name);
+						printf("Var %s ", tree->attr.name);
+					}
+
+					if (tree->isArray)
+					{
+						printf("is array  ");
 					}
 					else
 					{
-						printf("Var %s  ", tree->attr.name);
+						printf(" ");
 					}
 
 					break;

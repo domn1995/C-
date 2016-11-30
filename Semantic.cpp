@@ -797,7 +797,7 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		}
 		
 		// We just indexed the array, therefore it is no longer an array.
-		leftOperand->isArray = false;
+		//leftOperand->isArray = false;
 
 		break;
 	case DotOp:
