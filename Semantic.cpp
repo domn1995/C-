@@ -15,7 +15,7 @@ int loopDepth = 1;
 int globalOffset = 0;
 int localOffset = 0;
 
-std::string binaryOps[19] = { "+", "-", "*", "/", "%", "+=", "-=", "*=", "/=",
+std::string binaryOps[20] = { "+", "-", "*", "/", "%", "+=", "-=", "*=", "/=",
 							  "<", ">", "<=", ">=", "==", "!=", "=", "[", "."
 							  "and", "or" };
 
