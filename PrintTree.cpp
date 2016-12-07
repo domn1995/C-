@@ -25,7 +25,7 @@ void Indent()
 
 void PrintMemInfo(TreeNode* node)
 {
-	if (node->nodeKind == StmtK && node->kind.stmt != CompK || node->nodeKind == ExpK && node->kind.exp == CallK)
+	if (node->nodeKind == StmtK && node->kind.stmt != CompK)
 	{
 		// There's no mem info to print for statements or calls.
 		return;
@@ -36,6 +36,7 @@ void PrintMemInfo(TreeNode* node)
 		{
 			// There's no mem info for the following expression types:
 			case AssignK:
+			case CallK:
 			case ConstK:
 			case OpK:
 				return;
@@ -172,7 +173,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 			switch (tree->kind.decl)
 			{
 				case FuncK:
-					printf("Func %s ", tree->attr.name, ExpTypeToString(tree->expType));
+					printf("Func %s ", tree->attr.name);
 					break;
 				case VarK:
 					if (tree->isRecord)
