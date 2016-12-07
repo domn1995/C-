@@ -25,7 +25,7 @@ void Indent()
 
 void PrintMemInfo(TreeNode* node)
 {
-	if (node->nodeKind == StmtK)
+	if (node->nodeKind == StmtK && node->kind.stmt != CompK)
 	{
 		// There's no mem info to print for statements.
 		return;
@@ -48,7 +48,7 @@ void PrintMemInfo(TreeNode* node)
 	{		
 		printf("Param, ");		
 	}
-	else if (node->nodeKind == ExpK && node->kind.exp == CallK)	
+	else if (node->nodeKind == ExpK && node->kind.exp == CallK || node->nodeKind == StmtK && node->kind.stmt == CompK)	
 	{
 		printf("None, ");
 	}
@@ -172,7 +172,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 			switch (tree->kind.decl)
 			{
 				case FuncK:
-					printf("Func %s returns type %s ", tree->attr.name, ExpTypeToString(tree->expType));
+					printf("Func %s ", tree->attr.name, ExpTypeToString(tree->expType));
 					break;
 				case VarK:
 					if (tree->isRecord)
@@ -181,22 +181,22 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					}
 					else if (tree->isArray)
 					{
-						printf("Var %s is array  ", tree->attr.name);
+						printf("Var %s is array ", tree->attr.name);
 					}
 					else
 					{
-						printf("Var %s  ", tree->attr.name);
+						printf("Var %s ", tree->attr.name);
 					}
 
 					break;
 				case ParamK:
 					if (tree->isArray)
 					{
-						printf("Param %s is array  ", tree->attr.name);
+						printf("Param %s is array ", tree->attr.name);
 					}
 					else
 					{
-						printf("Param %s  ", tree->attr.name);
+						printf("Param %s ", tree->attr.name);
 					}
 
 					break;
