@@ -99,10 +99,10 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 			switch (tree->kind.stmt)
 			{
 				case IfK:
-					printf("If ");
+					printf("If  ");
 					break;
 				case WhileK:
-					printf("While ");
+					printf("While  ");
 					break;
 				case CompK:
 					printf("Compound ");
