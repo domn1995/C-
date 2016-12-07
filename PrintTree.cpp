@@ -25,9 +25,9 @@ void Indent()
 
 void PrintMemInfo(TreeNode* node)
 {
-	if (node->nodeKind == StmtK && node->kind.stmt != CompK)
+	if (node->nodeKind == StmtK && node->kind.stmt != CompK || node->nodeKind == ExpK && node->kind.exp == CallK)
 	{
-		// There's no mem info to print for statements.
+		// There's no mem info to print for statements or calls.
 		return;
 	}
 	else if (node->nodeKind == ExpK)
