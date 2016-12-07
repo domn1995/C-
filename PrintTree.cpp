@@ -150,11 +150,7 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					printf("Id: %s ", tree->attr.name);
 					if (tree->isArray)
 					{
-						printf("is array  ");
-					}
-					else
-					{
-						printf(" ");
+						printf("is array ");
 					}
 					break;
 				case OpK:
@@ -182,11 +178,11 @@ void PrintSyntaxTree(TreeNode* t, int currSibling, bool annotated)
 					}
 					else if (tree->isArray)
 					{
-						printf("Var %s is array ", tree->attr.name);
+						printf("Var: %s is array ", tree->attr.name);
 					}
 					else
 					{
-						printf("Var %s ", tree->attr.name);
+						printf("Var: %s ", tree->attr.name);
 					}
 
 					break;
