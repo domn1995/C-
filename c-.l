@@ -378,6 +378,7 @@ return				{
 						return SEMICOLON; 
 					}
 "//".*				; // Do nothing.
+"\r"				; // Do nothing.
 .					{ 
 						numWarnings++; 
 						printf("WARNING(%d): Invalid input character: '%c'. Character ignored.\n", yylineno, yytext[0]);
