@@ -59,6 +59,7 @@ public:
 	bool isConst;
 	bool isGlobal;
 	bool isIO;
+	bool isParam;
 	int arrayLength;
 	int memSize;
 	int memOffset;

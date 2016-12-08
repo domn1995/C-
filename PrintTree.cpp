@@ -45,7 +45,7 @@ void PrintMemInfo(TreeNode* node)
 
 	printf("[ref: ");
 
-	if (node->nodeKind == DeclK && node->kind.decl == ParamK)
+	if (node->nodeKind == DeclK && node->kind.decl == ParamK || node->isParam)
 	{		
 		printf("Param, ");		
 	}

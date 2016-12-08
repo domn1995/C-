@@ -2,8 +2,8 @@
 
 #Usage: ./test.sh ./c- -Pp TestFiles/hw4/testFile.c-
 
-testFilesDir="TestFiles/hw4"
-testResultsDir="TestResults/hw4"
+testFilesDir="TestFiles/hw7"
+testResultsDir="TestResults/hw7"
 bin="$1"
 flags="$2"
 inFilePath="$3"
@@ -15,7 +15,7 @@ outExt=".out"
 outFilePath="$testResultsDir/$outFileName$outExt"
 
 compCommand="$bin $flags $inFilePath > $outFilePath"
-diffCommand="diff $outFilePath $testFilesDir/$inFileNameNoExt.out"
+diffCommand="diff -w -B $outFilePath $testFilesDir/$inFileNameNoExt.pout"
 
 echo $compCommand 
 echo $diffCommand

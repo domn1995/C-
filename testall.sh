@@ -2,6 +2,6 @@
 
 rm -f TestResults/hw4/testall.out
 
-for file in ./TestFiles/hw4/*.c-; do
-	eval ./test.sh ./c- -0 "$file"
+for file in ./TestFiles/hw7/*.c-; do
+	eval ./test.sh ./c- -P "$file"
 done

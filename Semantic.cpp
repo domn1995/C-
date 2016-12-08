@@ -37,6 +37,7 @@ void AttachIOLib(TreeNode*& treeNode)
 		funcNode->lineNumber = -1;
 		funcNode->attr.name = strdup(funcIds[i].c_str());
 		funcNode->expType = funcRetVals[i];
+		funcNode->isIO = true;
 		funcNode->isGlobal = true;
 		funcNode->memSize = ioMemSize[i];
 		funcNode->memOffset = 0;
@@ -50,6 +51,7 @@ void AttachIOLib(TreeNode*& treeNode)
 			paramNode->attr.name = strdup("*dummy*");
 			paramNode->expType = funcParamVals[i];
 			paramNode->isIO = true;
+			paramNode->isParam = true;
 			paramNode->memSize = 1;
 			paramNode->memOffset = -2;
 			funcNode->children[0] = paramNode;
@@ -139,7 +141,8 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 	switch (node->kind.decl)
 	{
-	case ParamK:		
+	case ParamK:
+		node->isParam = true;		
 		for (int i = 0; i < 3; i++)
 		{
 			ScopeAndType(node->children[i], numErrors, numWarnings);
@@ -273,15 +276,30 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		symbolTable.leave();
 		currentFunction = NULL;
 		
-		node->memSize = 0;
-		TreeNode* t = node->children[0];
+		node->memSize = -2;
+		TreeNode* t = node->children[1];
+
 		while (t != NULL)
 		{
-			node->memSize--;
-			t = t->sibling;
+			if (!node->isIO)
+			{
+				node->memSize = t->memSize;
+			}
+			
+			t = t->children[1];
 		}
 
-		node->memSize -= 2;
+		if (node->isIO)
+		{
+			t = node->children[0];
+
+			while (t != NULL)
+			{
+				node->memSize--;
+				t = t->sibling;
+			}
+		}
+		
 		node->memOffset = 0;
 
 		break;
@@ -797,7 +815,7 @@ void TypeAndCheckBinaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 		}
 		
 		// We just indexed the array, therefore it is no longer an array.
-		leftOperand->isArray = false;
+		//leftOperand->isArray = false;
 
 		break;
 	case DotOp:
@@ -955,6 +973,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 			//node->expType = found->expType;
 			node->isArray = found->isArray;
+			node->isParam = found->isParam;
 			node->memSize = found->memSize;
 			node->memOffset = found->memOffset;
 			node->isGlobal = found->isGlobal;

@@ -868,6 +868,7 @@ simpleExpression	:	simpleExpression OR andExpression
 						{
 							$$ = NewExprNode(OpK);
 							$$->attr.name = $2.tokenStr;
+							$$->lineNumber = $2.lineNum;
 							$$->isConst = $1->isConst && $3->isConst;
 							$$->children[0] = $1;
 							$$->children[1] = $3;
@@ -894,6 +895,7 @@ simpleExpression	:	simpleExpression OR andExpression
 andExpression		:	andExpression AND unaryRelExpression
 						{
 							$$ = NewExprNode(OpK);
+							$$->lineNumber = $2.lineNum;
 							$$->attr.name = $2.tokenStr;
 							$$->isConst = $1->isConst && $3->isConst;
 							$$->children[0] = $1;
@@ -935,6 +937,7 @@ relExpression		:	sumExpression relop sumExpression
 						{
 							$$ = NewExprNode(OpK);
 							$$->attr.name = $2.tokenStr;
+							$$->lineNumber = $2.lineNum;
 							$$->isConst = $1->isConst && $3->isConst;
 							$$->children[0] = $1;
 							$$->children[1] = $3;
