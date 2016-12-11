@@ -3563,9 +3563,10 @@ int main(int argc, char** argv)
 		{
 			PrintSyntaxTree(savedTree, -1, true);
 		}
-	}
+
+		printf("Offset for end of global space: %d\n", globalOffset);
+	}	
 	
-	printf("Offset for end of global space: %d\n", globalOffset);
 	printf("Number of warnings: %d\n", numWarnings);
 	printf("Number of errors: %d\n", numErrors);
 	

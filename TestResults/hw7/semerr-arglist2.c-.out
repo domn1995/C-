@@ -1,9 +1,3 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -6
-local offset = -2
 ERROR(13): Too few parameters passed for function 'kate' defined on line 3.
 ERROR(14): Too few parameters passed for function 'kate' defined on line 3.
 ERROR(15): Too few parameters passed for function 'kate' defined on line 3.
@@ -26,24 +20,15 @@ ERROR(22): Expecting type int in parameter 3 of call to 'kate' defined on line 3
 ERROR(22): Expecting array in parameter 3 of call to 'kate' defined on line 3.
 ERROR(22): Expecting type bool in parameter 4 of call to 'kate' defined on line 3 but got type int.
 ERROR(25): '+' requires operands of type int but rhs is of type bool.
-local offset = -2
 ERROR(32): Function 'abbey' at line 30 is expecting to return type int but return has no return value.
 ERROR(35): Symbol 'abbey' is already defined at line 30.
-local offset = -2
 ERROR(37): Function 'abbey' at line 35 is expecting to return type int but return has no return value.
-local offset = -2
 ERROR(42): Function 'zena' at line 40 is expecting to return type int but instead returns type bool.
-local offset = -2
 ERROR(47): Function 'zeus' at line 45 is expecting to return type bool but instead returns type int.
-local offset = -2
 ERROR(52): Function 'blackdog' at line 50 is expecting to return type bool but return has no return value.
-local offset = -2
 ERROR(59): Cannot return an array.
-local offset = -2
 ERROR(64): Function 'quaoar' at line 62 is expecting no return value, but return has return value.
-local offset = -2
 ERROR(69): Function 'ixion' at line 67 is expecting no return value, but return has return value.
-local offset = -2
 ERROR(75): Cannot return an array.
 ERROR(75): Function 'varuna' at line 72 is expecting no return value, but return has return value.
 ERROR(LINKER): Procedure main is not defined.
@@ -65,7 +50,7 @@ Sibling: 6  Func kate [ref: Global, size: -6, loc: 0] [type int] [line: 3]
 !   Child: 1  Compound [ref: None, size: -6, loc: 0] [type void] [line: 4]
 !   !   Child: 1  Return [type void] [line: 5]
 !   !   !   Child: 0  Const: 666 [type int] [line: 5]
-Sibling: 7  Func matty [ref: Global, size: -2, loc: 0] [type int] [line: 8]
+Sibling: 7  Func matty [ref: Global, size: -9, loc: 0] [type int] [line: 8]
 !   Child: 1  Compound [ref: None, size: -9, loc: 0] [type void] [line: 9]
 !   !   Child: 0  Var: inta is array [ref: Local, size: 3, loc: -3] [type int] [line: 10]
 !   !   Sibling: 0  Var: boola is array [ref: Local, size: 4, loc: -6] [type bool] [line: 11]
@@ -142,7 +127,7 @@ Sibling: 11  Func zeus [ref: Global, size: -2, loc: 0] [type bool] [line: 45]
 Sibling: 12  Func blackdog [ref: Global, size: -2, loc: 0] [type bool] [line: 50]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 51]
 !   !   Child: 1  Return [type void] [line: 52]
-Sibling: 13  Func zog [ref: Global, size: -2, loc: 0] [type int] [line: 55]
+Sibling: 13  Func zog [ref: Global, size: -5, loc: 0] [type int] [line: 55]
 !   Child: 1  Compound [ref: None, size: -5, loc: 0] [type void] [line: 56]
 !   !   Child: 0  Var: z is array [ref: Local, size: 3, loc: -3] [type int] [line: 57]
 !   !   Child: 1  Return [type void] [line: 59]
@@ -155,7 +140,7 @@ Sibling: 15  Func ixion [ref: Global, size: -2, loc: 0] [type void] [line: 67]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 68]
 !   !   Child: 1  Return [type void] [line: 69]
 !   !   !   Child: 0  Const: true [type bool] [line: 69]
-Sibling: 16  Func varuna [ref: Global, size: -2, loc: 0] [type void] [line: 72]
+Sibling: 16  Func varuna [ref: Global, size: -13, loc: 0] [type void] [line: 72]
 !   Child: 1  Compound [ref: None, size: -13, loc: 0] [type void] [line: 73]
 !   !   Child: 0  Var: z is array [ref: Local, size: 11, loc: -3] [type bool] [line: 74]
 !   !   Child: 1  Return [type void] [line: 75]

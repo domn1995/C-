@@ -1,21 +1,14 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
 ERROR(4): Function 'fred' at line 3 is expecting to return type int but return has no return value.
 ERROR(5): Function 'fred' at line 3 is expecting to return type int but instead returns type bool.
 ERROR(9): Symbol 'fred' is already defined at line 3.
-local offset = -2
 ERROR(10): Function 'fred' at line 9 is expecting no return value, but return has return value.
 ERROR(11): Function 'fred' at line 9 is expecting no return value, but return has return value.
 ERROR(15): Symbol 'fred' is already defined at line 3.
-local offset = -2
 ERROR(17): Function 'fred' at line 15 is expecting no return value, but return has return value.
 ERROR(18): Function 'fred' at line 15 is expecting no return value, but return has return value.
 ERROR(22): Function 'fred' at line 15 is expecting no return value, but return has return value.
 ERROR(23): Function 'fred' at line 15 is expecting no return value, but return has return value.
 ERROR(28): Symbol 'fred' is already defined at line 3.
-local offset = -2
 ERROR(30): Function 'fred' at line 28 is expecting to return type bool but instead returns type int.
 ERROR(32): Function 'fred' at line 28 is expecting to return type bool but return has no return value.
 ERROR(35): Function 'fred' at line 28 is expecting to return type bool but instead returns type int.

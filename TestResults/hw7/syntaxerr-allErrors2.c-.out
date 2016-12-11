@@ -5,6 +5,5 @@ ERROR(181): Syntax error, unexpected ';', expecting ')'.
 ERROR(182): Syntax error, unexpected ';', expecting ')'.
 ERROR(184): Syntax error, unexpected ';', expecting ')'.
 ERROR(185): Syntax error, unexpected ';', expecting ')'.
-Offset for end of global space: 0
 Number of warnings: 0
 Number of errors: 7

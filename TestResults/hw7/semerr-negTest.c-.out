@@ -1,41 +1,20 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
 WARNING(10): Expecting to return type int but function 'intfunc' has no return statement.
-local offset = -2
 WARNING(14): Expecting to return type bool but function 'boolfunc' has no return statement.
-local offset = -2
-local offset = -2
-local offset = -42
-local offset = -2
 ERROR(29): Cannot return an array.
 ERROR(29): Function 't1' at line 27 is expecting to return type bool but instead returns type int.
-local offset = -2
 ERROR(34): Expecting Boolean test condition in if statement but got type int.
 ERROR(34): Cannot use array as test condition in if statement.
 ERROR(35): Expecting Boolean test condition in if statement but got type int.
 ERROR(38): Expecting Boolean test condition in while statement but got type int.
 ERROR(38): Cannot use array as test condition in while statement.
 ERROR(39): Expecting Boolean test condition in while statement but got type int.
-local offset = -2
 ERROR(45): Array index is the unindexed array 'arr'.
-local offset = -2
-local offset = -4
-local offset = -2
 ERROR(56): Expecting array in parameter 1 of call to 'foo1' defined on line 48.
 ERROR(56): Not expecting array in parameter 2 of call to 'foo1' defined on line 48.
 WARNING(52): Expecting to return type int but function 't4' has no return statement.
-local offset = -2
 ERROR(63): '=' requires that either both or neither operands be arrays.
 ERROR(64): '=' requires that either both or neither operands be arrays.
 ERROR(66): The operation '+' does not work with arrays.
-local offset = -2
-local offset = -4
-local offset = -2
-local offset = -3
-local offset = -2
-local offset = -2
 ERROR(84): Too few parameters passed for function 'foo2' defined on line 70.
 ERROR(85): Too few parameters passed for function 'foo2' defined on line 70.
 ERROR(86): Expecting type bool in parameter 1 of call to 'foo2' defined on line 70 but got type int.
@@ -44,21 +23,13 @@ ERROR(87): Expecting type bool in parameter 1 of call to 'foo2' defined on line 
 ERROR(87): Expecting type int in parameter 2 of call to 'foo2' defined on line 70 but got type bool.
 ERROR(88): Too many parameters passed for function 'foo2' defined on line 70.
 ERROR(91): Too many parameters passed for function 'foo4' defined on line 78.
-local offset = -2
 ERROR(98): Cannot return an array.
 ERROR(98): Function 't8' at line 96 is expecting no return value, but return has return value.
-local offset = -2
 ERROR(103): Function 't9' at line 101 is expecting no return value, but return has return value.
-local offset = -2
 ERROR(108): Function 't10' at line 106 is expecting to return type int but return has no return value.
-local offset = -2
 ERROR(113): Function 't11' at line 111 is expecting to return type int but instead returns type bool.
-local offset = -2
 ERROR(118): Function 't12' at line 116 is expecting to return type bool but instead returns type int.
-local offset = -2
 ERROR(123): Function 't14' at line 121 is expecting no return value, but return has return value.
-local offset = -2
-local offset = -2
 ERROR(138): '+' requires operands of type int but lhs is of type bool.
 ERROR(138): '+' requires operands of type int but rhs is of type bool.
 ERROR(138): '*' requires operands of type int but lhs is of type bool.
@@ -114,74 +85,40 @@ ERROR(183): 'and' requires operands of type bool but lhs is of type int.
 ERROR(183): 'and' requires operands of type bool but rhs is of type int.
 ERROR(184): 'and' requires operands of type bool but rhs is of type int.
 ERROR(185): 'and' requires operands of type bool but lhs is of type int.
-local offset = -2
 ERROR(192): Expecting Boolean test condition in if statement but got type int.
 ERROR(194): Expecting Boolean test condition in if statement but got type int.
 ERROR(195): Expecting Boolean test condition in if statement but got type void.
 ERROR(198): Expecting Boolean test condition in while statement but got type int.
 ERROR(200): Expecting Boolean test condition in while statement but got type int.
 ERROR(201): Expecting Boolean test condition in while statement but got type void.
-local offset = -2
 ERROR(206): Symbol 'a' is already defined at line 206.
-local offset = -4
 WARNING(206): Expecting to return type int but function 't18' has no return statement.
-local offset = -2
 WARNING(210): Expecting to return type int but function 't19' has no return statement.
 ERROR(214): Symbol 't19' is already defined at line 210.
-local offset = -2
 WARNING(214): Expecting to return type int but function 't19' has no return statement.
-local offset = -2
-local offset = -3
 WARNING(219): Expecting to return type int but function 't20' has no return statement.
-local offset = -2
-local offset = -3
 ERROR(226): Symbol 'a2' is already defined at line 224.
 WARNING(224): Expecting to return type int but function 't21' has no return statement.
-local offset = -2
-local offset = -3
 WARNING(230): Expecting to return type int but function 't22' has no return statement.
-local offset = -2
 ERROR(240): Symbol 'a4' is already defined at line 239.
 WARNING(237): Expecting to return type int but function 't23' has no return statement.
-local offset = -2
 WARNING(243): Expecting to return type int but function 't24' has no return statement.
-local offset = -2
-local offset = -3
 WARNING(252): Expecting to return type int but function 't25' has no return statement.
 ERROR(261): Symbol 'a7' is already defined at line 260.
 ERROR(264): Symbol 'a8' is already defined at line 263.
-local offset = -2
-local offset = -2
 ERROR(271): Symbol 'a9' is already defined at line 268.
-local offset = -2
 ERROR(276): Function 'zzz' is not defined.
-local offset = -2
 ERROR(284): Symbol 'x' is not defined.
 ERROR(288): Symbol 't27' is already defined at line 279.
-local offset = -2
-local offset = -3
 ERROR(305): Symbol 'x4' is not defined.
 ERROR(310): Symbol 'x3' is not defined.
 ERROR(311): Symbol 'x4' is not defined.
-local offset = -2
-local offset = -3
-local offset = -2
-local offset = -3
 ERROR(326): '=' requires operands of the same type but lhs is type int and rhs is type bool.
-local offset = -2
-local offset = -2
-local offset = -2
 ERROR(343): Function 'f2' is not defined.
-local offset = -2
-local offset = -2
-local offset = -3
 ERROR(357): '=' requires operands of the same type but lhs is type int and rhs is type bool.
-local offset = -2
-local offset = -2
 ERROR(371): 'bar4' is a simple variable and cannot be called.
 ERROR(373): Cannot use function 'bar4' as a variable.
 ERROR(373): '=' requires operands of the same type but lhs is type void and rhs is type int.
-local offset = -2
 ERROR(382): Cannot index nonarray 'y'.
 ERROR(383): Cannot index nonarray 'i'.
 ERROR(384): Cannot index nonarray 'b'.
@@ -198,14 +135,10 @@ ERROR(395): Array 'z' should be indexed by type int but got type void.
 ERROR(396): Array index is the unindexed array 'z'.
 ERROR(397): Array index is the unindexed array 'arr'.
 ERROR(398): Cannot use function 'intfunc' as a variable.
-local offset = -2
-local offset = -3
 ERROR(405): Symbol 'y' is not defined.
 ERROR(406): '=' requires operands of the same type but lhs is type bool and rhs is type int.
 ERROR(407): Symbol 'y' is not defined.
 WARNING(403): Expecting to return type int but function 't31' has no return statement.
-local offset = -2
-local offset = -2
 ERROR(LINKER): Procedure main is not defined.
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
@@ -320,7 +253,7 @@ Sibling: 18  Func t4 [ref: Global, size: -2, loc: 0] [type int] [line: 52]
 !   !   Child: 1  Call: foo1 [type void] [line: 56]
 !   !   !   Child: 0  Const: 1 [type int] [line: 56]
 !   !   !   Sibling: 0  Id: arr is array [ref: Global, size: 11, loc: -4] [type int] [line: 56]
-Sibling: 19  Func t5 [ref: Global, size: -2, loc: 0] [type void] [line: 59]
+Sibling: 19  Func t5 [ref: Global, size: -3, loc: 0] [type void] [line: 59]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 60]
 !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type int] [line: 61]
 !   !   Child: 1  Assign: = [type int] [line: 63]
@@ -627,50 +560,50 @@ Sibling: 37  Func t20 [ref: Global, size: -3, loc: 0] [type int] [line: 219]
 Sibling: 38  Var: a2 [ref: Global, size: 1, loc: -15] [type int] [line: 223]
 Sibling: 39  Func t21 [ref: Global, size: -3, loc: 0] [type int] [line: 224]
 !   Child: 0  Param a2 [ref: Param, size: 1, loc: -2] [type int] [line: 224]
-!   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 225]
-!   !   Child: 0  Var: a2 [ref: Local, size: 1, loc: -3] [type int] [line: 226]
+!   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 225]
+!   !   Child: 0  Var: a2 [ref: Local, size: 1, loc: 0] [type int] [line: 226]
 Sibling: 40  Var: a3 [ref: Global, size: 1, loc: -16] [type int] [line: 229]
-Sibling: 41  Func t22 [ref: Global, size: -3, loc: 0] [type int] [line: 230]
+Sibling: 41  Func t22 [ref: Global, size: -4, loc: 0] [type int] [line: 230]
 !   Child: 0  Param a3 [ref: Param, size: 1, loc: -2] [type int] [line: 230]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 231]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 232]
 !   !   !   Child: 0  Var: a3 [ref: Local, size: 1, loc: -3] [type int] [line: 233]
-Sibling: 42  Func t23 [ref: Global, size: -2, loc: 0] [type int] [line: 237]
-!   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 238]
+Sibling: 42  Func t23 [ref: Global, size: -3, loc: 0] [type int] [line: 237]
+!   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 238]
 !   !   Child: 0  Var: a4 [ref: Local, size: 1, loc: -2] [type int] [line: 239]
-!   !   Sibling: 0  Var: a4 [ref: Local, size: 1, loc: -3] [type int] [line: 240]
-Sibling: 43  Func t24 [ref: Global, size: -2, loc: 0] [type int] [line: 243]
+!   !   Sibling: 0  Var: a4 [ref: Local, size: 1, loc: 0] [type int] [line: 240]
+Sibling: 43  Func t24 [ref: Global, size: -4, loc: 0] [type int] [line: 243]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 244]
 !   !   Child: 0  Var: a4 [ref: Local, size: 1, loc: -2] [type int] [line: 245]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 246]
 !   !   !   Child: 0  Var: a4 [ref: Local, size: 1, loc: -3] [type int] [line: 247]
 Sibling: 44  Var: a5 [ref: Global, size: 1, loc: -17] [type int] [line: 251]
-Sibling: 45  Func t25 [ref: Global, size: -3, loc: 0] [type int] [line: 252]
+Sibling: 45  Func t25 [ref: Global, size: -5, loc: 0] [type int] [line: 252]
 !   Child: 0  Param a6 [ref: Param, size: 1, loc: -2] [type int] [line: 252]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 253]
 !   !   Child: 0  Var: a5 [ref: Local, size: 1, loc: -3] [type int] [line: 254]
 !   !   Child: 1  Compound [ref: None, size: -5, loc: 0] [type void] [line: 255]
 !   !   !   Child: 0  Var: a6 [ref: Local, size: 1, loc: -4] [type int] [line: 256]
 Sibling: 46  Var: a7 [ref: Global, size: 1, loc: -18] [type int] [line: 260]
-Sibling: 47  Var: a7 [ref: Global, size: 1, loc: -19] [type bool] [line: 261]
-Sibling: 48  Var: a8 [ref: Global, size: 1, loc: -20] [type int] [line: 263]
+Sibling: 47  Var: a7 [ref: Global, size: 1, loc: 0] [type bool] [line: 261]
+Sibling: 48  Var: a8 [ref: Global, size: 1, loc: -19] [type int] [line: 263]
 Sibling: 49  Func a8 [ref: Global, size: -2, loc: 0] [type void] [line: 264]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 265]
 Sibling: 50  Func a9 [ref: Global, size: -2, loc: 0] [type void] [line: 268]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 269]
-Sibling: 51  Var: a9 [ref: Global, size: 1, loc: -21] [type int] [line: 271]
+Sibling: 51  Var: a9 [ref: Global, size: 1, loc: 0] [type int] [line: 271]
 Sibling: 52  Func t26 [ref: Global, size: -2, loc: 0] [type void] [line: 274]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 275]
 !   !   Child: 1  Call: zzz [undefined type] [line: 276]
-Sibling: 53  Func t27 [ref: Global, size: -2, loc: 0] [type void] [line: 279]
+Sibling: 53  Func t27 [ref: Global, size: -3, loc: 0] [type void] [line: 279]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 280]
 !   !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 281]
 !   !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type int] [line: 282]
 !   !   Sibling: 0  Assign: = [undefined type] [line: 284]
-!   !   !   Child: 0  Id: x [ref: Local, size: 0, loc: 0] [undefined type] [line: 284]
+!   !   !   Child: 0  Id: x [ref: None, size: 1, loc: 0] [undefined type] [line: 284]
 !   !   !   Child: 1  Const: 1 [type int] [line: 284]
-Sibling: 54  Var: x0 [ref: Global, size: 1, loc: -22] [type int] [line: 287]
-Sibling: 55  Func t27 [ref: Global, size: -3, loc: 0] [type void] [line: 288]
+Sibling: 54  Var: x0 [ref: Global, size: 1, loc: -20] [type int] [line: 287]
+Sibling: 55  Func t27 [ref: Global, size: -6, loc: 0] [type void] [line: 288]
 !   Child: 0  Param x1 [ref: Param, size: 1, loc: -2] [type int] [line: 288]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 289]
 !   !   Child: 0  Var: x2 [ref: Local, size: 1, loc: -3] [type int] [line: 290]
@@ -679,7 +612,7 @@ Sibling: 55  Func t27 [ref: Global, size: -3, loc: 0] [type void] [line: 288]
 !   !   !   Child: 1  Compound [ref: None, size: -6, loc: 0] [type void] [line: 293]
 !   !   !   !   Child: 0  Var: x4 [ref: Local, size: 1, loc: -5] [type int] [line: 294]
 !   !   !   !   Child: 1  Assign: = [type int] [line: 295]
-!   !   !   !   !   Child: 0  Id: x0 [ref: Global, size: 1, loc: -22] [type int] [line: 295]
+!   !   !   !   !   Child: 0  Id: x0 [ref: Global, size: 1, loc: -20] [type int] [line: 295]
 !   !   !   !   !   Child: 1  Const: 1 [type int] [line: 295]
 !   !   !   !   Sibling: 0  Assign: = [type int] [line: 296]
 !   !   !   !   !   Child: 0  Id: x1 [ref: Param, size: 1, loc: -2] [type int] [line: 296]
@@ -694,7 +627,7 @@ Sibling: 55  Func t27 [ref: Global, size: -3, loc: 0] [type void] [line: 288]
 !   !   !   !   !   Child: 0  Id: x4 [ref: Local, size: 1, loc: -5] [type int] [line: 299]
 !   !   !   !   !   Child: 1  Const: 1 [type int] [line: 299]
 !   !   !   Sibling: 0  Assign: = [type int] [line: 301]
-!   !   !   !   Child: 0  Id: x0 [ref: Global, size: 1, loc: -22] [type int] [line: 301]
+!   !   !   !   Child: 0  Id: x0 [ref: Global, size: 1, loc: -20] [type int] [line: 301]
 !   !   !   !   Child: 1  Const: 1 [type int] [line: 301]
 !   !   !   Sibling: 1  Assign: = [type int] [line: 302]
 !   !   !   !   Child: 0  Id: x1 [ref: Param, size: 1, loc: -2] [type int] [line: 302]
@@ -706,10 +639,10 @@ Sibling: 55  Func t27 [ref: Global, size: -3, loc: 0] [type void] [line: 288]
 !   !   !   !   Child: 0  Id: x3 [ref: Local, size: 1, loc: -4] [type int] [line: 304]
 !   !   !   !   Child: 1  Const: 1 [type int] [line: 304]
 !   !   !   Sibling: 4  Assign: = [undefined type] [line: 305]
-!   !   !   !   Child: 0  Id: x4 [ref: Local, size: 0, loc: 0] [undefined type] [line: 305]
+!   !   !   !   Child: 0  Id: x4 [ref: None, size: 1, loc: 0] [undefined type] [line: 305]
 !   !   !   !   Child: 1  Const: 1 [type int] [line: 305]
 !   !   Sibling: 0  Assign: = [type int] [line: 307]
-!   !   !   Child: 0  Id: x0 [ref: Global, size: 1, loc: -22] [type int] [line: 307]
+!   !   !   Child: 0  Id: x0 [ref: Global, size: 1, loc: -20] [type int] [line: 307]
 !   !   !   Child: 1  Const: 1 [type int] [line: 307]
 !   !   Sibling: 1  Assign: = [type int] [line: 308]
 !   !   !   Child: 0  Id: x1 [ref: Param, size: 1, loc: -2] [type int] [line: 308]
@@ -718,12 +651,12 @@ Sibling: 55  Func t27 [ref: Global, size: -3, loc: 0] [type void] [line: 288]
 !   !   !   Child: 0  Id: x2 [ref: Local, size: 1, loc: -3] [type int] [line: 309]
 !   !   !   Child: 1  Const: 1 [type int] [line: 309]
 !   !   Sibling: 3  Assign: = [undefined type] [line: 310]
-!   !   !   Child: 0  Id: x3 [ref: Local, size: 0, loc: 0] [undefined type] [line: 310]
+!   !   !   Child: 0  Id: x3 [ref: None, size: 1, loc: 0] [undefined type] [line: 310]
 !   !   !   Child: 1  Const: 1 [type int] [line: 310]
 !   !   Sibling: 4  Assign: = [undefined type] [line: 311]
-!   !   !   Child: 0  Id: x4 [ref: Local, size: 0, loc: 0] [undefined type] [line: 311]
+!   !   !   Child: 0  Id: x4 [ref: None, size: 1, loc: 0] [undefined type] [line: 311]
 !   !   !   Child: 1  Const: 1 [type int] [line: 311]
-Sibling: 56  Func t28 [ref: Global, size: -3, loc: 0] [type void] [line: 314]
+Sibling: 56  Func t28 [ref: Global, size: -4, loc: 0] [type void] [line: 314]
 !   Child: 0  Param x1 [ref: Param, size: 1, loc: -2] [type int] [line: 314]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 315]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 316]
@@ -731,7 +664,7 @@ Sibling: 56  Func t28 [ref: Global, size: -3, loc: 0] [type void] [line: 314]
 !   !   !   Child: 1  Assign: = [type bool] [line: 318]
 !   !   !   !   Child: 0  Id: x1 [ref: Local, size: 1, loc: -3] [type bool] [line: 318]
 !   !   !   !   Child: 1  Const: true [type bool] [line: 318]
-Sibling: 57  Func t29 [ref: Global, size: -3, loc: 0] [type void] [line: 322]
+Sibling: 57  Func t29 [ref: Global, size: -4, loc: 0] [type void] [line: 322]
 !   Child: 0  Param x1 [ref: Param, size: 1, loc: -2] [type bool] [line: 322]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 323]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 324]
@@ -739,7 +672,7 @@ Sibling: 57  Func t29 [ref: Global, size: -3, loc: 0] [type void] [line: 322]
 !   !   !   Child: 1  Assign: = [type int] [line: 326]
 !   !   !   !   Child: 0  Id: x1 [ref: Local, size: 1, loc: -3] [type int] [line: 326]
 !   !   !   !   Child: 1  Const: true [type bool] [line: 326]
-Sibling: 58  Func bar [ref: Global, size: -2, loc: 0] [type void] [line: 330]
+Sibling: 58  Func bar [ref: Global, size: -3, loc: 0] [type void] [line: 330]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 331]
 !   !   Child: 0  Var: bar [ref: Local, size: 1, loc: -2] [type int] [line: 332]
 !   !   Child: 1  Assign: = [type int] [line: 333]
@@ -754,7 +687,7 @@ Sibling: 60  Func f1 [ref: Global, size: -2, loc: 0] [type void] [line: 341]
 Sibling: 61  Func f2 [ref: Global, size: -2, loc: 0] [type void] [line: 346]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 347]
 !   !   Child: 1  Call: f1 [type void] [line: 348]
-Sibling: 62  Func bar3 [ref: Global, size: -3, loc: 0] [type void] [line: 351]
+Sibling: 62  Func bar3 [ref: Global, size: -4, loc: 0] [type void] [line: 351]
 !   Child: 0  Param x1 [ref: Param, size: 1, loc: -2] [type int] [line: 351]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 352]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 353]
@@ -767,7 +700,7 @@ Sibling: 62  Func bar3 [ref: Global, size: -3, loc: 0] [type void] [line: 351]
 !   !   !   Child: 1  Const: false [type bool] [line: 357]
 Sibling: 63  Func bar4 [ref: Global, size: -2, loc: 0] [type void] [line: 362]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 363]
-Sibling: 64  Func bar5 [ref: Global, size: -2, loc: 0] [type void] [line: 366]
+Sibling: 64  Func bar5 [ref: Global, size: -3, loc: 0] [type void] [line: 366]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 367]
 !   !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 368]
 !   !   !   Child: 0  Var: bar4 [ref: Local, size: 1, loc: -2] [type int] [line: 369]
@@ -779,7 +712,7 @@ Sibling: 64  Func bar5 [ref: Global, size: -2, loc: 0] [type void] [line: 366]
 !   !   !   Child: 0  Id: bar4 [ref: Global, size: -2, loc: 0] [type void] [line: 373]
 !   !   !   Child: 1  Const: 1 [type int] [line: 373]
 !   !   Sibling: 1  Call: bar4 [type void] [line: 374]
-Sibling: 65  Func t30 [ref: Global, size: -2, loc: 0] [type void] [line: 377]
+Sibling: 65  Func t30 [ref: Global, size: -15, loc: 0] [type void] [line: 377]
 !   Child: 1  Compound [ref: None, size: -15, loc: 0] [type void] [line: 378]
 !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type int] [line: 379]
 !   !   Sibling: 0  Var: y [ref: Local, size: 1, loc: -3] [type int] [line: 380]
@@ -881,31 +814,31 @@ Sibling: 65  Func t30 [ref: Global, size: -2, loc: 0] [type void] [line: 377]
 !   !   !   Child: 0  Id: x [ref: Local, size: 1, loc: -2] [type int] [line: 400]
 !   !   !   Child: 1  Op: [ [type int] [line: 400]
 !   !   !   !   Child: 0  Id: z is array [ref: Local, size: 11, loc: -5] [type int] [line: 400]
-!   !   !   !   Child: 1  Id: x0 [ref: Global, size: 1, loc: -22] [type int] [line: 400]
+!   !   !   !   Child: 1  Id: x0 [ref: Global, size: 1, loc: -20] [type int] [line: 400]
 Sibling: 66  Func t31 [ref: Global, size: -3, loc: 0] [type int] [line: 403]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 403]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 404]
-!   !   Child: 1  Id: y [ref: Local, size: 0, loc: 0] [undefined type] [line: 405]
+!   !   Child: 1  Id: y [ref: None, size: 1, loc: 0] [undefined type] [line: 405]
 !   !   Sibling: 0  Assign: = [type bool] [line: 406]
 !   !   !   Child: 0  Id: b [ref: Global, size: 1, loc: 0] [type bool] [line: 406]
 !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 406]
 !   !   Sibling: 1  Assign: = [type bool] [line: 407]
 !   !   !   Child: 0  Id: b [ref: Global, size: 1, loc: 0] [type bool] [line: 407]
-!   !   !   Child: 1  Id: y [ref: Local, size: 0, loc: 0] [undefined type] [line: 407]
-Sibling: 67  Var: z1 [ref: Global, size: 1, loc: -23] [type int] [line: 411]
+!   !   !   Child: 1  Id: y [ref: None, size: 1, loc: 0] [undefined type] [line: 407]
+Sibling: 67  Var: z1 [ref: Global, size: 1, loc: -21] [type int] [line: 411]
 Sibling: 68  Func t32 [ref: Global, size: -2, loc: 0] [type void] [line: 412]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 413]
-!   !   Child: 1  Id: z1 [ref: Global, size: 1, loc: -23] [type int] [line: 414]
+!   !   Child: 1  Id: z1 [ref: Global, size: 1, loc: -21] [type int] [line: 414]
 !   !   Sibling: 0  Assign: = [type int] [line: 415]
 !   !   !   Child: 0  Id: i [ref: Global, size: 1, loc: -1] [type int] [line: 415]
-!   !   !   Child: 1  Id: z1 [ref: Global, size: 1, loc: -23] [type int] [line: 415]
-Sibling: 69  Func t33 [ref: Global, size: -2, loc: 0] [type void] [line: 419]
+!   !   !   Child: 1  Id: z1 [ref: Global, size: 1, loc: -21] [type int] [line: 415]
+Sibling: 69  Func t33 [ref: Global, size: -3, loc: 0] [type void] [line: 419]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 420]
 !   !   Child: 0  Var: z2 [ref: Local, size: 1, loc: -2] [type int] [line: 421]
 !   !   Child: 1  Id: z2 [ref: Local, size: 1, loc: -2] [type int] [line: 422]
 !   !   Sibling: 0  Assign: = [type int] [line: 423]
 !   !   !   Child: 0  Id: i [ref: Global, size: 1, loc: -1] [type int] [line: 423]
 !   !   !   Child: 1  Id: z2 [ref: Local, size: 1, loc: -2] [type int] [line: 423]
-Offset for end of global space: -24
+Offset for end of global space: -22
 Number of warnings: 13
 Number of errors: 129

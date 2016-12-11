@@ -4,6 +4,5 @@ WARNING(18): Invalid input character: '^'. Character ignored.
 ERROR(22): Syntax error, unexpected '{'.
 ERROR(44): Syntax error, unexpected '+'.
 ERROR(45): Syntax error, unexpected '%'.
-Offset for end of global space: 0
 Number of warnings: 1
 Number of errors: 5

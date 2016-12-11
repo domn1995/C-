@@ -1,11 +1,3 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -3
-local offset = -2
-local offset = -3
 ERROR(19): '=' requires operands of the same type but lhs is type int and rhs is type bool.
 ERROR(19): '=' requires operands of the same type but lhs is type bool and rhs is type int.
 ERROR(20): '=' requires operands of the same type but lhs is type bool and rhs is type int.
@@ -50,7 +42,7 @@ Sibling: 7  Func wu [ref: Global, size: -2, loc: 0] [type void] [line: 6]
 Sibling: 8  Func fred [ref: Global, size: -3, loc: 0] [type void] [line: 8]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 8]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 9]
-Sibling: 9  Func main [ref: Global, size: -3, loc: 0] [type int] [line: 12]
+Sibling: 9  Func main [ref: Global, size: -39, loc: 0] [type int] [line: 12]
 !   Child: 0  Param xraydeltaniner [ref: Param, size: 1, loc: -2] [type int] [line: 12]
 !   Child: 1  Compound [ref: None, size: -7, loc: 0] [type void] [line: 13]
 !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -3] [type int] [line: 14]
@@ -78,10 +70,10 @@ Sibling: 9  Func main [ref: Global, size: -3, loc: 0] [type int] [line: 12]
 !   !   !   !   Child: 0  Id: a [ref: Local, size: 1, loc: -5] [type bool] [line: 20]
 !   !   !   !   Child: 1  Id: x [ref: Local, size: 1, loc: -3] [type int] [line: 20]
 !   !   Sibling: 3  Assign: = [undefined type] [line: 21]
-!   !   !   Child: 0  Id: p [ref: Local, size: 0, loc: 0] [undefined type] [line: 21]
+!   !   !   Child: 0  Id: p [ref: None, size: 1, loc: 0] [undefined type] [line: 21]
 !   !   !   Child: 1  Assign: = [undefined type] [line: 21]
-!   !   !   !   Child: 0  Id: q [ref: Local, size: 0, loc: 0] [undefined type] [line: 21]
-!   !   !   !   Child: 1  Id: r [ref: Local, size: 0, loc: 0] [undefined type] [line: 21]
+!   !   !   !   Child: 0  Id: q [ref: None, size: 1, loc: 0] [undefined type] [line: 21]
+!   !   !   !   Child: 1  Id: r [ref: None, size: 1, loc: 0] [undefined type] [line: 21]
 !   !   Sibling: 4  Op: + [type int] [line: 22]
 !   !   !   Child: 0  Id: x [ref: Local, size: 1, loc: -3] [type int] [line: 22]
 !   !   !   Child: 1  Assign: += [type int] [line: 22]
@@ -125,7 +117,7 @@ Sibling: 9  Func main [ref: Global, size: -3, loc: 0] [type int] [line: 12]
 !   !   !   !   !   Child: 0  Op: + [type int] [line: 34]
 !   !   !   !   !   !   Child: 0  Id: p is array [ref: Local, size: 11, loc: -8] [type int] [line: 34]
 !   !   !   !   !   !   Child: 1  Id: q is array [ref: Local, size: 21, loc: -19] [type int] [line: 34]
-!   !   !   !   !   Child: 1  Id: xylophone [ref: Local, size: 0, loc: 0] [undefined type] [line: 34]
+!   !   !   !   !   Child: 1  Id: xylophone [ref: None, size: 1, loc: 0] [undefined type] [line: 34]
 !   !   Sibling: 10  Op: + [type int] [line: 37]
 !   !   !   Child: 0  Op: + [type int] [line: 37]
 !   !   !   !   Child: 0  Id: b [ref: Local, size: 1, loc: -6] [type bool] [line: 37]

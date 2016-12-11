@@ -94,10 +94,10 @@ void ScopeAndType(TreeNode* node, int& numErrors, int& numWarnings)
 
 	switch (node->nodeKind)
 	{
-	case DeclK:
+	case DeclK:		
 		ParseDeclNode(node, numErrors, numWarnings);
 		break;
-	case StmtK:
+	case StmtK:		
 		ParseStmtNode(node, numErrors, numWarnings);
 		break;
 	case ExpK:
@@ -153,6 +153,10 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			node->memOffset = localOffset;
 		}	
 		localOffset--;
+		if (currentFunction != NULL && localOffset < currentFunction->memSize)
+		{
+			currentFunction->memSize = localOffset;
+		}
 		break;
 	case VarK:			
 		for (int i = 0; i < 3; i++)
@@ -195,6 +199,15 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 		}
 
+		if (node->isArray)
+		{
+			node->memSize = node->arrayLength + 1;
+		}
+		else
+		{
+			node->memSize = 1;
+		}
+
 		// Symbol already defined.
 		if (!symbolTable.insert(node->attr.name, node))
 		{
@@ -205,16 +218,9 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			error.context0 = node->attr.name;
 			error.expressionLineNumber = existingNode->lineNumber;
 			PrintError(error, numErrors, numWarnings);
+			return;
 		}
-
-		if (node->isArray)
-		{
-			node->memSize = node->arrayLength + 1;
-		}
-		else
-		{
-			node->memSize = 1;
-		}
+		
 
 		if (node->isGlobal || node->isStatic)
 		{
@@ -236,16 +242,20 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			}
 			else
 			{
-				node->memOffset = localOffset;
+				node->memOffset = localOffset;				
 			}
-			localOffset -= node->memSize;
-		}
 
-		printf("var %s local offset = %d\n", node->attr.name, localOffset);
+			localOffset -= node->memSize;
+
+			if (currentFunction != NULL && localOffset < currentFunction->memSize)
+			{				
+				currentFunction->memSize = localOffset;
+			}
+		}
+		
 
 		break;
 	case FuncK:
-		printf("Func %s local offset before = %d\n", node->attr.name, localOffset);
 		localOffset = -2;
 		symbolTable.enter(node->attr.name);
 		currentFunction = node;
@@ -255,11 +265,10 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			if (node->children[i] != NULL)
 			{
-				printf("Func %s local offset = %d\n", node->attr.name, localOffset);
 				ScopeAndType(node->children[i], numErrors, numWarnings);
 			}
 		}
-
+		
 		if (returnStatementFound)
 		{
 			returnStatementFound = false;
@@ -280,35 +289,10 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		symbolTable.leave();
 		currentFunction = NULL;
 		
-		//node->memSize = -2;
-		TreeNode* t = node->children[1];
-
-		if (!node->isIO)
+		if (node->memSize > -2 || localOffset > -2)
 		{
-			node->memSize = localOffset;
+			node->memSize -= 2;
 		}
-		
-
-		// while (t != NULL)
-		// {
-		// 	if (!node->isIO)
-		// 	{
-		// 		node->memSize = t->memSize;
-		// 	}
-			
-		// 	t = t->children[1];
-		// }
-
-		// if (node->isIO)
-		// {
-		// 	t = node->children[0];
-
-		// 	while (t != NULL)
-		// 	{
-		// 		node->memSize--;
-		// 		t = t->sibling;
-		// 	}
-		// }
 		
 		node->memOffset = 0;
 
@@ -489,6 +473,10 @@ void ParseStmtNode(TreeNode* node, int& numErrors, int& numWarnings)
 		}
 
 		node->memSize = localOffset;
+		if (currentFunction != NULL && localOffset < currentFunction->memSize)
+		{			
+			currentFunction->memSize = localOffset;
+		}
 		localOffset = compSize;
 
 		break;
@@ -942,7 +930,6 @@ void TypeAndCheckUnaryOp(TreeNode* opNode, int& numErrors, int& numWarnings)
 
 void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 {
-
 	TreeNode* found = NULL;
 
 	switch (node->kind.exp)
@@ -965,15 +952,16 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 		break;
 	case IdK:
 		found = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
-
+		node->memSize = 1;
 		if (found == NULL)
 		{
-			node->expType = Undefined;
+			node->expType = Undefined;			
 			Error error;
 			error.errorCode = SymbolUndefined;
 			error.errorLineNumber = node->lineNumber;
 			error.context0 = node->attr.name;
 			PrintError(error, numErrors, numWarnings);
+			break;
 		}
 		else
 		{

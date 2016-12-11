@@ -1,14 +1,4 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -3
-local offset = -2
-local offset = -3
 WARNING(27): Expecting to return type int but function 'try' has no return statement.
-local offset = -2
-local offset = -3
-local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -25,7 +15,7 @@ Sibling: 8  Var: diagone is array [ref: Global, size: 26, loc: -27] [type int] [
 Sibling: 9  Var: diagtwo is array [ref: Global, size: 26, loc: -53] [type int] [line: 10]
 Sibling: 10  Var: n [ref: Global, size: 1, loc: -78] [type int] [line: 11]
 Sibling: 11  Var: count [ref: Global, size: 1, loc: -79] [type int] [line: 12]
-Sibling: 12  Func printboard [ref: Global, size: -3, loc: 0] [type void] [line: 14]
+Sibling: 12  Func printboard [ref: Global, size: -4, loc: 0] [type void] [line: 14]
 !   Child: 0  Param col is array [ref: Param, size: 1, loc: -2] [type int] [line: 14]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 15]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -3] [type int] [line: 16]
@@ -46,7 +36,7 @@ Sibling: 12  Func printboard [ref: Global, size: -3, loc: 0] [type void] [line: 
 !   !   Sibling: 1  Call: outnl [type void] [line: 23]
 !   !   Sibling: 2  Assign: ++ [type int] [line: 24]
 !   !   !   Child: 0  Id: count [ref: Global, size: 1, loc: -79] [type int] [line: 24]
-Sibling: 13  Func try [ref: Global, size: -3, loc: 0] [type int] [line: 27]
+Sibling: 13  Func try [ref: Global, size: -4, loc: 0] [type int] [line: 27]
 !   Child: 0  Param c [ref: Param, size: 1, loc: -2] [type int] [line: 27]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 28]
 !   !   Child: 0  Var: r [ref: Local, size: 1, loc: -3] [type int] [line: 29]
@@ -162,7 +152,7 @@ Sibling: 14  Func solve [ref: Global, size: -3, loc: 0] [type int] [line: 51]
 !   !   !   Child: 0  Const: 0 [type int] [line: 55]
 !   !   Sibling: 2  Return [type void] [line: 57]
 !   !   !   Child: 0  Id: count [ref: Global, size: 1, loc: -79] [type int] [line: 57]
-Sibling: 15  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 60]
+Sibling: 15  Func main [ref: Global, size: -3, loc: 0] [type void] [line: 60]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 61]
 !   !   Child: 0  Var: num [ref: Local, size: 1, loc: -2] [type int] [line: 62]
 !   !   Child: 1  While  [type void] [line: 64]

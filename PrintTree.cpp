@@ -49,7 +49,7 @@ void PrintMemInfo(TreeNode* node)
 	{		
 		printf("Param, ");		
 	}
-	else if (node->nodeKind == ExpK && node->kind.exp == CallK || node->nodeKind == StmtK && node->kind.stmt == CompK)	
+	else if (node->nodeKind == ExpK && node->kind.exp == CallK || node->nodeKind == StmtK && node->kind.stmt == CompK || node->expType == Undefined)	
 	{
 		printf("None, ");
 	}

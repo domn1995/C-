@@ -1,16 +1,3 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -3
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -23,7 +10,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: board is array [ref: Global, size: 10, loc: -1] [type int] [line: 26]
 Sibling: 7  Var: gamenotdone [ref: Global, size: 1, loc: -10] [type bool] [line: 27]
-Sibling: 8  Func move [ref: Global, size: -2, loc: 0] [type void] [line: 29]
+Sibling: 8  Func move [ref: Global, size: -3, loc: 0] [type void] [line: 29]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 30]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 31]
 !   !   Child: 1  Assign: = [type int] [line: 32]
@@ -513,7 +500,7 @@ Sibling: 9  Func win [ref: Global, size: -2, loc: 0] [type bool] [line: 51]
 !   !   !   !   !   Child: 0  Const: false [type bool] [line: 134]
 !   !   Sibling: 1  Return [type void] [line: 137]
 !   !   !   Child: 0  Const: true [type bool] [line: 137]
-Sibling: 10  Func blockplayer [ref: Global, size: -2, loc: 0] [type bool] [line: 140]
+Sibling: 10  Func blockplayer [ref: Global, size: -3, loc: 0] [type bool] [line: 140]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 141]
 !   !   Child: 0  Var: blocked [ref: Local, size: 1, loc: -2] [type bool] [line: 142]
 !   !   Child: 1  Assign: = [type bool] [line: 143]
@@ -972,7 +959,7 @@ Sibling: 11  Func placey [ref: Global, size: -2, loc: 0] [type void] [line: 227]
 !   !   !   !   !   !   Child: 0  Call: blockplayer [type bool] [line: 231]
 !   !   !   !   !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 231]
 !   !   !   !   !   !   Child: 1  Call: move [type void] [line: 232]
-Sibling: 12  Func xingrid [ref: Global, size: -3, loc: 0] [type bool] [line: 238]
+Sibling: 12  Func xingrid [ref: Global, size: -4, loc: 0] [type bool] [line: 238]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 238]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 239]
 !   !   Child: 0  Var: retval [ref: Local, size: 1, loc: -3] [type bool] [line: 240]
@@ -1011,7 +998,7 @@ Sibling: 12  Func xingrid [ref: Global, size: -3, loc: 0] [type bool] [line: 238
 !   !   !   !   !   !   !   Child: 1  Const: true [type bool] [line: 246]
 !   !   Sibling: 1  Return [type void] [line: 250]
 !   !   !   Child: 0  Id: retval [ref: Local, size: 1, loc: -3] [type bool] [line: 250]
-Sibling: 13  Func printboard [ref: Global, size: -2, loc: 0] [type void] [line: 253]
+Sibling: 13  Func printboard [ref: Global, size: -3, loc: 0] [type void] [line: 253]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 254]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 255]
 !   !   Child: 1  Assign: = [type int] [line: 256]
@@ -1059,7 +1046,7 @@ Sibling: 13  Func printboard [ref: Global, size: -2, loc: 0] [type void] [line: 
 !   !   !   !   !   !   Child: 1  Call: outnl [type void] [line: 269]
 !   !   !   !   Sibling: 1  Assign: ++ [type int] [line: 271]
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -2] [type int] [line: 271]
-Sibling: 14  Func finished [ref: Global, size: -2, loc: 0] [type bool] [line: 276]
+Sibling: 14  Func finished [ref: Global, size: -3, loc: 0] [type bool] [line: 276]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 277]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 278]
 !   !   Child: 1  Assign: = [type int] [line: 280]
@@ -1267,7 +1254,7 @@ Sibling: 14  Func finished [ref: Global, size: -2, loc: 0] [type bool] [line: 27
 !   !   !   Child: 2  Compound [ref: None, size: -3, loc: 0] [type void] [line: 320]
 !   !   !   !   Child: 1  Return [type void] [line: 321]
 !   !   !   !   !   Child: 0  Const: false [type bool] [line: 321]
-Sibling: 15  Func playgame [ref: Global, size: -2, loc: 0] [type void] [line: 325]
+Sibling: 15  Func playgame [ref: Global, size: -3, loc: 0] [type void] [line: 325]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 326]
 !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type int] [line: 327]
 !   !   Child: 1  Assign: = [type int] [line: 328]
@@ -1297,7 +1284,7 @@ Sibling: 15  Func playgame [ref: Global, size: -2, loc: 0] [type void] [line: 32
 !   !   !   !   !   !   Sibling: 0  Call: outnl [type void] [line: 338]
 !   !   !   !   !   !   Sibling: 1  Call: printboard [type void] [line: 339]
 !   !   !   !   !   !   Sibling: 2  Call: outnl [type void] [line: 340]
-Sibling: 16  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 345]
+Sibling: 16  Func main [ref: Global, size: -3, loc: 0] [type void] [line: 345]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 346]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 347]
 !   !   Child: 1  Assign: = [type int] [line: 348]

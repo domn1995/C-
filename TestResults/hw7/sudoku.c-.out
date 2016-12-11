@@ -1,24 +1,3 @@
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -5
-local offset = -2
-local offset = -4
-local offset = -2
-local offset = -5
-local offset = -2
-local offset = -4
-local offset = -2
-local offset = -5
-local offset = -2
-local offset = -4
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
-local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -31,7 +10,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: board is array [ref: Global, size: 82, loc: -1] [type int] [line: 22]
 Sibling: 7  Var: locked is array [ref: Global, size: 82, loc: -83] [type bool] [line: 23]
-Sibling: 8  Func initBoard [ref: Global, size: -2, loc: 0] [type void] [line: 26]
+Sibling: 8  Func initBoard [ref: Global, size: -3, loc: 0] [type void] [line: 26]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 27]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 28]
 !   !   Child: 1  Assign: = [type int] [line: 29]
@@ -106,7 +85,7 @@ Sibling: 12  Func getLocked [ref: Global, size: -4, loc: 0] [type bool] [line: 5
 !   !   !   !   !   !   Child: 0  Id: row [ref: Param, size: 1, loc: -2] [type int] [line: 58]
 !   !   !   !   !   !   Child: 1  Const: 9 [type int] [line: 58]
 !   !   !   !   !   Child: 1  Id: col [ref: Param, size: 1, loc: -3] [type int] [line: 58]
-Sibling: 13  Func isOkAt [ref: Global, size: -5, loc: 0] [type bool] [line: 62]
+Sibling: 13  Func isOkAt [ref: Global, size: -9, loc: 0] [type bool] [line: 62]
 !   Child: 0  Param row [ref: Param, size: 1, loc: -2] [type int] [line: 62]
 !   Sibling: 0  Param col [ref: Param, size: 1, loc: -3] [type int] [line: 62]
 !   Sibling: 1  Param value [ref: Param, size: 1, loc: -4] [type int] [line: 62]
@@ -189,7 +168,7 @@ Sibling: 13  Func isOkAt [ref: Global, size: -5, loc: 0] [type bool] [line: 62]
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -5] [type int] [line: 84]
 !   !   Sibling: 5  Return [type void] [line: 87]
 !   !   !   Child: 0  Const: true [type bool] [line: 87]
-Sibling: 14  Func search [ref: Global, size: -4, loc: 0] [type bool] [line: 91]
+Sibling: 14  Func search [ref: Global, size: -6, loc: 0] [type bool] [line: 91]
 !   Child: 0  Param i [ref: Param, size: 1, loc: -2] [type int] [line: 91]
 !   Sibling: 0  Param j [ref: Param, size: 1, loc: -3] [type int] [line: 91]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 92]
@@ -285,7 +264,7 @@ Sibling: 14  Func search [ref: Global, size: -4, loc: 0] [type bool] [line: 91]
 !   !   !   !   !   !   !   Child: 0  Id: n [ref: Local, size: 1, loc: -4] [type int] [line: 113]
 !   !   Sibling: 0  Return [type void] [line: 116]
 !   !   !   Child: 0  Const: false [type bool] [line: 116]
-Sibling: 15  Func searchTrivial [ref: Global, size: -2, loc: 0] [type void] [line: 120]
+Sibling: 15  Func searchTrivial [ref: Global, size: -8, loc: 0] [type void] [line: 120]
 !   Child: 1  Compound [ref: None, size: -8, loc: 0] [type void] [line: 121]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 122]
 !   !   Sibling: 0  Var: j [ref: Local, size: 1, loc: -3] [type int] [line: 122]
@@ -376,7 +355,7 @@ Sibling: 15  Func searchTrivial [ref: Global, size: -2, loc: 0] [type void] [lin
 !   !   !   !   !   !   !   !   !   Child: 0  Id: j [ref: Local, size: 1, loc: -3] [type int] [line: 154]
 !   !   !   !   !   !   Sibling: 1  Assign: ++ [type int] [line: 156]
 !   !   !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -2] [type int] [line: 156]
-Sibling: 16  Func solve [ref: Global, size: -2, loc: 0] [type bool] [line: 162]
+Sibling: 16  Func solve [ref: Global, size: -5, loc: 0] [type bool] [line: 162]
 !   Child: 1  Compound [ref: None, size: -5, loc: 0] [type void] [line: 163]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 164]
 !   !   Sibling: 0  Var: j [ref: Local, size: 1, loc: -3] [type int] [line: 164]
@@ -434,7 +413,7 @@ Sibling: 16  Func solve [ref: Global, size: -2, loc: 0] [type bool] [line: 162]
 !   !   !   Child: 0  Call: search [type bool] [line: 182]
 !   !   !   !   Child: 0  Const: 0 [type int] [line: 182]
 !   !   !   !   Sibling: 0  Const: 0 [type int] [line: 182]
-Sibling: 17  Func showBoard [ref: Global, size: -2, loc: 0] [type void] [line: 186]
+Sibling: 17  Func showBoard [ref: Global, size: -4, loc: 0] [type void] [line: 186]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 187]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 188]
 !   !   Sibling: 0  Var: j [ref: Local, size: 1, loc: -3] [type int] [line: 188]
@@ -465,7 +444,7 @@ Sibling: 17  Func showBoard [ref: Global, size: -2, loc: 0] [type void] [line: 1
 !   !   !   !   Sibling: 2  Assign: ++ [type int] [line: 198]
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -2] [type int] [line: 198]
 !   !   Sibling: 2  Call: outnl [type void] [line: 200]
-Sibling: 18  Func getInput [ref: Global, size: -2, loc: 0] [type void] [line: 204]
+Sibling: 18  Func getInput [ref: Global, size: -5, loc: 0] [type void] [line: 204]
 !   Child: 1  Compound [ref: None, size: -5, loc: 0] [type void] [line: 205]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 206]
 !   !   Sibling: 0  Var: j [ref: Local, size: 1, loc: -3] [type int] [line: 206]
