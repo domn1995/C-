@@ -1,3 +1,9 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -3
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -42,7 +48,7 @@ Sibling: 8  Func dog [ref: Global, size: -3, loc: 0] [type int] [line: 6]
 !   !   Sibling: 8  Call: outnl [type void] [line: 21]
 !   !   Sibling: 9  Return [type void] [line: 22]
 !   !   !   Child: 0  Id: z [ref: Local, size: 1, loc: -4] [type int] [line: 22]
-Sibling: 9  Func main [ref: Global, size: -3, loc: 0] [type void] [line: 25]
+Sibling: 9  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 25]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 26]
 !   !   Child: 0  Var: m [ref: Local, size: 1, loc: -2] [type int] [line: 27]
 !   !   !   Child: 0  Const: 444 [type int] [line: 27]

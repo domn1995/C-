@@ -1,3 +1,13 @@
+Func output local offset = -2
+Func outputb local offset = -2
+Func outputc local offset = -2
+Func main local offset = -2
+var frodo local offset = -3
+var bilbo local offset = -4
+var sam local offset = -5
+var merry local offset = -6
+var pippin local offset = -7
+var arwen local offset = -8
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -8,7 +18,7 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 4]
+Sibling: 6  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 4]
 !   Child: 1  Compound [ref: None, size: -8, loc: 0] [type void] [line: 5]
 !   !   Child: 0  Var: frodo [ref: Local, size: 1, loc: -2] [type int] [line: 6]
 !   !   Sibling: 0  Var: bilbo [ref: Local, size: 1, loc: -3] [type int] [line: 7]

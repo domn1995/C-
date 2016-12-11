@@ -1,9 +1,25 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -3
 ERROR(16): Function 'cat' is not defined.
 ERROR(18): Function 'dog' at line 12 is expecting to return type int but instead returns type bool.
+local offset = -2
+local offset = -3
 ERROR(25): Function 'cat' at line 21 is expecting to return type int but return has no return value.
 ERROR(28): Symbol 'cat' is already defined at line 21.
+local offset = -2
+local offset = -3
+local offset = -2
+local offset = -3
 ERROR(39): Function 'ox' at line 37 is expecting no return value, but return has return value.
+local offset = -2
+local offset = -5
 WARNING(42): Expecting to return type int but function 'emu' has no return statement.
+local offset = -2
+local offset = -3
+local offset = -2
 ERROR(53): Symbol 'x' is already defined at line 52.
 ERROR(54): Symbol 'x' is already defined at line 52.
 ERROR(62): Symbol 'v' is not defined.
@@ -112,7 +128,7 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func dog [ref: Global, size: 0, loc: 0] [type int] [line: 12]
+Sibling: 6  Func dog [ref: Global, size: -3, loc: 0] [type int] [line: 12]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 12]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 13]
 !   !   Child: 0  Var: b [ref: Local, size: 1, loc: -3] [type bool] [line: 14]
@@ -120,20 +136,20 @@ Sibling: 6  Func dog [ref: Global, size: 0, loc: 0] [type int] [line: 12]
 !   !   !   Child: 0  Const: 10 [type int] [line: 16]
 !   !   Sibling: 0  Return [type void] [line: 18]
 !   !   !   Child: 0  Id: b [ref: Local, size: 1, loc: -3] [type bool] [line: 18]
-Sibling: 7  Func cat [ref: Global, size: 0, loc: 0] [type int] [line: 21]
+Sibling: 7  Func cat [ref: Global, size: -3, loc: 0] [type int] [line: 21]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 21]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 22]
 !   !   Child: 0  Var: b [ref: Local, size: 1, loc: -3] [type bool] [line: 23]
 !   !   Child: 1  Return [type void] [line: 25]
 Sibling: 8  Var: cat [ref: Global, size: 1, loc: 0] [type int] [line: 28]
 Sibling: 9  Var: unusedGlobal [ref: Global, size: 1, loc: -1] [type int] [line: 29]
-Sibling: 10  Func ibex [ref: Global, size: 0, loc: 0] [type bool] [line: 31]
+Sibling: 10  Func ibex [ref: Global, size: -3, loc: 0] [type bool] [line: 31]
 !   Child: 0  Param x is array [ref: Param, size: 1, loc: -2] [type int] [line: 31]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 32]
 !   !   Child: 0  Var: unusedLocal [ref: Local, size: 1, loc: -3] [type int] [line: 33]
 !   !   Child: 1  Return [type void] [line: 34]
 !   !   !   Child: 0  Const: true [type bool] [line: 34]
-Sibling: 11  Func ox [ref: Global, size: 0, loc: 0] [type void] [line: 37]
+Sibling: 11  Func ox [ref: Global, size: -3, loc: 0] [type void] [line: 37]
 !   Child: 0  Param y [ref: Param, size: 1, loc: -2] [type int] [line: 37]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 38]
 !   !   Child: 1  Return [type void] [line: 39]
@@ -146,7 +162,7 @@ Sibling: 12  Func emu [ref: Global, size: -5, loc: 0] [type int] [line: 42]
 Sibling: 13  Func OvisAries [ref: Global, size: -3, loc: 0] [type void] [line: 46]
 !   Child: 0  Param sheep [ref: Param, size: 1, loc: -2] [type int] [line: 46]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 47]
-Sibling: 14  Func main [ref: Global, size: 0, loc: 0] [type int] [line: 50]
+Sibling: 14  Func main [ref: Global, size: -2, loc: 0] [type int] [line: 50]
 !   Child: 1  Compound [ref: None, size: -35, loc: 0] [type void] [line: 51]
 !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type int] [line: 52]
 !   !   Sibling: 0  Var: yuri [ref: Local, size: 1, loc: -3] [type int] [line: 52]
@@ -170,7 +186,7 @@ Sibling: 14  Func main [ref: Global, size: 0, loc: 0] [type int] [line: 50]
 !   !   !   Child: 1  Id: x [ref: Local, size: 1, loc: -2] [type int] [line: 66]
 !   !   Sibling: 3  Assign: = [type int] [line: 68]
 !   !   !   Child: 0  Id: x [ref: Local, size: 1, loc: -2] [type int] [line: 68]
-!   !   !   Child: 1  Id: cat [ref: Global, size: 0, loc: 0] [type int] [line: 68]
+!   !   !   Child: 1  Id: cat [ref: Global, size: -3, loc: 0] [type int] [line: 68]
 !   !   Sibling: 4  Assign: = [type int] [line: 69]
 !   !   !   Child: 0  Id: x [ref: Local, size: 1, loc: -2] [type int] [line: 69]
 !   !   !   Child: 1  Id: b [ref: Local, size: 1, loc: -34] [type bool] [line: 69]
@@ -282,7 +298,7 @@ Sibling: 14  Func main [ref: Global, size: 0, loc: 0] [type int] [line: 50]
 !   !   !   Child: 1  Id: b [ref: Local, size: 1, loc: -34] [type bool] [line: 108]
 !   !   Sibling: 33  Op: [ [type int] [line: 110]
 !   !   !   Child: 0  Id: aa is array [ref: Local, size: 7, loc: -7] [type int] [line: 110]
-!   !   !   Child: 1  Id: cat [ref: Global, size: 0, loc: 0] [type int] [line: 110]
+!   !   !   Child: 1  Id: cat [ref: Global, size: -3, loc: 0] [type int] [line: 110]
 !   !   Sibling: 34  Op: [ [type int] [line: 112]
 !   !   !   Child: 0  Id: aa is array [ref: Local, size: 7, loc: -7] [type int] [line: 112]
 !   !   !   Child: 1  Id: aa is array [ref: Local, size: 7, loc: -7] [type int] [line: 112]
@@ -325,10 +341,10 @@ Sibling: 14  Func main [ref: Global, size: 0, loc: 0] [type int] [line: 50]
 !   !   Sibling: 47  Call: ibex [type bool] [line: 133]
 !   !   !   Child: 0  Id: bb is array [ref: Local, size: 7, loc: -21] [type bool] [line: 133]
 !   !   Sibling: 48  Op: [ [type bool] [line: 134]
-!   !   !   Child: 0  Id: ibex [ref: Global, size: 0, loc: 0] [type bool] [line: 134]
+!   !   !   Child: 0  Id: ibex [ref: Global, size: -3, loc: 0] [type bool] [line: 134]
 !   !   !   Child: 1  Const: 3 [type int] [line: 134]
 !   !   Sibling: 49  Op: + [type int] [line: 136]
-!   !   !   Child: 0  Id: ibex [ref: Global, size: 0, loc: 0] [type bool] [line: 136]
+!   !   !   Child: 0  Id: ibex [ref: Global, size: -3, loc: 0] [type bool] [line: 136]
 !   !   !   Child: 1  Const: 4 [type int] [line: 136]
 !   !   Sibling: 50  Op: [ [type int] [line: 138]
 !   !   !   Child: 0  Id: aa is array [ref: Local, size: 7, loc: -7] [type int] [line: 138]

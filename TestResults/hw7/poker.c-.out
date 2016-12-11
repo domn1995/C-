@@ -1,3 +1,19 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -3
+local offset = -2
+local offset = -3
+local offset = -2
+local offset = -4
+local offset = -2
+local offset = -5
+local offset = -2
+local offset = -6
+local offset = -2
+local offset = -7
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -11,21 +27,21 @@ Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: numSuits [ref: Global, size: 1, loc: 0] [type int] [line: 5]
 Sibling: 7  Var: numPips [ref: Global, size: 1, loc: -1] [type int] [line: 5]
 Sibling: 8  Var: numCards [ref: Global, size: 1, loc: -2] [type int] [line: 5]
-Sibling: 9  Func suit [ref: Global, size: 0, loc: 0] [type int] [line: 7]
+Sibling: 9  Func suit [ref: Global, size: -3, loc: 0] [type int] [line: 7]
 !   Child: 0  Param c [ref: Param, size: 1, loc: -2] [type int] [line: 7]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 7]
 !   !   Child: 1  Return [type void] [line: 7]
 !   !   !   Child: 0  Op: % [type int] [line: 7]
 !   !   !   !   Child: 0  Id: c [ref: Param, size: 1, loc: -2] [type int] [line: 7]
 !   !   !   !   Child: 1  Id: numSuits [ref: Global, size: 1, loc: 0] [type int] [line: 7]
-Sibling: 10  Func pips [ref: Global, size: 0, loc: 0] [type int] [line: 8]
+Sibling: 10  Func pips [ref: Global, size: -3, loc: 0] [type int] [line: 8]
 !   Child: 0  Param c [ref: Param, size: 1, loc: -2] [type int] [line: 8]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 8]
 !   !   Child: 1  Return [type void] [line: 8]
 !   !   !   Child: 0  Op: / [type int] [line: 8]
 !   !   !   !   Child: 0  Id: c [ref: Param, size: 1, loc: -2] [type int] [line: 8]
 !   !   !   !   Child: 1  Id: numSuits [ref: Global, size: 1, loc: 0] [type int] [line: 8]
-Sibling: 11  Func p [ref: Global, size: 0, loc: 0] [type bool] [line: 10]
+Sibling: 11  Func p [ref: Global, size: -4, loc: 0] [type bool] [line: 10]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 10]
 !   Sibling: 0  Param b [ref: Param, size: 1, loc: -3] [type int] [line: 10]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 10]
@@ -35,7 +51,7 @@ Sibling: 11  Func p [ref: Global, size: 0, loc: 0] [type bool] [line: 10]
 !   !   !   !   !   Child: 0  Id: a [ref: Param, size: 1, loc: -2] [type int] [line: 10]
 !   !   !   !   Child: 1  Call: pips [type int] [line: 10]
 !   !   !   !   !   Child: 0  Id: b [ref: Param, size: 1, loc: -3] [type int] [line: 10]
-Sibling: 12  Func ppp [ref: Global, size: 0, loc: 0] [type bool] [line: 11]
+Sibling: 12  Func ppp [ref: Global, size: -5, loc: 0] [type bool] [line: 11]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 11]
 !   Sibling: 0  Param b [ref: Param, size: 1, loc: -3] [type int] [line: 11]
 !   Sibling: 1  Param c [ref: Param, size: 1, loc: -4] [type int] [line: 11]
@@ -48,7 +64,7 @@ Sibling: 12  Func ppp [ref: Global, size: 0, loc: 0] [type bool] [line: 11]
 !   !   !   !   Child: 1  Call: p [type bool] [line: 11]
 !   !   !   !   !   Child: 0  Id: b [ref: Param, size: 1, loc: -3] [type int] [line: 11]
 !   !   !   !   !   Sibling: 0  Id: c [ref: Param, size: 1, loc: -4] [type int] [line: 11]
-Sibling: 13  Func pppp [ref: Global, size: 0, loc: 0] [type bool] [line: 12]
+Sibling: 13  Func pppp [ref: Global, size: -6, loc: 0] [type bool] [line: 12]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 12]
 !   Sibling: 0  Param b [ref: Param, size: 1, loc: -3] [type int] [line: 12]
 !   Sibling: 1  Param c [ref: Param, size: 1, loc: -4] [type int] [line: 12]
@@ -66,7 +82,7 @@ Sibling: 13  Func pppp [ref: Global, size: 0, loc: 0] [type bool] [line: 12]
 !   !   !   !   Child: 1  Call: p [type bool] [line: 12]
 !   !   !   !   !   Child: 0  Id: c [ref: Param, size: 1, loc: -4] [type int] [line: 12]
 !   !   !   !   !   Sibling: 0  Id: d [ref: Param, size: 1, loc: -5] [type int] [line: 12]
-Sibling: 14  Func handtype [ref: Global, size: 0, loc: 0] [type int] [line: 14]
+Sibling: 14  Func handtype [ref: Global, size: -7, loc: 0] [type int] [line: 14]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 14]
 !   Sibling: 0  Param b [ref: Param, size: 1, loc: -3] [type int] [line: 14]
 !   Sibling: 1  Param c [ref: Param, size: 1, loc: -4] [type int] [line: 14]
@@ -302,7 +318,7 @@ Sibling: 14  Func handtype [ref: Global, size: 0, loc: 0] [type int] [line: 14]
 !   !   !   !   !   !   !   !   !   !   !   !   Child: 0  Const: 8 [type int] [line: 58]
 !   !   !   !   !   !   !   !   !   !   !   Child: 2  Return [type void] [line: 60]
 !   !   !   !   !   !   !   !   !   !   !   !   Child: 0  Const: 9 [type int] [line: 60]
-Sibling: 15  Func main [ref: Global, size: 0, loc: 0] [type int] [line: 63]
+Sibling: 15  Func main [ref: Global, size: -2, loc: 0] [type int] [line: 63]
 !   Child: 1  Compound [ref: None, size: -21, loc: 0] [type void] [line: 64]
 !   !   Child: 0  Var: hands is array [ref: Local, size: 11, loc: -3] [type int] [line: 65]
 !   !   Sibling: 0  Var: a [ref: Local, size: 1, loc: -13] [type int] [line: 66]

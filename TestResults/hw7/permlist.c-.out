@@ -1,3 +1,9 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -3
+local offset = -2
 WARNING(19): Expecting to return type int but function 'main' has no return statement.
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
@@ -10,7 +16,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: n [ref: Global, size: 1, loc: 0] [type int] [line: 2]
-Sibling: 7  Func put [ref: Global, size: 0, loc: 0] [type void] [line: 4]
+Sibling: 7  Func put [ref: Global, size: -3, loc: 0] [type void] [line: 4]
 !   Child: 0  Param p is array [ref: Param, size: 1, loc: -2] [type int] [line: 4]
 !   Child: 1  Compound [ref: None, size: -5, loc: 0] [type void] [line: 5]
 !   !   Child: 0  Var: j [ref: Local, size: 1, loc: -3] [type int] [line: 6]

@@ -241,8 +241,11 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 			localOffset -= node->memSize;
 		}
 
+		printf("var %s local offset = %d\n", node->attr.name, localOffset);
+
 		break;
 	case FuncK:
+		printf("Func %s local offset before = %d\n", node->attr.name, localOffset);
 		localOffset = -2;
 		symbolTable.enter(node->attr.name);
 		currentFunction = node;
@@ -252,6 +255,7 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		{
 			if (node->children[i] != NULL)
 			{
+				printf("Func %s local offset = %d\n", node->attr.name, localOffset);
 				ScopeAndType(node->children[i], numErrors, numWarnings);
 			}
 		}
@@ -276,29 +280,35 @@ void ParseDeclNode(TreeNode* node, int& numErrors, int& numWarnings)
 		symbolTable.leave();
 		currentFunction = NULL;
 		
-		node->memSize = -2;
+		//node->memSize = -2;
 		TreeNode* t = node->children[1];
 
-		while (t != NULL)
+		if (!node->isIO)
 		{
-			if (!node->isIO)
-			{
-				node->memSize = t->memSize;
-			}
+			node->memSize = localOffset;
+		}
+		
+
+		// while (t != NULL)
+		// {
+		// 	if (!node->isIO)
+		// 	{
+		// 		node->memSize = t->memSize;
+		// 	}
 			
-			t = t->children[1];
-		}
+		// 	t = t->children[1];
+		// }
 
-		if (node->isIO)
-		{
-			t = node->children[0];
+		// if (node->isIO)
+		// {
+		// 	t = node->children[0];
 
-			while (t != NULL)
-			{
-				node->memSize--;
-				t = t->sibling;
-			}
-		}
+		// 	while (t != NULL)
+		// 	{
+		// 		node->memSize--;
+		// 		t = t->sibling;
+		// 	}
+		// }
 		
 		node->memOffset = 0;
 

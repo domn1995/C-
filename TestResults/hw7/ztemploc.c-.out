@@ -1,3 +1,7 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -9,7 +13,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type int] [line: 1]
-Sibling: 7  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 3]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 3]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 4]
 !   !   Child: 0  Var: h [ref: Local, size: 1, loc: -2] [type int] [line: 5]
 !   !   Child: 1  Op: + [type int] [line: 6]

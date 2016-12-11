@@ -1,3 +1,20 @@
+Func input local offset before = 0
+Func output local offset before = -2
+Func output local offset = -2
+Func inputb local offset before = -3
+Func outputb local offset before = -2
+Func outputb local offset = -2
+Func inputc local offset before = -3
+Func outputc local offset before = -2
+Func outputc local offset = -2
+Func outnl local offset before = -3
+Func ford local offset before = -2
+Func ford local offset = -2
+Func ford local offset = -4
+var z local offset = -27
+Func main local offset before = -4
+Func main local offset = -2
+var y local offset = -36
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -8,7 +25,7 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func ford [ref: Global, size: 0, loc: 0] [type void] [line: 2]
+Sibling: 6  Func ford [ref: Global, size: -4, loc: 0] [type void] [line: 2]
 !   Child: 0  Param x is array [ref: Param, size: 1, loc: -2] [type int] [line: 2]
 !   Sibling: 0  Param y is array [ref: Param, size: 1, loc: -3] [type int] [line: 2]
 !   Child: 1  Compound [ref: None, size: -27, loc: 0] [type void] [line: 3]
@@ -27,7 +44,7 @@ Sibling: 6  Func ford [ref: Global, size: 0, loc: 0] [type void] [line: 2]
 !   !   !   !   Child: 0  Id: x is array [ref: Param, size: 1, loc: -2] [type int] [line: 8]
 !   !   !   !   Child: 1  Const: 3 [type int] [line: 8]
 !   !   !   Child: 1  Const: 777 [type int] [line: 8]
-Sibling: 7  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 11]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 11]
 !   Child: 1  Compound [ref: None, size: -36, loc: 0] [type void] [line: 12]
 !   !   Child: 0  Var: y is array [ref: Local, size: 34, loc: -3] [type int] [line: 13]
 !   !   Child: 1  Assign: = [type int] [line: 15]

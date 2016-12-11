@@ -1,3 +1,9 @@
+Func output local offset = -2
+Func outputb local offset = -2
+Func outputc local offset = -2
+Func fib local offset = -2
+Func fib local offset = -3
+Func main local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -30,7 +36,7 @@ Sibling: 6  Func fib [ref: Global, size: -3, loc: 0] [type int] [line: 2]
 !   !   !   !   !   Child: 0  Op: - [type int] [line: 7]
 !   !   !   !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 7]
 !   !   !   !   !   !   Child: 1  Const: 2 [type int] [line: 7]
-Sibling: 7  Func main [ref: Global, size: -3, loc: 0] [type void] [line: 10]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 10]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 11]
 !   !   Child: 1  Call: output [type void] [line: 12]
 !   !   !   Child: 0  Call: fib [type int] [line: 12]

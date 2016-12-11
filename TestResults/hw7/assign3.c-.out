@@ -1,3 +1,19 @@
+Func input local offset before = 0
+Func output local offset before = -2
+Func output local offset = -2
+Func inputb local offset before = -3
+Func outputb local offset before = -2
+Func outputb local offset = -2
+Func inputc local offset before = -3
+Func outputc local offset before = -2
+Func outputc local offset = -2
+Func outnl local offset before = -3
+var gx local offset = -2
+var gy local offset = -2
+Func main local offset before = -2
+Func main local offset = -2
+var x local offset = -11
+var y local offset = -19
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -10,7 +26,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: gx is array [ref: Global, size: 8, loc: -1] [type int] [line: 2]
 Sibling: 7  Var: gy is array [ref: Global, size: 7, loc: -9] [type int] [line: 2]
-Sibling: 8  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 4]
+Sibling: 8  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 4]
 !   Child: 1  Compound [ref: None, size: -19, loc: 0] [type void] [line: 5]
 !   !   Child: 0  Var: x is array [ref: Local, size: 9, loc: -3] [type int] [line: 6]
 !   !   Sibling: 0  Var: y is array [ref: Local, size: 8, loc: -12] [type int] [line: 6]

@@ -1,3 +1,8 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -3
 ERROR(7): Symbol 'b' is not defined.
 ERROR(13): Symbol 'b' is not defined.
 ERROR(19): Symbol 'b' is not defined.
@@ -5,6 +10,8 @@ ERROR(20): Symbol 'c' is not defined.
 ERROR(24): Symbol 'b' is not defined.
 ERROR(25): Symbol 'c' is not defined.
 WARNING(4): Expecting to return type int but function 'ant' has no return statement.
+local offset = -2
+local offset = -3
 ERROR(34): Symbol 'y' is already defined at line 31.
 ERROR(36): Symbol 'x' is not defined.
 ERROR(40): Symbol 'v' is not defined.
@@ -15,6 +22,7 @@ ERROR(42): Symbol 'abraxsis' is not defined.
 ERROR(43): Symbol 'a' is not defined.
 ERROR(49): Symbol 'g' is already defined at line 3.
 ERROR(51): Symbol 'g' is already defined at line 3.
+local offset = -2
 ERROR(70): Symbol 'c' is not defined.
 ERROR(73): Symbol 'z' is not defined.
 ERROR(76): Symbol 'b' is not defined.
@@ -33,7 +41,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type int] [line: 3]
-Sibling: 7  Func ant [ref: Global, size: 0, loc: 0] [type int] [line: 4]
+Sibling: 7  Func ant [ref: Global, size: -3, loc: 0] [type int] [line: 4]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 4]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 5]
 !   !   Child: 0  Var: a [ref: Local, size: 1, loc: -3] [type int] [line: 6]
@@ -57,7 +65,7 @@ Sibling: 7  Func ant [ref: Global, size: 0, loc: 0] [type int] [line: 4]
 !   !   !   Sibling: 1  Id: c [ref: Local, size: 0, loc: 0] [undefined type] [line: 25]
 !   !   !   Sibling: 2  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 26]
 !   !   Sibling: 8  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 28]
-Sibling: 8  Func bat [ref: Global, size: 0, loc: 0] [type int] [line: 31]
+Sibling: 8  Func bat [ref: Global, size: -3, loc: 0] [type int] [line: 31]
 !   Child: 0  Param y [ref: Param, size: 1, loc: -2] [type int] [line: 31]
 !   Child: 1  Compound [ref: None, size: -6, loc: 0] [type void] [line: 32]
 !   !   Child: 0  Var: bat [ref: Local, size: 1, loc: -3] [type int] [line: 33]
@@ -83,7 +91,7 @@ Sibling: 8  Func bat [ref: Global, size: 0, loc: 0] [type int] [line: 31]
 !   !   Sibling: 9  Return [type void] [line: 46]
 !   !   !   Child: 0  Id: g [ref: Global, size: 1, loc: 0] [type int] [line: 46]
 Sibling: 9  Var: g [ref: Global, size: 1, loc: -1] [type int] [line: 49]
-Sibling: 10  Func g [ref: Global, size: 1, loc: 0] [type int] [line: 51]
+Sibling: 10  Func g [ref: Global, size: -2, loc: 0] [type int] [line: 51]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 52]
 !   !   Child: 0  Var: a [ref: Local, size: 1, loc: -2] [type int] [line: 53]
 !   !   Sibling: 0  Var: x [ref: Local, size: 1, loc: -3] [type int] [line: 54]

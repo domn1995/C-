@@ -1,3 +1,16 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -4
+local offset = -2
+local offset = -6
+local offset = -2
+local offset = -2
+local offset = -4
+local offset = -2
+local offset = -4
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -9,7 +22,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: gromit [ref: Global, size: 1, loc: 0] [type int] [line: 6]
-Sibling: 7  Func wallace [ref: Global, size: 1, loc: 0] [type void] [line: 8]
+Sibling: 7  Func wallace [ref: Global, size: -4, loc: 0] [type void] [line: 8]
 !   Child: 0  Param wrong [ref: Param, size: 1, loc: -2] [type int] [line: 8]
 !   Sibling: 0  Param trousers [ref: Param, size: 1, loc: -3] [type int] [line: 8]
 !   Child: 1  Compound [ref: None, size: -6, loc: 0] [type void] [line: 9]
@@ -177,7 +190,7 @@ Sibling: 7  Func wallace [ref: Global, size: 1, loc: 0] [type void] [line: 8]
 !   !   !   !   !   !   !   Child: 1  Assign: -- [type int] [line: 40]
 !   !   !   !   !   !   !   !   Child: 0  Id: wrong [ref: Local, size: 1, loc: -20] [type int] [line: 40]
 !   !   Sibling: 13  Return [type void] [line: 43]
-Sibling: 8  Func Wendolene [ref: Global, size: 0, loc: 0] [type int] [line: 46]
+Sibling: 8  Func Wendolene [ref: Global, size: -6, loc: 0] [type int] [line: 46]
 !   Child: 0  Param wool [ref: Param, size: 1, loc: -2] [type int] [line: 46]
 !   Sibling: 0  Param shawn [ref: Param, size: 1, loc: -3] [type bool] [line: 46]
 !   Sibling: 1  Param yarn is array [ref: Param, size: 1, loc: -4] [type int] [line: 46]
@@ -198,7 +211,7 @@ Sibling: 8  Func Wendolene [ref: Global, size: 0, loc: 0] [type int] [line: 46]
 !   !   !   !   !   Child: 1  Op: * [type int] [line: 48]
 !   !   !   !   !   !   Child: 0  Const: 7 [type int] [line: 48]
 !   !   !   !   !   !   Child: 1  Id: wool [ref: Param, size: 1, loc: -2] [type int] [line: 48]
-Sibling: 9  Func ramsBottom [ref: Global, size: 0, loc: 0] [type bool] [line: 51]
+Sibling: 9  Func ramsBottom [ref: Global, size: -2, loc: 0] [type bool] [line: 51]
 !   Child: 1  Compound [ref: None, size: -16, loc: 0] [type void] [line: 52]
 !   !   Child: 0  Var: chicken is array [ref: Local, size: 3, loc: -3] [type int] [line: 53]
 !   !   Sibling: 0  Var: run is array [ref: Local, size: 4, loc: -6] [type bool] [line: 54]
@@ -238,7 +251,7 @@ Sibling: 9  Func ramsBottom [ref: Global, size: 0, loc: 0] [type bool] [line: 51
 !   !   !   !   !   !   !   !   Child: 0  Id: gromit is array [ref: Local, size: 4, loc: -13] [type int] [line: 60]
 !   !   !   !   !   !   !   !   Child: 1  Const: 2 [type int] [line: 60]
 !   !   !   !   !   !   Child: 1  Const: 3 [type int] [line: 60]
-Sibling: 10  Func cheese [ref: Global, size: 0, loc: 0] [type int] [line: 63]
+Sibling: 10  Func cheese [ref: Global, size: -4, loc: 0] [type int] [line: 63]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 63]
 !   Sibling: 0  Param y [ref: Param, size: 1, loc: -3] [type int] [line: 63]
 !   Child: 1  While  [type void] [line: 63]
@@ -257,14 +270,14 @@ Sibling: 10  Func cheese [ref: Global, size: 0, loc: 0] [type int] [line: 63]
 !   !   !   !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 63]
 !   !   !   !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 63]
 !   !   !   !   !   Child: 1  Id: y [ref: Param, size: 1, loc: -3] [type int] [line: 63]
-Sibling: 11  Func Wensleydale [ref: Global, size: 0, loc: 0] [type int] [line: 65]
+Sibling: 11  Func Wensleydale [ref: Global, size: -4, loc: 0] [type int] [line: 65]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 65]
 !   Sibling: 0  Param y [ref: Param, size: 1, loc: -3] [type int] [line: 65]
 !   Child: 1  Return [type void] [line: 65]
 !   !   Child: 0  Call: cheese [type int] [line: 65]
 !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 65]
 !   !   !   Sibling: 0  Id: gromit [ref: Global, size: 1, loc: 0] [type int] [line: 65]
-Sibling: 12  Func main [ref: Global, size: 1, loc: 0] [type int] [line: 67]
+Sibling: 12  Func main [ref: Global, size: -2, loc: 0] [type int] [line: 67]
 !   Child: 1  Compound [ref: None, size: -141, loc: 0] [type void] [line: 68]
 !   !   Child: 0  Var: wool [ref: Local, size: 1, loc: -2] [type int] [line: 69]
 !   !   Sibling: 0  Var: yarn is array [ref: Local, size: 114, loc: -4] [type int] [line: 69]

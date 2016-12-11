@@ -1,3 +1,12 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -3
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -11,7 +20,7 @@ Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: seed [ref: Global, size: 1, loc: 0] [type int] [line: 23]
 Sibling: 7  Var: board is array [ref: Global, size: 101, loc: -2] [type int] [line: 26]
 Sibling: 8  Var: guess is array [ref: Global, size: 101, loc: -103] [type bool] [line: 29]
-Sibling: 9  Func Random [ref: Global, size: 0, loc: 0] [type int] [line: 34]
+Sibling: 9  Func Random [ref: Global, size: -2, loc: 0] [type int] [line: 34]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 35]
 !   !   Child: 0  Var: rand [ref: Local, size: 1, loc: -2] [type int] [line: 36]
 !   !   Child: 1  Assign: = [type int] [line: 37]
@@ -34,7 +43,7 @@ Sibling: 9  Func Random [ref: Global, size: 0, loc: 0] [type int] [line: 34]
 !   !   !   !   Child: 0  Op: % [type int] [line: 42]
 !   !   !   !   !   Child: 0  Id: seed [ref: Global, size: 1, loc: 0] [type int] [line: 42]
 !   !   !   !   !   Child: 1  Const: 100 [type int] [line: 42]
-Sibling: 10  Func CreateBoard [ref: Global, size: 0, loc: 0] [type void] [line: 46]
+Sibling: 10  Func CreateBoard [ref: Global, size: -2, loc: 0] [type void] [line: 46]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 47]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 48]
 !   !   Sibling: 0  Var: j [ref: Local, size: 1, loc: -3] [type int] [line: 48]
@@ -295,7 +304,7 @@ Sibling: 10  Func CreateBoard [ref: Global, size: 0, loc: 0] [type void] [line: 
 !   !   !   !   Sibling: 0  Assign: += [type int] [line: 120]
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -2] [type int] [line: 120]
 !   !   !   !   !   Child: 1  Const: 1 [type int] [line: 120]
-Sibling: 11  Func PrintBoard [ref: Global, size: 0, loc: 0] [type void] [line: 125]
+Sibling: 11  Func PrintBoard [ref: Global, size: -2, loc: 0] [type void] [line: 125]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 126]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 127]
 !   !   Child: 1  Assign: = [type int] [line: 129]
@@ -344,7 +353,7 @@ Sibling: 11  Func PrintBoard [ref: Global, size: 0, loc: 0] [type void] [line: 1
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -2] [type int] [line: 148]
 !   !   !   !   !   Child: 1  Const: 1 [type int] [line: 148]
 !   !   Sibling: 2  Call: outnl [type void] [line: 150]
-Sibling: 12  Func Move [ref: Global, size: 0, loc: 0] [type void] [line: 153]
+Sibling: 12  Func Move [ref: Global, size: -3, loc: 0] [type void] [line: 153]
 !   Child: 0  Param m [ref: Param, size: 1, loc: -2] [type int] [line: 153]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 154]
 !   !   Child: 1  Assign: = [type bool] [line: 155]

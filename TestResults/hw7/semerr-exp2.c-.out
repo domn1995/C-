@@ -1,3 +1,7 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
 ERROR(11): '=' requires operands of the same type but lhs is type bool and rhs is type int.
 ERROR(12): '=' requires operands of the same type but lhs is type bool and rhs is type int.
 ERROR(13): '=' requires operands of the same type but lhs is type bool and rhs is type int.
@@ -54,7 +58,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type bool] [line: 3]
-Sibling: 7  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 5]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 5]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 6]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 7]
 !   !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type bool] [line: 8]

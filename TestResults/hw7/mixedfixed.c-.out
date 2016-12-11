@@ -1,3 +1,11 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -5
+local offset = -2
+local offset = -5
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -13,7 +21,7 @@ Sibling: 6  Var: a [ref: Global, size: 1, loc: 0] [type int] [line: 2]
 Sibling: 7  Var: b is array [ref: Global, size: 5, loc: -2] [type int] [line: 2]
 Sibling: 8  Var: c [ref: Global, size: 1, loc: -6] [type int] [line: 2]
 !   Child: 0  Const: 3 [type int] [line: 2]
-Sibling: 9  Func main [ref: Global, size: 1, loc: 0] [type void] [line: 3]
+Sibling: 9  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 3]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 3]
 !   !   Child: 1  While  [type void] [line: 4]
 !   !   !   Child: 0  Const: true [type bool] [line: 4]
@@ -31,7 +39,7 @@ Sibling: 9  Func main [ref: Global, size: 1, loc: 0] [type void] [line: 3]
 !   !   Sibling: 0  If  [type void] [line: 8]
 !   !   !   Child: 0  Const: true [type bool] [line: 8]
 Sibling: 10  Var: gromit is array [ref: Global, size: 11, loc: -8] [type int] [line: 12]
-Sibling: 11  Func thelma [ref: Global, size: 0, loc: 0] [type int] [line: 13]
+Sibling: 11  Func thelma [ref: Global, size: -5, loc: 0] [type int] [line: 13]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 13]
 !   Sibling: 0  Param b is array [ref: Param, size: 1, loc: -3] [type int] [line: 13]
 !   Sibling: 1  Param c [ref: Param, size: 1, loc: -4] [type bool] [line: 13]
@@ -58,7 +66,7 @@ Sibling: 11  Func thelma [ref: Global, size: 0, loc: 0] [type int] [line: 13]
 !   !   !   !   !   !   Child: 1  Const: 7 [type int] [line: 19]
 !   !   !   Child: 2  Return [type void] [line: 21]
 !   !   !   !   Child: 0  Id: zz [ref: Local, size: 1, loc: -5] [type int] [line: 21]
-Sibling: 12  Func thelma2 [ref: Global, size: 0, loc: 0] [type int] [line: 24]
+Sibling: 12  Func thelma2 [ref: Global, size: -5, loc: 0] [type int] [line: 24]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 24]
 !   Sibling: 0  Param b [ref: Param, size: 1, loc: -3] [type int] [line: 24]
 !   Sibling: 1  Param c [ref: Param, size: 1, loc: -4] [type bool] [line: 24]

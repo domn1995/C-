@@ -1,3 +1,7 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
 ERROR(25): 'and' requires operands of type bool but rhs is of type int.
 ERROR(25): 'or' requires operands of type bool but rhs is of type int.
 ERROR(34): '+' requires operands of type int but lhs is of type bool.
@@ -18,7 +22,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type int] [line: 3]
-Sibling: 7  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 5]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 5]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 6]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 7]
 !   !   !   Child: 0  Var: x [ref: Local, size: 1, loc: -2] [type int] [line: 8]

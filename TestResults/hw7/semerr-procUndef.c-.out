@@ -1,7 +1,19 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
 ERROR(8): Function 'square' is not defined.
 ERROR(10): Function 'max' is not defined.
 ERROR(13): Function 'toBool' is not defined.
 ERROR(14): Function 'toInt' is not defined.
+local offset = -2
+local offset = -3
+local offset = -2
+local offset = -4
+local offset = -2
+local offset = -3
+local offset = -2
+local offset = -3
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -12,7 +24,7 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func main [ref: Global, size: -3, loc: 0] [type void] [line: 3]
+Sibling: 6  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 3]
 !   Child: 1  Compound [ref: None, size: -6, loc: 0] [type void] [line: 4]
 !   !   Child: 0  Var: a [ref: Local, size: 1, loc: -2] [type bool] [line: 5]
 !   !   Sibling: 0  Var: b [ref: Local, size: 1, loc: -3] [type bool] [line: 5]
@@ -96,13 +108,13 @@ Sibling: 6  Func main [ref: Global, size: -3, loc: 0] [type void] [line: 3]
 !   !   !   Child: 1  Call: output [type void] [line: 22]
 !   !   !   !   Child: 0  Const: 7 [type int] [line: 22]
 !   !   Sibling: 12  Call: outnl [type void] [line: 23]
-Sibling: 7  Func square [ref: Global, size: 0, loc: 0] [type int] [line: 26]
+Sibling: 7  Func square [ref: Global, size: -3, loc: 0] [type int] [line: 26]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 26]
 !   Child: 1  Return [type void] [line: 26]
 !   !   Child: 0  Op: * [type int] [line: 26]
 !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 26]
 !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 26]
-Sibling: 8  Func max [ref: Global, size: 0, loc: 0] [type int] [line: 27]
+Sibling: 8  Func max [ref: Global, size: -4, loc: 0] [type int] [line: 27]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 27]
 !   Sibling: 0  Param y [ref: Param, size: 1, loc: -3] [type int] [line: 27]
 !   Child: 1  If  [type void] [line: 27]
@@ -113,7 +125,7 @@ Sibling: 8  Func max [ref: Global, size: 0, loc: 0] [type int] [line: 27]
 !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 27]
 !   !   Child: 2  Return [type void] [line: 27]
 !   !   !   Child: 0  Id: y [ref: Param, size: 1, loc: -3] [type int] [line: 27]
-Sibling: 9  Func toInt [ref: Global, size: 0, loc: 0] [type int] [line: 28]
+Sibling: 9  Func toInt [ref: Global, size: -3, loc: 0] [type int] [line: 28]
 !   Child: 0  Param b [ref: Param, size: 1, loc: -2] [type bool] [line: 28]
 !   Child: 1  If  [type void] [line: 28]
 !   !   Child: 0  Id: b [ref: Param, size: 1, loc: -2] [type bool] [line: 28]
@@ -121,7 +133,7 @@ Sibling: 9  Func toInt [ref: Global, size: 0, loc: 0] [type int] [line: 28]
 !   !   !   Child: 0  Const: 1 [type int] [line: 28]
 !   !   Child: 2  Return [type void] [line: 28]
 !   !   !   Child: 0  Const: 0 [type int] [line: 28]
-Sibling: 10  Func toBool [ref: Global, size: 0, loc: 0] [type bool] [line: 29]
+Sibling: 10  Func toBool [ref: Global, size: -3, loc: 0] [type bool] [line: 29]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 29]
 !   Child: 1  If  [type void] [line: 29]
 !   !   Child: 0  Op: == [type bool] [line: 29]

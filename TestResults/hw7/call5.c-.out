@@ -1,4 +1,29 @@
+Func input local offset before = 0
+Func output local offset before = -2
+Func output local offset = -2
+Func inputb local offset before = -3
+Func outputb local offset before = -2
+Func outputb local offset = -2
+Func inputc local offset before = -3
+Func outputc local offset before = -2
+Func outputc local offset = -2
+Func outnl local offset before = -3
+var g local offset = -2
+Func dog local offset before = -2
+Func dog local offset = -2
+Func dog local offset = -3
+Func cat local offset before = -3
+Func cat local offset = -2
+Func cat local offset = -3
+Func elk local offset before = -3
+Func elk local offset = -2
+Func elk local offset = -3
+Func fox local offset before = -3
+Func fox local offset = -2
+Func fox local offset = -3
 WARNING(16): Expecting to return type int but function 'fox' has no return statement.
+Func main local offset before = -3
+Func main local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -10,7 +35,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type int] [line: 1]
-Sibling: 7  Func dog [ref: Global, size: 1, loc: 0] [type int] [line: 2]
+Sibling: 7  Func dog [ref: Global, size: -3, loc: 0] [type int] [line: 2]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 2]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 2]
 !   !   Child: 1  Assign: = [type int] [line: 3]
@@ -20,7 +45,7 @@ Sibling: 7  Func dog [ref: Global, size: 1, loc: 0] [type int] [line: 2]
 !   !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 3]
 !   !   Sibling: 0  Return [type void] [line: 4]
 !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 4]
-Sibling: 8  Func cat [ref: Global, size: 1, loc: 0] [type void] [line: 7]
+Sibling: 8  Func cat [ref: Global, size: -3, loc: 0] [type void] [line: 7]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 7]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 7]
 !   !   Child: 1  Assign: = [type int] [line: 8]
@@ -29,7 +54,7 @@ Sibling: 8  Func cat [ref: Global, size: 1, loc: 0] [type void] [line: 7]
 !   !   !   !   Child: 0  Const: 3 [type int] [line: 8]
 !   !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 8]
 !   !   Sibling: 0  Return [type void] [line: 9]
-Sibling: 9  Func elk [ref: Global, size: 1, loc: 0] [type void] [line: 12]
+Sibling: 9  Func elk [ref: Global, size: -3, loc: 0] [type void] [line: 12]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 12]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 12]
 !   !   Child: 1  Assign: = [type int] [line: 13]
@@ -37,7 +62,7 @@ Sibling: 9  Func elk [ref: Global, size: 1, loc: 0] [type void] [line: 12]
 !   !   !   Child: 1  Op: * [type int] [line: 13]
 !   !   !   !   Child: 0  Const: 4 [type int] [line: 13]
 !   !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 13]
-Sibling: 10  Func fox [ref: Global, size: 1, loc: 0] [type int] [line: 16]
+Sibling: 10  Func fox [ref: Global, size: -3, loc: 0] [type int] [line: 16]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 16]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 16]
 !   !   Child: 1  Assign: = [type int] [line: 17]
@@ -45,7 +70,7 @@ Sibling: 10  Func fox [ref: Global, size: 1, loc: 0] [type int] [line: 16]
 !   !   !   Child: 1  Op: * [type int] [line: 17]
 !   !   !   !   Child: 0  Const: 5 [type int] [line: 17]
 !   !   !   !   Child: 1  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 17]
-Sibling: 11  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 20]
+Sibling: 11  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 20]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 21]
 !   !   Child: 1  Assign: = [type int] [line: 22]
 !   !   !   Child: 0  Id: g [ref: Global, size: 1, loc: 0] [type int] [line: 22]

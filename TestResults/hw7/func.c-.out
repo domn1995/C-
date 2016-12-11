@@ -1,3 +1,30 @@
+Func output local offset = -2
+Func outputb local offset = -2
+Func outputc local offset = -2
+Func ant local offset = -2
+Func bat local offset = -2
+Func bat local offset = -3
+Func cat local offset = -2
+Func cat local offset = -3
+Func dog local offset = -2
+Func dog local offset = -6
+var eel local offset = -6
+var fox local offset = -6
+Func gnu local offset = -2
+Func hog local offset = -2
+Func hog local offset = -3
+var ibex local offset = -4
+Func jay local offset = -2
+Func pig local offset = -2
+Func pig local offset = -3
+Func pigs local offset = -2
+Func pigs local offset = -3
+Func max local offset = -2
+Func max local offset = -4
+var z local offset = -5
+Func main local offset = -2
+var a local offset = -8
+var b local offset = -16
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -8,22 +35,22 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func ant [ref: Global, size: 0, loc: 0] [type int] [line: 3]
+Sibling: 6  Func ant [ref: Global, size: -2, loc: 0] [type int] [line: 3]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 4]
 !   !   Child: 1  Return [type void] [line: 5]
 !   !   !   Child: 0  Const: 0 [type int] [line: 5]
-Sibling: 7  Func bat [ref: Global, size: 0, loc: 0] [type bool] [line: 9]
+Sibling: 7  Func bat [ref: Global, size: -3, loc: 0] [type bool] [line: 9]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 9]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 10]
 !   !   Child: 1  Return [type void] [line: 11]
 !   !   !   Child: 0  Op: > [type bool] [line: 11]
 !   !   !   !   Child: 0  Id: x [ref: Param, size: 1, loc: -2] [type int] [line: 11]
 !   !   !   !   Child: 1  Const: 0 [type int] [line: 11]
-Sibling: 8  Func cat [ref: Global, size: 0, loc: 0] [type void] [line: 15]
+Sibling: 8  Func cat [ref: Global, size: -3, loc: 0] [type void] [line: 15]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type bool] [line: 15]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 16]
 !   !   Child: 1  Return [type void] [line: 17]
-Sibling: 9  Func dog [ref: Global, size: 0, loc: 0] [type int] [line: 21]
+Sibling: 9  Func dog [ref: Global, size: -6, loc: 0] [type int] [line: 21]
 !   Child: 0  Param a [ref: Param, size: 1, loc: -2] [type int] [line: 21]
 !   Sibling: 0  Param b is array [ref: Param, size: 1, loc: -3] [type int] [line: 21]
 !   Sibling: 1  Param c [ref: Param, size: 1, loc: -4] [type bool] [line: 21]
@@ -33,12 +60,12 @@ Sibling: 9  Func dog [ref: Global, size: 0, loc: 0] [type int] [line: 21]
 !   !   !   Child: 0  Id: a [ref: Param, size: 1, loc: -2] [type int] [line: 23]
 Sibling: 10  Var: eel [ref: Global, size: 1, loc: 0] [type int] [line: 27]
 Sibling: 11  Var: fox is array [ref: Global, size: 12, loc: -2] [type int] [line: 28]
-Sibling: 12  Func gnu [ref: Global, size: -3, loc: 0] [type void] [line: 31]
+Sibling: 12  Func gnu [ref: Global, size: -2, loc: 0] [type void] [line: 31]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 32]
 !   !   Child: 1  Call: output [type void] [line: 33]
 !   !   !   Child: 0  Id: eel [ref: Global, size: 1, loc: 0] [type int] [line: 33]
 !   !   Sibling: 0  Return [type void] [line: 34]
-Sibling: 13  Func hog [ref: Global, size: 0, loc: 0] [type int] [line: 38]
+Sibling: 13  Func hog [ref: Global, size: -3, loc: 0] [type int] [line: 38]
 !   Child: 0  Param z [ref: Param, size: 1, loc: -2] [type int] [line: 38]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 39]
 !   !   Child: 0  Var: ibex [ref: Local, size: 1, loc: -3] [type int] [line: 40]
@@ -57,7 +84,7 @@ Sibling: 17  Func pigs [ref: Global, size: -3, loc: 0] [type void] [line: 53]
 !   !   Child: 1  Call: pig [type void] [line: 54]
 !   !   !   Child: 0  Id: z [ref: Param, size: 1, loc: -2] [type int] [line: 54]
 !   !   Sibling: 0  Call: outnl [type void] [line: 55]
-Sibling: 18  Func max [ref: Global, size: 1, loc: 0] [type int] [line: 58]
+Sibling: 18  Func max [ref: Global, size: -4, loc: 0] [type int] [line: 58]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 58]
 !   Sibling: 0  Param y [ref: Param, size: 1, loc: -3] [type int] [line: 58]
 !   Child: 1  Compound [ref: None, size: -5, loc: 0] [type void] [line: 58]
@@ -74,7 +101,7 @@ Sibling: 18  Func max [ref: Global, size: 1, loc: 0] [type int] [line: 58]
 !   !   !   !   Child: 1  Id: y [ref: Param, size: 1, loc: -3] [type int] [line: 61]
 !   !   Sibling: 0  Return [type void] [line: 62]
 !   !   !   Child: 0  Id: z [ref: Local, size: 1, loc: -4] [type int] [line: 62]
-Sibling: 19  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 66]
+Sibling: 19  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 66]
 !   Child: 1  Compound [ref: None, size: -16, loc: 0] [type void] [line: 67]
 !   !   Child: 0  Var: a is array [ref: Local, size: 6, loc: -3] [type int] [line: 68]
 !   !   Sibling: 0  Var: b is array [ref: Local, size: 8, loc: -9] [type bool] [line: 69]

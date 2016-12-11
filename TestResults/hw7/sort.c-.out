@@ -1,3 +1,11 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -5
+local offset = -2
+local offset = -5
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -9,7 +17,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: x is array [ref: Global, size: 11, loc: -1] [type int] [line: 5]
-Sibling: 7  Func minloc [ref: Global, size: 1, loc: 0] [type int] [line: 7]
+Sibling: 7  Func minloc [ref: Global, size: -5, loc: 0] [type int] [line: 7]
 !   Child: 0  Param a is array [ref: Param, size: 1, loc: -2] [type int] [line: 7]
 !   Sibling: 0  Param low [ref: Param, size: 1, loc: -3] [type int] [line: 7]
 !   Sibling: 1  Param high [ref: Param, size: 1, loc: -4] [type int] [line: 7]
@@ -54,7 +62,7 @@ Sibling: 7  Func minloc [ref: Global, size: 1, loc: 0] [type int] [line: 7]
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -5] [type int] [line: 20]
 !   !   Sibling: 3  Return [type void] [line: 23]
 !   !   !   Child: 0  Id: k [ref: Local, size: 1, loc: -7] [type int] [line: 23]
-Sibling: 8  Func sort [ref: Global, size: 1, loc: 0] [type void] [line: 26]
+Sibling: 8  Func sort [ref: Global, size: -5, loc: 0] [type void] [line: 26]
 !   Child: 0  Param a is array [ref: Param, size: 1, loc: -2] [type int] [line: 26]
 !   Sibling: 0  Param low [ref: Param, size: 1, loc: -3] [type int] [line: 26]
 !   Sibling: 1  Param high [ref: Param, size: 1, loc: -4] [type int] [line: 26]
@@ -97,7 +105,7 @@ Sibling: 8  Func sort [ref: Global, size: 1, loc: 0] [type void] [line: 26]
 !   !   !   !   !   Child: 1  Id: t [ref: Local, size: 1, loc: -7] [type int] [line: 36]
 !   !   !   !   Sibling: 3  Assign: ++ [type int] [line: 37]
 !   !   !   !   !   Child: 0  Id: i [ref: Local, size: 1, loc: -5] [type int] [line: 37]
-Sibling: 9  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 41]
+Sibling: 9  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 41]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 42]
 !   !   Child: 0  Var: i [ref: Local, size: 1, loc: -2] [type int] [line: 42]
 !   !   Child: 1  Assign: = [type int] [line: 44]

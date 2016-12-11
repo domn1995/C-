@@ -1,3 +1,7 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
 ERROR(5): Symbol 'i' is not defined.
 ERROR(5): Symbol 'i' is not defined.
 ERROR(6): Symbol 'i' is not defined.
@@ -171,7 +175,7 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func main [ref: Global, size: 0, loc: 0] [type int] [line: 3]
+Sibling: 6  Func main [ref: Global, size: -2, loc: 0] [type int] [line: 3]
 !   Child: 1  Compound [ref: None, size: -2, loc: 0] [type void] [line: 4]
 !   !   Child: 1  Op: + [type int] [line: 5]
 !   !   !   Child: 0  Id: i [ref: Local, size: 0, loc: 0] [undefined type] [line: 5]

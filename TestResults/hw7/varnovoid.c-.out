@@ -1,3 +1,11 @@
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -2
+local offset = -4
+local offset = -2
+local offset = -4
+local offset = -2
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -10,7 +18,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type int] [line: 2]
 Sibling: 7  Var: ga is array [ref: Global, size: 11, loc: -2] [type int] [line: 2]
-Sibling: 8  Func cat [ref: Global, size: -3, loc: 0] [type void] [line: 4]
+Sibling: 8  Func cat [ref: Global, size: -4, loc: 0] [type void] [line: 4]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 4]
 !   Sibling: 0  Param xa is array [ref: Param, size: 1, loc: -3] [type int] [line: 4]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 5]
@@ -21,7 +29,7 @@ Sibling: 8  Func cat [ref: Global, size: -3, loc: 0] [type void] [line: 4]
 !   !   !   !   Child: 0  Id: xa is array [ref: Param, size: 1, loc: -3] [type int] [line: 7]
 !   !   !   !   Child: 1  Const: 3 [type int] [line: 7]
 !   !   Sibling: 1  Call: outnl [type void] [line: 8]
-Sibling: 9  Func dog [ref: Global, size: -3, loc: 0] [type void] [line: 11]
+Sibling: 9  Func dog [ref: Global, size: -4, loc: 0] [type void] [line: 11]
 !   Child: 0  Param x [ref: Param, size: 1, loc: -2] [type int] [line: 11]
 !   Sibling: 0  Param xa is array [ref: Param, size: 1, loc: -3] [type int] [line: 11]
 !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 12]
@@ -72,7 +80,7 @@ Sibling: 9  Func dog [ref: Global, size: -3, loc: 0] [type void] [line: 11]
 !   !   Sibling: 13  Call: cat [type void] [line: 30]
 !   !   !   Child: 0  Id: g [ref: Global, size: 1, loc: 0] [type int] [line: 30]
 !   !   !   Sibling: 0  Id: ga is array [ref: Global, size: 11, loc: -2] [type int] [line: 30]
-Sibling: 10  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 33]
+Sibling: 10  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 33]
 !   Child: 1  Compound [ref: None, size: -14, loc: 0] [type void] [line: 34]
 !   !   Child: 0  Var: y [ref: Local, size: 1, loc: -2] [type int] [line: 35]
 !   !   Sibling: 0  Var: ya is array [ref: Local, size: 11, loc: -4] [type int] [line: 35]

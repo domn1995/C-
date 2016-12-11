@@ -1,3 +1,25 @@
+Func input local offset before = 0
+Func output local offset before = -2
+Func output local offset = -2
+Func inputb local offset before = -3
+Func outputb local offset before = -2
+Func outputb local offset = -2
+Func inputc local offset before = -3
+Func outputc local offset before = -2
+Func outputc local offset = -2
+Func outnl local offset before = -3
+Func comb local offset before = -2
+Func comb local offset = -2
+Func comb local offset = -4
+var i local offset = -5
+var j local offset = -6
+var c local offset = -7
+Func main local offset before = -4
+Func main local offset = -2
+var max local offset = -3
+var n local offset = -4
+var xx local offset = -5
+var r local offset = -6
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -8,7 +30,7 @@ Sibling: 3  Func inputc [ref: Global, size: -2, loc: 0] [type char] [line: -1]
 Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
-Sibling: 6  Func comb [ref: Global, size: 0, loc: 0] [type int] [line: 4]
+Sibling: 6  Func comb [ref: Global, size: -4, loc: 0] [type int] [line: 4]
 !   Child: 0  Param n [ref: Param, size: 1, loc: -2] [type int] [line: 4]
 !   Sibling: 0  Param r [ref: Param, size: 1, loc: -3] [type int] [line: 4]
 !   Child: 1  Compound [ref: None, size: -7, loc: 0] [type void] [line: 5]
@@ -50,7 +72,7 @@ Sibling: 6  Func comb [ref: Global, size: 0, loc: 0] [type int] [line: 4]
 !   !   !   !   !   Child: 0  Id: j [ref: Local, size: 1, loc: -5] [type int] [line: 14]
 !   !   Sibling: 3  Return [type void] [line: 16]
 !   !   !   Child: 0  Id: c [ref: Local, size: 1, loc: -6] [type int] [line: 16]
-Sibling: 7  Func main [ref: Global, size: 0, loc: 0] [type void] [line: 19]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 19]
 !   Child: 1  Compound [ref: None, size: -6, loc: 0] [type void] [line: 20]
 !   !   Child: 0  Var: max [ref: Local, size: 1, loc: -2] [type int] [line: 21]
 !   !   Sibling: 0  Var: n [ref: Local, size: 1, loc: -3] [type int] [line: 21]

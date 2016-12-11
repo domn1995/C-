@@ -1,3 +1,14 @@
+Func output local offset = -2
+Func outputb local offset = -2
+Func outputc local offset = -2
+var g local offset = -2
+Func main local offset = -2
+var a local offset = -3
+var b local offset = -4
+var c local offset = -5
+var d local offset = -4
+var e local offset = -5
+var f local offset = -6
 Func input [ref: Global, size: -2, loc: 0] [type int] [line: -1]
 Sibling: 0  Func output [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type int] [line: -1]
@@ -9,7 +20,7 @@ Sibling: 4  Func outputc [ref: Global, size: -3, loc: 0] [type void] [line: -1]
 !   Child: 0  Param *dummy* [ref: Param, size: 1, loc: -2] [type char] [line: -1]
 Sibling: 5  Func outnl [ref: Global, size: -2, loc: 0] [type void] [line: -1]
 Sibling: 6  Var: g [ref: Global, size: 1, loc: 0] [type int] [line: 2]
-Sibling: 7  Func main [ref: Global, size: -5, loc: 0] [type void] [line: 4]
+Sibling: 7  Func main [ref: Global, size: -2, loc: 0] [type void] [line: 4]
 !   Child: 1  Compound [ref: None, size: -3, loc: 0] [type void] [line: 4]
 !   !   Child: 0  Var: a [ref: Local, size: 1, loc: -2] [type int] [line: 5]
 !   !   Child: 1  Compound [ref: None, size: -4, loc: 0] [type void] [line: 6]
