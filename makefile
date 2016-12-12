@@ -1,12 +1,18 @@
 BIN  = c-
 CC   = g++
-SRCS = $(BIN).y $(BIN).l Token.h SymbolTable.h SymbolTable.cpp TreeNode.h TreeNode.cpp PrintTree.h PrintTree.cpp Semantic.h Semantic.cpp Utils.h Utils.cpp YyError.h YyError.cpp
-OBJS = lex.yy.o $(BIN).tab.o SymbolTable.o TreeNode.o PrintTree.o Semantic.o Utils.o YyError.o
+SRCS = $(BIN).y $(BIN).l Token.h SymbolTable.h SymbolTable.cpp TreeNode.h TreeNode.cpp PrintTree.h PrintTree.cpp Semantic.h Semantic.cpp Utils.h Utils.cpp YyError.h YyError.cpp EmitCode.h EmitCode.cpp CodeGen.h CodeGen.cpp
+OBJS = lex.yy.o $(BIN).tab.o SymbolTable.o TreeNode.o PrintTree.o Semantic.o Utils.o YyError.o EmitCode.o CodeGen.o
 CCFLAGS = -ggdb -g -Wno-write-strings
 LIBS = -lm 
 
 $(BIN): $(OBJS)
 	$(CC) $(CCFLAGS) $(OBJS) $(LIBS) -o $(BIN)
+
+CodeGen.o: CodeGen.h CodeGen.cpp
+	$(CC) $(CCFLAGS) CodeGen.cpp -c
+
+EmitCode.o: EmitCode.h EmitCode.cpp CodeGen.h CodeGen.cpp
+	$(CC) $(CCFLAGS) EmitCode.cpp -c
 
 YyError.o: YyError.h YyError.cpp
 	$(CC) $(CCFLAGS) YyError.cpp -c
