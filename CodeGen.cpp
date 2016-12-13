@@ -12,6 +12,10 @@ extern int globalOffset;
 extern int localOffset;
 extern SymbolTable symbolTable;
 
+bool init = false, store = false, opStore = false, opLoad = false, unary = false;
+int numStatics = 0, compSize = 0, numParams = 0, tempIndex = 0, breakLoc = 0;
+Instruction opCode;
+
 void GenerateHeader(char* compiledFileName)
 {
     std::string fileName(compiledFileName);
@@ -98,16 +102,91 @@ void GenerateCode(TreeNode* node)
         case StmtK:
             GenerateStmtCode(node);
             break;
+        default:
+            printf("ERROR: Unknown NodeKind in GenerateCode()\n");
+            break;
     }
 
     GenerateCode(node->sibling);
 }
 
-
-
 void GenerateDeclCode(TreeNode* node)
 {
+    std::string name = node->attr.name;
+    switch (node->kind.decl)
+    {
+        case VarK:
+        {
+            store = false;
+            if ((!node->isStatic && !node->isGlobal) || ((node->isStatic || node->isGlobal) && init))
+            {
+                if (node->isArray)
+                {
+                    EmitInstruction(LDC, AC, node->memSize - 1, 6, "load size of array " + name);
+                    EmitInstruction(ST, AC, node->memOffset + 1, FP, "save size of array " + name);
+                }
+                else
+                {
+                    TreeNode* firstChild = node->children[0];
+                    if (firstChild != NULL)
+                    {
+                        GenerateCode(firstChild);
+                        EmitInstruction(ST, AC, node->memOffset, FP, "Store variable " + name);
+                    }
+                }
+            }
+            break;
+        }            
+        case FuncK:
+        {
+            TreeNode* temp = node->children[0];
+            int numParams = 0;
 
+            if (temp != NULL)
+            {
+                for (numParams; temp != NULL; ++numParams)
+                {
+                    temp = temp->sibling;
+                }
+
+                if (!(node->children[1]->nodeKind == StmtK && node->children[1]->kind.stmt == CompK))
+                {
+                    tempIndex -= (numParams + 2);
+                }
+            }
+
+            node->emitLoc = EmitSkip(0) - 1;
+
+            EmitComment("FUNCTION " + name);
+            EmitInstruction(ST, AC, -1, FP, "Store return address.");
+
+            for (int i = 0; i < 3; ++i)
+            {
+                GenerateCode(node->children[i]);
+            }
+
+            EmitComment("Add standard closing in case there is no return statement");
+            EmitInstruction(LDC, RT, 0, 6, "Set return value to 0");
+            EmitInstruction(LD, AC, -1, FP, "Load return address");
+            EmitInstruction(LD, FP, 0, FP, "Adjust fp");
+            EmitInstruction(LDA, PC, 0, AC, "Return");
+
+            EmitComment("END FUNCTION " + name);
+            tempIndex = 0;
+            break;
+        }            
+        case ParamK:
+        {
+            for (int i = 0; i < 3; ++i)
+            {
+                GenerateCode(node->children[i]);
+            }
+            break;
+        }            
+        default:
+            printf("ERROR: Unknown DeclK node in GenerateDeclCode()\n");
+            break;
+    }
 }
 
 void GenerateExpCode(TreeNode* node)
