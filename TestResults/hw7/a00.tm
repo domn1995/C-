@@ -73,3 +73,10 @@
 * END FUNCTION outnl
 * 
 * ** ** ** ** ** ** ** ** ** ** ** **
+* FUNCTION input
+ 42:     ST  3,-1(1)	Store return address. 
+* Add standard closing in case there is no return statement
+ 43:    LDC  2,0(6)	Set return value to 0 
+ 44:     LD  3,-1(1)	Load return address 
+ 45:     LD  1,0(1)	Adjust fp 
+ 46:    LDA  7,0(3)	Return 

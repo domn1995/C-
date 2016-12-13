@@ -20,6 +20,7 @@ extern FILE *code;
 //  TM location number for current instruction emission
 static int emitLoc = 0;
 static int litLoc = 0;
+static int maxLoc = 0;
 
 //  Procedure emitComment prints a comment line 
 // with a comment that is the concatenation of c and d
@@ -61,6 +62,11 @@ void EmitInstruction(Instruction i, int r, int s, int t, std::string c, bool par
     
     fflush(code);
     emitLoc++;
+    
+    if (emitLoc > maxLoc)
+    {
+        maxLoc = emitLoc;
+    }
 }
 
 // emitRO emits a REGISTER-ONLY TM instruction
@@ -175,6 +181,11 @@ int EmitSkip(int howMany)
 void EmitBackup(int loc)
 {
     emitLoc = loc;
+}
+
+void EmitRestore()
+{
+    emitLoc = maxLoc;
 }
 
 // this back patches a LDA at the instruction address addr that

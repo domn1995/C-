@@ -5,7 +5,7 @@
 #include "SymbolTable.h"
 
 void GenerateHeader(char* compiledFileName);
-void GenerateIOFuncs(TreeNode* node);
+void GenerateIOCode(TreeNode* node);
 void GenerateCode(TreeNode* node, char* outFile, char* inFile);
 void GenerateCode(TreeNode* node);
 void GenerateDeclCode(TreeNode* node);

@@ -2,10 +2,6 @@
 #define EMITCODEH
 
 #include <string>
-//
-//  Special register defines for optional use in calling the 
-//  routines below.
-//
 
 enum Instruction
 {
@@ -15,6 +11,11 @@ enum Instruction
     TLT, TLE, TEQ, TNE, TGE, TGT, MOV, SET, CMP, CPI
 };
 
+
+//
+//  Special register defines for optional use in calling the 
+//  routines below.
+//
 #define GP   0	//  The global pointer
 #define FP   1	//  The local frame pointer
 #define RT   2	//  Return value
@@ -27,7 +28,6 @@ enum Instruction
 //
 //  No comment please...
 //
-
 #define NO_COMMENT (char *)""
 
 //
@@ -40,6 +40,7 @@ enum Instruction
 //
 int EmitSkip(int howMany);    // emitSkip(0) tells you where you are and reserves no space
 void EmitBackup(int loc);
+void EmitRestore();
 
 // Optional parameter indicates whether parens wrap the 't' register.
 void EmitInstruction(Instruction i, int r, int s, int t, std::string c, bool parens = true);
