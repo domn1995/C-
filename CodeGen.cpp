@@ -150,10 +150,13 @@ void GenerateDeclCode(TreeNode* node)
                     temp = temp->sibling;
                 }
 
-                if (!(node->children[1]->nodeKind == StmtK && node->children[1]->kind.stmt == CompK))
+                if (node->children[1] != NULL)
                 {
-                    tempIndex -= (numParams + 2);
-                }
+                    if (!(node->children[1]->nodeKind == StmtK && node->children[1]->kind.stmt == CompK))
+                    {
+                        tempIndex -= (numParams + 2);
+                    }
+                }                
             }
 
             node->emitLoc = EmitSkip(0) - 1;
