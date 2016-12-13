@@ -20,7 +20,14 @@ void EmitHeader(char* compiledFileName)
 
 void GenerateCode(TreeNode* node, char* inFile, char* outFile)
 {
-    printf("Generating code\n");
-    printf("Input file = %s\n", inFile);
-    printf("Output file = %s\n", outFile);
+    code = fopen(outFile, "w");
+
+    if (code)
+    {
+        EmitHeader(inFile);
+    }
+    else
+    {
+        printf("Error opening file output file '%s'\n", outFile);66666666666666666
+    }
 }

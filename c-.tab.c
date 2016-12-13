@@ -3514,41 +3514,33 @@ int main(int argc, char** argv)
 
 	InitErrorProcessing();
 	
-	while (optind < argc)
+	while ((arg = getopt(argc, argv, "dpPo:0")) != EOF)
 	{
-		if ((arg = getopt(argc, argv, "dpPo:0")) != EOF)
-		{
-			switch (arg)
-			{			
-				case 'd':
-					argFound = true;
-					yydebug = 1;
-					break;
-				case 'p':
-					argFound = true;
-					printAbstractSyntaxTree = true;
-					break;
-				case 'P':
-					argFound = true;
-					printAnnotatedSyntaxTree = true;
-					break;	
-				case 'o':
-					printf("Case 0; optarg = %s\n", optarg);
-					outFilePath = optarg;
-					break;
-				case '0': // Case '0' does nothing.
-					break;
-				default:
-					printf("Invalid argument: %s", argv[optind]);
-					return -1;
-			}
+		switch (arg)
+		{			
+			case 'd':
+				argFound = true;
+				yydebug = 1;
+				break;
+			case 'p':
+				argFound = true;
+				printAbstractSyntaxTree = true;
+				break;
+			case 'P':
+				argFound = true;
+				printAnnotatedSyntaxTree = true;
+				break;	
+			case 'o':
+				outFilePath = optarg;
+				break;
+			case '0': // Case '0' does nothing.
+				break;
+			default:
+				printf("Invalid argument: %s", argv[optind]);
+				return -1;
 		}
-		else
-		{
-			outFilePath = argv[optind];
-			optind++;
-		}
-	}	
+	}
+	
 
 	printf("outFilePath = %s\n", outFilePath);
 	
@@ -3592,9 +3584,10 @@ int main(int argc, char** argv)
 
 	if (numErrors == 0)
 	{
-		std::string outFile = inFilePath;
+		std::string outFile;
 		if (outFilePath == NULL)
 		{
+			outFile = inFilePath;
 			// Handles files in another directory.
 			while (outFile.find("/", 0) != std::string::npos)
 			{
@@ -3606,7 +3599,7 @@ int main(int argc, char** argv)
 		}
 		else
 		{
-			std::string outFile = outFilePath;
+			outFile = outFilePath;
 		}
 		GenerateCode(savedTree, inFilePath, (char*)outFile.c_str());
 	}
