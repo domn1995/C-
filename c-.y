@@ -1,4 +1,6 @@
 %{
+#include <string>
+#include <iostream>
 #include <cstdio>
 #include <getopt.h>
 #include "Token.h"
@@ -7,6 +9,7 @@
 #include "PrintTree.h"
 #include "Semantic.h"
 #include "YyError.h"
+#include "CodeGen.h"
 
 extern int yylex();
 extern char* yytext;
@@ -1226,35 +1229,53 @@ int main(int argc, char** argv)
 	bool printAbstractSyntaxTree = false;
 	bool printAnnotatedSyntaxTree = false;	
 
+	char* inFilePath = NULL;
+	char* outFilePath = NULL;
+
 	InitErrorProcessing();
 	
-	while ((arg = getopt(argc, argv, "dpP0")) != EOF)
+	while (optind < argc)
 	{
-		switch (arg)
-		{			
-			case 'd':
-				argFound = true;
-				yydebug = 1;
-				break;
-			case 'p':
-				argFound = true;
-				printAbstractSyntaxTree = true;
-				break;
-			case 'P':
-				argFound = true;
-				printAnnotatedSyntaxTree = true;
-				break;				
-			case '0': // Case '0' does nothing.
-				break;
-			default:
-				printf("Invalid argument: %c", arg);
-				return -1;
+		if ((arg = getopt(argc, argv, "dpPo:0")) != EOF)
+		{
+			switch (arg)
+			{			
+				case 'd':
+					argFound = true;
+					yydebug = 1;
+					break;
+				case 'p':
+					argFound = true;
+					printAbstractSyntaxTree = true;
+					break;
+				case 'P':
+					argFound = true;
+					printAnnotatedSyntaxTree = true;
+					break;	
+				case 'o':
+					printf("Case 0; optarg = %s\n", optarg);
+					outFilePath = optarg;
+					break;
+				case '0': // Case '0' does nothing.
+					break;
+				default:
+					printf("Invalid argument: %s", argv[optind]);
+					return -1;
+			}
+		}
+		else
+		{
+			outFilePath = argv[optind];
+			optind++;
 		}
 	}	
+
+	printf("outFilePath = %s\n", outFilePath);
 	
 	if (argc >= 2)
 	{
 		FILE* inputFile = fopen(argv[argc - 1], "r");
+		inFilePath = argv[argc - 1];
 		
 		if (inputFile)
 		{
@@ -1282,13 +1303,33 @@ int main(int argc, char** argv)
 		if (printAnnotatedSyntaxTree)
 		{
 			PrintSyntaxTree(savedTree, -1, true);
-		}
-
-		printf("Offset for end of global space: %d\n", globalOffset);
+			printf("Offset for end of global space: %d\n", globalOffset);
+		}		
 	}	
 	
 	printf("Number of warnings: %d\n", numWarnings);
 	printf("Number of errors: %d\n", numErrors);
+
+	if (numErrors == 0)
+	{
+		std::string outFile = inFilePath;
+		if (outFilePath == NULL)
+		{
+			// Handles files in another directory.
+			while (outFile.find("/", 0) != std::string::npos)
+			{
+				outFile = outFile.substr(outFile.find("/", 0) + 1, outFile.length());
+			}
+			// Removes "c-" extension and appends "tm".
+			outFile = outFile.substr(0, outFile.length() - 2);
+			outFile += "tm";
+		}
+		else
+		{
+			std::string outFile = outFilePath;
+		}
+		GenerateCode(savedTree, inFilePath, (char*)outFile.c_str());
+	}
 	
 	return 0;
 }

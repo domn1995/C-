@@ -12,10 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 #include "EmitCode.h"
 
 extern FILE *code;
-
 
 //  TM location number for current instruction emission
 static int emitLoc = 0;
@@ -38,7 +38,10 @@ void emitComment(char *c)
     fprintf(code, "* %s\n", c);
 }
 
-
+void emitComment(std::string comment)
+{
+    fprintf(code, "* %s\n", (char*)comment.c_str());
+}
 
 // emitRO emits a REGISTER-ONLY TM instruction
 // op = the opcode

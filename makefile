@@ -8,7 +8,7 @@ LIBS = -lm
 $(BIN): $(OBJS)
 	$(CC) $(CCFLAGS) $(OBJS) $(LIBS) -o $(BIN)
 
-CodeGen.o: CodeGen.h CodeGen.cpp
+CodeGen.o: CodeGen.h CodeGen.cpp TreeNode.h TreeNode.cpp SymbolTable.h SymbolTable.cpp
 	$(CC) $(CCFLAGS) CodeGen.cpp -c
 
 EmitCode.o: EmitCode.h EmitCode.cpp CodeGen.h CodeGen.cpp
@@ -32,7 +32,7 @@ PrintTree.o: PrintTree.h TreeNode.h PrintTree.cpp
 Semantic.o: Semantic.h Semantic.cpp SymbolTable.cpp Utils.h Utils.cpp
 	$(CC) $(CCFlags) Semantic.cpp -c
 	
-$(BIN).tab.h $(BIN).tab.c: $(BIN).y SymbolTable.o TreeNode.o YyError.o
+$(BIN).tab.h $(BIN).tab.c: $(BIN).y SymbolTable.o TreeNode.o YyError.o CodeGen.o
 	bison -v -t -d $(BIN).y   # -d supplies defines file, -v supplies output
 
 lex.yy.c: $(BIN).l $(BIN).tab.h SymbolTable.o YyError.o TreeNode.o

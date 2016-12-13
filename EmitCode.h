@@ -1,6 +1,7 @@
 #ifndef EMITCODEH
 #define EMITCODEH
 
+#include <string>
 //
 //  Special register defines for optional use in calling the 
 //  routines below.
@@ -33,6 +34,7 @@
 int emitSkip(int howMany);    // emitSkip(0) tells you where you are and reserves no space
 void emitBackup(int loc);
 
+void emitComment(std::string str);
 void emitComment(char *c);
 void emitComment(char *c, char *cc);
 
