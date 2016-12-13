@@ -7,6 +7,14 @@
 //  routines below.
 //
 
+enum Instruction
+{
+    HALT, NOP, IN, OUT, INB, OUTB, INC, OUTC, OUTNL,
+    ADD, SUB, MUL, DIV, AND, OR, XOR, NOT, SWP, RND,
+    LDC, LDA, LD, LDL, LDI, ST, STI, JNZ, JZR,
+    TLT, TLE, TEQ, TNE, TGE, TGT, MOV, SET, CMP, CPI
+};
+
 #define GP   0	//  The global pointer
 #define FP   1	//  The local frame pointer
 #define RT   2	//  Return value
@@ -22,7 +30,6 @@
 
 #define NO_COMMENT (char *)""
 
-
 //
 //  We always trace the code
 //
@@ -33,6 +40,8 @@
 //
 int emitSkip(int howMany);    // emitSkip(0) tells you where you are and reserves no space
 void emitBackup(int loc);
+
+void EmitInstruction(Instruction i, int r, int s, int t, std::string c);
 
 void emitComment(std::string str);
 void emitComment(char *c);
@@ -55,5 +64,7 @@ void backPatchAJumpToHere(int addr, char *comment);
 void backPatchAJumpToHere(char *cmd, int reg, int addr, char *comment);
 
 void emitLit(char *s);
+
+char* InstructionToStr(Instruction i);
 
 #endif

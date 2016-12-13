@@ -63,6 +63,7 @@ public:
 	int arrayLength;
 	int memSize;
 	int memOffset;
+	int emitLoc;
 } TreeNode;
 
 void InitializeChildrenNodes(TreeNode* treeNode);

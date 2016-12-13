@@ -1,6 +1,7 @@
 #include <string>
 #include "CodeGen.h"
 #include "SymbolTable.h"
+#include "EmitCode.h"
 
 FILE* code;
 
@@ -8,7 +9,7 @@ extern int globalOffset;
 extern int localOffset;
 extern SymbolTable symbolTable;
 
-void EmitHeader(char* compiledFileName)
+void GenerateHeader(char* compiledFileName)
 {
     std::string fileName(compiledFileName);
     emitComment("C- compiler version C-F16");
@@ -24,10 +25,24 @@ void GenerateCode(TreeNode* node, char* inFile, char* outFile)
 
     if (code)
     {
-        EmitHeader(inFile);
+        GenerateHeader(inFile);
     }
     else
     {
-        printf("Error opening file output file '%s'\n", outFile);66666666666666666
+        printf("Error opening file output file '%s'\n", outFile);
+    }
+
+}
+
+void GenerateIOFuncs(TreeNode* node)
+{
+    Instruction io[] =     { IN,    OUT,       INB,    OUTB,   INC,    OUTC,   OUTNL };
+    std::string ioStr[] = { "int", "integer", "bool", "bool", "char", "char", "a newline" };
+
+    for (int i = 0; i < 7; ++i)
+    {
+        node->emitLoc = emitSkip(0) - 1;
+        std::string name(node->attr.name);
     }
 }
+

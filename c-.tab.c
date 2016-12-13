@@ -3539,10 +3539,7 @@ int main(int argc, char** argv)
 				printf("Invalid argument: %s", argv[optind]);
 				return -1;
 		}
-	}
-	
-
-	printf("outFilePath = %s\n", outFilePath);
+	}	
 	
 	if (argc >= 2)
 	{
