@@ -8,10 +8,11 @@ void GenerateHeader(char* compiledFileName);
 void GenerateIOFuncs(TreeNode* node);
 void GenerateCode(TreeNode* node, char* outFile, char* inFile);
 void GenerateCode(TreeNode* node);
-void GenerateDecl(TreeNode* node);
-void GenerateExp(TreeNode* node);
-void GenerateStmt(TreeNode* node);
-void GenerateConst(TreeNode* node);
-void GenerateGlobalsAndStatics(TreeNode* node);
+void GenerateDeclCode(TreeNode* node);
+void GenerateExpCode(TreeNode* node);
+void GenerateStmtCode(TreeNode* node);
+void GenerateConstCode(TreeNode* node);
+void GenerateGlobalsAndStaticsCode(TreeNode* node);
+void GenerateInitCode(TreeNode* node);
 
 #endif

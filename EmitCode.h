@@ -38,34 +38,35 @@ enum Instruction
 //
 //  The following functions were borrowed from Tiny compiler code generator
 //
-int emitSkip(int howMany);    // emitSkip(0) tells you where you are and reserves no space
-void emitBackup(int loc);
+int EmitSkip(int howMany);    // emitSkip(0) tells you where you are and reserves no space
+void EmitBackup(int loc);
 
+// Optional parameter indicates whether parens wrap the 't' register.
 void EmitInstruction(Instruction i, int r, int s, int t, std::string c, bool parens = true);
 
 void EmitComment(std::string str);
-void emitComment(char *c);
-void emitComment(char *c, char *cc);
+void EmitComment(char *c);
+void EmitComment(char *c, char *cc);
 
 void EmitEmptyLine();
 
-void emitGoto(int d, int s, char *c);
-void emitGoto(int d, int s, char *c, char *cc);
-void emitGotoAbs(int a, char *c);
-void emitGotoAbs(int a, char *c, char *cc);
+void EmitGoto(int d, int s, char *c);
+void EmitGoto(int d, int s, char *c, char *cc);
+void EmitGotoAbs(int a, char *c);
+void EmitGotoAbs(int a, char *c, char *cc);
 
-void emitRM(char *op, int r, int d, int s, char *c);
-void emitRM(char *op, int r, int d, int s, char *c, char *cc);
-void emitRMAbs(char *op, int r, int a, char *c);
-void emitRMAbs(char *op, int r, int a, char *c, char *cc);
+void EmitRM(char *op, int r, int d, int s, char *c);
+void EmitRM(char *op, int r, int d, int s, char *c, char *cc);
+void EmitRMAbs(char *op, int r, int a, char *c);
+void EmitRMAbs(char *op, int r, int a, char *c, char *cc);
 
-void emitRO(char *op, int r, int s, int t, char *c);
-void emitRO(char *op, int r, int s, int t, char *c, char *cc);
+void EmitRO(char *op, int r, int s, int t, char *c);
+void EmitRO(char *op, int r, int s, int t, char *c, char *cc);
 
-void backPatchAJumpToHere(int addr, char *comment);
-void backPatchAJumpToHere(char *cmd, int reg, int addr, char *comment);
+void BackPatchAJumpToHere(int addr, char *comment);
+void BackPatchAJumpToHere(char *cmd, int reg, int addr, char *comment);
 
-void emitLit(char *s);
+void EmitLit(char *s);
 
 char* InstructionToStr(Instruction i);
 

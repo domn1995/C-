@@ -20,7 +20,7 @@ void GenerateHeader(char* compiledFileName)
     EmitComment("Author: Robert B. Heckendorn");
     EmitComment("File compiled: " + fileName);
     EmitEmptyLine();
-    emitSkip(1);
+    EmitSkip(1);
 }
 
 void GenerateCode(TreeNode* node, char* inFile, char* outFile)
@@ -37,7 +37,8 @@ void GenerateCode(TreeNode* node, char* inFile, char* outFile)
     }
 
     GenerateIOFuncs(node);
-
+    GenerateCode(node);
+    GenerateInitCode(node);
 }
 
 void GenerateIOFuncs(TreeNode* node)
@@ -47,7 +48,7 @@ void GenerateIOFuncs(TreeNode* node)
 
     for (int i = 0; i < 7; ++i)
     {
-        node->emitLoc = emitSkip(0) - 1;
+        node->emitLoc = EmitSkip(0) - 1;
         std::string funcName(node->attr.name);
         EmitComment("FUNCTION " + funcName);
         EmitInstruction(ST, AC, -1, FP, "Store return address");
@@ -89,13 +90,13 @@ void GenerateCode(TreeNode* node)
     switch (node->nodeKind)
     {
         case DeclK:
-            GenerateDecl(node);
+            GenerateDeclCode(node);
             break;
         case ExpK: 
-            GenerateExp(node);
+            GenerateExpCode(node);
             break;
         case StmtK:
-            GenerateStmt(node);
+            GenerateStmtCode(node);
             break;
     }
 
@@ -104,22 +105,22 @@ void GenerateCode(TreeNode* node)
 
 
 
-void GenerateDecl(TreeNode* node)
+void GenerateDeclCode(TreeNode* node)
 {
 
 }
 
-void GenerateExp(TreeNode* node)
+void GenerateExpCode(TreeNode* node)
 {
 
 }
 
-void GenerateStmt(TreeNode* node)
+void GenerateStmtCode(TreeNode* node)
 {
 
 }
 
-void GenerateConst(TreeNode* node)
+void GenerateConstCode(TreeNode* node)
 {
     if (node == NULL)
     {
@@ -140,13 +141,32 @@ void GenerateConst(TreeNode* node)
                 EmitInstruction(LDC, AC, node->attr.cValue, 6, "Load char constant");
                 break;
             default:
-                printf("Invalid ConstK type in GenerateConst()\n");
+                printf("Invalid ConstK type in GenerateConstCode()\n");
                 break;
         }
     }
 }
 
-void GenerateGlobalsAndStatics(TreeNode* node)
+void GenerateGlobalsAndStaticsCode(TreeNode* node)
 {
 
+}
+
+void GenerateInitCode(TreeNode* node)
+{
+    TreeNode* main = static_cast<TreeNode*>(symbolTable.lookup("main"));
+    EmitBackup(0);
+    EmitInstruction(LDA, PC, EmitSkip(0) - 1, PC, "Jump to init [backpatch]");
+    EmitSkip(EmitSkip(0) - 1);
+    EmitComment("INIT");
+    EmitInstruction(LD, GP, 0, 0, "Set the global pointer");
+    EmitInstruction(LDA, FP, globalOffset, GP, "set first frame at end of globals");
+    EmitInstruction(ST, FP, 0, FP, "store old fp (point to self)");
+    EmitComment("INIT GLOBALS AND STATICS");
+    GenerateGlobalsAndStaticsCode(node);
+    EmitComment("END INIT GLOBALS AND STATICS");
+    EmitInstruction(LDA, AC, FP, PC, "Return address in ac");
+    EmitInstruction(LDA, PC, main->emitLoc - EmitSkip(0), PC, "Jump to main");
+    EmitInstruction(HALT, 0, 0, 0, "DONE!", false);
+    EmitComment("END INIT");
 }

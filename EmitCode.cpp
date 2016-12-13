@@ -24,7 +24,7 @@ static int litLoc = 0;
 //  Procedure emitComment prints a comment line 
 // with a comment that is the concatenation of c and d
 // 
-void emitComment(char *c, char *cc)
+void EmitComment(char *c, char *cc)
 {
     fprintf(code, "* %s %s\n", c, cc);
 }
@@ -32,7 +32,7 @@ void emitComment(char *c, char *cc)
 //  Procedure emitComment prints a comment line 
 // with comment c in the code file
 // 
-void emitComment(char *c)
+void EmitComment(char *c)
 {
     fprintf(code, "* %s\n", c);
 }
@@ -70,16 +70,16 @@ void EmitInstruction(Instruction i, int r, int s, int t, std::string c, bool par
 // t = 2nd source register
 // c = a comment to be printed if TraceCode is TRUE
 // 
-void emitRO(char *op, int r, int s, int t, char *c, char *cc)
+void EmitRO(char *op, int r, int s, int t, char *c, char *cc)
 {
     fprintf(code, "%3d:  %5s  %d,%d,%d\t%s %s\n", emitLoc, op, r, s, t, c, cc);
     fflush(code);
     emitLoc++;
 }
 
-void emitRO(char *op, int r, int s, int t, char *c)
+void EmitRO(char *op, int r, int s, int t, char *c)
 {
-    emitRO(op, r, s, t, c, (char *)"");
+    EmitRO(op, r, s, t, c, (char *)"");
 }
 
 // emitRM emits a REGISTER-TO-MEMORY TM instruction
@@ -89,27 +89,27 @@ void emitRO(char *op, int r, int s, int t, char *c)
 // s = the base register
 // c = a comment to be printed if TraceCode is TRUE
 // 
-void emitRM(char *op, int r, int d, int s, char *c, char *cc)
+void EmitRM(char *op, int r, int d, int s, char *c, char *cc)
 {
     fprintf(code, "%3d:  %5s  %d,%d(%d)\t%s %s\n", emitLoc, op, r, d, s, c, cc);
     fflush(code);
     emitLoc++;
 }
 
-void emitRM(char *op, int r, int d, int s, char *c)
+void EmitRM(char *op, int r, int d, int s, char *c)
 {
-    emitRM(op, r, d, s, c, (char *)"");
+    EmitRM(op, r, d, s, c, (char *)"");
 }
 
 
-void emitGoto(int d, int s, char *c, char *cc)
+void EmitGoto(int d, int s, char *c, char *cc)
 {
-    emitRM((char *)"LDA", PC, d, s, c, cc);
+    EmitRM((char *)"LDA", PC, d, s, c, cc);
 }
 
-void emitGoto(int d, int s, char *c)
+void EmitGoto(int d, int s, char *c)
 {
-    emitGoto(d,  s, c, (char *)"");
+    EmitGoto(d,  s, c, (char *)"");
 }
 
 // emitRMAbs converts an absolute reference 
@@ -120,7 +120,7 @@ void emitGoto(int d, int s, char *c)
 // a = the absolute location in memory
 // c = a comment to be printed if TraceCode is TRUE
 // 
-void emitRMAbs(char *op, int r, int a, char *c, char *cc)
+void EmitRMAbs(char *op, int r, int a, char *c, char *cc)
 {
     fprintf(code, "%3d:  %5s  %d,%d(%d)\t%s %s\n", emitLoc, op, r, a - (emitLoc + 1),
 	    PC, c, cc);
@@ -128,27 +128,27 @@ void emitRMAbs(char *op, int r, int a, char *c, char *cc)
     emitLoc++;
 }
 
-void emitRMAbs(char *op, int r, int a, char *c)
+void EmitRMAbs(char *op, int r, int a, char *c)
 {
-    emitRMAbs(op, r, a, c, (char *)"");
+    EmitRMAbs(op, r, a, c, (char *)"");
 }
 
-void emitGotoAbs(int a, char *c, char *cc)
+void EmitGotoAbs(int a, char *c, char *cc)
 {
-    emitRMAbs((char *)"LDA", PC, a, c, cc);
+    EmitRMAbs((char *)"LDA", PC, a, c, cc);
 }
 
-void emitGotoAbs(int a, char *c)
+void EmitGotoAbs(int a, char *c)
 {
-    emitGotoAbs(a, c, (char *)"");
+    EmitGotoAbs(a, c, (char *)"");
 }
 
 // emit a literal instruction
-void emitLit(char *s)
+void EmitLit(char *s)
 {
     litLoc += strlen(s);
     fprintf(code, "%3d:  %5s  \"%s\"\n", litLoc, (char *)"LIT", s);
-    emitRM((char *)"LDC", 3, litLoc, 6, (char *)"Load literal value");
+    EmitRM((char *)"LDC", 3, litLoc, 6, (char *)"Load literal value");
     litLoc++;
 }
 
@@ -161,7 +161,7 @@ void emitLit(char *s)
 // It also returns the current code position.
 // emitSkip(0) tells you where you are and reserves no space.
 // 
-int emitSkip(int howMany)
+int EmitSkip(int howMany)
 {
     int i = emitLoc;
     emitLoc += howMany;
@@ -172,7 +172,7 @@ int emitSkip(int howMany)
 // emitBackup backs up to 
 // loc = a previously skipped location
 // 
-void emitBackup(int loc)
+void EmitBackup(int loc)
 {
     emitLoc = loc;
 }
@@ -180,26 +180,26 @@ void emitBackup(int loc)
 // this back patches a LDA at the instruction address addr that
 // jumps to the current instruction location now that it is known.
 // This is essentially a backpatched "goto"
-void backPatchAJumpToHere(int addr, char *comment)
+void BackPatchAJumpToHere(int addr, char *comment)
 {
     int currloc;
 
-    currloc = emitSkip(0);          // remember where we are
-    emitBackup(addr);               // go to addr
-    emitGotoAbs(currloc, comment);  // the LDA to here
-    emitBackup(currloc);            // restore addr
+    currloc = EmitSkip(0);          // remember where we are
+    EmitBackup(addr);               // go to addr
+    EmitGotoAbs(currloc, comment);  // the LDA to here
+    EmitBackup(currloc);            // restore addr
 }
 
 // this back patches a JZR or JNZ at the instruction address addr that
 // jumps to the current instruction location now that it is known.
-void backPatchAJumpToHere(char *cmd, int reg, int addr, char *comment)
+void BackPatchAJumpToHere(char *cmd, int reg, int addr, char *comment)
 {
     int currloc;
 
-    currloc = emitSkip(0);          // remember where we are
-    emitBackup(addr);               // go to addr
-    emitRMAbs(cmd, reg, currloc, comment);  // cmd = JZR, JNZ
-    emitBackup(currloc);            // restore addr
+    currloc = EmitSkip(0);          // remember where we are
+    EmitBackup(addr);               // go to addr
+    EmitRMAbs(cmd, reg, currloc, comment);  // cmd = JZR, JNZ
+    EmitBackup(currloc);            // restore addr
 }
 
 char* InstructionToStr(Instruction i)
