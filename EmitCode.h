@@ -41,11 +41,13 @@ enum Instruction
 int emitSkip(int howMany);    // emitSkip(0) tells you where you are and reserves no space
 void emitBackup(int loc);
 
-void EmitInstruction(Instruction i, int r, int s, int t, std::string c);
+void EmitInstruction(Instruction i, int r, int s, int t, std::string c, bool parens = true);
 
-void emitComment(std::string str);
+void EmitComment(std::string str);
 void emitComment(char *c);
 void emitComment(char *c, char *cc);
+
+void EmitEmptyLine();
 
 void emitGoto(int d, int s, char *c);
 void emitGoto(int d, int s, char *c, char *cc);

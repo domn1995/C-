@@ -37,14 +37,28 @@ void emitComment(char *c)
     fprintf(code, "* %s\n", c);
 }
 
-void emitComment(std::string comment)
+void EmitComment(std::string comment)
 {
     fprintf(code, "* %s\n", (char*)comment.c_str());
 }
 
-void EmitInstruction(Instruction i, int r, int s, int t, std::string c)
+void EmitEmptyLine()
 {
-    fprintf(code, "%3d:  %5s  %d,%d,%d\t%s \n", emitLoc, InstructionToStr(i), r, s, t, (char*)c.c_str());
+    EmitComment("");
+    fprintf(code, "* ** ** ** ** ** ** ** ** ** ** ** **\n");
+}
+
+void EmitInstruction(Instruction i, int r, int s, int t, std::string c, bool parens/*=true*/)
+{
+    if (parens)
+    {
+        fprintf(code, "%3d:  %5s  %d,%d(%d)\t%s \n", emitLoc, InstructionToStr(i), r, s, t, (char*)c.c_str());
+    }
+    else
+    {
+        fprintf(code, "%3d:  %5s  %d,%d,%d\t%s \n", emitLoc, InstructionToStr(i), r, s, t, (char*)c.c_str());    
+    }
+    
     fflush(code);
     emitLoc++;
 }
