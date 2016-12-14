@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdio>
 #include <getopt.h>
+#include <stdlib.h>
 #include "Token.h"
 #include "TreeNode.h"
 #include "SymbolTable.h"

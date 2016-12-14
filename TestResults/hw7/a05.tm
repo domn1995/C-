@@ -1,7 +1,7 @@
 * C- compiler version C-F16
 * Built: Nov 13, 2016
 * Author: Robert B. Heckendorn
-* File compiled: TestFiles/hw7/a01.c-
+* File compiled: TestFiles/hw7/a05.c-
 * 
 * ** ** ** ** ** ** ** ** ** ** ** **
 * FUNCTION input
@@ -78,32 +78,34 @@
 * COMPOUND
 * Compound Body
 * EXPRESSION
+ 43:     ST  3,-2(1)	Store variable x 
+* EXPRESSION
 *                       Begin call to  output
- 43:     ST  1,-2(1)	Store old fp in ghost frame 
+ 44:     ST  1,-3(1)	Store old fp in ghost frame 
 *                        Load param 
- 44:    LDC  3,987(6)	Load integer constant 
- 45:     ST  3,-4(1)	Store parameter 
+ 45:     LD  3,-2(1)	Load variable x 
+ 46:     ST  3,-5(1)	Store parameter 
 *                       Jump to output
- 46:    LDA  1,-2(1)	Load address of new frame 
- 47:    LDA  3,1(7)	Return address in ac 
- 48:    LDA  7,-43(7)	CALL output 
- 49:    LDA  3,0(2)	Save the result in ac 
+ 47:    LDA  1,-3(1)	Load address of new frame 
+ 48:    LDA  3,1(7)	Return address in ac 
+ 49:    LDA  7,-44(7)	CALL output 
+ 50:    LDA  3,0(2)	Save the result in ac 
 *                       End call to output
 * END COMPOUND
 * Add standard closing in case there is no return statement
- 50:    LDC  2,0(6)	Set return value to 0 
- 51:     LD  3,-1(1)	Load return address 
- 52:     LD  1,0(1)	Adjust fp 
- 53:    LDA  7,0(3)	Return 
+ 51:    LDC  2,0(6)	Set return value to 0 
+ 52:     LD  3,-1(1)	Load return address 
+ 53:     LD  1,0(1)	Adjust fp 
+ 54:    LDA  7,0(3)	Return 
 * END FUNCTION main
-  0:    LDA  7,53(7)	Jump to init [backpatch] 
+  0:    LDA  7,54(7)	Jump to init [backpatch] 
 * INIT
- 54:     LD  0,0(0)	Set the global pointer 
- 55:    LDA  1,0(0)	set first frame at end of globals 
- 56:     ST  1,0(1)	store old fp (point to self) 
+ 55:     LD  0,0(0)	Set the global pointer 
+ 56:    LDA  1,0(0)	set first frame at end of globals 
+ 57:     ST  1,0(1)	store old fp (point to self) 
 * INIT GLOBALS AND STATICS
 * END INIT GLOBALS AND STATICS
- 57:    LDA  3,1(7)	Return address in ac 
- 58:    LDA  7,-17(7)	Jump to main 
- 59:   HALT  0,0,0	DONE! 
+ 58:    LDA  3,1(7)	Return address in ac 
+ 59:    LDA  7,-18(7)	Jump to main 
+ 60:   HALT  0,0,0	DONE! 
 * END INIT

@@ -54,7 +54,7 @@ char GetEscapedChar(char* string)
  
 %%
 [\ \t\n]			; // Ignore space, new line, and tab characters.
-[0-9]+				{ 
+-?[0-9]+				{ 
 						yylval.t.tokenClass = NUMCONST;
 						yylval.t.lineNum = yylineno;
 						yylval.t.intVal = atoi(yytext); 

@@ -21,8 +21,8 @@ void GenerateHeader(char* compiledFileName)
 {
     std::string fileName(compiledFileName);
     EmitComment("C- compiler version C-F16");
-    EmitComment("Built: Nov 13, 2016");
-    EmitComment("Author: Robert B. Heckendorn");
+    EmitComment("Built: Dec 01, 2016");
+    EmitComment("Author: Domn Werner");
     EmitComment("File compiled: " + fileName);
     EmitEmptyLine();
     EmitSkip(1);
@@ -215,8 +215,7 @@ void GenerateExpCode(TreeNode* node)
 
     if (node->isParam)
     {
-        printf("Found param node: %s\n", node->attr.name);
-        EmitComment("                       Load param " + (numParams + 1));
+        EmitComment("                        Load param " + (numParams + 1));
     }
 
     switch (node->kind.exp)
@@ -328,17 +327,17 @@ void GenerateExpCode(TreeNode* node)
                 }
                 else if ("?" == name)
                 {
-                    EmitInstruction(RND, AC, AC, 6, "Op ?");
+                    EmitInstruction(RND, AC, AC, 6, "Op ?", false);
                 }
                 else if ("!" == name)
                 {
                     EmitInstruction(LDC, AC1, 1, 6, "Load 1");
-                    EmitInstruction(XOR, AC, AC, AC1, "Op NOT ");
+                    EmitInstruction(XOR, AC, AC, AC1, "Op NOT ", false);
                 }
                 else if ("-" == name)
                 {
                     EmitInstruction(LDC, AC1, 0 , 6, "Load 0");
-                    EmitInstruction(SUB, AC, AC1, AC, "Op unary -");
+                    EmitInstruction(SUB, AC, AC1, AC, "Op unary -", false);
                 }
             }
             else
@@ -353,166 +352,189 @@ void GenerateExpCode(TreeNode* node)
 
                 if (">" == name)
                 {
-                    EmitInstruction(TGT, AC, AC1, AC, "Op >");
+                    EmitInstruction(TGT, AC, AC1, AC, "Op >", false);
                 }
                 else if ("<" == name)
                 {
-                    EmitInstruction(TLT, AC, AC1, AC, "Op <");
+                    EmitInstruction(TLT, AC, AC1, AC, "Op <", false);
                 }
                 else if (">=" == name)
                 {
-                    EmitInstruction(TGE, AC, AC1, AC, "Op >=");
+                    EmitInstruction(TGE, AC, AC1, AC, "Op >=", false);
                 }
                 else if ("<=" == name)
                 {
-                    EmitInstruction(TLE, AC, AC1, AC, "Op <=");
+                    EmitInstruction(TLE, AC, AC1, AC, "Op <=", false);
                 }
                 else if ("==" == name)
                 {
-                    EmitInstruction(TEQ, AC, AC1, AC, "Op ==");
+                    EmitInstruction(TEQ, AC, AC1, AC, "Op ==", false);
                 }
                 else if ("or" == name)
                 {
-                    EmitInstruction(OR, AC, AC1, AC, "Op OR");
+                    EmitInstruction(OR, AC, AC1, AC, "Op OR", false);
                 }
                 else if ("and" == name)
                 {
-                    EmitInstruction(AND, AC, AC1, AC, "Op AND");
+                    EmitInstruction(AND, AC, AC1, AC, "Op AND", false);
                 }
                 else if ("+" == name)
                 {
-                    EmitInstruction(ADD, AC, AC1, AC, "Op +");
+                    EmitInstruction(ADD, AC, AC1, AC, "Op +", false);
                 }
                 else if ("-" == name)
                 {
-                    EmitInstruction(SUB, AC, AC1, AC, "Op -");
+                    EmitInstruction(SUB, AC, AC1, AC, "Op -", false);
                 }
                 else if ("*" == name)
                 {
-                    EmitInstruction(MUL, AC, AC1, AC, "Op *");
+                    EmitInstruction(MUL, AC, AC1, AC, "Op *", false);
                 }
                 else if ("/" == name)
                 {
-                    EmitInstruction(DIV, AC, AC1, AC, "Op /");
+                    EmitInstruction(DIV, AC, AC1, AC, "Op /", false);
                 }
                 else if ("%" == name)
                 {
-                    EmitInstruction(DIV, AC2, AC1, AC, "Op %");
+                    EmitInstruction(DIV, AC2, AC1, AC, "Op %", false);
                     EmitInstruction(MUL, AC2, AC2, AC, "");
                     EmitInstruction(SUB, AC, AC1, AC2, "");
-                }
-                break;
+                }                
             }
-            case ConstK:
+            break;
+        }
+        case ConstK:
+        {
+            GenerateConstCode(node);
+            break;
+        }
+        case IdK:
+        {
+            if (node->isGlobal || node->isStatic)
             {
-                GenerateConstCode(node);
-                break;
+                pointer = 0;
             }
-            case IdK:
+            else
             {
-                if (node->isGlobal || node->isStatic)
-                {
-                    pointer = 0;
-                }
-                else
-                {
-                    pointer = 1;
-                }
+                pointer = 1;
+            }
 
-                if (node->memSize == 1)
-                {
-                    loadInstruction = LD;
-                }
+            if (node->memSize == 1)
+            {
+                loadInstruction = LD;
+            }
 
-                if (!store)
+            if (!store)
+            {
+                if (node->isArray)
                 {
-                    if (node->isArray)
+                    if (left != NULL)
                     {
-                        if (left != NULL)
-                        {
-                            GenerateCode(left);
-                            EmitInstruction(loadInstruction, AC1, node->memOffset, pointer, "Load address of base of array " + name);
-                            EmitInstruction(SUB, AC, AC1, AC, "Compute offset of value");
-                            EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, 0 , AC, opLoad ? "Load LHS value" : "Load the value");                        
-                        }
-                        else
-                        {
-                            EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, node->memOffset, pointer, opLoad ? "Load LHS address of base of array " : "Load address of base of array " + name);
-                        }
+                        GenerateCode(left);
+                        EmitInstruction(loadInstruction, AC1, node->memOffset, pointer, "Load address of base of array " + name);
+                        EmitInstruction(SUB, AC, AC1, AC, "Compute offset of value");
+                        EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, 0 , AC, opLoad ? "Load LHS value" : "Load the value");                        
                     }
                     else
                     {
-                        EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, node->memOffset, pointer, (opLoad ? "load lhs variable " : "Load variable ") + name);
+                        EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, node->memOffset, pointer, opLoad ? "Load LHS address of base of array " : "Load address of base of array " + name);
                     }
                 }
                 else
                 {
-                    if (node->isArray)
+                    EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, node->memOffset, pointer, (opLoad ? "load lhs variable " : "Load variable ") + name);
+                }
+            }
+            else
+            {
+                if (node->isArray)
+                {
+                    if (left != NULL)
                     {
-                        if (left != NULL)
-                        {
-                            EmitInstruction(LD, AC1, compSize + tempIndex + 1, FP, "Restore index");
-                            EmitInstruction(loadInstruction, AC2, node->memOffset, pointer, "Load address of base of array " + name);
-                            EmitInstruction(SUB, AC2, AC2, AC1, "Compute offset of value");
+                        EmitInstruction(LD, AC1, compSize + tempIndex + 1, FP, "Restore index");
+                        EmitInstruction(loadInstruction, AC2, node->memOffset, pointer, "Load address of base of array " + name);
+                        EmitInstruction(SUB, AC2, AC2, AC1, "Compute offset of value");
 
-                            if (opStore)
+                        if (opStore)
+                        {
+                            EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, 0 , AC2, "load lhs variable " + name);
+                            if ("++" == currentOpName)
                             {
-                                EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, 0 , AC2, "load lhs variable " + name);
-                                if ("++" == currentOpName)
-                                {
-                                    EmitInstruction(LDA, AC, 1, AC, "increment value of " + name);
-                                }
-                                else if ("--" == currentOpName)
-                                {
-                                    EmitInstruction(LDA, AC, -1, AC, "decrement value of " + name);
-                                }
-                                else 
-                                {
-                                    EmitInstruction(opCode, AC, AC1, AC, "op " + currentOpName);
-                                }
+                                EmitInstruction(LDA, AC, 1, AC, "increment value of " + name);
                             }
-                            EmitInstruction(ST, AC, node->memOffset, pointer, "Store variable " + name);
+                            else if ("--" == currentOpName)
+                            {
+                                EmitInstruction(LDA, AC, -1, AC, "decrement value of " + name);
+                            }
+                            else 
+                            {
+                                EmitInstruction(opCode, AC, AC1, AC, "op " + currentOpName, false);
+                            }
                         }
+                        EmitInstruction(ST, AC, 0, AC2, "Store variable " + name);
                     }
                 }
-                break;
+                else
+                {
+                    if (opStore)
+                    {
+                        EmitInstruction(LD, opLoad ? (unary ? AC : AC1) : AC, node->memOffset, pointer, "load lhs variable " + name);
+
+                        if ("++" == currentOpName)
+                        {
+                            EmitInstruction(LDA, AC, 1, AC, "increment value of " + name);
+                        }
+                        else if ("--" == currentOpName)
+                        {
+                            EmitInstruction(LDA, AC, -1, AC, "decrement value of " + name);
+                        }
+                        else
+                        {
+                            EmitInstruction(opCode, AC, AC1, AC, "op " + currentOpName, false);
+                        }
+                    }
+                    EmitInstruction(ST, AC, node->memOffset, pointer, "Store variable " + name);
+                }
             }
-            case CallK:
-            {
-                TreeNode* function = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
-                tempIndex -= 2;
-                numParams = 0;
-                int params = numParams;
-                bool st = store;
-                int ti = tempIndex;
-                int cs = compSize;
-                store = opLoad = false;
-
-                EmitComment("EXPRESSION");
-                EmitComment("                       Begin call to " + name);
-                EmitInstruction(ST, FP, cs + ti + 2, FP, "Store old fp in ghost frame");
-
-                GenerateCode(left);
-
-                store = st;
-                numParams = params;
-                compSize = cs;
-
-                EmitComment("                       Jump to " + name);
-                EmitInstruction(LDA, FP, compSize + ti + 2, FP, "Load address of new frame");
-                EmitInstruction(LDA, AC, FP, PC, "Return address in ac");
-                EmitInstruction(LDA, PC, function->emitLoc - EmitSkip(0), PC, "CALL " + name);
-                EmitInstruction(LDA, AC, 0 , RT, "Save the result in ac");
-                EmitComment("                       End call to " + name);
-
-                tempIndex += 2;
-                break;
-            }
+            break;
         }
-        if (node->isParam)
+        case CallK:
         {
-            EmitInstruction(ST, AC, compSize - numParams + tempIndex, FP, "Store parameter");
-        }
+            TreeNode* function = static_cast<TreeNode*>(symbolTable.lookup(node->attr.name));
+            tempIndex -= 2;
+            numParams = 0;
+            int params = numParams;
+            bool st = store;
+            int ti = tempIndex;
+            int cs = compSize;
+            store = opLoad = false;
+
+            EmitComment("EXPRESSION");
+            EmitComment("                      Begin call to  " + name);
+            EmitInstruction(ST, FP, cs + ti + 2, FP, "Store old fp in ghost frame");
+
+            GenerateCode(left);
+
+            store = st;
+            numParams = params;
+            compSize = cs;
+
+            EmitComment("                      Jump to " + name);
+            EmitInstruction(LDA, FP, compSize + ti + 2, FP, "Load address of new frame");
+            EmitInstruction(LDA, AC, FP, PC, "Return address in ac");
+            EmitInstruction(LDA, PC, function->emitLoc - EmitSkip(0), PC, "CALL " + name);
+            EmitInstruction(LDA, AC, 0 , RT, "Save the result in ac");
+            EmitComment("                      End call to " + name);
+
+            tempIndex += 2;
+            break;
+        }        
+    }
+
+    if (node->isParam)
+    {
+        EmitInstruction(ST, AC, compSize - numParams + tempIndex, FP, "Store parameter");
+        numParams++;
     }
 }
 
@@ -612,9 +634,10 @@ void GenerateStmtCode(TreeNode* node)
             compSize = node->memSize;
             EmitComment("COMPOUND");
             EmitComment("Compound Body");
-            GenerateCode(left);
-            GenerateCode(right);
-            GenerateCode(last);
+            for (int i = 0; i < 3; ++i)
+            {
+                GenerateCode(node->children[i]);
+            }
             EmitComment("END COMPOUND");
             break;
         }
@@ -700,9 +723,10 @@ void GenerateGlobalsAndStaticsCode(TreeNode* node)
 void GenerateInitCode(TreeNode* node)
 {
     TreeNode* main = static_cast<TreeNode*>(symbolTable.lookup("main"));
+    int r = EmitSkip(0);
     EmitBackup(0);
-    EmitInstruction(LDA, PC, EmitSkip(0) - 1, PC, "Jump to init [backpatch]");
-    EmitSkip(EmitSkip(0) - 1);
+    EmitInstruction(LDA, PC, r - 1, PC, "Jump to init [backpatch]");
+    EmitSkip(r - 1);
     EmitComment("INIT");
     EmitInstruction(LD, GP, 0, 0, "Set the global pointer");
     EmitInstruction(LDA, FP, globalOffset, GP, "set first frame at end of globals");
