@@ -1082,6 +1082,7 @@ void ParseExprNode(TreeNode* node, int& numErrors, int& numWarnings)
 
 			while (callParams != NULL && declParams != NULL)
 			{
+				callParams->isParam = true;
 				if (callParams->kind.exp == IdK && callParams->expType == Void)
 				{
 					callParams = callParams->sibling;

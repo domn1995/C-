@@ -14,5 +14,6 @@ void GenerateStmtCode(TreeNode* node);
 void GenerateConstCode(TreeNode* node);
 void GenerateGlobalsAndStaticsCode(TreeNode* node);
 void GenerateInitCode(TreeNode* node);
+void SkipIONodesAndGenerateCode(TreeNode* node);
 
 #endif

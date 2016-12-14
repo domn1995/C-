@@ -1,7 +1,7 @@
 * C- compiler version C-F16
 * Built: Nov 13, 2016
 * Author: Robert B. Heckendorn
-* File compiled: TestFiles/hw7/a00.c-
+* File compiled: TestFiles/hw7/a01.c-
 * 
 * ** ** ** ** ** ** ** ** ** ** ** **
 * FUNCTION input
@@ -77,21 +77,6 @@
  42:     ST  3,-1(1)	Store return address. 
 * COMPOUND
 * Compound Body
-* END COMPOUND
-* Add standard closing in case there is no return statement
- 43:    LDC  2,0(6)	Set return value to 0 
- 44:     LD  3,-1(1)	Load return address 
- 45:     LD  1,0(1)	Adjust fp 
- 46:    LDA  7,0(3)	Return 
-* END FUNCTION main
-  0:    LDA  7,-1(7)	Jump to init [backpatch] 
-* INIT
-  1:     LD  0,0(0)	Set the global pointer 
-  2:    LDA  1,0(0)	set first frame at end of globals 
-  3:     ST  1,0(1)	store old fp (point to self) 
-* INIT GLOBALS AND STATICS
-* END INIT GLOBALS AND STATICS
-  4:    LDA  3,1(7)	Return address in ac 
-  5:    LDA  7,36(7)	Jump to main 
-  6:   HALT  0,0,0	DONE! 
-* END INIT
+* EXPRESSION
+*                        Begin call to output
+ 43:     ST  1,-2(1)	Store old fp in ghost frame 

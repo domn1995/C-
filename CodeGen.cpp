@@ -42,7 +42,7 @@ void GenerateCode(TreeNode* node, char* inFile, char* outFile)
     }
 
     GenerateIOCode(node);
-    GenerateCode(node);
+    SkipIONodesAndGenerateCode(node);
     GenerateInitCode(node);
 }
 
@@ -114,6 +114,7 @@ void GenerateCode(TreeNode* node)
 void GenerateDeclCode(TreeNode* node)
 {
     std::string name = node->attr.name;
+
     switch (node->kind.decl)
     {
         case VarK:
@@ -214,6 +215,7 @@ void GenerateExpCode(TreeNode* node)
 
     if (node->isParam)
     {
+        printf("Found param node: %s\n", node->attr.name);
         EmitComment("                       Load param " + (numParams + 1));
     }
 
@@ -609,6 +611,7 @@ void GenerateStmtCode(TreeNode* node)
         {
             compSize = node->memSize;
             EmitComment("COMPOUND");
+            EmitComment("Compound Body");
             GenerateCode(left);
             GenerateCode(right);
             GenerateCode(last);
@@ -711,4 +714,14 @@ void GenerateInitCode(TreeNode* node)
     EmitInstruction(LDA, PC, main->emitLoc - EmitSkip(0), PC, "Jump to main");
     EmitInstruction(HALT, 0, 0, 0, "DONE!", false);
     EmitComment("END INIT");
+}
+
+void SkipIONodesAndGenerateCode(TreeNode* node)
+{
+    for (int i = 0; i < 7; ++i)
+    {
+        node = node->sibling;
+    }
+
+    GenerateCode(node);
 }
